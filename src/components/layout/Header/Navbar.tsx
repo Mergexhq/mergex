@@ -182,74 +182,109 @@ export function Navbar() {
                                         onMouseEnter={openDropdown}
                                         onMouseLeave={closeDropdown}
                                     >
-                                        <div className="bg-[#0a0a0a] rounded-b-xl shadow-2xl border-x border-b border-white/10 flex overflow-hidden">
-                                            {/* Left Branding/Description Column */}
-                                            <div className="w-[30%] bg-[#0f0f0f] p-12 flex flex-col justify-between border-r border-white/5">
-                                                <div>
-                                                    <h2 className="text-3xl font-clash text-white mb-4">What We Do</h2>
-                                                    <p className="text-white/60 text-base leading-relaxed mb-8">
-                                                        Discover our portfolio – constantly evolving to keep pace with the ever-changing needs of scaling companies. We build operational systems that drive growth.
-                                                    </p>
-                                                </div>
-                                                <Link 
-                                                    href="/systems"
-                                                    className="inline-flex items-center gap-2 text-white border border-white/20 px-6 py-3 rounded-full hover:bg-white hover:text-black transition-all duration-300 w-fit"
-                                                >
-                                                    <span>Explore all systems</span>
-                                                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none">
-                                                        <path d="M5 12H19M19 12L12 5M19 12L12 19" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-                                                    </svg>
-                                                </Link>
-                                            </div>
-
-                                            {/* Right Columns Grid */}
-                                            <div className="w-[70%] p-12 bg-[#0a0a0a]">
-                                                <div className="grid grid-cols-3 gap-12">
-                                                    {whatWeDoColumns.map((col) => (
-                                                        <div key={col.title} className="flex flex-col gap-6">
-                                                            <h3 className="text-white/40 uppercase tracking-widest text-xs font-semibold">
-                                                                {col.title}
-                                                            </h3>
-                                                            <div className="flex flex-col gap-4">
-                                                                {col.items.map((item) => (
-                                                                    <Link
-                                                                        key={item.href}
-                                                                        href={item.href}
-                                                                        className="group flex flex-col"
-                                                                    >
-                                                                        <span className="text-white text-lg font-medium group-hover:text-violet-400 transition-colors duration-300 inline-flex items-center gap-2">
-                                                                            {item.label}
-                                                                            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" className="opacity-0 -translate-x-2 group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-300 text-violet-400">
-                                                                                <path d="M5 12H19M19 12L12 5M19 12L12 19" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-                                                                            </svg>
-                                                                        </span>
-                                                                        <span className="text-white/50 text-sm mt-1">
-                                                                            {item.description}
-                                                                        </span>
-                                                                    </Link>
-                                                                ))}
-                                                            </div>
-                                                        </div>
-                                                    ))}
-                                                </div>
-
-                                                {/* Bottom section of right column */}
-                                                <div className="mt-16 pt-8 border-t border-white/10 grid grid-cols-2 gap-8">
+                                        <div className="bg-[#0a0a0a] rounded-b-xl shadow-2xl border-x border-b border-white/10 overflow-hidden">
+                                            {/* Main Content Row */}
+                                            <div className="flex">
+                                                {/* LEFT PANEL — 35% — Narrative anchor */}
+                                                <div className="w-[35%] bg-[#0f0f0f] px-12 py-10 flex flex-col justify-between border-r border-white/5">
                                                     <div>
-                                                        <h3 className="text-white/40 uppercase tracking-widest text-xs font-semibold mb-4">
-                                                            Featured Case Study
-                                                        </h3>
-                                                        <Link href="/explore/case-studies" className="group flex items-start gap-4">
-                                                            <div className="w-16 h-16 bg-white/5 rounded-lg border border-white/10 shrink-0 flex items-center justify-center group-hover:border-violet-500/50 transition-colors">
-                                                                <span className="text-2xl">📈</span>
-                                                            </div>
-                                                            <div>
-                                                                <span className="block text-white font-medium group-hover:text-violet-400 transition-colors">Scaling Operations 10x</span>
-                                                                <span className="block text-white/50 text-sm mt-1">How we helped a B2B SaaS company streamline their entire delivery pipeline.</span>
-                                                            </div>
+                                                        <p className="text-white/30 uppercase tracking-[0.2em] text-[10px] font-semibold mb-5">
+                                                            What We Do
+                                                        </p>
+                                                        <h2
+                                                            className="text-[2rem] leading-[1.15] font-clash font-semibold text-white mb-4"
+                                                            style={{ fontFamily: "'Clash Display', sans-serif" }}
+                                                        >
+                                                            Scaling<br />Infrastructure
+                                                        </h2>
+                                                        <p className="text-white/50 text-sm leading-relaxed max-w-[280px]">
+                                                            MergeX helps businesses identify operational constraints, restructure fragmented systems and scale with greater clarity.
+                                                        </p>
+                                                    </div>
+                                                    <Link
+                                                        href="/brands/mergex"
+                                                        className="inline-flex items-center gap-2 text-white/80 hover:text-white text-sm font-medium transition-colors duration-300 group mt-8"
+                                                    >
+                                                        <span>Explore MergeX</span>
+                                                        <span className="inline-block group-hover:translate-x-1 transition-transform duration-300">→</span>
+                                                    </Link>
+                                                </div>
+
+                                                {/* RIGHT PANEL — 65% — Navigation system */}
+                                                <div className="w-[65%] px-12 py-10 bg-[#0a0a0a]">
+                                                    <div className="flex flex-col gap-0">
+                                                        {/* PRIMARY — MergeX */}
+                                                        <Link
+                                                            href="/brands/mergex"
+                                                            className="group flex flex-col border-b border-white/[0.06] pb-7 mb-7"
+                                                        >
+                                                            <p className="text-white/25 uppercase tracking-[0.18em] text-[10px] font-semibold mb-2">Brand</p>
+                                                            <span
+                                                                className="text-white text-[1.65rem] font-clash font-semibold leading-none group-hover:text-violet-300 transition-colors duration-300 inline-flex items-center gap-3"
+                                                                style={{ fontFamily: "'Clash Display', sans-serif" }}
+                                                            >
+                                                                MergeX
+                                                                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" className="opacity-0 -translate-x-2 group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-300 text-violet-400">
+                                                                    <path d="M5 12H19M19 12L12 5M19 12L12 19" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                                                                </svg>
+                                                            </span>
+                                                            <span className="text-white/40 text-sm mt-2">Operational scaling systems</span>
+                                                        </Link>
+
+                                                        {/* SECONDARY — Methodology */}
+                                                        <Link
+                                                            href="/methodology"
+                                                            className="group flex flex-col border-b border-white/[0.06] pb-6 mb-6"
+                                                        >
+                                                            <p className="text-white/25 uppercase tracking-[0.18em] text-[10px] font-semibold mb-2">Framework</p>
+                                                            <span className="text-white text-xl font-medium group-hover:text-violet-300 transition-colors duration-300 inline-flex items-center gap-2">
+                                                                Methodology
+                                                                <svg width="11" height="11" viewBox="0 0 24 24" fill="none" className="opacity-0 -translate-x-2 group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-300 text-violet-400">
+                                                                    <path d="M5 12H19M19 12L12 5M19 12L12 19" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                                                                </svg>
+                                                            </span>
+                                                            <span className="text-white/35 text-sm mt-1.5">The S.C.A.L.E framework</span>
+                                                        </Link>
+
+                                                        {/* ACTION — Diagnostic */}
+                                                        <Link
+                                                            href="/diagnostic"
+                                                            className="group flex flex-col"
+                                                        >
+                                                            <p className="text-white/25 uppercase tracking-[0.18em] text-[10px] font-semibold mb-2">Start Here</p>
+                                                            <span className="text-white/80 text-base font-medium group-hover:text-violet-300 transition-colors duration-300 inline-flex items-center gap-2">
+                                                                Diagnostic
+                                                                <svg width="10" height="10" viewBox="0 0 24 24" fill="none" className="opacity-0 -translate-x-2 group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-300 text-violet-400">
+                                                                    <path d="M5 12H19M19 12L12 5M19 12L12 19" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                                                                </svg>
+                                                            </span>
+                                                            <span className="text-white/30 text-sm mt-1.5">Start with clarity</span>
                                                         </Link>
                                                     </div>
                                                 </div>
+                                            </div>
+
+                                            {/* Bottom institutional statement bar */}
+                                            <div className="relative border-t border-white/[0.07] px-12 py-4 flex items-center justify-center overflow-hidden">
+                                                {/* Purple gradient — left end */}
+                                                <div
+                                                    className="pointer-events-none absolute left-0 top-0 h-full w-40"
+                                                    style={{
+                                                        background:
+                                                            'linear-gradient(to right, rgba(124,58,237,0.25) 0%, transparent 100%)',
+                                                    }}
+                                                />
+                                                {/* Purple gradient — right end */}
+                                                <div
+                                                    className="pointer-events-none absolute right-0 top-0 h-full w-40"
+                                                    style={{
+                                                        background:
+                                                            'linear-gradient(to left, rgba(124,58,237,0.25) 0%, transparent 100%)',
+                                                    }}
+                                                />
+                                                <p className="relative text-white/30 text-xs tracking-[0.22em] uppercase font-medium select-none">
+                                                    Diagnosis before execution.&nbsp;&nbsp;Systems before scale.
+                                                </p>
                                             </div>
                                         </div>
                                     </motion.div>

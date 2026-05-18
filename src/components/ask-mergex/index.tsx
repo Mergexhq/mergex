@@ -19,6 +19,7 @@ export default function AskMergeXWidget() {
     const [isHovered, setIsHovered] = useState(false);
     const [hasInitialExpanded, setHasInitialExpanded] = useState(true);
     const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+    const [isFooterRevealing, setIsFooterRevealing] = useState(false);
 
     // Collapse FAB label after 3s
     useEffect(() => {
@@ -34,6 +35,16 @@ export default function AskMergeXWidget() {
         };
         window.addEventListener('mergex:mobile-menu', handleMobileMenu);
         return () => window.removeEventListener('mergex:mobile-menu', handleMobileMenu);
+    }, []);
+
+    // Hide widget when footer curtain is revealing
+    useEffect(() => {
+        const handleFooterReveal = (e: Event) => {
+            const detail = (e as CustomEvent<{ hidden: boolean }>).detail;
+            setIsFooterRevealing(!!detail?.hidden);
+        };
+        window.addEventListener('mergex:toggle-navbar', handleFooterReveal);
+        return () => window.removeEventListener('mergex:toggle-navbar', handleFooterReveal);
     }, []);
 
     const isExpanded = hasInitialExpanded || isHovered;
@@ -213,7 +224,7 @@ export default function AskMergeXWidget() {
     };
 
     // ─── Render ────────────────────────────────────────────────────────────────
-    if (isMobileMenuOpen) return null;
+    if (isMobileMenuOpen || isFooterRevealing) return null;
 
     return (
         <>
