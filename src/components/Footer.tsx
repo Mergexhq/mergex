@@ -226,9 +226,8 @@ export default function Footer() {
                     </motion.div>
                 </div>
 
-                {/* ── Bottom bar ── */}
                 <motion.div
-                    className="pt-10 md:pt-16 pb-0 flex flex-col md:flex-row justify-between items-center gap-4 lg:gap-6 text-sm lg:text-base text-gray-600 font-body relative"
+                    className="pt-10 md:pt-16 pb-0 flex flex-col md:flex-row justify-between items-center gap-4 lg:gap-6 text-xs text-gray-500 font-body relative"
                     style={{ zIndex: 10 }}
                     initial="hidden"
                     whileInView="visible"
@@ -236,7 +235,7 @@ export default function Footer() {
                     variants={fadeInUp}
                 >
                     <div className="flex flex-col md:flex-row gap-2 md:gap-4 items-center">
-                        <p>© 2026 MergeX. All rights reserved.</p>
+                        <p>© 2025-2026 The MergeX Company. All rights reserved.</p>
                         <span className="hidden md:block text-gray-300">|</span>
                         <p
                             className={`hidden md:block opacity-100 font-medium text-gray-800 ${

@@ -46,6 +46,7 @@ export function Navbar() {
     const [isDropdownOpen, setIsDropdownOpen] = useState(false);
     const [hidden, setHidden] = useState(false);
     const [isScrolled, setIsScrolled] = useState(false);
+    const [isPastHero, setIsPastHero] = useState(false);
     const dropdownRef = useRef<HTMLDivElement>(null);
     const timeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
     const pathname = usePathname();
@@ -58,6 +59,12 @@ export function Navbar() {
             setIsScrolled(false);
         }
 
+        if (latest > (typeof window !== 'undefined' ? window.innerHeight - 80 : 800)) {
+            setIsPastHero(true);
+        } else {
+            setIsPastHero(false);
+        }
+
         const previous = scrollY.getPrevious() ?? 0;
         // Hide on scroll down after 150px, show on scroll up
         if (latest > previous && latest > 150) {
@@ -68,6 +75,7 @@ export function Navbar() {
     });
 
     const isLightPage =
+        (pathname === '/' && isPastHero) ||
         pathname?.startsWith('/insights') ||
         pathname?.startsWith('/systems') ||
         pathname?.startsWith('/legal') ||
@@ -76,7 +84,6 @@ export function Navbar() {
         pathname?.startsWith('/contact') ||
         pathname === '/about' ||
         pathname === '/careers' ||
-        pathname === '/' ||
         pathname === '/sitemap' ||
         pathname?.startsWith('/brands') ||
         pathname?.startsWith('/methodology') ||
@@ -88,12 +95,12 @@ export function Navbar() {
         : 'text-white/80 hover:text-white';
     
     // When dropdown is open, we force the navbar background to match the dark dropdown
-    // and match the border-white/10 from the mega menu, while hiding the bottom border.
+    // and hide the bottom border to seamlessly connect with the mega menu.
     const navBgClass = isDropdownOpen 
-        ? 'bg-[#0a0a0a] border-white/10 border-b-transparent' 
+        ? 'bg-[#0a0a0a] border-b-transparent' 
         : (isScrolled 
-            ? (isLightPage ? 'bg-white shadow-sm border-gray-200/50' : 'bg-[#0a0a0a] shadow-md border-white/10')
-            : 'bg-transparent border-transparent');
+            ? (isLightPage ? 'bg-white shadow-sm border-b border-b-gray-200/50' : 'bg-[#0a0a0a] shadow-md border-b border-b-white/10')
+            : 'bg-transparent border-b border-b-transparent');
 
     const openDropdown = () => {
         if (timeoutRef.current) clearTimeout(timeoutRef.current);
@@ -132,12 +139,12 @@ export function Navbar() {
         <>
             {/* Desktop Navbar */}
             <motion.div
-                className="hidden lg:block w-full fixed top-0 left-0 right-0 z-50 p-2 pointer-events-none"
+                className="hidden lg:block w-full fixed top-0 left-0 right-0 z-50 pointer-events-none"
                 initial={{ y: -100 }}
                 animate={{ y: forceHidden || hidden ? '-100%' : 0 }}
                 transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
             >
-                <nav className={`w-full ${navBgClass} transition-colors duration-300 pl-4 pr-8 h-16 flex items-center justify-center relative border pointer-events-auto rounded-t-xl ${!isDropdownOpen ? 'rounded-b-xl' : ''}`}>
+                <nav className={`w-full ${navBgClass} transition-colors duration-300 pl-6 pr-8 h-16 flex items-center justify-center relative pointer-events-auto`}>
                     {/* Logo */}
                     <div className="absolute left-6 h-full flex items-center">
                         <Link href="/" className="flex items-center gap-0">
@@ -215,11 +222,11 @@ export function Navbar() {
                                         animate={{ opacity: 1, height: 'auto' }}
                                         exit={{ opacity: 0, height: 0 }}
                                         transition={{ duration: 0.3, ease: [0.22, 1, 0.36, 1] }}
-                                        className="fixed top-[71px] left-2 right-2 z-50 overflow-hidden"
+                                        className="fixed top-16 left-0 right-0 z-50 overflow-hidden"
                                         onMouseEnter={openDropdown}
                                         onMouseLeave={closeDropdown}
                                     >
-                                        <div className="relative rounded-b-xl shadow-2xl border-x border-b border-white/10 overflow-hidden bg-[#0A0A0A]">
+                                        <div className="relative shadow-2xl border-b border-white/10 overflow-hidden bg-[#0A0A0A]">
                                             {/* Background Gradient / Overlay */}
                                             <div className="absolute inset-0 z-0 pointer-events-none">
                                                 {/* Solid black at top → seamless join with navbar, fades to dark */}
@@ -362,17 +369,17 @@ export function Navbar() {
                 initial={{ y: 0 }}
                 animate={{ y: isMobileMenuOpen ? 0 : (forceHidden || hidden ? -100 : 0) }}
                 transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
-                className="lg:hidden fixed top-0 left-0 right-0 z-50 p-2 pointer-events-none"
+                className="lg:hidden fixed top-0 left-0 right-0 z-50 pointer-events-none"
             >
                 <div
                     className={`w-full transition-all duration-300 ease-in-out pointer-events-auto ${
                         isMobileMenuOpen
-                            ? 'bg-white shadow-lg border-gray-200/50'
+                            ? 'bg-white shadow-lg border-b border-b-gray-200/50'
                             : (isScrolled 
-                                ? (isLightPage ? 'bg-white shadow-sm border-gray-200/50' : 'bg-[#0a0a0a] shadow-md border-white/10')
-                                : 'bg-transparent border-transparent'
+                                ? (isLightPage ? 'bg-white shadow-sm border-b border-b-gray-200/50' : 'bg-[#0a0a0a] shadow-md border-b border-b-white/10')
+                                : 'bg-transparent border-b border-b-transparent'
                               )
-                    } rounded-xl px-5 h-14 flex items-center justify-between border relative`}
+                    } px-5 h-14 flex items-center justify-between relative`}
                 >
                     {/* Left: Hamburger */}
                     <button
