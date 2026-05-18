@@ -12,7 +12,7 @@ export function FinalCTA() {
                 </p>
                 <a
                     href="/diagnostic"
-                    className="inline-block px-10 py-4 bg-foreground text-background rounded-full text-sm font-semibold hover:opacity-90 transition-opacity"
+                    className="inline-block px-10 py-4 bg-foreground text-background rounded-none text-sm font-semibold hover:opacity-90 transition-opacity"
                 >
                     Book a Diagnostic Call →
                 </a>

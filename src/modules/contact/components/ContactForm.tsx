@@ -50,9 +50,9 @@ export function ContactForm() {
     };
 
     const selectClass =
-        'w-full rounded-xl border border-gray-200 bg-white px-4 py-3 text-[15px] text-gray-800 appearance-none focus:border-gray-900 focus:outline-none focus:ring-0 transition-colors';
+        'w-full rounded-none border border-gray-200 bg-white px-4 py-3 text-[15px] text-gray-800 appearance-none focus:border-gray-900 focus:outline-none focus:ring-0 transition-colors';
     const inputClass =
-        'w-full rounded-xl border border-gray-200 bg-white px-4 py-3 text-[15px] text-gray-800 placeholder:text-gray-400 focus:border-gray-900 focus:outline-none focus:ring-0 transition-colors';
+        'w-full rounded-none border border-gray-200 bg-white px-4 py-3 text-[15px] text-gray-800 placeholder:text-gray-400 focus:border-gray-900 focus:outline-none focus:ring-0 transition-colors';
     const labelClass = 'mb-1.5 block text-xs font-semibold tracking-wide text-gray-500 uppercase';
 
     return (
@@ -68,7 +68,7 @@ export function ContactForm() {
                             animate={{ opacity: 1, y: 0 }}
                             exit={{ opacity: 0, y: -20 }}
                             transition={{ duration: 0.5 }}
-                            className="rounded-2xl border border-gray-200 bg-white p-8 shadow-sm md:p-12"
+                            className="rounded-none border border-gray-200 bg-white p-8 shadow-sm md:p-12"
                         >
                             {/* Form header */}
                             <div className="mb-10">
@@ -263,7 +263,7 @@ export function ContactForm() {
                                 <button
                                     type="submit"
                                     disabled={isSubmitting}
-                                    className="group flex w-full items-center justify-center gap-3 rounded-xl bg-gray-900 py-4 text-base font-bold text-white transition-all hover:bg-gray-800 disabled:opacity-60"
+                                    className="group flex w-full items-center justify-center gap-3 rounded-none bg-gray-900 py-4 text-base font-bold text-white transition-all hover:bg-gray-800 disabled:opacity-60"
                                 >
                                     {isSubmitting ? (
                                         <span className="flex items-center gap-2">
@@ -292,7 +292,7 @@ export function ContactForm() {
                             initial={{ opacity: 0, scale: 0.97 }}
                             animate={{ opacity: 1, scale: 1 }}
                             transition={{ duration: 0.5 }}
-                            className="rounded-2xl border border-gray-200 bg-white p-8 text-center shadow-sm md:p-14"
+                            className="rounded-none border border-gray-200 bg-white p-8 text-center shadow-sm md:p-14"
                         >
                             <div className="mb-6 flex justify-center">
                                 <div className="flex h-14 w-14 items-center justify-center rounded-full bg-gray-900">
@@ -312,7 +312,7 @@ export function ContactForm() {
                                 href="https://calendly.com"
                                 target="_blank"
                                 rel="noopener noreferrer"
-                                className="inline-flex items-center gap-2 rounded-xl border-2 border-gray-900 bg-gray-900 px-8 py-4 text-sm font-bold text-white transition-all hover:bg-white hover:text-gray-900"
+                                className="inline-flex items-center gap-2 rounded-none border-2 border-gray-900 bg-gray-900 px-8 py-4 text-sm font-bold text-white transition-all hover:bg-white hover:text-gray-900"
                             >
                                 Schedule Diagnostic Conversation
                                 <ArrowRight className="h-4 w-4" />

@@ -18,7 +18,7 @@ export function BrandsCTA() {
                 </p>
                 <Link
                     href="/diagnostic"
-                    className="inline-flex items-center gap-2 px-8 py-4 bg-foreground text-background rounded-full text-sm font-semibold hover:opacity-90 transition-opacity"
+                    className="inline-flex items-center gap-2 px-8 py-4 bg-foreground text-background rounded-none text-sm font-semibold hover:opacity-90 transition-opacity"
                 >
                     Request a Diagnostic
                     <svg className="w-4 h-4" fill="none" stroke="currentColor" strokeWidth={2} viewBox="0 0 24 24">

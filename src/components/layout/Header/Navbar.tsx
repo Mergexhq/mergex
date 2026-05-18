@@ -69,8 +69,9 @@ export function Navbar() {
         : 'text-white/80 hover:text-white';
     
     // When dropdown is open, we force the navbar background to match the dark dropdown
+    // and match the border-white/10 from the mega menu, while hiding the bottom border.
     const navBgClass = isDropdownOpen 
-        ? 'bg-[#0a0a0a] border-[#0a0a0a]' 
+        ? 'bg-[#0a0a0a] border-white/10 border-b-transparent' 
         : 'bg-transparent border-transparent';
 
     const openDropdown = () => {
@@ -178,15 +179,25 @@ export function Navbar() {
                                         animate={{ opacity: 1, height: 'auto' }}
                                         exit={{ opacity: 0, height: 0 }}
                                         transition={{ duration: 0.3, ease: [0.22, 1, 0.36, 1] }}
-                                        className="fixed top-[72px] left-2 right-2 z-50 overflow-hidden"
+                                        className="fixed top-[71px] left-2 right-2 z-50 overflow-hidden"
                                         onMouseEnter={openDropdown}
                                         onMouseLeave={closeDropdown}
                                     >
-                                        <div className="bg-[#0a0a0a] rounded-b-xl shadow-2xl border-x border-b border-white/10 overflow-hidden">
+                                        <div className="relative rounded-b-xl shadow-2xl border-x border-b border-white/10 overflow-hidden bg-[#0A0A0A]">
+                                            {/* Background Gradient / Overlay */}
+                                            <div className="absolute inset-0 z-0 pointer-events-none">
+                                                {/* Solid black at top → seamless join with navbar, fades to dark */}
+                                                <div className="absolute inset-0 bg-[#0A0A0A]" />
+                                                
+                                                {/* Left and Right subtle purple gradients */}
+                                                <div className="absolute -left-[10%] top-[20%] w-[300px] h-[300px] rounded-full bg-violet-600/10 blur-[100px]" />
+                                                <div className="absolute -right-[10%] bottom-[10%] w-[300px] h-[300px] rounded-full bg-violet-600/10 blur-[100px]" />
+                                            </div>
+
                                             {/* Main Content Row */}
-                                            <div className="flex">
+                                            <div className="flex relative z-10">
                                                 {/* LEFT PANEL — 35% — Narrative anchor */}
-                                                <div className="w-[35%] bg-[#0f0f0f] px-12 py-10 flex flex-col justify-between border-r border-white/5">
+                                                <div className="w-[35%] px-12 py-8 flex flex-col justify-between">
                                                     <div>
                                                         <p className="text-white/30 uppercase tracking-[0.2em] text-[10px] font-semibold mb-5">
                                                             What We Do
@@ -195,7 +206,7 @@ export function Navbar() {
                                                             className="text-[2rem] leading-[1.15] font-clash font-semibold text-white mb-4"
                                                             style={{ fontFamily: "'Clash Display', sans-serif" }}
                                                         >
-                                                            Scaling<br />Infrastructure
+                                                            Scaling<br /><span className="font-serif italic font-medium">Infrastructure</span>
                                                         </h2>
                                                         <p className="text-white/50 text-sm leading-relaxed max-w-[280px]">
                                                             MergeX helps businesses identify operational constraints, restructure fragmented systems and scale with greater clarity.
@@ -203,7 +214,7 @@ export function Navbar() {
                                                     </div>
                                                     <Link
                                                         href="/brands/mergex"
-                                                        className="inline-flex items-center gap-2 text-white/80 hover:text-white text-sm font-medium transition-colors duration-300 group mt-8"
+                                                        className="inline-flex items-center gap-2 text-white/80 hover:text-white text-sm font-medium transition-colors duration-300 group mt-8 w-fit"
                                                     >
                                                         <span>Explore MergeX</span>
                                                         <span className="inline-block group-hover:translate-x-1 transition-transform duration-300">→</span>
@@ -211,38 +222,49 @@ export function Navbar() {
                                                 </div>
 
                                                 {/* RIGHT PANEL — 65% — Navigation system */}
-                                                <div className="w-[65%] px-12 py-10 bg-[#0a0a0a]">
+                                                <div className="w-[65%] px-12 py-8">
                                                     <div className="flex flex-col gap-0">
                                                         {/* PRIMARY — MergeX */}
                                                         <Link
                                                             href="/brands/mergex"
-                                                            className="group flex flex-col border-b border-white/[0.06] pb-7 mb-7"
+                                                            className="group flex flex-col border-b border-white/[0.06] pb-5 mb-5"
                                                         >
                                                             <p className="text-white/25 uppercase tracking-[0.18em] text-[10px] font-semibold mb-2">Brand</p>
-                                                            <span
-                                                                className="text-white text-[1.65rem] font-clash font-semibold leading-none group-hover:text-violet-300 transition-colors duration-300 inline-flex items-center gap-3"
-                                                                style={{ fontFamily: "'Clash Display', sans-serif" }}
-                                                            >
-                                                                MergeX
-                                                                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" className="opacity-0 -translate-x-2 group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-300 text-violet-400">
-                                                                    <path d="M5 12H19M19 12L12 5M19 12L12 19" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                                                            <div className="flex items-center justify-between">
+                                                                <span
+                                                                    className="text-white text-[1.65rem] font-clash font-semibold leading-none group-hover:text-violet-300 transition-colors duration-300"
+                                                                    style={{ fontFamily: "'Clash Display', sans-serif" }}
+                                                                >
+                                                                    MergeX
+                                                                </span>
+                                                                {/* Large diagonal arrow — visible on hover */}
+                                                                <svg
+                                                                    width="36" height="36" viewBox="0 0 24 24" fill="none"
+                                                                    className="opacity-0 translate-y-1 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-300 text-white shrink-0"
+                                                                >
+                                                                    <path d="M7 17L17 7M17 7H7M17 7V17" stroke="currentColor" strokeWidth="1.75" strokeLinecap="square" strokeLinejoin="miter"/>
                                                                 </svg>
-                                                            </span>
+                                                            </div>
                                                             <span className="text-white/40 text-sm mt-2">Operational scaling systems</span>
                                                         </Link>
 
                                                         {/* SECONDARY — Methodology */}
                                                         <Link
                                                             href="/methodology"
-                                                            className="group flex flex-col border-b border-white/[0.06] pb-6 mb-6"
+                                                            className="group flex flex-col border-b border-white/[0.06] pb-5 mb-5"
                                                         >
                                                             <p className="text-white/25 uppercase tracking-[0.18em] text-[10px] font-semibold mb-2">Framework</p>
-                                                            <span className="text-white text-xl font-medium group-hover:text-violet-300 transition-colors duration-300 inline-flex items-center gap-2">
-                                                                Methodology
-                                                                <svg width="11" height="11" viewBox="0 0 24 24" fill="none" className="opacity-0 -translate-x-2 group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-300 text-violet-400">
-                                                                    <path d="M5 12H19M19 12L12 5M19 12L12 19" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                                                            <div className="flex items-center justify-between">
+                                                                <span className="text-white text-xl font-medium group-hover:text-violet-300 transition-colors duration-300">
+                                                                    Methodology
+                                                                </span>
+                                                                <svg
+                                                                    width="36" height="36" viewBox="0 0 24 24" fill="none"
+                                                                    className="opacity-0 translate-y-1 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-300 text-white shrink-0"
+                                                                >
+                                                                    <path d="M7 17L17 7M17 7H7M17 7V17" stroke="currentColor" strokeWidth="1.75" strokeLinecap="square" strokeLinejoin="miter"/>
                                                                 </svg>
-                                                            </span>
+                                                            </div>
                                                             <span className="text-white/35 text-sm mt-1.5">The S.C.A.L.E framework</span>
                                                         </Link>
 
@@ -252,12 +274,17 @@ export function Navbar() {
                                                             className="group flex flex-col"
                                                         >
                                                             <p className="text-white/25 uppercase tracking-[0.18em] text-[10px] font-semibold mb-2">Start Here</p>
-                                                            <span className="text-white/80 text-base font-medium group-hover:text-violet-300 transition-colors duration-300 inline-flex items-center gap-2">
-                                                                Diagnostic
-                                                                <svg width="10" height="10" viewBox="0 0 24 24" fill="none" className="opacity-0 -translate-x-2 group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-300 text-violet-400">
-                                                                    <path d="M5 12H19M19 12L12 5M19 12L12 19" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                                                            <div className="flex items-center justify-between">
+                                                                <span className="text-white/80 text-base font-medium group-hover:text-violet-300 transition-colors duration-300">
+                                                                    Diagnostic
+                                                                </span>
+                                                                <svg
+                                                                    width="36" height="36" viewBox="0 0 24 24" fill="none"
+                                                                    className="opacity-0 translate-y-1 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-300 text-white shrink-0"
+                                                                >
+                                                                    <path d="M7 17L17 7M17 7H7M17 7V17" stroke="currentColor" strokeWidth="1.75" strokeLinecap="square" strokeLinejoin="miter"/>
                                                                 </svg>
-                                                            </span>
+                                                            </div>
                                                             <span className="text-white/30 text-sm mt-1.5">Start with clarity</span>
                                                         </Link>
                                                     </div>
@@ -265,24 +292,8 @@ export function Navbar() {
                                             </div>
 
                                             {/* Bottom institutional statement bar */}
-                                            <div className="relative border-t border-white/[0.07] px-12 py-4 flex items-center justify-center overflow-hidden">
-                                                {/* Purple gradient — left end */}
-                                                <div
-                                                    className="pointer-events-none absolute left-0 top-0 h-full w-40"
-                                                    style={{
-                                                        background:
-                                                            'linear-gradient(to right, rgba(124,58,237,0.25) 0%, transparent 100%)',
-                                                    }}
-                                                />
-                                                {/* Purple gradient — right end */}
-                                                <div
-                                                    className="pointer-events-none absolute right-0 top-0 h-full w-40"
-                                                    style={{
-                                                        background:
-                                                            'linear-gradient(to left, rgba(124,58,237,0.25) 0%, transparent 100%)',
-                                                    }}
-                                                />
-                                                <p className="relative text-white/30 text-xs tracking-[0.22em] uppercase font-medium select-none">
+                                            <div className="relative px-12 py-4 mt-2 flex items-center justify-center overflow-hidden z-10 pb-6 border-t border-white/[0.06]">
+                                                <p className="relative text-white/40 text-xs tracking-[0.22em] uppercase font-medium select-none">
                                                     Diagnosis before execution.&nbsp;&nbsp;Systems before scale.
                                                 </p>
                                             </div>

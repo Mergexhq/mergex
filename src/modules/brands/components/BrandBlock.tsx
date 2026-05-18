@@ -113,7 +113,7 @@ export function BrandBlock({ brand, index }: BrandBlockProps) {
           {/* ── Right: Structured info panel ───────────────── */}
           <div className="flex flex-col gap-6">
             {/* Ecosystem role */}
-            <div className="rounded-2xl border border-border bg-background p-6">
+            <div className="rounded-none border border-border bg-background p-6">
               <p className="text-xs font-bold uppercase tracking-widest text-foreground-muted mb-3">
                 Ecosystem Role
               </p>
@@ -123,7 +123,7 @@ export function BrandBlock({ brand, index }: BrandBlockProps) {
             </div>
 
             {/* Focus areas */}
-            <div className="rounded-2xl border border-border bg-background p-6">
+            <div className="rounded-none border border-border bg-background p-6">
               <p className="text-xs font-bold uppercase tracking-widest text-foreground-muted mb-4">
                 Focus Areas
               </p>
@@ -131,7 +131,7 @@ export function BrandBlock({ brand, index }: BrandBlockProps) {
                 {brand.focusAreas.map((area) => (
                   <span
                     key={area}
-                    className="text-xs px-3 py-1.5 rounded-full border border-border text-foreground-muted font-medium"
+                    className="text-xs px-3 py-1.5 rounded-none border border-border text-foreground-muted font-medium"
                   >
                     {area}
                   </span>
@@ -142,7 +142,7 @@ export function BrandBlock({ brand, index }: BrandBlockProps) {
             {/* Status */}
             <div className="flex items-center gap-3">
               <div
-                className={`inline-flex items-center gap-2 px-3 py-1.5 rounded-full text-xs font-semibold ${status.bg} ${status.text}`}
+                className={`inline-flex items-center gap-2 px-3 py-1.5 rounded-none text-xs font-semibold ${status.bg} ${status.text}`}
               >
                 <div className={`w-1.5 h-1.5 rounded-full ${status.dot}`} />
                 {brand.status}

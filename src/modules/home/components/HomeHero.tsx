@@ -16,13 +16,13 @@ export function HomeHero() {
             <div className="mt-12 flex gap-4">
                 <a
                     href="/diagnostic"
-                    className="px-8 py-3.5 bg-foreground text-background rounded-full text-sm font-semibold hover:opacity-90 transition-opacity"
+                    className="px-8 py-3.5 bg-foreground text-background rounded-none text-sm font-semibold hover:opacity-90 transition-opacity"
                 >
                     Book a Diagnostic Call
                 </a>
                 <a
                     href="/methodology"
-                    className="px-8 py-3.5 border border-border rounded-full text-sm font-semibold hover:bg-background-subtle transition-colors"
+                    className="px-8 py-3.5 border border-border rounded-none text-sm font-semibold hover:bg-background-subtle transition-colors"
                 >
                     Our Methodology
                 </a>

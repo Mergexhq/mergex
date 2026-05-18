@@ -56,7 +56,7 @@ export function CaseStudyCard({ caseStudy, variant = 'compact' }: CaseStudyCardP
               {caseStudy.tags.slice(0, 3).map((tag) => (
                 <span
                   key={tag}
-                  className="text-xs px-3 py-1 rounded-full bg-background-subtle text-foreground-muted"
+                  className="text-xs px-3 py-1 rounded-none bg-background-subtle text-foreground-muted"
                 >
                   {tag}
                 </span>

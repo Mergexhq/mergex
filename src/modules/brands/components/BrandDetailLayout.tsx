@@ -51,12 +51,12 @@ export function BrandDetailLayout({
         <div className="flex items-center gap-4">
           <Link
             href="/contact"
-            className="px-6 py-3 bg-foreground text-background rounded-full text-sm font-semibold hover:opacity-80 transition-opacity"
+            className="px-6 py-3 bg-foreground text-background rounded-none text-sm font-semibold hover:opacity-80 transition-opacity"
           >
             Get in Touch
           </Link>
           <div
-            className={`inline-flex items-center gap-2 px-3 py-1.5 rounded-full text-xs font-semibold ${status.bg} ${status.text}`}
+            className={`inline-flex items-center gap-2 px-3 py-1.5 rounded-none text-xs font-semibold ${status.bg} ${status.text}`}
           >
             <div className={`w-1.5 h-1.5 rounded-full ${status.dot}`} />
             {brand.status}
@@ -87,7 +87,7 @@ export function BrandDetailLayout({
               {brand.focusAreas.map((area) => (
                 <span
                   key={area}
-                  className="text-xs px-3 py-1.5 rounded-full border border-border text-foreground-muted font-medium"
+                  className="text-xs px-3 py-1.5 rounded-none border border-border text-foreground-muted font-medium"
                 >
                   {area}
                 </span>
@@ -117,7 +117,7 @@ export function BrandDetailLayout({
           </div>
           <Link
             href="/contact"
-            className="shrink-0 px-8 py-4 bg-white text-foreground rounded-full text-sm font-semibold hover:opacity-90 transition-opacity inline-flex items-center gap-2"
+            className="shrink-0 px-8 py-4 bg-white text-foreground rounded-none text-sm font-semibold hover:opacity-90 transition-opacity inline-flex items-center gap-2"
           >
             Start a Conversation
             <svg className="w-4 h-4" fill="none" stroke="currentColor" strokeWidth={2} viewBox="0 0 24 24">

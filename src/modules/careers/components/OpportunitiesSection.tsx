@@ -48,7 +48,7 @@ export function OpportunitiesSection() {
                                             {role.description}
                                         </p>
                                     </div>
-                                    <button className="flex items-center gap-2 rounded-full border border-gray-900 px-5 py-2 text-sm font-bold text-gray-900 transition-all hover:bg-gray-900 hover:text-white">
+                                    <button className="flex items-center gap-2 rounded-none border border-gray-900 px-5 py-2 text-sm font-bold text-gray-900 transition-all hover:bg-gray-900 hover:text-white">
                                         Apply
                                         <ArrowUpRight className="h-4 w-4" />
                                     </button>
@@ -77,7 +77,7 @@ export function OpportunitiesSection() {
                             </p>
                             <a
                                 href={OPPORTUNITIES.openApplication.ctaLink}
-                                className="inline-flex w-full items-center justify-center rounded-xl bg-white py-4 font-bold text-gray-900 transition-all hover:bg-purple-50"
+                                className="inline-flex w-full items-center justify-center rounded-none bg-white py-4 font-bold text-gray-900 transition-all hover:bg-purple-50"
                             >
                                 {OPPORTUNITIES.openApplication.ctaText}
                             </a>

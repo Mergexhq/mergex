@@ -76,7 +76,7 @@ export function MobileNav({ isOpen, onClose }: MobileNavProps) {
                         animate={{ opacity: 1 }}
                         exit={{ opacity: 0 }}
                         transition={{ duration: 0.3 }}
-                        className="fixed inset-0 bg-black/80 backdrop-blur-md z-60"
+                        className="fixed inset-0 bg-black/80 backdrop-blur-md z-[60]"
                         onClick={onClose}
                     />
 
@@ -86,7 +86,7 @@ export function MobileNav({ isOpen, onClose }: MobileNavProps) {
                         animate={{ y: 0 }}
                         exit={{ y: '100%' }}
                         transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
-                        className="fixed bottom-0 left-0 right-0 w-full max-h-[85vh] bg-[#0a0a0a] z-61 flex flex-col shadow-[0_-20px_50px_rgba(0,0,0,0.5)] border-t border-white/10 rounded-t-3xl overflow-hidden"
+                        className="fixed bottom-0 left-0 right-0 w-full h-[92dvh] bg-[#0a0a0a] z-[61] flex flex-col shadow-[0_-20px_50px_rgba(0,0,0,0.5)] border-t border-white/10 rounded-t-3xl overflow-hidden"
                     >
                         {/* Unified Header Row */}
                         <div className="flex items-center justify-between px-6 h-20 border-b border-white/10 shrink-0 relative">
@@ -130,7 +130,7 @@ export function MobileNav({ isOpen, onClose }: MobileNavProps) {
                         </div>
 
                         {/* Menu Content Area */}
-                        <div className="flex-1 overflow-y-auto px-6 py-8">
+                        <div className="flex-1 overflow-y-auto overscroll-contain px-6 py-8 pb-12">
                             <div className="flex flex-col">
                                 {/* Who We Are */}
                                 <Link

@@ -77,7 +77,7 @@ export function InsightSidebar({
               <Link
                 key={cat}
                 href={href}
-                className={`px-4 py-1.5 rounded-full text-sm font-medium transition-colors duration-200 ${
+                className={`px-4 py-1.5 rounded-none text-sm font-medium transition-colors duration-200 ${
                   isActive
                     ? 'bg-primary text-white'
                     : 'bg-background-subtle text-foreground-muted hover:text-foreground'
