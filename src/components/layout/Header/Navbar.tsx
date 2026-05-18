@@ -4,7 +4,7 @@ import { useState, useEffect, useRef } from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import Image from 'next/image';
-import { motion, AnimatePresence } from 'framer-motion';
+import { motion, AnimatePresence, useScroll, useMotionValueEvent } from 'framer-motion';
 import { MobileNav } from '@/components/layout/Header/MobileNav';
 
 const whatWeDoColumns = [
@@ -44,9 +44,28 @@ export function Navbar() {
     const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
     const [forceHidden, setForceHidden] = useState(false);
     const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+    const [hidden, setHidden] = useState(false);
+    const [isScrolled, setIsScrolled] = useState(false);
     const dropdownRef = useRef<HTMLDivElement>(null);
     const timeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
     const pathname = usePathname();
+    const { scrollY } = useScroll();
+
+    useMotionValueEvent(scrollY, "change", (latest) => {
+        if (latest > 50) {
+            setIsScrolled(true);
+        } else {
+            setIsScrolled(false);
+        }
+
+        const previous = scrollY.getPrevious() ?? 0;
+        // Hide on scroll down after 150px, show on scroll up
+        if (latest > previous && latest > 150) {
+            setHidden(true);
+        } else {
+            setHidden(false);
+        }
+    });
 
     const isLightPage =
         pathname?.startsWith('/insights') ||
@@ -72,7 +91,9 @@ export function Navbar() {
     // and match the border-white/10 from the mega menu, while hiding the bottom border.
     const navBgClass = isDropdownOpen 
         ? 'bg-[#0a0a0a] border-white/10 border-b-transparent' 
-        : 'bg-transparent border-transparent';
+        : (isScrolled 
+            ? (isLightPage ? 'bg-white shadow-sm border-gray-200/50' : 'bg-[#0a0a0a] shadow-md border-white/10')
+            : 'bg-transparent border-transparent');
 
     const openDropdown = () => {
         if (timeoutRef.current) clearTimeout(timeoutRef.current);
@@ -111,12 +132,12 @@ export function Navbar() {
         <>
             {/* Desktop Navbar */}
             <motion.div
-                className="hidden lg:block w-full absolute top-0 left-0 right-0 z-50 p-2"
+                className="hidden lg:block w-full fixed top-0 left-0 right-0 z-50 p-2 pointer-events-none"
                 initial={{ y: -100 }}
-                animate={{ y: forceHidden ? '-100%' : 0 }}
-                transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
+                animate={{ y: forceHidden || hidden ? '-100%' : 0 }}
+                transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
             >
-                <nav className={`w-full ${navBgClass} transition-colors duration-300 pl-4 pr-8 h-16 flex items-center justify-center relative border rounded-t-xl ${!isDropdownOpen ? 'rounded-b-xl' : ''}`}>
+                <nav className={`w-full ${navBgClass} transition-colors duration-300 pl-4 pr-8 h-16 flex items-center justify-center relative border pointer-events-auto rounded-t-xl ${!isDropdownOpen ? 'rounded-b-xl' : ''}`}>
                     {/* Logo */}
                     <div className="absolute left-6 h-full flex items-center">
                         <Link href="/" className="flex items-center gap-0">
@@ -133,6 +154,21 @@ export function Navbar() {
                             >
                                 <span>MERGEX</span>
                             </span>
+                        </Link>
+                    </div>
+
+                    {/* Right: Login */}
+                    <div className="absolute right-6 h-full flex items-center">
+                        <Link
+                            href="/login"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className={`flex items-center gap-2 text-lg font-semibold transition-colors duration-300 ${navItemColorClass}`}
+                        >
+                            Login
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" className="opacity-70 mt-0.5">
+                                <path d="M7 17L17 7M17 7H7M17 7V17" />
+                            </svg>
                         </Link>
                     </div>
 
@@ -324,44 +360,24 @@ export function Navbar() {
             {/* Mobile Navbar Header */}
             <motion.div
                 initial={{ y: 0 }}
-                animate={{ y: isMobileMenuOpen || forceHidden ? -100 : 0 }}
-                transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
-                className="lg:hidden absolute top-0 left-0 right-0 z-50 p-2 pointer-events-none"
+                animate={{ y: isMobileMenuOpen ? 0 : (forceHidden || hidden ? -100 : 0) }}
+                transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
+                className="lg:hidden fixed top-0 left-0 right-0 z-50 p-2 pointer-events-none"
             >
                 <div
                     className={`w-full transition-all duration-300 ease-in-out pointer-events-auto ${
                         isMobileMenuOpen
-                            ? 'bg-white/90 shadow-lg border-gray-200/50'
-                            : 'bg-transparent border-transparent'
+                            ? 'bg-white shadow-lg border-gray-200/50'
+                            : (isScrolled 
+                                ? (isLightPage ? 'bg-white shadow-sm border-gray-200/50' : 'bg-[#0a0a0a] shadow-md border-white/10')
+                                : 'bg-transparent border-transparent'
+                              )
                     } rounded-xl px-5 h-14 flex items-center justify-between border relative`}
                 >
-                    {/* Left spacer to balance justify-between */}
-                    <div className="w-8"></div>
-
-                    {/* Centered Logo + Text */}
-                    <Link href="/" className="absolute left-1/2 -translate-x-1/2 flex items-center justify-center gap-1 z-10">
-                        <Image
-                            src="/logo/mergex-logo.png"
-                            alt="MergeX Logo"
-                            width={40}
-                            height={40}
-                            className={`object-contain transition-all duration-300 ${
-                                isMobileMenuOpen || isLightPage ? '' : 'brightness-0 invert'
-                            }`}
-                        />
-                        <span
-                            className={`font-clash font-bold text-2xl tracking-wide ${
-                                isMobileMenuOpen || isLightPage ? 'text-black' : 'text-white'
-                            }`}
-                            style={{ fontFamily: "'Clash Display', sans-serif" }}
-                        >
-                            MERGEX
-                        </span>
-                    </Link>
-
+                    {/* Left: Hamburger */}
                     <button
                         onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-                        className={`p-2 -mr-2 focus:outline-none z-10 ${
+                        className={`p-2 -ml-2 focus:outline-none z-10 ${
                             isMobileMenuOpen || isLightPage ? 'text-black' : 'text-white'
                         }`}
                         aria-label="Toggle menu"
@@ -392,6 +408,43 @@ export function Navbar() {
                             )}
                         </svg>
                     </button>
+
+                    {/* Centered Logo + Text */}
+                    <Link href="/" className="absolute left-1/2 -translate-x-1/2 flex items-center justify-center gap-1 z-10">
+                        <Image
+                            src="/logo/mergex-logo.png"
+                            alt="MergeX Logo"
+                            width={40}
+                            height={40}
+                            className={`object-contain transition-all duration-300 ${
+                                isMobileMenuOpen || isLightPage ? '' : 'brightness-0 invert'
+                            }`}
+                        />
+                        <span
+                            className={`font-clash font-bold text-2xl tracking-wide ${
+                                isMobileMenuOpen || isLightPage ? 'text-black' : 'text-white'
+                            }`}
+                            style={{ fontFamily: "'Clash Display', sans-serif" }}
+                        >
+                            MERGEX
+                        </span>
+                    </Link>
+
+                    {/* Right: Login Icon */}
+                    <Link
+                        href="/login"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className={`p-2 -mr-2 z-10 flex items-center justify-center ${
+                            isMobileMenuOpen || isLightPage ? 'text-black' : 'text-white'
+                        } transition-colors hover:opacity-70`}
+                        aria-label="Login"
+                    >
+                        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                            <path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2" />
+                            <circle cx="12" cy="7" r="4" />
+                        </svg>
+                    </Link>
                 </div>
             </motion.div>
 

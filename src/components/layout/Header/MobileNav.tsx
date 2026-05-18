@@ -228,10 +228,24 @@ export function MobileNav({ isOpen, onClose }: MobileNavProps) {
                                 <Link
                                     href="/contact"
                                     onClick={onClose}
-                                    className="group flex items-center justify-between py-5"
+                                    className="group flex items-center justify-between py-5 border-b border-white/10"
                                 >
                                     <span className="text-2xl font-medium text-white tracking-tight group-hover:text-violet-400 transition-colors">
                                         Contact
+                                    </span>
+                                    <ArrowUpRight size={20} className="text-white/30 group-hover:text-violet-400 transition-colors" />
+                                </Link>
+
+                                {/* Login */}
+                                <Link
+                                    href="/login"
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    onClick={onClose}
+                                    className="group flex items-center justify-between py-5"
+                                >
+                                    <span className="text-2xl font-medium text-white tracking-tight group-hover:text-violet-400 transition-colors">
+                                        Login
                                     </span>
                                     <ArrowUpRight size={20} className="text-white/30 group-hover:text-violet-400 transition-colors" />
                                 </Link>
