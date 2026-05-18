@@ -9,12 +9,13 @@ export const metadata: Metadata = {
     'Perspectives on systems, scaling, and execution from The MergeX Company.',
 };
 
-export default function InsightsPage({
+export default async function InsightsPage({
   searchParams,
 }: {
-  searchParams?: { category?: string };
+  searchParams?: Promise<{ category?: string }>;
 }) {
-  const activeCategory = searchParams?.category ?? 'All';
+  const resolvedSearchParams = await searchParams;
+  const activeCategory = resolvedSearchParams?.category ?? 'All';
 
   const filtered =
     activeCategory === 'All'

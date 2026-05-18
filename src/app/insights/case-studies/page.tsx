@@ -9,12 +9,13 @@ export const metadata: Metadata = {
     'Selected case studies from The MergeX Company. Real constraints. Real systems. Measurable results.',
 };
 
-export default function CaseStudiesPage({
+export default async function CaseStudiesPage({
   searchParams,
 }: {
-  searchParams?: { industry?: string };
+  searchParams?: Promise<{ industry?: string }>;
 }) {
-  const activeIndustry = searchParams?.industry ?? 'All';
+  const resolvedSearchParams = await searchParams;
+  const activeIndustry = resolvedSearchParams?.industry ?? 'All';
 
   const filtered =
     activeIndustry === 'All'
