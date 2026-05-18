@@ -1,0 +1,355 @@
+'use client';
+
+import { useState, useEffect, useRef } from 'react';
+import Link from 'next/link';
+import { usePathname } from 'next/navigation';
+import Image from 'next/image';
+import { motion, AnimatePresence } from 'framer-motion';
+import { MobileNav } from '@/components/layout/Header/MobileNav';
+
+const whatWeDoColumns = [
+    {
+        title: 'Brand',
+        items: [
+            {
+                label: 'MergeX',
+                description: 'Operational scaling systems',
+                href: '/brands/mergex',
+            },
+        ],
+    },
+    {
+        title: 'Framework',
+        items: [
+            {
+                label: 'Methodology',
+                description: 'The S.C.A.L.E framework',
+                href: '/methodology',
+            },
+        ],
+    },
+    {
+        title: 'Start Here',
+        items: [
+            {
+                label: 'Diagnostic',
+                description: 'Start with clarity',
+                href: '/diagnostic',
+            },
+        ],
+    },
+];
+
+export function Navbar() {
+    const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+    const [forceHidden, setForceHidden] = useState(false);
+    const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+    const dropdownRef = useRef<HTMLDivElement>(null);
+    const timeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+    const pathname = usePathname();
+
+    const isLightPage =
+        pathname?.startsWith('/insights') ||
+        pathname?.startsWith('/systems') ||
+        pathname?.startsWith('/legal') ||
+        pathname?.startsWith('/partner') ||
+        pathname === '/pricing' ||
+        pathname?.startsWith('/contact') ||
+        pathname === '/about' ||
+        pathname === '/careers' ||
+        pathname === '/' ||
+        pathname === '/sitemap' ||
+        pathname?.startsWith('/brands') ||
+        pathname?.startsWith('/methodology') ||
+        pathname?.startsWith('/diagnostic');
+
+    const textColorClass = isLightPage && !isDropdownOpen ? 'text-black' : 'text-white';
+    const navItemColorClass = isLightPage && !isDropdownOpen
+        ? 'text-black/80 hover:text-violet-600'
+        : 'text-white/80 hover:text-white';
+    
+    // When dropdown is open, we force the navbar background to match the dark dropdown
+    const navBgClass = isDropdownOpen 
+        ? 'bg-[#0a0a0a] border-[#0a0a0a]' 
+        : 'bg-transparent border-transparent';
+
+    const openDropdown = () => {
+        if (timeoutRef.current) clearTimeout(timeoutRef.current);
+        setIsDropdownOpen(true);
+    };
+
+    const closeDropdown = () => {
+        timeoutRef.current = setTimeout(() => setIsDropdownOpen(false), 120);
+    };
+
+    useEffect(() => {
+        const handleToggleNavbar = (e: CustomEvent<{ hidden: boolean }>) => {
+            setForceHidden(e.detail.hidden);
+        };
+        window.addEventListener('mergex:toggle-navbar', handleToggleNavbar as EventListener);
+        return () => {
+            window.removeEventListener('mergex:toggle-navbar', handleToggleNavbar as EventListener);
+            if (timeoutRef.current) clearTimeout(timeoutRef.current);
+        };
+    }, []);
+
+    // Also close dropdown on path change
+    useEffect(() => {
+        setIsDropdownOpen(false);
+    }, [pathname]);
+
+    // Notify AskMergeXWidget when mobile menu state changes
+    useEffect(() => {
+        const event = new CustomEvent('mergex:mobile-menu', {
+            detail: { open: isMobileMenuOpen }
+        });
+        window.dispatchEvent(event);
+    }, [isMobileMenuOpen]);
+
+    return (
+        <>
+            {/* Desktop Navbar */}
+            <motion.div
+                className="hidden lg:block w-full absolute top-0 left-0 right-0 z-50 p-2"
+                initial={{ y: -100 }}
+                animate={{ y: forceHidden ? '-100%' : 0 }}
+                transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
+            >
+                <nav className={`w-full ${navBgClass} transition-colors duration-300 pl-4 pr-8 h-16 flex items-center justify-center relative border rounded-t-xl ${!isDropdownOpen ? 'rounded-b-xl' : ''}`}>
+                    {/* Logo */}
+                    <div className="absolute left-6 h-full flex items-center">
+                        <Link href="/" className="flex items-center gap-0">
+                            <Image
+                                src="/logo/mergex-logo.png"
+                                alt="MergeX Logo"
+                                width={60}
+                                height={60}
+                                className={`object-contain transition-all duration-300 ${isDropdownOpen ? 'brightness-0 invert' : (isLightPage ? '' : 'brightness-0 invert')}`}
+                            />
+                            <span
+                                className={`font-clash font-bold text-2xl tracking-wide ml-1.5 mt-1 flex items-center gap-1.5 ${textColorClass} transition-colors duration-300`}
+                                style={{ fontFamily: "'Clash Display', sans-serif" }}
+                            >
+                                <span>MERGEX</span>
+                            </span>
+                        </Link>
+                    </div>
+
+                    {/* Center Menu */}
+                    <div className="flex items-center gap-8 h-full">
+                        <Link
+                            href="/about"
+                            className={`relative h-full flex items-center px-1 text-base font-medium transition-colors duration-300 ${navItemColorClass}`}
+                        >
+                            Who We Are
+                        </Link>
+
+                        {/* What We Do Mega Dropdown */}
+                        <div
+                            ref={dropdownRef}
+                            className="relative h-full flex items-center"
+                            onMouseEnter={openDropdown}
+                            onMouseLeave={closeDropdown}
+                        >
+                            <button
+                                className={`relative flex items-center gap-1.5 px-1 text-base font-medium transition-colors duration-300 ${navItemColorClass}`}
+                                aria-expanded={isDropdownOpen}
+                                aria-haspopup="true"
+                            >
+                                What We Do
+                                <motion.svg
+                                    width="8"
+                                    height="5"
+                                    viewBox="0 0 10 6"
+                                    fill="currentColor"
+                                    className="text-violet-500"
+                                    animate={{ rotate: isDropdownOpen ? 180 : 0 }}
+                                    transition={{ duration: 0.2 }}
+                                >
+                                    <polygon points="0,0 10,0 5,6" />
+                                </motion.svg>
+                            </button>
+
+                            {/* Full-width Mega Dropdown Panel */}
+                            <AnimatePresence>
+                                {isDropdownOpen && (
+                                    <motion.div
+                                        initial={{ opacity: 0, height: 0 }}
+                                        animate={{ opacity: 1, height: 'auto' }}
+                                        exit={{ opacity: 0, height: 0 }}
+                                        transition={{ duration: 0.3, ease: [0.22, 1, 0.36, 1] }}
+                                        className="fixed top-[72px] left-2 right-2 z-50 overflow-hidden"
+                                        onMouseEnter={openDropdown}
+                                        onMouseLeave={closeDropdown}
+                                    >
+                                        <div className="bg-[#0a0a0a] rounded-b-xl shadow-2xl border-x border-b border-white/10 flex overflow-hidden">
+                                            {/* Left Branding/Description Column */}
+                                            <div className="w-[30%] bg-[#0f0f0f] p-12 flex flex-col justify-between border-r border-white/5">
+                                                <div>
+                                                    <h2 className="text-3xl font-clash text-white mb-4">What We Do</h2>
+                                                    <p className="text-white/60 text-base leading-relaxed mb-8">
+                                                        Discover our portfolio – constantly evolving to keep pace with the ever-changing needs of scaling companies. We build operational systems that drive growth.
+                                                    </p>
+                                                </div>
+                                                <Link 
+                                                    href="/systems"
+                                                    className="inline-flex items-center gap-2 text-white border border-white/20 px-6 py-3 rounded-full hover:bg-white hover:text-black transition-all duration-300 w-fit"
+                                                >
+                                                    <span>Explore all systems</span>
+                                                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none">
+                                                        <path d="M5 12H19M19 12L12 5M19 12L12 19" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                                                    </svg>
+                                                </Link>
+                                            </div>
+
+                                            {/* Right Columns Grid */}
+                                            <div className="w-[70%] p-12 bg-[#0a0a0a]">
+                                                <div className="grid grid-cols-3 gap-12">
+                                                    {whatWeDoColumns.map((col) => (
+                                                        <div key={col.title} className="flex flex-col gap-6">
+                                                            <h3 className="text-white/40 uppercase tracking-widest text-xs font-semibold">
+                                                                {col.title}
+                                                            </h3>
+                                                            <div className="flex flex-col gap-4">
+                                                                {col.items.map((item) => (
+                                                                    <Link
+                                                                        key={item.href}
+                                                                        href={item.href}
+                                                                        className="group flex flex-col"
+                                                                    >
+                                                                        <span className="text-white text-lg font-medium group-hover:text-violet-400 transition-colors duration-300 inline-flex items-center gap-2">
+                                                                            {item.label}
+                                                                            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" className="opacity-0 -translate-x-2 group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-300 text-violet-400">
+                                                                                <path d="M5 12H19M19 12L12 5M19 12L12 19" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                                                                            </svg>
+                                                                        </span>
+                                                                        <span className="text-white/50 text-sm mt-1">
+                                                                            {item.description}
+                                                                        </span>
+                                                                    </Link>
+                                                                ))}
+                                                            </div>
+                                                        </div>
+                                                    ))}
+                                                </div>
+
+                                                {/* Bottom section of right column */}
+                                                <div className="mt-16 pt-8 border-t border-white/10 grid grid-cols-2 gap-8">
+                                                    <div>
+                                                        <h3 className="text-white/40 uppercase tracking-widest text-xs font-semibold mb-4">
+                                                            Featured Case Study
+                                                        </h3>
+                                                        <Link href="/explore/case-studies" className="group flex items-start gap-4">
+                                                            <div className="w-16 h-16 bg-white/5 rounded-lg border border-white/10 shrink-0 flex items-center justify-center group-hover:border-violet-500/50 transition-colors">
+                                                                <span className="text-2xl">📈</span>
+                                                            </div>
+                                                            <div>
+                                                                <span className="block text-white font-medium group-hover:text-violet-400 transition-colors">Scaling Operations 10x</span>
+                                                                <span className="block text-white/50 text-sm mt-1">How we helped a B2B SaaS company streamline their entire delivery pipeline.</span>
+                                                            </div>
+                                                        </Link>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </motion.div>
+                                )}
+                            </AnimatePresence>
+                        </div>
+
+                        <Link
+                            href="/insights"
+                            className={`relative h-full flex items-center px-1 text-base font-medium transition-colors duration-300 ${navItemColorClass}`}
+                        >
+                            Insights
+                        </Link>
+                        <Link
+                            href="/contact"
+                            className={`relative h-full flex items-center px-1 text-base font-medium transition-colors duration-300 ${navItemColorClass}`}
+                        >
+                            Contact
+                        </Link>
+                    </div>
+
+
+                </nav>
+            </motion.div>
+
+            {/* Mobile Navbar Header */}
+            <motion.div
+                initial={{ y: 0 }}
+                animate={{ y: isMobileMenuOpen || forceHidden ? -100 : 0 }}
+                transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
+                className="lg:hidden absolute top-0 left-0 right-0 z-50 p-2 pointer-events-none"
+            >
+                <div
+                    className={`w-full transition-all duration-300 ease-in-out pointer-events-auto ${
+                        isMobileMenuOpen
+                            ? 'bg-white/90 shadow-lg border-gray-200/50'
+                            : 'bg-transparent border-transparent'
+                    } rounded-xl px-5 h-14 flex items-center justify-between border relative`}
+                >
+                    {/* Left spacer to balance justify-between */}
+                    <div className="w-8"></div>
+
+                    {/* Centered Logo + Text */}
+                    <Link href="/" className="absolute left-1/2 -translate-x-1/2 flex items-center justify-center gap-1 z-10">
+                        <Image
+                            src="/logo/mergex-logo.png"
+                            alt="MergeX Logo"
+                            width={40}
+                            height={40}
+                            className={`object-contain transition-all duration-300 ${
+                                isMobileMenuOpen || isLightPage ? '' : 'brightness-0 invert'
+                            }`}
+                        />
+                        <span
+                            className={`font-clash font-bold text-2xl tracking-wide ${
+                                isMobileMenuOpen || isLightPage ? 'text-black' : 'text-white'
+                            }`}
+                            style={{ fontFamily: "'Clash Display', sans-serif" }}
+                        >
+                            MERGEX
+                        </span>
+                    </Link>
+
+                    <button
+                        onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+                        className={`p-2 -mr-2 focus:outline-none z-10 ${
+                            isMobileMenuOpen || isLightPage ? 'text-black' : 'text-white'
+                        }`}
+                        aria-label="Toggle menu"
+                    >
+                        <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            {isMobileMenuOpen ? (
+                                <path
+                                    strokeLinecap="round"
+                                    strokeLinejoin="round"
+                                    strokeWidth={2}
+                                    d="M6 18L18 6M6 6l12 12"
+                                />
+                            ) : (
+                                <>
+                                    <path
+                                        strokeLinecap="round"
+                                        strokeLinejoin="round"
+                                        strokeWidth={2.5}
+                                        d="M4 8h16"
+                                    />
+                                    <path
+                                        strokeLinecap="round"
+                                        strokeLinejoin="round"
+                                        strokeWidth={2.5}
+                                        d="M4 16h16"
+                                    />
+                                </>
+                            )}
+                        </svg>
+                    </button>
+                </div>
+            </motion.div>
+
+            <MobileNav isOpen={isMobileMenuOpen} onClose={() => setIsMobileMenuOpen(false)} />
+        </>
+    );
+}
