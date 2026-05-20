@@ -3,13 +3,13 @@ export function DiagnosticApproach() {
         <section className="py-24 md:py-32 px-6 bg-background">
             <div className="max-w-4xl mx-auto text-center">
                 <p className="text-sm font-medium tracking-[0.3em] uppercase text-foreground-muted mb-6">
-                    The Diagnostic Approach
+                    How We Consult
                 </p>
                 <h2 className="text-3xl md:text-5xl font-bold leading-tight mb-12">
                     Diagnose before you build.
                 </h2>
                 <p className="text-lg text-foreground-muted leading-relaxed max-w-3xl mx-auto mb-16">
-                    We use the S.C.A.L.E Formula™ to pinpoint exactly where your business is stuck. Then, we prescribe specific outputs across Technology, Branding, Marketing, and Sales.
+                    Every consulting engagement at MergeX begins with a structured business diagnosis. We use the S.C.A.L.E. Methodology to pinpoint exactly where your business is constrained. Then, and only then, we prescribe and build the solution.
                 </p>
                 <div className="grid grid-cols-1 sm:grid-cols-5 gap-8 text-left">
                     {[

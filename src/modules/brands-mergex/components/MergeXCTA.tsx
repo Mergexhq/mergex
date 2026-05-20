@@ -63,7 +63,7 @@ export function MergeXCTA() {
                 color: 'var(--color-foreground-muted)',
               }}
             >
-              Section 07 — Begin Here
+              Begin Here
             </p>
           </div>
           <h2
@@ -97,9 +97,9 @@ export function MergeXCTA() {
               maxWidth: '440px',
             }}
           >
-            Not a proposal. Not a pitch. A structured diagnostic session that
-            identifies the real constraint in your business — and determines
-            whether MergeX is the right prescription for it.
+            Not a proposal. Not a pitch. A structured consulting engagement
+            begins with diagnosing the real constraint in your business — and
+            determining whether MergeX is the right firm for it.
           </p>
         </div>
 
@@ -121,7 +121,7 @@ export function MergeXCTA() {
               marginBottom: '20px',
             }}
           >
-            Diagnostic Session
+            Consulting Diagnostic
           </p>
           <p
             style={{
@@ -206,7 +206,7 @@ export function MergeXCTA() {
               width: '100%',
             }}
           >
-            Request a Diagnostic
+            Start With a Diagnostic
             <span style={{ fontSize: '16px' }}>→</span>
           </Link>
         </div>

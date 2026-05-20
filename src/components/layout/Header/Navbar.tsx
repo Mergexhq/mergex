@@ -94,12 +94,13 @@ export function Navbar() {
         ? 'text-black/80 hover:text-violet-600'
         : 'text-white/80 hover:text-white';
     
-    // When dropdown is open, we force the navbar background to match the dark dropdown
-    // and hide the bottom border to seamlessly connect with the mega menu.
-    const navBgClass = isDropdownOpen 
-        ? 'bg-[#0a0a0a] border-b-transparent' 
-        : (isScrolled 
-            ? (isLightPage ? 'bg-white shadow-sm border-b border-b-gray-200/50' : 'bg-[#0a0a0a] shadow-md border-b border-b-white/10')
+    // Dropdown open: force dark bg to blend with mega menu.
+    // Light page + scrolled: solid white.
+    // Everything else (including hero scroll): stay transparent.
+    const navBgClass = isDropdownOpen
+        ? 'bg-[#0a0a0a] border-b-transparent'
+        : (isScrolled && isLightPage
+            ? 'bg-white border-b border-b-gray-200/50'
             : 'bg-transparent border-b border-b-transparent');
 
     const openDropdown = () => {
@@ -145,7 +146,7 @@ export function Navbar() {
                 transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
             >
                 <nav className={`w-full ${navBgClass} transition-colors duration-300 pl-6 pr-8 h-16 flex items-center justify-center relative pointer-events-auto`}>
-                    {/* Logo */}
+                    {/* Logo — absolute left */}
                     <div className="absolute left-6 h-full flex items-center">
                         <Link href="/" className="flex items-center gap-0">
                             <Image
@@ -164,7 +165,7 @@ export function Navbar() {
                         </Link>
                     </div>
 
-                    {/* Right: Login */}
+                    {/* Login — absolute right */}
                     <div className="absolute right-6 h-full flex items-center">
                         <Link
                             href="/login"
@@ -229,12 +230,9 @@ export function Navbar() {
                                         <div className="relative shadow-2xl border-b border-white/10 overflow-hidden bg-[#0A0A0A]">
                                             {/* Background Gradient / Overlay */}
                                             <div className="absolute inset-0 z-0 pointer-events-none">
-                                                {/* Solid black at top → seamless join with navbar, fades to dark */}
                                                 <div className="absolute inset-0 bg-[#0A0A0A]" />
-                                                
-                                                {/* Left and Right subtle purple gradients */}
-                                                <div className="absolute -left-[10%] top-[20%] w-[300px] h-[300px] rounded-full bg-violet-600/10 blur-[100px]" />
-                                                <div className="absolute -right-[10%] bottom-[10%] w-[300px] h-[300px] rounded-full bg-violet-600/10 blur-[100px]" />
+                                                <div className="absolute left-[-10%] top-[20%] w-[300px] h-[300px] rounded-full bg-violet-600/10 blur-[100px]" />
+                                                <div className="absolute right-[-10%] bottom-[10%] w-[300px] h-[300px] rounded-full bg-violet-600/10 blur-[100px]" />
                                             </div>
 
                                             {/* Main Content Row */}
@@ -249,10 +247,10 @@ export function Navbar() {
                                                             className="text-[2rem] leading-[1.15] font-clash font-semibold text-white mb-4"
                                                             style={{ fontFamily: "'Clash Display', sans-serif" }}
                                                         >
-                                                            Scaling<br /><span className="font-serif italic font-medium">Infrastructure</span>
+                                                            Business<br /><span className="font-serif italic font-medium">Consulting</span>
                                                         </h2>
                                                         <p className="text-white/50 text-sm leading-relaxed max-w-[280px]">
-                                                            MergeX helps businesses identify operational constraints, restructure fragmented systems and scale with greater clarity.
+                                                            MergeX is a consulting firm for scaling businesses. We diagnose the real operational and structural constraint before building any solution.
                                                         </p>
                                                     </div>
                                                     <Link
@@ -270,7 +268,7 @@ export function Navbar() {
                                                         {/* PRIMARY — MergeX */}
                                                         <Link
                                                             href="/brands/mergex"
-                                                            className="group flex flex-col border-b border-white/[0.06] pb-5 mb-5"
+                                                            className="group flex flex-col border-b border-white/6 pb-5 mb-5"
                                                         >
                                                             <p className="text-white/25 uppercase tracking-[0.18em] text-[10px] font-semibold mb-2">Brand</p>
                                                             <div className="flex items-center justify-between">
@@ -280,7 +278,6 @@ export function Navbar() {
                                                                 >
                                                                     MergeX
                                                                 </span>
-                                                                {/* Large diagonal arrow — visible on hover */}
                                                                 <svg
                                                                     width="36" height="36" viewBox="0 0 24 24" fill="none"
                                                                     className="opacity-0 translate-y-1 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-300 text-white shrink-0"
@@ -294,7 +291,7 @@ export function Navbar() {
                                                         {/* SECONDARY — Methodology */}
                                                         <Link
                                                             href="/methodology"
-                                                            className="group flex flex-col border-b border-white/[0.06] pb-5 mb-5"
+                                                            className="group flex flex-col border-b border-white/6 pb-5 mb-5"
                                                         >
                                                             <p className="text-white/25 uppercase tracking-[0.18em] text-[10px] font-semibold mb-2">Framework</p>
                                                             <div className="flex items-center justify-between">
@@ -328,17 +325,17 @@ export function Navbar() {
                                                                     <path d="M7 17L17 7M17 7H7M17 7V17" stroke="currentColor" strokeWidth="1.75" strokeLinecap="square" strokeLinejoin="miter"/>
                                                                 </svg>
                                                             </div>
-                                                            <span className="text-white/30 text-sm mt-1.5">Start with clarity</span>
+                                                            <span className="text-white/40 text-sm mt-1.5">The entry point to every consulting engagement</span>
                                                         </Link>
                                                     </div>
                                                 </div>
                                             </div>
 
                                             {/* Bottom institutional statement bar */}
-                                            <div className="relative px-12 py-4 mt-2 flex items-center justify-center overflow-hidden z-10 pb-6 border-t border-white/[0.06]">
-                                                <p className="relative text-white/40 text-xs tracking-[0.22em] uppercase font-medium select-none">
-                                                    Diagnosis before execution.&nbsp;&nbsp;Systems before scale.
-                                                </p>
+                                            <div className="relative px-12 py-4 mt-2 flex items-center justify-center overflow-hidden z-10 pb-6 border-t border-white/6">
+                                                 <p className="relative text-white/40 text-xs tracking-[0.22em] uppercase font-medium select-none">
+                                                     Consulting built on diagnosis.&nbsp;&nbsp;Structure before scale.
+                                                 </p>
                                             </div>
                                         </div>
                                     </motion.div>
@@ -359,8 +356,6 @@ export function Navbar() {
                             Contact
                         </Link>
                     </div>
-
-
                 </nav>
             </motion.div>
 
@@ -374,9 +369,9 @@ export function Navbar() {
                 <div
                     className={`w-full transition-all duration-300 ease-in-out pointer-events-auto ${
                         isMobileMenuOpen
-                            ? 'bg-white shadow-lg border-b border-b-gray-200/50'
+                            ? 'bg-white border-b border-b-gray-200/50'
                             : (isScrolled 
-                                ? (isLightPage ? 'bg-white shadow-sm border-b border-b-gray-200/50' : 'bg-[#0a0a0a] shadow-md border-b border-b-white/10')
+                                ? (isLightPage ? 'bg-white border-b border-b-gray-200/50' : 'bg-[#0a0a0a] border-b border-b-white/10')
                                 : 'bg-transparent border-b border-b-transparent'
                               )
                     } px-5 h-14 flex items-center justify-between relative`}

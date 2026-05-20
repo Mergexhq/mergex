@@ -3,7 +3,7 @@
 
 export const CONTACT_HERO = {
     headline: "Let's Get Started.",
-    subheadline: 'Every business wants growth. Few identify what is actually preventing it. MergeX begins with diagnosis before execution.',
+    subheadline: 'Every business wants growth. Few know what is actually preventing it. Every MergeX consulting engagement begins with diagnosing the real constraint — before any solution is prescribed.',
 } as const;
 
 export const UNIFIED_FORM = {
@@ -142,7 +142,7 @@ export const CONTACT_NEXT_STEPS = {
     headline: 'What happens next',
     steps: [
         { number: '01', description: 'We review your submission and identify the core constraint pattern.' },
-        { number: '02', description: 'A senior team member reaches out within 48 hours with an initial diagnosis.' },
-        { number: '03', description: 'If there is a clear fit, we schedule a structured diagnostic conversation.' },
+        { number: '02', description: 'A senior consulting team member reaches out within 48 hours with an initial diagnostic assessment.' },
+        { number: '03', description: 'If there is a clear fit, we schedule a structured diagnostic consultation to map the constraint.' },
     ],
 } as const;

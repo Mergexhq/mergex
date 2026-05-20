@@ -50,17 +50,7 @@ export function HowWeOperate() {
       >
         {/* Sidebar */}
         <div style={{ position: 'sticky', top: '100px', height: 'fit-content' }}>
-          <p
-            style={{
-              fontSize: '11px',
-              letterSpacing: '0.12em',
-              textTransform: 'uppercase',
-              color: 'var(--color-foreground-muted)',
-              marginBottom: '16px',
-            }}
-          >
-            Section 03
-          </p>
+
           <h2
             style={{
               fontFamily: 'var(--font-playfair-display, Georgia, serif)',
@@ -81,7 +71,7 @@ export function HowWeOperate() {
               lineHeight: 1.6,
             }}
           >
-            The S.C.A.L.E Formula™ — five stages, one constraint, precise prescription.
+            The S.C.A.L.E. Methodology — five stages, one constraint, precise prescription.
           </p>
         </div>
 

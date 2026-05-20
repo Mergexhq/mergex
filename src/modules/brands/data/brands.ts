@@ -19,7 +19,7 @@ export const BRANDS: Brand[] = [
     name: 'MergeX',
     tagline: 'The primary scaling and business infrastructure brand.',
     description:
-      'MergeX is the diagnostic-first business scaling engine at the core of the ecosystem. It works directly with founders and leadership teams to identify the real constraints — operational, commercial, structural — and architect the systems needed to resolve them. Every other brand is built to support the infrastructure MergeX prescribes.',
+      'MergeX is the business consulting firm at the core of the ecosystem. It uses a diagnostic-led approach, working directly with founders and leadership teams to identify the real constraints — operational, commercial, structural — and architect the systems needed to resolve them. Every other brand is built to support the infrastructure MergeX prescribes.',
     role:
       'The primary client-facing operating unit. All other brands are built to extend MergeX\'s core mandate.',
     focusAreas: ['Systems Design', 'Strategy', 'Sales Architecture', 'Operations', 'Commercial Clarity'],

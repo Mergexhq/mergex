@@ -43,7 +43,7 @@ const LETTERS = [
   },
 ];
 
-export function ScaleFormula() {
+export function ScaleMethodology() {
   const sectionRef = useRef<HTMLDivElement>(null);
 
   useGSAP(
@@ -150,7 +150,7 @@ export function ScaleFormula() {
               color: 'var(--color-foreground-muted)',
             }}
           >
-            Section 02 — The S.C.A.L.E Formula™
+            Section 02 — The S.C.A.L.E. Methodology
           </p>
         </div>
 

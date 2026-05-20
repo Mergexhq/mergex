@@ -33,7 +33,7 @@ export function IndustriesStrip() {
               whiteSpace: 'nowrap',
             }}
           >
-            Industries — Section 04
+            Industries
           </p>
           <div
             style={{

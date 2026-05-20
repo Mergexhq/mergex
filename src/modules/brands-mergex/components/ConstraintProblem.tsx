@@ -24,6 +24,7 @@ const PROBLEMS = [
 export function ConstraintProblem() {
   return (
     <section
+      id="problems"
       style={{
         padding: '100px 48px',
         borderBottom: '1px solid var(--color-border)',
@@ -40,17 +41,7 @@ export function ConstraintProblem() {
       >
         {/* Sidebar */}
         <div style={{ position: 'sticky', top: '100px', height: 'fit-content' }}>
-          <p
-            style={{
-              fontSize: '11px',
-              letterSpacing: '0.12em',
-              textTransform: 'uppercase',
-              color: 'var(--color-foreground-muted)',
-              marginBottom: '16px',
-            }}
-          >
-            Section 02
-          </p>
+
           <h2
             style={{
               fontFamily: 'var(--font-playfair-display, Georgia, serif)',
@@ -77,8 +68,8 @@ export function ConstraintProblem() {
             }}
           >
             Most scaling businesses do not have a <strong style={{ color: 'var(--color-foreground)', fontWeight: 500 }}>growth</strong> problem.
-            They have a <strong style={{ color: 'var(--color-foreground)', fontWeight: 500 }}>diagnosis</strong> problem.
-            The ceiling is always structural. The question is knowing exactly which structure to fix — and in which order.
+            They have a <strong style={{ color: 'var(--color-foreground)', fontWeight: 500 }}>structural</strong> problem.
+            The ceiling is always systemic. Most firms prescribe solutions before understanding the real constraint. We diagnose first.
           </p>
           <div
             style={{

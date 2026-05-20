@@ -12,7 +12,7 @@ import {
 export const metadata: Metadata = {
   title: 'MergeX — Brands — The MergeX Company',
   description:
-    'MergeX is the diagnostic-first business scaling engine. We find the exact constraint holding your business back — and build only what resolves it.',
+    'MergeX is a business consulting firm for scaling companies. We use a diagnostic-led approach to identify the exact constraint holding your business back — and build only what resolves it.',
 };
 
 export default function MergeXBrandPage() {

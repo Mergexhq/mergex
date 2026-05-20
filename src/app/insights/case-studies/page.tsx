@@ -26,13 +26,13 @@ export default async function CaseStudiesPage({
   const rest = filtered.filter((cs) => cs.slug !== featured?.slug);
 
   return (
-    <div className="min-h-screen bg-background">
-      {/* ── Hero ── */}
-      <section className="pt-40 pb-16 px-6 md:px-12 max-w-7xl mx-auto">
+    <div className="min-h-screen bg-[#f0eeea]">
+      {/* ── Page header ── */}
+      <section className="pt-40 pb-10 px-6 md:px-12 max-w-[1400px] mx-auto">
         <p className="text-xs font-bold uppercase tracking-widest text-primary mb-4">
           Work
         </p>
-        <h1 className="text-5xl md:text-7xl font-serif text-foreground tracking-tight leading-tight mb-4">
+        <h1 className="text-5xl md:text-7xl font-serif text-foreground tracking-tight leading-tight mb-3">
           Real constraints.
           <br />
           Real systems. Real results.
@@ -44,16 +44,20 @@ export default async function CaseStudiesPage({
         </p>
       </section>
 
-      {/* ── Main Layout ── */}
-      <section className="max-w-7xl mx-auto px-6 md:px-12 pb-32">
-        {/* Mobile filters */}
-        <CaseStudySidebar mode="filter" activeIndustry={activeIndustry} />
+      {/* ── Outer card shell ── */}
+      <section className="pr-4 md:pr-8 pb-12 max-w-[1400px] mx-auto">
+        <div className="rounded-r-3xl bg-white shadow-sm border border-black/5 border-l-0 overflow-hidden flex min-h-[80vh] items-stretch">
 
-        <div className="flex gap-16">
-          {/* Desktop sidebar */}
+          {/* Mobile filters */}
+          <div className="lg:hidden p-4">
+            <CaseStudySidebar mode="filter" activeIndustry={activeIndustry} />
+          </div>
+
+          {/* Dark sidebar */}
           <CaseStudySidebar mode="filter" activeIndustry={activeIndustry} />
 
-          <div className="flex-1 min-w-0">
+          {/* Right: content pane */}
+          <div className="flex-1 min-w-0 p-8 md:p-12 overflow-y-auto">
             {filtered.length === 0 ? (
               <EmptyState
                 headline="No case studies found"

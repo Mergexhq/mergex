@@ -116,6 +116,60 @@ The churn reduction, in particular, had a compounding effect on the unit economi
       { label: 'Sales cycle reduction', value: '47d → 19d' },
     ],
   },
+  {
+    slug: 'leadership-growth-strategy',
+    title: 'Leadership & Growth Strategy',
+    client: 'Confidential — Professional Services Firm',
+    industry: 'Professional Services',
+    excerpt:
+      'A professional services firm had plateaued at £2M ARR for three consecutive years. Growth had stalled, key talent was leaving, and leadership had no coherent strategy for the next phase. MergeX redesigned the organisational structure and built a compounding growth system.',
+    featured: false,
+    tags: ['Leadership', 'Strategy', 'Organisational Design', 'Growth'],
+    publishedAt: '2026-02-10',
+    aiOverview:
+      'This case study covers a professional services firm stuck in a revenue plateau driven by leadership bandwidth constraints and a fragmented service model. MergeX redesigned the leadership layer, restructured the service offering into three clear tiers, and built a referral and retention engine that unlocked compounding growth.',
+    challenge: `
+The firm had strong client relationships and a reputable track record. But revenue had not moved in three years, and the founding partners were absorbing every senior client interaction personally — creating a hard ceiling on capacity and growth.
+
+Attrition among mid-level staff was running at 35% annually. The pipeline was entirely relationship-dependent with no structured business development activity. Leadership had discussed a growth strategy in multiple away-days but had never committed to or executed one.
+
+Key conditions at engagement start:
+- Revenue plateau: £2M ARR for 36 months
+- Senior partner utilisation: 94% (no bandwidth for growth)
+- Mid-level attrition: 35% annually
+- Pipeline source: 100% referral, no structured outreach
+    `.trim(),
+    diagnosis: `
+Our diagnostic identified three structural problems that reinforced each other:
+
+**Problem 1: Leadership bottleneck.** All client decisions were escalated to the two founding partners. There was no second tier of accountable leadership. This meant the firm's capacity for client work and growth activity was permanently constrained by two people's working hours.
+
+**Problem 2: Undifferentiated service model.** The firm offered a broad range of services without a clear hierarchy or signature offer. Clients and prospects could not quickly understand what the firm was best at. This made referrals imprecise and pitches inconsistent.
+
+**Problem 3: No retention infrastructure.** Mid-level staff were leaving because there was no defined career path, no structured progression criteria, and no visibility into how performance was measured. Attrition was destroying accumulated institutional knowledge every year.
+    `.trim(),
+    strategy: `
+We built the intervention across three interconnected workstreams:
+
+**Workstream 1 — Leadership layer rebuild.** We identified three senior associates ready for principal-level responsibility and designed a formal promotion and accountability structure. We transferred 60% of routine client decisions to this new layer and created a weekly operating rhythm that gave partners visibility without involvement.
+
+**Workstream 2 — Service model rationalisation.** We defined a three-tier service structure: a diagnostic entry offer, a signature engagement, and a retained advisory model. We rebuilt the firm's positioning around the signature engagement and created sales materials for the first time.
+
+**Workstream 3 — Retention and progression system.** We built a formal competency framework with clear promotion criteria, introduced quarterly structured reviews, and created a profit-sharing model tied to client retention. Attrition dropped to 9% within two quarters.
+    `.trim(),
+    outcome: `
+Within 12 months of implementation, the firm had broken through its revenue plateau decisively.
+
+The structural change to the leadership layer was the highest-leverage intervention: it freed the founding partners to spend 30% of their time on growth activity for the first time in the firm's history. Within six months, they had closed two new retained clients — adding £380K ARR — entirely through structured business development rather than opportunistic referrals.
+    `.trim(),
+    clientNote:
+      'We had been talking about growing for years. MergeX showed us that we had built a structure that made growth impossible — and then rebuilt it so growth was the natural outcome.',
+    metrics: [
+      { label: 'ARR growth (12 months)', value: '+£620K' },
+      { label: 'Mid-level attrition reduction', value: '35% → 9%' },
+      { label: 'Partner capacity freed', value: '+30%' },
+    ],
+  },
 ];
 
 export function getCaseStudyBySlug(slug: string): CaseStudy | undefined {

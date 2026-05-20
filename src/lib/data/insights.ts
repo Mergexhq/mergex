@@ -10,9 +10,10 @@ export const INSIGHTS: Insight[] = [
     readTime: '6 min read',
     publishedAt: '2026-05-10',
     featured: true,
+    coverImage: 'https://images.unsplash.com/photo-1513694203232-719a280e022f?q=80&w=2069&auto=format&fit=crop',
     tags: ['Strategy', 'Systems Thinking', 'Diagnostics'],
     aiOverview:
-      'This insight argues that reactive execution — building solutions before understanding the underlying constraint — is the leading cause of scaling plateau. It introduces a diagnostic-first framework that MergeX applies across every engagement, starting with the S.C.A.L.E. Scan phase.',
+      'This insight argues that reactive execution — building solutions before understanding the underlying constraint — is the leading cause of scaling plateau. It introduces a diagnostic-led framework that MergeX applies across every engagement, starting with the S.C.A.L.E. Scan phase.',
     body: `
 ## The Problem with Execution-First Thinking
 
@@ -24,9 +25,9 @@ But in almost every case we encounter, the problem is not a lack of effort. It i
 
 ---
 
-## What Diagnostic-First Means in Practice
+## What Diagnostic-Led Means in Practice
 
-A diagnostic-first approach inverts the typical strategy process:
+A diagnostic-led approach inverts the typical strategy process:
 
 1. **Stop before you prescribe.** Resist the pressure to propose solutions immediately.
 2. **Map the system, not just the symptoms.** Revenue is down — but why? Leads are down? Conversion is down? Retention is down? Each has a completely different fix.
@@ -79,6 +80,7 @@ If you cannot answer that with confidence, you need a diagnostic before you need
     readTime: '8 min read',
     publishedAt: '2026-04-28',
     featured: false,
+    coverImage: 'https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?q=80&w=2070&auto=format&fit=crop',
     tags: ['Operations', 'Scale', 'Leverage', 'Framework'],
     aiOverview:
       'This insight presents a five-part framework for identifying where to intervene in a scaling organisation. It covers offer clarity, sales sequencing, delivery capacity, data infrastructure, and leadership bandwidth — and explains why fixing the wrong lever can actually slow growth.',
@@ -148,6 +150,35 @@ The lowest score is almost always where your scaling constraint lives. That is w
 Scaling is not about being strong across all five. It is about not being critically weak in any one of them.
     `.trim(),
   },
+  {
+    slug: 'the-architecture-of-decision-making',
+    title: 'The Architecture of Decision Making',
+    excerpt: 'Speed of execution is downstream of decision architecture. How to build frameworks that allow teams to move fast without breaking alignment.',
+    category: 'Structure',
+    readTime: '5 min read',
+    publishedAt: '2026-05-15',
+    featured: false,
+    coverImage: 'https://images.unsplash.com/photo-1600267185393-e158a98703de?q=80&w=2070&auto=format&fit=crop',
+    tags: ['Structure', 'Leadership', 'Decision Making'],
+    aiOverview: 'An overview of how structured decision-making accelerates growth by removing friction and increasing clarity across an organisation.',
+    body: [
+      '## Decision Speed is the Ultimate Moat',
+      '',
+      'The faster you can make good decisions, the faster you can learn. In any competitive market, the organisation that learns the fastest wins.',
+      '',
+      'But speed without structure is chaos. This is why scaling companies often slow down intentionally — because moving fast starts to feel dangerous.',
+      '',
+      '## Rebuilding the Architecture',
+      '',
+      'To regain speed, you do not need more meetings. You need a better decision architecture.',
+      '',
+      '- Define who owns the decision.',
+      '- Define what information is required.',
+      '- Define the threshold for acting (it is usually 70% certainty, not 100%).',
+      '',
+      'Once this architecture is in place, execution velocity becomes a natural byproduct.',
+    ].join('\n'),
+  }
 ];
 
 export function getInsightBySlug(slug: string): Insight | undefined {

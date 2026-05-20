@@ -43,59 +43,57 @@ export default async function InsightDetailPage({
 
   const related = getRelatedInsights(slug, insight.category);
 
-  // Convert body to simple paragraphs for rendering
   const bodyParagraphs = insight.body
     .split('\n\n')
     .map((block) => block.trim())
     .filter(Boolean);
 
   return (
-    <div className="min-h-screen bg-background">
-      {/* ── Hero ── */}
-      <section className="pt-40 pb-16 px-6 md:px-12 max-w-7xl mx-auto border-b border-border">
-        <div className="max-w-3xl">
-          <div className="flex items-center gap-3 mb-6">
-            <span className="text-xs font-bold uppercase tracking-widest text-primary">
-              {insight.category}
+    <div className="min-h-screen bg-[#f0eeea]">
+      {/* ── Page header (outside card) ── */}
+      <section className="pt-40 pb-10 px-6 md:px-12 max-w-[1400px] mx-auto">
+        <div className="flex items-center gap-3 mb-5">
+          <span className="text-xs font-bold uppercase tracking-widest text-primary">
+            {insight.category}
+          </span>
+          <span className="text-xs text-foreground-muted">·</span>
+          <span className="text-xs text-foreground-muted">{insight.readTime}</span>
+          <span className="text-xs text-foreground-muted">·</span>
+          <span className="text-xs text-foreground-muted">
+            {new Date(insight.publishedAt).toLocaleDateString('en-GB', {
+              day: 'numeric',
+              month: 'long',
+              year: 'numeric',
+            })}
+          </span>
+        </div>
+        <h1 className="text-4xl md:text-6xl font-serif text-foreground tracking-tight leading-tight mb-5 max-w-4xl">
+          {insight.title}
+        </h1>
+        <p className="text-foreground-muted text-lg leading-relaxed max-w-2xl mb-5">
+          {insight.excerpt}
+        </p>
+        <div className="flex flex-wrap gap-2">
+          {insight.tags.map((tag) => (
+            <span
+              key={tag}
+              className="text-xs px-3 py-1 rounded-full bg-black/8 text-foreground-muted"
+            >
+              {tag}
             </span>
-            <span className="text-xs text-foreground-muted">·</span>
-            <span className="text-xs text-foreground-muted">{insight.readTime}</span>
-            <span className="text-xs text-foreground-muted">·</span>
-            <span className="text-xs text-foreground-muted">
-              {new Date(insight.publishedAt).toLocaleDateString('en-GB', {
-                day: 'numeric',
-                month: 'long',
-                year: 'numeric',
-              })}
-            </span>
-          </div>
-          <h1 className="text-4xl md:text-6xl font-serif text-foreground tracking-tight leading-tight mb-6">
-            {insight.title}
-          </h1>
-          <p className="text-foreground-muted text-lg leading-relaxed">
-            {insight.excerpt}
-          </p>
-          <div className="flex flex-wrap gap-2 mt-6">
-            {insight.tags.map((tag) => (
-              <span
-                key={tag}
-                className="text-xs px-3 py-1 rounded-full bg-background-subtle text-foreground-muted"
-              >
-                {tag}
-              </span>
-            ))}
-          </div>
+          ))}
         </div>
       </section>
 
-      {/* ── Main Layout ── */}
-      <section className="max-w-7xl mx-auto px-6 md:px-12 py-16">
-        <div className="flex gap-16">
-          {/* Sidebar */}
+      {/* ── Outer card shell ── */}
+      <section className="pr-4 md:pr-8 pb-12 max-w-[1400px] mx-auto">
+        <div className="rounded-r-3xl bg-white shadow-sm border border-black/5 border-l-0 overflow-hidden flex min-h-[80vh] items-stretch">
+
+          {/* Dark TOC sidebar */}
           <InsightSidebar mode="toc" sections={TOC_SECTIONS} />
 
-          {/* Content */}
-          <div className="flex-1 min-w-0 max-w-3xl">
+          {/* Right: content pane */}
+          <div className="flex-1 min-w-0 p-8 md:p-14 overflow-y-auto max-w-3xl">
 
             {/* AI Overview */}
             <div
@@ -122,20 +120,14 @@ export default async function InsightDetailPage({
               {bodyParagraphs.map((block, i) => {
                 if (block.startsWith('## ')) {
                   return (
-                    <h2
-                      key={i}
-                      className="text-2xl font-serif text-foreground mt-10 mb-4 tracking-tight"
-                    >
+                    <h2 key={i} className="text-2xl font-serif text-foreground mt-10 mb-4 tracking-tight">
                       {block.replace('## ', '')}
                     </h2>
                   );
                 }
                 if (block.startsWith('### ')) {
                   return (
-                    <h3
-                      key={i}
-                      className="text-lg font-semibold text-foreground mt-8 mb-3"
-                    >
+                    <h3 key={i} className="text-lg font-semibold text-foreground mt-8 mb-3">
                       {block.replace('### ', '')}
                     </h3>
                   );
@@ -150,18 +142,13 @@ export default async function InsightDetailPage({
                     </p>
                   );
                 }
-                // Blockquote
                 if (block.startsWith('> ')) {
                   return (
-                    <blockquote
-                      key={i}
-                      className="border-l-4 border-primary pl-5 py-1 text-foreground-muted italic text-base"
-                    >
+                    <blockquote key={i} className="border-l-4 border-primary pl-5 py-1 text-foreground-muted italic text-base">
                       {block.replace('> ', '')}
                     </blockquote>
                   );
                 }
-                // List items (numbered)
                 if (/^\d+\.\s/.test(block)) {
                   const lines = block.split('\n').filter(Boolean);
                   return (
@@ -172,7 +159,6 @@ export default async function InsightDetailPage({
                     </ol>
                   );
                 }
-                // Bullet points
                 if (block.startsWith('- ')) {
                   const lines = block.split('\n').filter(Boolean);
                   return (
@@ -183,7 +169,6 @@ export default async function InsightDetailPage({
                     </ul>
                   );
                 }
-                // Inline bold handling for regular paragraphs
                 const hasBold = /\*\*(.+?)\*\*/.test(block);
                 if (hasBold) {
                   const parts = block.split(/\*\*(.+?)\*\*/);
@@ -191,9 +176,7 @@ export default async function InsightDetailPage({
                     <p key={i} className="text-foreground-muted text-base leading-relaxed">
                       {parts.map((part, pi) =>
                         pi % 2 === 1 ? (
-                          <strong key={pi} className="text-foreground font-semibold">
-                            {part}
-                          </strong>
+                          <strong key={pi} className="text-foreground font-semibold">{part}</strong>
                         ) : (
                           part
                         )

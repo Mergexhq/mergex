@@ -27,7 +27,7 @@ export function AboutHero() {
         <div className="hero-left">
           <div className="hero-tag hero-animate">About MergeX</div>
           <h1 className="hero-heading hero-animate">
-            Diagnosis<br />
+            Structure<br />
             before<br />
             <em>everything.</em>
           </h1>
@@ -37,12 +37,14 @@ export function AboutHero() {
         {/* Right */}
         <div className="hero-right">
           <p className="hero-para hero-animate">
-            MergeX is a <strong>diagnostic-first scaling company.</strong>{' '}
-            We don&apos;t sell services. We find the exact factor stopping
-            your business from growing — and build the precise system to fix it.
+            MergeX is a <strong>business consulting firm</strong>{' '}
+            built for scaling companies. We don&apos;t prescribe solutions
+            before understanding the problem. Every engagement begins with
+            diagnosing the exact structural, operational, or strategic
+            constraint limiting your growth.
             <br /><br />
-            Most companies offer execution. We offer clarity first.
-            Then execution — only where the diagnosis demands it.
+            Most consulting firms sell advice. We identify the actual constraint
+            first — then build only what resolves it.
           </p>
           <div className="hero-scroll hero-animate">
             <span className="hero-scroll-line" />

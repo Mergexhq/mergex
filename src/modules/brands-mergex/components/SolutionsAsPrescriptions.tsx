@@ -48,17 +48,7 @@ export function SolutionsAsPrescriptions() {
       >
         {/* Sidebar */}
         <div style={{ position: 'sticky', top: '100px', height: 'fit-content' }}>
-          <p
-            style={{
-              fontSize: '11px',
-              letterSpacing: '0.12em',
-              textTransform: 'uppercase',
-              color: 'var(--color-foreground-muted)',
-              marginBottom: '16px',
-            }}
-          >
-            Section 05
-          </p>
+
           <h2
             style={{
               fontFamily: 'var(--font-playfair-display, Georgia, serif)',

@@ -1,9 +1,11 @@
 /* ═══════════════════════════════════════════════
-   HOME HERO — Institutional Editorial
-   Left-aligned / lower-left / atmospheric
+   HOME HERO — Scroll-driven card reveal
+   Starts full-screen. As the user scrolls,
+   framer-motion scales + rounds the corners
+   to collapse it into a card state.
    ═══════════════════════════════════════════════ */
 
-.home-hero {
+.home-hero-scroll-wrapper {
   --hh-bg-image: url('/background/hero/hero.webp');
   --hh-text-primary: #FFFFFF;
   --hh-text-secondary: rgba(255, 255, 255, 0.52);
@@ -12,38 +14,49 @@
   --hh-sans: var(--font-manrope, 'Manrope', sans-serif);
   --hh-serif: var(--font-playfair-display, 'Playfair Display', Georgia, serif);
 
-  position: relative;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-end;   /* anchor to bottom */
-  align-items: flex-start;
-  overflow: hidden;
+  /* Taller than 100vh — gives scroll distance for the card animation */
+  height: 175vh;
   font-family: var(--hh-sans);
+
+  /* Page bg peeking around the scaled card */
+  background: var(--color-background, #f5f5f3);
 }
 
-/* ── BACKGROUND IMAGE ── */
-.hh-bg {
-  position: absolute;
-  inset: 0;
+/* ── STICKY CARD (the whole hero is the card) ──
+   framer-motion drives: scale, borderRadius, transformOrigin  */
+.home-hero {
+  position: sticky;
+  top: 0;
+  width: 100%;
+  height: 100svh;
+  overflow: hidden;
+
+  /* Content layout */
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  align-items: flex-start;
+
+  /* Background image */
   background-image: var(--hh-bg-image);
   background-size: cover;
   background-position: center 40%;
-  z-index: 0;
   animation: hh-drift 24s ease-in-out infinite alternate;
   will-change: transform;
 }
 
 @keyframes hh-drift {
-  from { transform: scale(1.00); }
-  to   { transform: scale(1.045); }
+  from { background-size: 100%; }
+  to   { background-size: 104.5%; }
 }
 
 /* ── OVERLAY ── */
-.hh-overlay {
+.home-hero::before {
+  content: '';
   position: absolute;
   inset: 0;
   z-index: 1;
+  pointer-events: none;
   background:
     linear-gradient(to top,
       rgba(6, 4, 12, 0.92) 0%,
@@ -57,12 +70,13 @@
     );
 }
 
-/* ── CONTENT BLOCK — lower-left ── */
+/* ── CONTENT BLOCK — lower-left inside card ── */
 .hh-content {
   position: relative;
   z-index: 2;
-  padding: 0 72px 96px;
-  max-width: 600px;
+  padding: 0 clamp(24px, 5vw, 72px) clamp(48px, 7vw, 96px);
+  max-width: 640px;
+  width: 100%;
 }
 
 /* ── EYEBROW ── */
@@ -129,16 +143,13 @@
    RESPONSIVE
    ═══════════════════════════════════════════════ */
 
-@media (max-width: 900px) {
-  .hh-content {
-    padding: 0 40px 72px;
-    max-width: 520px;
-  }
-}
-
 @media (max-width: 640px) {
+  .home-hero-scroll-wrapper {
+    height: 150vh;
+  }
+
   .hh-content {
-    padding: 0 24px 64px;
+    padding: 0 20px 48px;
     max-width: 100%;
   }
 

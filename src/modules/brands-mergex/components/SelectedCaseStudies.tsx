@@ -1,232 +1,284 @@
 'use client';
 
+import { useRef, useState, useEffect } from 'react';
+import { useScroll, useTransform, motion } from 'framer-motion';
 import Link from 'next/link';
 import { CASE_STUDIES } from '@/lib/data/case-studies';
 
 export function SelectedCaseStudies() {
-  // Show first 2 case studies
-  const featured = CASE_STUDIES.slice(0, 2);
+  const targetRef = useRef<HTMLDivElement>(null);
+  const featured = CASE_STUDIES.slice(0, 3);
+
+  // Framer Motion can only animate numeric pixel values, NOT vw strings.
+  // So we measure the actual window width and use pixels.
+  const [windowWidth, setWindowWidth] = useState(0);
+  useEffect(() => {
+    const update = () => setWindowWidth(window.innerWidth);
+    update();
+    window.addEventListener('resize', update);
+    return () => window.removeEventListener('resize', update);
+  }, []);
+
+  // offset ['start start', 'end end']:
+  //   scrollYProgress=0 → element top at viewport top
+  //   scrollYProgress=1 → element bottom at viewport bottom
+  // height 300vh: scroll range = 300vh - 100vh = 200vh → 100vh per card
+  const { scrollYProgress } = useScroll({
+    target: targetRef,
+    offset: ['start start', 'end end'],
+  });
+
+  // Translate x by -2 * windowWidth pixels (card 1 → 2 → 3)
+  const x = useTransform(
+    scrollYProgress,
+    [0, 1],
+    [0, windowWidth ? -windowWidth * 2 : 0]
+  );
+
+  const images = [
+    'https://images.unsplash.com/photo-1497366216548-37526070297c?q=80&w=1600&auto=format&fit=crop',
+    'https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?q=80&w=1600&auto=format&fit=crop',
+    'https://images.unsplash.com/photo-1556761175-5973dc0f32e7?q=80&w=1600&auto=format&fit=crop',
+  ];
 
   return (
-    <section
-      style={{
-        padding: '100px 48px',
-        borderBottom: '1px solid var(--color-border)',
-      }}
-    >
-      <div style={{ maxWidth: '1200px', margin: '0 auto' }}>
+    <div ref={targetRef} style={{ height: '300vh', position: 'relative' }}>
+      <div
+        style={{
+          position: 'sticky',
+          top: 0,
+          height: '100vh',
+          display: 'flex',
+          flexDirection: 'column',
+          overflow: 'hidden',
+          background: 'var(--color-background)',
+        }}
+      >
         {/* Header */}
         <div
           style={{
+            width: '100%',
+            padding: '36px 48px 20px 48px',
             display: 'flex',
             alignItems: 'flex-end',
             justifyContent: 'space-between',
-            marginBottom: '48px',
+            flexShrink: 0,
           }}
         >
           <div>
-            <p
-              style={{
-                fontSize: '11px',
-                fontWeight: 700,
-                letterSpacing: '0.12em',
-                textTransform: 'uppercase',
-                color: 'var(--color-foreground-muted)',
-                marginBottom: '12px',
-              }}
-            >
-              Section 06 — Selected Case Studies
-            </p>
             <h2
               style={{
                 fontFamily: 'var(--font-playfair-display, Georgia, serif)',
-                fontSize: 'clamp(28px, 3vw, 40px)',
-                fontWeight: 400,
+                fontSize: 'clamp(26px, 3vw, 40px)',
+                fontWeight: 500,
                 lineHeight: 1.15,
                 letterSpacing: '-0.02em',
                 color: 'var(--color-foreground)',
+                marginBottom: '8px',
               }}
             >
-              Diagnosis → result
+              Scale improves when
+              <br />
+              the right problem gets solved.
             </h2>
+            <p
+              style={{
+                fontSize: '14px',
+                color: 'var(--color-foreground-muted)',
+                lineHeight: 1.5,
+              }}
+            >
+              A selection of structural, operational, and growth interventions across different businesses.
+            </p>
           </div>
           <Link
             href="/insights/case-studies"
             style={{
               fontSize: '13px',
               fontWeight: 500,
-              color: 'var(--color-foreground-muted)',
+              color: 'var(--color-background)',
+              background: 'var(--color-foreground)',
               textDecoration: 'none',
-              display: 'flex',
+              display: 'inline-flex',
               alignItems: 'center',
-              gap: '6px',
+              padding: '12px 28px',
+              borderRadius: '8px',
+              transition: 'opacity 0.2s',
+              flexShrink: 0,
+              marginLeft: '32px',
             }}
+            onMouseOver={(e) => (e.currentTarget.style.opacity = '0.8')}
+            onMouseOut={(e) => (e.currentTarget.style.opacity = '1')}
           >
-            View all case studies →
+            Explore insights
           </Link>
         </div>
 
-        {/* Cards */}
+        {/* Horizontal track */}
         <div
           style={{
-            display: 'grid',
-            gridTemplateColumns: '1fr 1fr',
-            gap: '1px',
-            background: 'var(--color-border)',
-            border: '1px solid var(--color-border)',
+            flex: 1,
+            position: 'relative',
+            overflow: 'hidden',
           }}
         >
-          {featured.map((cs) => (
-            <Link
-              key={cs.slug}
-              href={`/insights/case-studies/${cs.slug}`}
-              style={{ textDecoration: 'none', display: 'block' }}
-            >
+          <motion.div
+            style={{
+              x,
+              display: 'flex',
+              height: '100%',
+              // Each card is one windowWidth wide, total = 3 cards
+              width: windowWidth ? `${windowWidth * 3}px` : '300vw',
+              willChange: 'transform',
+            }}
+          >
+            {featured.map((cs, i) => (
               <div
-                className="cs-card-inner"
+                key={cs.slug}
                 style={{
-                  background: 'var(--color-background)',
-                  padding: '40px',
+                  width: windowWidth ? `${windowWidth}px` : '100vw',
+                  flex: '0 0 auto',
                   height: '100%',
-                  display: 'flex',
-                  flexDirection: 'column',
-                  transition: 'background 0.2s',
-                  cursor: 'pointer',
+                  padding: '0 16px 28px 16px',
                 }}
-                onMouseOver={(e) =>
-                  ((e.currentTarget as HTMLDivElement).style.background =
-                    '#EBEBEB')
-                }
-                onMouseOut={(e) =>
-                  ((e.currentTarget as HTMLDivElement).style.background =
-                    'var(--color-background)')
-                }
               >
-                {/* Industry + date */}
+                {/* Card */}
                 <div
                   style={{
-                    display: 'flex',
-                    alignItems: 'center',
-                    gap: '12px',
-                    marginBottom: '24px',
+                    position: 'relative',
+                    width: '100%',
+                    height: '100%',
+                    borderRadius: '12px',
+                    overflow: 'hidden',
                   }}
                 >
-                  <span
-                    style={{
-                      fontSize: '10px',
-                      fontWeight: 700,
-                      letterSpacing: '0.1em',
-                      textTransform: 'uppercase',
-                      color: 'var(--color-primary)',
-                    }}
-                  >
-                    {cs.industry}
-                  </span>
-                  <span
-                    style={{
-                      width: '3px',
-                      height: '3px',
-                      borderRadius: '50%',
-                      background: 'var(--color-border)',
-                      display: 'inline-block',
-                    }}
-                  />
-                  <span
-                    style={{
-                      fontSize: '11px',
-                      color: 'var(--color-foreground-muted)',
-                    }}
-                  >
-                    {new Date(cs.publishedAt).toLocaleDateString('en-GB', {
-                      month: 'long',
-                      year: 'numeric',
-                    })}
-                  </span>
-                </div>
-
-                {/* Title */}
-                <p
-                  style={{
-                    fontFamily: 'var(--font-playfair-display, Georgia, serif)',
-                    fontSize: 'clamp(20px, 2vw, 26px)',
-                    fontWeight: 400,
-                    color: 'var(--color-foreground)',
-                    lineHeight: 1.25,
-                    letterSpacing: '-0.015em',
-                    marginBottom: '12px',
-                  }}
-                >
-                  {cs.title}
-                </p>
-
-                {/* Excerpt */}
-                <p
-                  style={{
-                    fontSize: '13px',
-                    color: 'var(--color-foreground-muted)',
-                    lineHeight: 1.7,
-                    flex: 1,
-                    marginBottom: '28px',
-                  }}
-                >
-                  {cs.excerpt.slice(0, 180)}…
-                </p>
-
-                {/* Metrics */}
-                {cs.metrics && cs.metrics.length > 0 && (
+                  {/* Stock Image */}
                   <div
                     style={{
-                      paddingTop: '20px',
-                      borderTop: '1px solid var(--color-border)',
-                      display: 'flex',
-                      gap: '28px',
+                      position: 'absolute',
+                      inset: 0,
+                      backgroundImage: `url(${images[i]})`,
+                      backgroundSize: 'cover',
+                      backgroundPosition: 'center',
                     }}
                   >
-                    {cs.metrics.map((m) => (
-                      <div key={m.label}>
-                        <p
-                          style={{
-                            fontFamily:
-                              'var(--font-playfair-display, Georgia, serif)',
-                            fontSize: '20px',
-                            fontWeight: 400,
-                            color: 'var(--color-foreground)',
-                            lineHeight: 1,
-                            marginBottom: '4px',
-                          }}
-                        >
-                          {m.value}
-                        </p>
-                        <p
-                          style={{
-                            fontSize: '10px',
-                            color: 'var(--color-foreground-muted)',
-                            letterSpacing: '0.04em',
-                          }}
-                        >
-                          {m.label}
-                        </p>
-                      </div>
-                    ))}
+                    <div
+                      style={{
+                        position: 'absolute',
+                        inset: 0,
+                        background:
+                          'linear-gradient(to top, rgba(0,0,0,0.88) 0%, rgba(0,0,0,0.08) 55%)',
+                      }}
+                    />
                   </div>
-                )}
 
-                {/* Arrow */}
-                <div
-                  style={{
-                    marginTop: '24px',
-                    fontSize: '18px',
-                    color: 'var(--color-foreground-muted)',
-                    textAlign: 'right',
-                  }}
-                >
-                  →
+                  {/* Card content */}
+                  <div
+                    style={{
+                      position: 'absolute',
+                      bottom: 0,
+                      left: 0,
+                      right: 0,
+                      padding: '48px 52px',
+                      display: 'flex',
+                      justifyContent: 'space-between',
+                      alignItems: 'flex-end',
+                      zIndex: 2,
+                    }}
+                  >
+                    <div style={{ maxWidth: '72%' }}>
+                      <span
+                        style={{
+                          display: 'inline-block',
+                          background: '#FFFFFF',
+                          color: '#000000',
+                          fontSize: '10px',
+                          fontWeight: 700,
+                          padding: '5px 10px',
+                          borderRadius: '20px',
+                          textTransform: 'uppercase',
+                          letterSpacing: '0.05em',
+                          marginBottom: '14px',
+                        }}
+                      >
+                        {cs.industry}
+                      </span>
+
+                      <h3
+                        style={{
+                          color: '#FFFFFF',
+                          fontSize: 'clamp(26px, 2.6vw, 36px)',
+                          fontWeight: 400,
+                          marginBottom: '12px',
+                          fontFamily: 'var(--font-playfair-display, Georgia, serif)',
+                          letterSpacing: '-0.01em',
+                          lineHeight: 1.15,
+                        }}
+                      >
+                        {cs.title}
+                      </h3>
+
+                      <p
+                        style={{
+                          color: 'rgba(255,255,255,0.72)',
+                          fontSize: '15px',
+                          lineHeight: 1.6,
+                          display: '-webkit-box',
+                          WebkitLineClamp: 2,
+                          WebkitBoxOrient: 'vertical',
+                          overflow: 'hidden',
+                        }}
+                      >
+                        {cs.excerpt}
+                      </p>
+                    </div>
+
+                    {/* Arrow button — solid white circle */}
+                    <Link
+                      href={`/insights/case-studies/${cs.slug}`}
+                      style={{
+                        width: '52px',
+                        height: '52px',
+                        borderRadius: '50%',
+                        background: '#FFFFFF',
+                        color: '#0a0a0a',
+                        display: 'flex',
+                        alignItems: 'center',
+                        justifyContent: 'center',
+                        textDecoration: 'none',
+                        flexShrink: 0,
+                        transition: 'transform 0.25s ease, background 0.25s ease',
+                        boxShadow: '0 2px 12px rgba(0,0,0,0.18)',
+                      }}
+                      onMouseOver={(e) => {
+                        e.currentTarget.style.transform = 'scale(1.1) rotate(10deg)';
+                        e.currentTarget.style.background = '#f0f0f0';
+                      }}
+                      onMouseOut={(e) => {
+                        e.currentTarget.style.transform = 'scale(1) rotate(0deg)';
+                        e.currentTarget.style.background = '#FFFFFF';
+                      }}
+                    >
+                      <svg
+                        width="20"
+                        height="20"
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="currentColor"
+                        strokeWidth="2"
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                      >
+                        <path d="M7 17L17 7M17 7H7M17 7V17" />
+                      </svg>
+                    </Link>
+                  </div>
                 </div>
               </div>
-            </Link>
-          ))}
+            ))}
+          </motion.div>
         </div>
       </div>
-    </section>
+    </div>
   );
 }

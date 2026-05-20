@@ -6,7 +6,7 @@ export function AboutCTA() {
   return (
     <section className="about-cta">
       <div className="cta-inner">
-        <div className="cta-label">Work with us</div>
+        <div className="cta-label">Start a Consulting Engagement</div>
         <h2 className="cta-heading">
           If this is how you<br />
           think about building<br />

@@ -1,140 +1,77 @@
-import Link from 'next/link';
+'use client';
+
+import { motion } from 'framer-motion';
+import { NeonOrbs } from '@/components/ui/neon-orbs';
 
 export function MergeXHero() {
   return (
-    <section className="min-h-[88vh] flex flex-col justify-end px-6 md:px-12 pb-20 pt-40 border-b border-border relative">
-      {/* Vertical rule left */}
-      <div
-        className="absolute left-6 md:left-12 top-0 bottom-0 w-px"
-        style={{
-          background:
-            'linear-gradient(to bottom, transparent, var(--color-border) 25%, var(--color-border) 75%, transparent)',
-        }}
-      />
-
-      <div className="max-w-6xl mx-auto w-full">
-        {/* Breadcrumb */}
-        <div className="flex items-center gap-2 mb-14 pl-0 md:pl-0">
-          <Link
-            href="/brands"
-            className="text-xs font-medium text-foreground-muted hover:text-primary transition-colors"
+    <section className="relative w-full z-0 overflow-hidden bg-background">
+      {/* ── NEON ORBS BACKGROUND ── */}
+      <NeonOrbs 
+        orbOpacity={0.28}
+        className="relative w-full min-h-screen pt-32 pb-24 flex items-center justify-center overflow-hidden"
+      >
+        <div className="max-w-5xl mx-auto px-6 md:px-12 flex flex-col items-center text-center relative z-10">
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+            className="w-full flex flex-col items-center"
           >
-            Brands
-          </Link>
-          <span className="text-xs text-foreground-muted/40">→</span>
-          <span className="text-xs font-semibold text-foreground">MergeX</span>
-        </div>
-
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-0 items-end">
-          {/* Left */}
-          <div>
-            <p className="text-xs font-bold uppercase tracking-widest text-primary mb-5">
-              Diagnostic-First Scaling
-            </p>
+            {/* Main Headline */}
             <h1
               style={{
                 fontFamily: 'var(--font-playfair-display, Georgia, serif)',
-                fontSize: 'clamp(52px, 7vw, 88px)',
+                fontSize: 'clamp(36px, 5.5vw, 68px)',
                 fontWeight: 400,
-                lineHeight: 1.03,
+                lineHeight: 1.1,
                 letterSpacing: '-0.025em',
                 color: 'var(--color-foreground)',
-                marginBottom: '40px',
+                marginBottom: '36px',
+                maxWidth: '920px',
               }}
             >
-              MergeX
+              Scale breaks{' '}
+              <span
+                style={{
+                  fontStyle: 'italic',
+                  color: 'var(--color-foreground-muted)',
+                  display: 'block',
+                  marginTop: '8px',
+                }}
+              >
+                where structure doesn’t exist.
+              </span>
             </h1>
+
+            {/* Supporting Copy */}
             <p
               style={{
-                fontSize: '16px',
+                fontSize: 'clamp(15px, 1.8vw, 18px)',
                 color: 'var(--color-foreground-muted)',
                 lineHeight: 1.75,
-                maxWidth: '440px',
-                marginBottom: '40px',
+                maxWidth: '680px',
               }}
             >
-              The primary scaling brand. We find the exact constraint holding
-              your business back — then build only what resolves it.
+              We help businesses identify the constraints preventing sustainable growth.
             </p>
-            <Link
-              href="/contact/diagnostic"
-              style={{
-                display: 'inline-flex',
-                alignItems: 'center',
-                gap: '10px',
-                background: 'var(--color-foreground)',
-                color: 'var(--color-background)',
-                fontSize: '13px',
-                fontWeight: 500,
-                padding: '14px 28px',
-                borderRadius: '2px',
-                textDecoration: 'none',
-                letterSpacing: '0.02em',
-                transition: 'opacity 0.2s',
-              }}
-            >
-              Request a Diagnostic
-              <span style={{ fontSize: '16px' }}>→</span>
-            </Link>
-          </div>
-
-          {/* Right — stat strip */}
-          <div
-            className="hidden lg:grid grid-cols-3 gap-px"
-            style={{
-              background: 'var(--color-border)',
-              border: '1px solid var(--color-border)',
-              borderRadius: '2px',
-              marginBottom: '4px',
-            }}
-          >
-            {[
-              { value: '90', unit: 'days', label: 'Average engagement' },
-              { value: '5', unit: 'stage', label: 'S.C.A.L.E Formula™' },
-              { value: '4', unit: 'domains', label: 'Prescription outputs' },
-            ].map((s) => (
-              <div
-                key={s.label}
-                className="bg-background p-7 flex flex-col justify-between"
-              >
-                <div>
-                  <span
-                    style={{
-                      fontFamily: 'var(--font-playfair-display, Georgia, serif)',
-                      fontSize: '40px',
-                      fontWeight: 400,
-                      color: 'var(--color-foreground)',
-                      lineHeight: 1,
-                    }}
-                  >
-                    {s.value}
-                  </span>
-                  <span
-                    style={{
-                      fontSize: '13px',
-                      color: 'var(--color-foreground-muted)',
-                      marginLeft: '4px',
-                    }}
-                  >
-                    {s.unit}
-                  </span>
-                </div>
-                <p
-                  style={{
-                    fontSize: '11px',
-                    color: 'var(--color-foreground-muted)',
-                    letterSpacing: '0.06em',
-                    textTransform: 'uppercase',
-                    marginTop: '20px',
-                  }}
-                >
-                  {s.label}
-                </p>
-              </div>
-            ))}
-          </div>
+          </motion.div>
         </div>
-      </div>
+      </NeonOrbs>
+
+      {/* ── SMOOTH GRADIENT DISSOLVE (SMEDGE EFFECT) ── */}
+      <div
+        style={{
+          position: 'absolute',
+          bottom: 0,
+          left: 0,
+          right: 0,
+          height: '240px',
+          background: 'linear-gradient(to bottom, transparent, var(--color-background))',
+          pointerEvents: 'none',
+          zIndex: 2,
+        }}
+      />
     </section>
   );
 }

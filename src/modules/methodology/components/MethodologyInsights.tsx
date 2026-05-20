@@ -14,8 +14,8 @@ export function MethodologyInsights() {
                 </div>
                 <div>
                     <p className="mp-prose">
-                        These articles go deeper on the thinking behind the S.C.A.L.E Formula™ 
-                        and the diagnostic-first approach to scaling.
+                        These articles go deeper on the thinking behind the S.C.A.L.E. Methodology 
+                        and our diagnostic-led approach to consulting and scaling.
                     </p>
                     <div style={{ display: 'flex', flexDirection: 'column', gap: '1px', background: 'var(--mp-border)', border: '1px solid var(--mp-border)' }}>
                         {featured.map((insight) => (

@@ -7,7 +7,7 @@ export function MethodologyCTA() {
                     Begin your diagnosis
                 </p>
                 <h2 className="methodology-cta-heading">
-                    The formula only works<br />
+                    The methodology only works<br />
                     when we <em>start with the scan.</em>
                 </h2>
                 <p className="methodology-cta-body">

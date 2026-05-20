@@ -32,7 +32,7 @@ const BELIEFS = [
 ];
 
 const ECO_BRANDS = [
-  { name: 'MergeX', role: 'Diagnostic scaling systems', status: 'Active' },
+  { name: 'MergeX', role: 'Business consulting & scale infrastructure', status: 'Active' },
   { name: 'Studio', role: 'Brand & creative infrastructure', status: 'Active' },
 ];
 
@@ -95,21 +95,22 @@ export function NarrativeCore() {
           </p>
 
           <p className="about-prose fade-up">
-            The agency sells execution. The consultant sells advice.
-            Nobody diagnoses first. Nobody asks what the actual constraint is
+            The agency sells execution. The consultant sells generic advice.
+            Neither diagnoses first. Nobody stops to ask what the actual constraint is
             before prescribing a solution. The result is a market full of{' '}
             <strong>expensive, well-executed answers to the wrong questions.</strong>
           </p>
 
           <p className="about-prose fade-up">
-            MergeX was built to fix this. Not by doing more — but by{' '}
-            <strong>understanding precisely what needs to be done</strong> before
-            anything is built. We diagnose the exact factor limiting your growth.
-            Then and only then, we architect the system to remove it.
+            MergeX is a business consulting firm built to fix this. Not by doing
+            more — but by <strong>understanding precisely what needs to be done</strong>{' '}
+            before anything is built. We use a diagnostic-led consulting approach:
+            identify the exact structural or operational constraint first, then
+            architect and build only what resolves it.
           </p>
 
           <p className="about-prose fade-up">
-            We call this approach the <strong>S.C.A.L.E Formula™</strong> —
+            We call this approach the <strong>S.C.A.L.E. Methodology</strong> —
             a five-stage diagnostic and execution framework that identifies
             your real growth constraint and builds the infrastructure to resolve it.{' '}
             <Link href="/methodology" className="about-link">Learn how it works →</Link>

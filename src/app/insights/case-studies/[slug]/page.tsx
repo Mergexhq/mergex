@@ -73,9 +73,7 @@ function renderBlock(block: string, i: number) {
       <p key={i} className="text-foreground-muted text-base leading-relaxed">
         {parts.map((part, pi) =>
           pi % 2 === 1 ? (
-            <strong key={pi} className="text-foreground font-semibold">
-              {part}
-            </strong>
+            <strong key={pi} className="text-foreground font-semibold">{part}</strong>
           ) : (
             part
           )
@@ -90,25 +88,11 @@ function renderBlock(block: string, i: number) {
   );
 }
 
-function Section({
-  id,
-  label,
-  content,
-}: {
-  id: string;
-  label: string;
-  content: string;
-}) {
-  const blocks = content
-    .split('\n\n')
-    .map((b) => b.trim())
-    .filter(Boolean);
-
+function Section({ id, label, content }: { id: string; label: string; content: string }) {
+  const blocks = content.split('\n\n').map((b) => b.trim()).filter(Boolean);
   return (
     <section id={id} className="mb-14">
-      <p className="text-xs font-bold uppercase tracking-widest text-primary mb-4">
-        {label}
-      </p>
+      <p className="text-xs font-bold uppercase tracking-widest text-primary mb-4">{label}</p>
       <div className="space-y-4">{blocks.map(renderBlock)}</div>
     </section>
   );
@@ -128,55 +112,53 @@ export default async function CaseStudyDetailPage({
   const related = getRelatedCaseStudies(slug, cs.industry);
 
   return (
-    <div className="min-h-screen bg-background">
-      {/* ── Hero ── */}
-      <section className="pt-40 pb-16 px-6 md:px-12 max-w-7xl mx-auto border-b border-border">
-        <div className="max-w-3xl">
-          <div className="flex items-center gap-3 mb-6">
-            <span className="text-xs font-bold uppercase tracking-widest text-primary">
-              {cs.industry}
-            </span>
-            <span className="text-xs text-foreground-muted">·</span>
-            <span className="text-xs text-foreground-muted">{cs.client}</span>
-            <span className="text-xs text-foreground-muted">·</span>
-            <span className="text-xs text-foreground-muted">
-              {new Date(cs.publishedAt).toLocaleDateString('en-GB', {
-                month: 'long',
-                year: 'numeric',
-              })}
-            </span>
-          </div>
-          <h1 className="text-4xl md:text-6xl font-serif text-foreground tracking-tight leading-tight mb-6">
-            {cs.title}
-          </h1>
-          <p className="text-foreground-muted text-lg leading-relaxed mb-8">
-            {cs.excerpt}
-          </p>
-
-          {/* Metrics */}
-          {cs.metrics && cs.metrics.length > 0 && (
-            <div className="flex flex-wrap gap-10 mt-8 pt-8 border-t border-border">
-              {cs.metrics.map((m) => (
-                <div key={m.label} className="flex flex-col">
-                  <span className="text-3xl font-bold font-serif text-foreground">
-                    {m.value}
-                  </span>
-                  <span className="text-xs text-foreground-muted mt-1">{m.label}</span>
-                </div>
-              ))}
-            </div>
-          )}
+    <div className="min-h-screen bg-[#f0eeea]">
+      {/* ── Page header (outside card) ── */}
+      <section className="pt-40 pb-10 px-6 md:px-12 max-w-[1400px] mx-auto">
+        <div className="flex items-center gap-3 mb-5">
+          <span className="text-xs font-bold uppercase tracking-widest text-primary">
+            {cs.industry}
+          </span>
+          <span className="text-xs text-foreground-muted">·</span>
+          <span className="text-xs text-foreground-muted">{cs.client}</span>
+          <span className="text-xs text-foreground-muted">·</span>
+          <span className="text-xs text-foreground-muted">
+            {new Date(cs.publishedAt).toLocaleDateString('en-GB', {
+              month: 'long',
+              year: 'numeric',
+            })}
+          </span>
         </div>
+        <h1 className="text-4xl md:text-6xl font-serif text-foreground tracking-tight leading-tight mb-5 max-w-4xl">
+          {cs.title}
+        </h1>
+        <p className="text-foreground-muted text-lg leading-relaxed mb-8 max-w-2xl">
+          {cs.excerpt}
+        </p>
+
+        {/* Metrics row */}
+        {cs.metrics && cs.metrics.length > 0 && (
+          <div className="flex flex-wrap gap-10">
+            {cs.metrics.map((m) => (
+              <div key={m.label} className="flex flex-col">
+                <span className="text-3xl font-bold font-serif text-foreground">{m.value}</span>
+                <span className="text-xs text-foreground-muted mt-1">{m.label}</span>
+              </div>
+            ))}
+          </div>
+        )}
       </section>
 
-      {/* ── Main Layout ── */}
-      <section className="max-w-7xl mx-auto px-6 md:px-12 py-16">
-        <div className="flex gap-16">
-          {/* Sidebar */}
+      {/* ── Outer card shell ── */}
+      <section className="pr-4 md:pr-8 pb-12 max-w-[1400px] mx-auto">
+        <div className="rounded-r-3xl bg-white shadow-sm border border-black/5 border-l-0 overflow-hidden flex min-h-[80vh] items-stretch">
+
+          {/* Dark TOC sidebar */}
           <CaseStudySidebar mode="toc" sections={TOC_SECTIONS} />
 
-          {/* Content */}
-          <div className="flex-1 min-w-0 max-w-3xl">
+          {/* Right: content pane */}
+          <div className="flex-1 min-w-0 p-8 md:p-14 overflow-y-auto">
+
             {/* AI Overview */}
             <div
               id="overview"
@@ -184,13 +166,7 @@ export default async function CaseStudyDetailPage({
             >
               <div className="flex items-center gap-2 mb-3">
                 <div className="w-5 h-5 rounded-full bg-primary/20 flex items-center justify-center">
-                  <svg
-                    className="w-3 h-3 text-primary"
-                    fill="none"
-                    stroke="currentColor"
-                    strokeWidth={2.5}
-                    viewBox="0 0 24 24"
-                  >
+                  <svg className="w-3 h-3 text-primary" fill="none" stroke="currentColor" strokeWidth={2.5} viewBox="0 0 24 24">
                     <path
                       strokeLinecap="round"
                       strokeLinejoin="round"
@@ -202,9 +178,7 @@ export default async function CaseStudyDetailPage({
                   AI Overview
                 </span>
               </div>
-              <p className="text-foreground text-[15px] leading-relaxed">
-                {cs.aiOverview}
-              </p>
+              <p className="text-foreground text-[15px] leading-relaxed">{cs.aiOverview}</p>
             </div>
 
             {/* Sections */}
