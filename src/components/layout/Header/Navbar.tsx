@@ -100,7 +100,7 @@ export function Navbar() {
     const cardBgClass = isDropdownOpen
         ? 'bg-black rounded-xl border border-white/10 shadow-2xl'
         : (isScrolled && isLightPage
-            ? 'bg-white border-b border-gray-200/50 border-t-transparent border-l-transparent border-r-transparent rounded-none shadow-none'
+            ? 'bg-[#F3F3F3] border-b border-gray-200/50 border-t-transparent border-l-transparent border-r-transparent rounded-none shadow-none'
             : 'bg-transparent border border-transparent rounded-none shadow-none');
 
     const openDropdown = () => {
@@ -355,9 +355,9 @@ export function Navbar() {
                 <div
                     className={`w-full transition-all duration-300 ease-in-out pointer-events-auto ${
                         isMobileMenuOpen
-                            ? 'bg-white border-b border-b-gray-200/50'
+                            ? 'bg-[#F3F3F3] border-b border-b-gray-200/50'
                             : (isScrolled 
-                                ? (isLightPage ? 'bg-white border-b border-b-gray-200/50' : 'bg-black border-b border-b-white/10')
+                                ? (isLightPage ? 'bg-[#F3F3F3] border-b border-b-gray-200/50' : 'bg-black border-b border-b-white/10')
                                 : 'bg-transparent border-b border-b-transparent'
                               )
                     } px-5 h-14 flex items-center justify-between relative`}
