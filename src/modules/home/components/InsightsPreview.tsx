@@ -3,126 +3,116 @@ import Image from 'next/image';
 import { INSIGHTS } from '@/lib/data/insights';
 
 export function InsightsPreview() {
-    const featuredInsight = INSIGHTS.find((i) => i.featured) || INSIGHTS[0];
-    const supportingInsights = INSIGHTS.filter((i) => !i.featured).slice(0, 2);
+    const previewInsights = INSIGHTS.slice(0, 2);
 
     return (
-        <section className="py-32 md:py-44 px-6 relative overflow-hidden" style={{ backgroundColor: '#F5F3EF' }}>
+        <section className="py-24 md:py-32 px-6 relative overflow-hidden" style={{ backgroundColor: '#F5F3EF' }}>
             {/* Subtle noise texture */}
             <div className="absolute inset-0 opacity-[0.03] pointer-events-none" style={{ backgroundImage: 'url("data:image/svg+xml,%3Csvg viewBox=%220 0 200 200%22 xmlns=%22http://www.w3.org/2000/svg%22%3E%3Cfilter id=%22noiseFilter%22%3E%3CfeTurbulence type=%22fractalNoise%22 baseFrequency=%220.65%22 numOctaves=%223%22 stitchTiles=%22stitch%22/%3E%3C/filter%3E%3Crect width=%22100%25%22 height=%22100%25%22 filter=%22url(%23noiseFilter)%22/%3E%3C/svg%3E")' }}></div>
 
             <div className="max-w-7xl mx-auto relative z-10">
-                <div className="flex flex-col md:flex-row md:items-end justify-between mb-16 gap-8">
-                    <div>
-                        <p className="text-xs font-bold uppercase tracking-widest text-primary mb-4">
-                            Insights
-                        </p>
-                        <h2 className="text-4xl md:text-5xl font-serif leading-[1.1] text-foreground">
-                            Perspectives on systems,<br />
-                            structure and scale.
-                        </h2>
-                    </div>
-                    <Link
-                        href="/insights"
-                        className="hidden md:inline-block text-sm font-medium text-foreground-muted hover:text-primary transition-colors pb-2"
+                {/* Header */}
+                <div className="mb-16">
+                    <p className="text-xs font-bold uppercase tracking-widest text-primary mb-4">
+                        OUR THINKING
+                    </p>
+                    <h2 
+                        className="text-3xl md:text-4xl lg:text-5xl font-normal leading-[1.2] tracking-[-0.01em] w-full max-w-none"
+                        style={{ 
+                            fontFamily: 'Garamond, Georgia, serif', 
+                            color: '#1A0D2E' 
+                        }}
                     >
-                        Explore Insights
-                    </Link>
+                        The latest perspectives from MergeX.
+                    </h2>
                 </div>
 
-                <div className="grid grid-cols-1 lg:grid-cols-12 gap-6">
-                    {/* Featured Insight */}
-                    <Link
-                        href={`/insights/${featuredInsight.slug}`}
-                        className="group lg:col-span-7 flex flex-col rounded-[32px] border border-black/5 hover:border-black/10 transition-all duration-500 hover:-translate-y-1 relative overflow-hidden"
-                        style={{ backgroundColor: '#F5F3EF' }}
-                    >
-                        {/* Purple accent line */}
-                        <div className="absolute top-0 left-0 w-full h-[2px] bg-primary scale-x-0 group-hover:scale-x-100 transition-transform duration-700 origin-left z-20"></div>
-                        
-                        <div className="relative aspect-16/10 w-full overflow-hidden rounded-t-[32px]">
-                            {featuredInsight.coverImage && (
+                {/* Cards Container */}
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-8 lg:gap-12 mb-16">
+                    {previewInsights.map((insight) => (
+                        <Link
+                            key={insight.slug}
+                            href={`/insights/${insight.slug}`}
+                            className="group relative aspect-[4/3] w-full overflow-hidden rounded-[12px] border border-black/5 hover:shadow-lg transition-all duration-500 flex flex-col justify-end"
+                        >
+                            {/* Full Card Cover Image */}
+                            {insight.coverImage && (
                                 <Image 
-                                    src={featuredInsight.coverImage} 
-                                    alt={featuredInsight.title}
+                                    src={insight.coverImage} 
+                                    alt={insight.title}
                                     fill
-                                    className="object-cover transition-transform duration-700 ease-out group-hover:scale-[1.03]"
+                                    className="object-cover"
                                 />
                             )}
-                            {/* Optional Cursor-Reactive Image Light / Overlay */}
-                            <div className="absolute inset-0 bg-linear-to-t from-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-700 z-10 pointer-events-none"></div>
-                        </div>
-                        
-                        <div className="p-8 md:p-10 flex flex-col grow justify-between">
-                            <div>
-                                <span className="text-[11px] font-bold uppercase tracking-widest text-primary/70 group-hover:text-primary transition-colors duration-500 block mb-4">
-                                    {featuredInsight.category} · {featuredInsight.readTime}
+                            
+                            {/* Rich Dark Gradient Overlay for Typography Readability */}
+                            <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent z-10 pointer-events-none" />
+
+                            {/* Text Content Container */}
+                            <div className="relative z-20 p-8 md:p-10 flex flex-col">
+                                <span className="text-[10px] font-bold uppercase tracking-[0.2em] text-violet-300 mb-2 block">
+                                    {insight.category} · {insight.readTime}
                                 </span>
-                                <h3 className="text-2xl md:text-3xl font-serif font-medium text-foreground leading-tight mb-4 transition-transform duration-500 group-hover:translate-y-[-2px]">
-                                    {featuredInsight.title}
-                                </h3>
-                                <p className="text-base text-foreground-muted leading-relaxed line-clamp-2 md:line-clamp-3 mb-8">
-                                    {featuredInsight.slug === 'diagnose-before-you-build' 
-                                        ? "Most scaling failures begin long before execution." 
-                                        : featuredInsight.excerpt}
-                                </p>
-                            </div>
-                            <span className="text-sm font-medium text-foreground group-hover:text-primary transition-colors">
-                                Explore Insight
-                            </span>
-                        </div>
-                    </Link>
-
-                    {/* Supporting Cards */}
-                    <div className="lg:col-span-5 flex flex-col gap-6">
-                        {supportingInsights.map((insight) => (
-                            <Link
-                                key={insight.slug}
-                                href={`/insights/${insight.slug}`}
-                                className="group flex flex-col rounded-[28px] border border-black/5 hover:border-black/10 transition-all duration-500 hover:-translate-y-1 relative overflow-hidden flex-1"
-                                style={{ backgroundColor: '#F5F3EF' }}
-                            >
-                                {/* Purple accent line */}
-                                <div className="absolute top-0 left-0 w-full h-[2px] bg-primary scale-x-0 group-hover:scale-x-100 transition-transform duration-700 origin-left z-20"></div>
-
-                                <div className="relative aspect-16/10 sm:aspect-2/1 lg:aspect-video w-full overflow-hidden rounded-t-[28px]">
-                                    {insight.coverImage && (
-                                        <Image 
-                                            src={insight.coverImage} 
-                                            alt={insight.title}
-                                            fill
-                                            className="object-cover transition-transform duration-700 ease-out group-hover:scale-[1.03]"
-                                        />
-                                    )}
-                                </div>
                                 
-                                <div className="p-6 md:p-8 flex flex-col grow justify-between">
-                                    <div>
-                                        <span className="text-[11px] font-bold uppercase tracking-widest text-primary/70 group-hover:text-primary transition-colors duration-500 block mb-3">
-                                            {insight.category} · {insight.readTime}
-                                        </span>
-                                        <h3 className="text-xl font-serif font-medium text-foreground leading-snug mb-3 transition-transform duration-500 group-hover:translate-y-[-2px]">
-                                            {insight.title}
-                                        </h3>
-                                        <p className="text-sm text-foreground-muted leading-relaxed line-clamp-2 mb-6">
-                                            {insight.excerpt}
-                                        </p>
-                                    </div>
-                                    <span className="text-sm font-medium text-foreground group-hover:text-primary transition-colors mt-auto">
-                                        Explore Insight
+                                <h3 
+                                    className="text-xl md:text-2xl font-normal text-white leading-snug mb-3"
+                                    style={{ fontFamily: 'Garamond, Georgia, serif' }}
+                                >
+                                    {insight.title}
+                                </h3>
+                                
+                                <p className="text-xs md:text-sm text-gray-300 leading-relaxed line-clamp-2 max-w-xl">
+                                    {insight.excerpt}
+                                </p>
+
+                                {/* Animated 'Learn more' Button Revealed on Hover */}
+                                <div className="opacity-0 max-h-0 translate-y-3 group-hover:opacity-100 group-hover:max-h-12 group-hover:translate-y-0 transition-all duration-300 ease-out overflow-hidden mt-4">
+                                    <span className="inline-flex items-center gap-1.5 px-4 py-2 bg-white hover:bg-white/90 text-[#1A0D2E] text-xs font-semibold rounded-md transition-colors shadow-sm">
+                                        Learn more
+                                        <svg
+                                            width="10"
+                                            height="10"
+                                            viewBox="0 0 10 10"
+                                            fill="none"
+                                            stroke="currentColor"
+                                            className="stroke-current"
+                                        >
+                                            <path
+                                                d="M1 5h8M5 1l4 4-4 4"
+                                                strokeWidth="1.5"
+                                                strokeLinecap="round"
+                                                strokeLinejoin="round"
+                                            />
+                                        </svg>
                                     </span>
                                 </div>
-                            </Link>
-                        ))}
-                    </div>
+                            </div>
+                        </Link>
+                    ))}
                 </div>
 
-                <div className="mt-12 md:hidden">
+                {/* Centered CTA Button */}
+                <div className="flex justify-center">
                     <Link
                         href="/insights"
-                        className="inline-block text-sm font-medium text-foreground-muted hover:text-primary transition-colors"
+                        className="group inline-flex items-center gap-2 px-6 py-3 rounded-lg text-sm font-semibold tracking-wide border border-[#1A0D2E] text-[#1A0D2E] bg-transparent hover:bg-[#1A0D2E] hover:text-[#F5F3EF] transition-all duration-300 hover:scale-[1.02] active:scale-[0.98]"
                     >
-                        Explore Insights
+                        <span>See all insights</span>
+                        <svg
+                            width="14"
+                            height="14"
+                            viewBox="0 0 14 14"
+                            fill="none"
+                            stroke="currentColor"
+                            className="stroke-current transform group-hover:translate-x-0.5 transition-transform"
+                        >
+                            <path
+                                d="M2 7h10M8 3l4 4-4 4"
+                                strokeWidth="2"
+                                strokeLinecap="round"
+                                strokeLinejoin="round"
+                            />
+                        </svg>
                     </Link>
                 </div>
             </div>

@@ -1,9 +1,19 @@
 import type { Metadata } from "next";
-import { Manrope, Playfair_Display, Great_Vibes } from "next/font/google";
+import {
+  Manrope,
+  Playfair_Display,
+  Great_Vibes,
+} from "next/font/google";
+
 import "./globals.css";
 import LayoutShell from "@/components/LayoutShell";
 
-/* ─── Fonts ─────────────────────────────────────────────────────────── */
+/* ─────────────────────────────────────────────────────────────────────
+   Fonts
+   Note: Great Vibes is decorative — keep here only if used globally.
+   If only used in one component, move it there to avoid loading it
+   on every page unnecessarily.
+───────────────────────────────────────────────────────────────────── */
 const manrope = Manrope({
   subsets: ["latin"],
   variable: "--font-manrope",
@@ -23,41 +33,153 @@ const greatVibes = Great_Vibes({
   display: "swap",
 });
 
-/* ─── Metadata ──────────────────────────────────────────────────────── */
+/* ─────────────────────────────────────────────────────────────────────
+   Site URL
+   Uses env variable in staging/preview — falls back to production.
+   Set NEXT_PUBLIC_SITE_URL in your .env.local for local dev if needed.
+───────────────────────────────────────────────────────────────────── */
+const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? "https://mergex.in";
+
+/* ─────────────────────────────────────────────────────────────────────
+   Metadata
+   OG image must be a public URL path — never a local disk path.
+   Place og-cover.jpg inside /public/ and reference as "/og-cover.jpg".
+───────────────────────────────────────────────────────────────────── */
 export const metadata: Metadata = {
-  title: "The MergeX Company — Scale is not luck. It's structure.",
-  description: "The scaling ecosystem for ambition.",
+  metadataBase: new URL(siteUrl),
+
+  title: {
+    default: "The MergeX Company",
+    template: "%s - The MergeX Company",
+  },
+
+  description:
+    "MergeX identifies and fixes the exact factor stopping business growth. A consulting-first scaling company.",
+
+  keywords: [
+    "MergeX",
+    "The MergeX Company",
+    "Business Scaling",
+    "Diagnostic Consulting",
+    "Scaling Systems",
+    "Business Infrastructure",
+    "Operational Clarity",
+    "S.C.A.L.E Methodology",
+    "Brand Systems",
+    "Technology Systems",
+    "Sales Systems",
+  ],
+
+  authors: [{ name: "The MergeX Company", url: siteUrl }],
+  creator: "The MergeX Company",
+  publisher: "The MergeX Company",
+
+  /* ── Open Graph ──────────────────────────────────────────────────
+     Used by LinkedIn, WhatsApp, Facebook, Slack previews.
+     og-cover.jpg must be in /public/og-cover.jpg — 1200×630px.
+  ─────────────────────────────────────────────────────────────── */
+  openGraph: {
+    title: "The MergeX Company",
+    description:
+      "Most businesses don't fail from lack of effort. They fail because they're solving the wrong problem.",
+    url: siteUrl,
+    siteName: "The MergeX Company",
+    locale: "en_US",
+    type: "website",
+    images: [
+      {
+        url: "/og-cover.jpg",       // → resolves to https://mergex.in/og-cover.jpg
+        width: 1200,
+        height: 630,
+        alt: "The MergeX Company — Diagnosis before everything.",
+      },
+    ],
+  },
+
+  /* ── Twitter / X Card ────────────────────────────────────────── */
+  twitter: {
+    card: "summary_large_image",
+    title: "The MergeX Company",
+    description:
+      "Most businesses don't fail from lack of effort. They fail because they're solving the wrong problem.",
+    images: ["/og-cover.jpg"],
+  },
+
+  /* ── Robots ─────────────────────────────────────────────────── */
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      "max-image-preview": "large",
+      "max-snippet": -1,
+    },
+  },
+
+  /* ── Canonical ───────────────────────────────────────────────── */
+  alternates: {
+    canonical: siteUrl,
+  },
+
+  /* ── Favicons ────────────────────────────────────────────────── */
   icons: {
     icon: [
-      { url: '/favicon/favicon-16x16.png', sizes: '16x16', type: 'image/png' },
-      { url: '/favicon/favicon-32x32.png', sizes: '32x32', type: 'image/png' },
-      { url: '/favicon/favicon.ico', sizes: 'any' },
+      { url: "/favicon/favicon-16x16.png", sizes: "16x16", type: "image/png" },
+      { url: "/favicon/favicon-32x32.png", sizes: "32x32", type: "image/png" },
+      { url: "/favicon/favicon.ico", sizes: "any" },
     ],
     apple: [
-      { url: '/favicon/apple-touch-icon.png', sizes: '180x180', type: 'image/png' },
+      { url: "/favicon/apple-touch-icon.png", sizes: "180x180", type: "image/png" },
     ],
     other: [
-      { rel: 'manifest', url: '/favicon/site.webmanifest' },
+      { rel: "manifest", url: "/favicon/site.webmanifest" },
     ],
   },
 };
 
-/* ─── Root Layout ────────────────────────────────────────────────────── */
+/* ─────────────────────────────────────────────────────────────────────
+   Root Layout
+───────────────────────────────────────────────────────────────────── */
 export default function RootLayout({
   children,
 }: Readonly<{ children: React.ReactNode }>) {
   return (
     <html
       lang="en"
-      className={`${manrope.variable} ${playfair.variable} ${greatVibes.variable} h-full antialiased`}
+      suppressHydrationWarning            // ← prevents hydration mismatch from theme systems
+      className={`
+        ${manrope.variable}
+        ${playfair.variable}
+        ${greatVibes.variable}
+        h-full
+        scroll-smooth
+        antialiased
+      `}
     >
       <head>
+        {/* Clash Display — not on Google Fonts, loaded via Fontshare CDN */}
+        <link rel="preconnect" href="https://api.fontshare.com" />
         <link
-          href="https://api.fontshare.com/v2/css?f[]=clash-display@400,500,600,700&display=swap"
           rel="stylesheet"
+          href="https://api.fontshare.com/v2/css?f[]=clash-display@400,500,600,700&display=swap"
         />
+
+        {/* Theme color — matches your background token for mobile browser chrome */}
+        <meta name="theme-color" content="#0A0A0A" />
       </head>
-      <body className="min-h-full font-body text-foreground">
+
+      <body
+        className="
+          min-h-full
+          bg-background
+          font-body
+          text-foreground
+          overflow-x-hidden
+          selection:bg-purple-500/20
+          selection:text-foreground
+        "
+      >
         <LayoutShell>{children}</LayoutShell>
       </body>
     </html>

@@ -9,6 +9,17 @@ const nextConfig: NextConfig = {
       },
     ],
   },
+  async rewrites() {
+    const isDev = process.env.NODE_ENV === 'development';
+    return [
+      {
+        source: "/console/:path*",
+        destination: isDev
+          ? "http://localhost:3333/:path*"
+          : "https://mergex-console.sanity.studio/:path*",
+      },
+    ];
+  },
 };
 
 export default nextConfig;

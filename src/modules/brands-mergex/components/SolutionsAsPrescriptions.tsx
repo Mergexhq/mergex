@@ -1,185 +1,220 @@
+'use client';
+
+import { useState, useEffect } from 'react';
+
 const PRESCRIPTIONS = [
   {
     num: '01',
-    domain: 'Technology',
-    headline: 'Operational systems that remove the bottleneck.',
-    body: 'Automation infrastructure, internal tooling, and data architecture that eliminate manual overhead and create scalable operational capacity — without adding headcount.',
-    industries: ['D2C / E-commerce', 'EdTech', 'B2B SaaS'],
+    domain: 'Technology Systems',
+    title: 'Technology Systems',
+    subtitle: 'Infrastructure, automation, platforms, tooling.',
+    image: '/prescriptions/technology-systems.png',
   },
   {
     num: '02',
-    domain: 'Branding',
-    headline: 'Positioning that closes the trust gap.',
-    body: 'The visual identity, messaging architecture, and brand clarity that align how the market perceives the business with how it actually operates. Prescribed when positioning is the conversion constraint.',
-    industries: ['Professional Services', 'B2B Services', 'D2C'],
+    domain: 'Brand Systems',
+    title: 'Brand Systems',
+    subtitle: 'Identity, positioning, perception, messaging.',
+    image: '/prescriptions/brand-systems.png',
   },
   {
     num: '03',
-    domain: 'Marketing',
-    headline: 'Acquisition infrastructure built for the right buyer.',
-    body: 'Channel strategy, content systems, and demand architecture that bring qualified buyers into the commercial motion. Prescribed when the pipeline is thin, inconsistent, or misaligned.',
-    industries: ['B2B Services', 'D2C / E-commerce', 'EdTech'],
+    domain: 'Commercial Systems',
+    title: 'Commercial Systems',
+    subtitle: 'Acquisition, pipeline, conversion, revenue flow.',
+    image: '/prescriptions/commercial-systems.png',
   },
   {
     num: '04',
-    domain: 'Sales',
-    headline: 'A commercial system that does not require the founder.',
-    body: 'Qualification frameworks, pipeline architecture, and closing infrastructure that produce predictable revenue without founder-dependency. Prescribed when conversion is the constraint.',
-    industries: ['Professional Services', 'B2B SaaS', 'B2B Services'],
+    domain: 'Operational Systems',
+    title: 'Operational Systems',
+    subtitle: 'Execution, workflows, process, scalability.',
+    image: '/prescriptions/operational-systems.png',
   },
 ];
 
 export function SolutionsAsPrescriptions() {
+  const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
+  const [windowWidth, setWindowWidth] = useState(0);
+
+  useEffect(() => {
+    const update = () => setWindowWidth(window.innerWidth);
+    update();
+    window.addEventListener('resize', update);
+    return () => window.removeEventListener('resize', update);
+  }, []);
+
+  const isMobile = windowWidth > 0 && windowWidth < 640;
+  const isTablet = windowWidth >= 640 && windowWidth < 1024;
+
+  const gridCols = isMobile ? '1fr' : isTablet ? '1fr 1fr' : 'repeat(4, 1fr)';
+  const cardHeight = isMobile ? '240px' : isTablet ? '300px' : '420px';
+  const sectionPadding = isMobile ? '72px 12px' : '100px 12px';
+  const headerFlexDir: React.CSSProperties['flexDirection'] = isMobile ? 'column' : 'row';
+  const headerTextAlign: React.CSSProperties['textAlign'] = isMobile ? 'left' : 'right';
+
   return (
     <section
       style={{
-        padding: '100px 48px',
+        padding: sectionPadding,
+        background: 'var(--color-background)',
         borderBottom: '1px solid var(--color-border)',
+        overflow: 'hidden',
       }}
     >
+      {/* ── Editorial Header ──────────────────────────────────────── */}
       <div
         style={{
-          maxWidth: '1200px',
-          margin: '0 auto',
-          display: 'grid',
-          gridTemplateColumns: '280px 1fr',
-          gap: '80px',
+          width: '100%',
+          display: 'flex',
+          flexDirection: 'column',
+          alignItems: 'center',
+          justifyContent: 'center',
+          textAlign: 'center',
+          gap: '16px',
+          marginBottom: isMobile ? '36px' : '56px',
         }}
       >
-        {/* Sidebar */}
-        <div style={{ position: 'sticky', top: '100px', height: 'fit-content' }}>
-
-          <h2
-            style={{
-              fontFamily: 'var(--font-playfair-display, Georgia, serif)',
-              fontSize: 'clamp(28px, 3vw, 40px)',
-              fontWeight: 400,
-              lineHeight: 1.15,
-              letterSpacing: '-0.02em',
-              color: 'var(--color-foreground)',
-              marginBottom: '16px',
-            }}
-          >
-            Solutions as prescriptions
-          </h2>
-          <p
-            style={{
-              fontSize: '13px',
-              color: 'var(--color-foreground-muted)',
-              lineHeight: 1.7,
-            }}
-          >
-            Every prescription is a direct response to the diagnosed constraint.
-            We do not build speculatively.
-          </p>
-        </div>
-
-        {/* Cards */}
-        <div
+        <h2
           style={{
-            display: 'grid',
-            gridTemplateColumns: '1fr 1fr',
-            gap: '1px',
-            background: 'var(--color-border)',
-            border: '1px solid var(--color-border)',
-            alignContent: 'start',
+            fontFamily: 'var(--font-playfair-display, Georgia, serif)',
+            fontSize: isMobile ? '24px' : 'clamp(26px, 3vw, 40px)',
+            fontWeight: 500,
+            lineHeight: 1.35,
+            letterSpacing: '-0.02em',
+            color: 'var(--color-foreground)',
+            margin: 0,
           }}
         >
-          {PRESCRIPTIONS.map((p) => (
+          Solutions as prescriptions
+        </h2>
+
+        <p
+          style={{
+            fontSize: '14px',
+            color: 'var(--color-foreground-muted)',
+            lineHeight: 1.6,
+            maxWidth: '520px',
+            textAlign: 'center',
+            margin: '0 auto',
+          }}
+        >
+          Every intervention is prescribed based on the actual operational constraint —
+          not packaged services.
+        </p>
+      </div>
+
+      {/* ── Prescription Gallery ──────────────────────────────────── */}
+      <div
+        style={{
+          width: '100%',
+          display: 'grid',
+          gridTemplateColumns: gridCols,
+          gap: '12px',
+        }}
+      >
+        {PRESCRIPTIONS.map((p, i) => {
+          const isHovered = hoveredIndex === i;
+
+          return (
             <div
               key={p.num}
+              onMouseEnter={() => setHoveredIndex(i)}
+              onMouseLeave={() => setHoveredIndex(null)}
               style={{
-                background: 'var(--color-background)',
-                padding: '32px',
-                display: 'flex',
-                flexDirection: 'column',
+                position: 'relative',
+                height: cardHeight,
+                borderRadius: '14px',
+                overflow: 'hidden',
+                cursor: 'default',
+                boxShadow: '0 2px 8px rgba(0,0,0,0.07)',
               }}
             >
+              {/* ── Background Image ── */}
               <div
                 style={{
+                  position: 'absolute',
+                  inset: 0,
+                  backgroundImage: `url(${p.image})`,
+                  backgroundSize: 'cover',
+                  backgroundPosition: 'center',
+                }}
+              />
+
+              {/* ── Cinematic Gradient Overlay ── */}
+              <div
+                style={{
+                  position: 'absolute',
+                  inset: 0,
+                  background:
+                    'linear-gradient(to top, rgba(0,0,0,0.92) 0%, rgba(0,0,0,0.3) 50%, rgba(0,0,0,0.02) 100%)',
+                }}
+              />
+
+              {/* ── Inner Content Container (Equal padding on all 4 sides) ── */}
+              <div
+                style={{
+                  position: 'absolute',
+                  inset: 0,
+                  padding: isMobile ? '24px' : '32px',
                   display: 'flex',
+                  flexDirection: 'column',
                   justifyContent: 'space-between',
-                  alignItems: 'flex-start',
-                  marginBottom: '16px',
+                  boxSizing: 'border-box',
+                  zIndex: 2,
                 }}
               >
-                <span
+                {/* Top: Number badge */}
+                <div
                   style={{
+                    alignSelf: 'flex-end',
+                    fontFamily: 'var(--font-manrope, sans-serif)',
                     fontSize: '11px',
                     fontWeight: 700,
                     letterSpacing: '0.1em',
-                    textTransform: 'uppercase',
-                    color: 'var(--color-primary)',
-                  }}
-                >
-                  {p.domain}
-                </span>
-                <span
-                  style={{
-                    fontSize: '11px',
-                    color: 'var(--color-foreground-muted)',
-                    opacity: 0.4,
-                    fontWeight: 700,
+                    color: 'rgba(255,255,255,0.28)',
                   }}
                 >
                   {p.num}
-                </span>
-              </div>
-              <p
-                style={{
-                  fontSize: '15px',
-                  fontWeight: 600,
-                  color: 'var(--color-foreground)',
-                  marginBottom: '10px',
-                  lineHeight: 1.35,
-                  letterSpacing: '-0.01em',
-                }}
-              >
-                {p.headline}
-              </p>
-              <p
-                style={{
-                  fontSize: '13px',
-                  color: 'var(--color-foreground-muted)',
-                  lineHeight: 1.7,
-                  flex: 1,
-                }}
-              >
-                {p.body}
-              </p>
-              {/* Industry tags */}
-              <div
-                style={{
-                  marginTop: '20px',
-                  paddingTop: '16px',
-                  borderTop: '1px solid var(--color-border)',
-                  display: 'flex',
-                  flexWrap: 'wrap',
-                  gap: '6px',
-                }}
-              >
-                {p.industries.map((ind) => (
-                  <span
-                    key={ind}
+                </div>
+
+                {/* Bottom: Text Content */}
+                <div style={{ display: 'flex', flexDirection: 'column' }}>
+                  {/* Card title */}
+                  <h3
                     style={{
-                      fontSize: '10px',
-                      fontWeight: 600,
-                      letterSpacing: '0.06em',
-                      textTransform: 'uppercase',
-                      color: 'var(--color-foreground-muted)',
-                      background: 'transparent',
-                      border: '1px solid var(--color-border)',
-                      padding: '3px 8px',
-                      borderRadius: '2px',
+                      fontFamily: 'var(--font-playfair-display, Georgia, serif)',
+                      fontSize: isMobile ? '20px' : '22px',
+                      fontWeight: 400,
+                      lineHeight: 1.22,
+                      letterSpacing: '-0.01em',
+                      color: '#FFFFFF',
+                      marginTop: 0,
+                      marginBottom: '8px',
+                      marginLeft: 0,
+                      marginRight: 0,
                     }}
                   >
-                    {ind}
-                  </span>
-                ))}
+                    {p.title}
+                  </h3>
+
+                  {/* Subtitle / Support Text */}
+                  <p
+                    style={{
+                      fontFamily: 'var(--font-manrope, sans-serif)',
+                      fontSize: isMobile ? '11px' : '12px',
+                      color: 'rgba(255,255,255,0.6)',
+                      lineHeight: 1.5,
+                      margin: 0,
+                    }}
+                  >
+                    {p.subtitle}
+                  </p>
+                </div>
               </div>
             </div>
-          ))}
-        </div>
+          );
+        })}
       </div>
     </section>
   );

@@ -189,7 +189,7 @@ export default function Footer() {
 
                     {/* Newsletter / Insights column */}
                     <motion.div
-                        className="md:col-span-4 lg:col-span-4"
+                        className="md:col-span-4 lg:col-span-4 order-first md:order-none"
                         initial="hidden"
                         whileInView="visible"
                         viewport={{ once: true }}

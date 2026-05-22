@@ -1,42 +1,103 @@
+import Link from 'next/link';
+
 export function DiagnosticApproach() {
+    const steps = [
+        { num: '01', letter: 'S', title: 'Scan', desc: 'Deep diagnostic of current operations.' },
+        { num: '02', letter: 'C', title: 'Clarify', desc: 'Define the real constraints.' },
+        { num: '03', letter: 'A', title: 'Architect', desc: 'Design the system blueprint.' },
+        { num: '04', letter: 'L', title: 'Launch', desc: 'Execute with precision.' },
+        { num: '05', letter: 'E', title: 'Evolve', desc: 'Iterate and compound growth.' },
+    ];
+
     return (
         <section className="py-24 md:py-32 px-6 bg-background">
-            <div className="max-w-4xl mx-auto text-center">
-                <p className="text-sm font-medium tracking-[0.3em] uppercase text-foreground-muted mb-6">
-                    How We Consult
-                </p>
-                <h2 className="text-3xl md:text-5xl font-bold leading-tight mb-12">
-                    Diagnose before you build.
-                </h2>
-                <p className="text-lg text-foreground-muted leading-relaxed max-w-3xl mx-auto mb-16">
-                    Every consulting engagement at MergeX begins with a structured business diagnosis. We use the S.C.A.L.E. Methodology to pinpoint exactly where your business is constrained. Then, and only then, we prescribe and build the solution.
-                </p>
-                <div className="grid grid-cols-1 sm:grid-cols-5 gap-8 text-left">
-                    {[
-                        { letter: 'S', title: 'Scan', desc: 'Deep diagnostic of current operations.' },
-                        { letter: 'C', title: 'Clarify', desc: 'Define the real constraints.' },
-                        { letter: 'A', title: 'Architect', desc: 'Design the system blueprint.' },
-                        { letter: 'L', title: 'Launch', desc: 'Execute with precision.' },
-                        { letter: 'E', title: 'Evolve', desc: 'Iterate and compound growth.' },
-                    ].map((step) => (
-                        <div key={step.letter} className="flex flex-col items-center sm:items-start">
-                            <span className="text-4xl font-bold text-primary mb-2">{step.letter}</span>
-                            <h4 className="font-bold text-lg mb-1">{step.title}</h4>
-                            <p className="text-foreground-muted text-sm">{step.desc}</p>
+            <div className="max-w-[84rem] mx-auto">
+                
+                {/* Header */}
+                <div className="max-w-3xl mb-16">
+                    <span className="text-[10px] font-bold uppercase tracking-[0.25em] text-primary mb-4 block">
+                        How We Consult
+                    </span>
+                    <h2
+                        className="font-serif text-3xl md:text-5xl font-normal leading-tight mb-6 text-foreground"
+                        style={{ letterSpacing: '0.02em' }}
+                    >
+                        Diagnose before you build.
+                    </h2>
+                    <p className="text-base md:text-lg text-foreground-muted leading-relaxed">
+                        Every consulting engagement at MergeX begins with a structured business diagnosis. We use the S.C.A.L.E. Methodology to pinpoint exactly where your business is constrained. Then, and only then, we prescribe and build the solution.
+                    </p>
+                </div>
+
+                {/* Steps Grid */}
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-6">
+                    {steps.map((step) => (
+                        <div 
+                            key={step.letter}
+                            className="group relative p-6 rounded-2xl transition-all duration-300 hover:-translate-y-1 overflow-hidden border border-black/5 hover:border-violet-500/20 bg-white/60 hover:bg-white/80 shadow-xs hover:shadow-md"
+                        >
+                            {/* Hover glowing card background */}
+                            <div 
+                                className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none"
+                                style={{
+                                    background: 'radial-gradient(circle at 50% 50%, rgba(139,92,246,0.04) 0%, transparent 100%)',
+                                }}
+                            />
+                            
+                            {/* Huge background step letter */}
+                            <span 
+                                className="absolute right-4 bottom-2 text-7xl font-bold font-serif opacity-[0.03] group-hover:opacity-[0.07] group-hover:scale-110 transition-all duration-500 select-none pointer-events-none text-primary"
+                            >
+                                {step.letter}
+                            </span>
+
+                            {/* Content */}
+                            <div className="relative z-10 flex flex-col h-full min-h-[140px] justify-between">
+                                <div>
+                                    <span 
+                                        className="text-[10px] font-bold uppercase tracking-widest block transition-colors duration-300 text-primary/40 group-hover:text-primary/70"
+                                    >
+                                        {step.num}
+                                    </span>
+                                    <h3 className="font-semibold text-lg text-foreground mt-2 mb-1.5 group-hover:text-primary transition-colors duration-300">
+                                        {step.title}
+                                    </h3>
+                                    <p 
+                                        className="text-sm leading-relaxed text-foreground-muted"
+                                    >
+                                        {step.desc}
+                                    </p>
+                                </div>
+                            </div>
                         </div>
                     ))}
                 </div>
-                <div className="mt-16">
-                    <a
+
+                {/* CTA Link */}
+                <div className="mt-14 flex justify-start">
+                    <Link
                         href="/methodology"
-                        className="inline-flex items-center gap-2 text-sm font-semibold text-primary hover:opacity-80 transition-opacity"
+                        className="group inline-flex items-center gap-2 text-sm font-semibold tracking-wide transition-all duration-300 text-primary hover:opacity-80"
                     >
-                        Learn how it works
-                        <svg className="w-4 h-4" fill="none" stroke="currentColor" strokeWidth={2} viewBox="0 0 24 24">
-                            <path strokeLinecap="round" strokeLinejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3" />
+                        <span>Learn how it works</span>
+                        <svg
+                            width="14"
+                            height="14"
+                            viewBox="0 0 14 14"
+                            fill="none"
+                            className="transform group-hover:translate-x-1 transition-transform duration-300"
+                        >
+                            <path
+                                d="M2 7h10M8 3l4 4-4 4"
+                                stroke="currentColor"
+                                strokeWidth="2"
+                                strokeLinecap="round"
+                                strokeLinejoin="round"
+                            />
                         </svg>
-                    </a>
+                    </Link>
                 </div>
+
             </div>
         </section>
     );
