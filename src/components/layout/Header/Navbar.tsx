@@ -156,7 +156,7 @@ export function Navbar() {
         <>
             {/* Desktop Navbar */}
             <motion.div
-                className="hidden lg:block w-full fixed top-0 left-0 right-0 z-50 pointer-events-none"
+                className="hidden lg:block w-full fixed top-0 left-0 right-0 z-50 pointer-events-none mergex-navbar"
                 initial={{ y: -100 }}
                 animate={{ y: forceHidden || hidden ? '-100%' : 0 }}
                 transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
@@ -378,7 +378,7 @@ export function Navbar() {
                 initial={{ y: 0 }}
                 animate={{ y: isMobileMenuOpen ? 0 : (forceHidden || hidden ? -100 : 0) }}
                 transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
-                className="lg:hidden fixed top-0 left-0 right-0 z-50 pointer-events-none"
+                className="lg:hidden fixed top-0 left-0 right-0 z-50 pointer-events-none mergex-navbar"
             >
                 <div
                     className={`w-full transition-all duration-300 ease-in-out pointer-events-auto ${

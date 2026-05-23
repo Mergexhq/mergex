@@ -6,10 +6,10 @@ import { motion } from 'framer-motion';
 
 export default function NotFound() {
     return (
-        <main className="not-found-root fixed inset-0 z-9999 bg-black flex flex-col items-center justify-end overflow-hidden">
+        <main className="not-found-root fixed inset-0 z-9999 bg-[#F3F3F3] flex flex-col items-center justify-end overflow-hidden">
             {/* Immersive Background Image */}
             <div className="absolute inset-0 z-0">
-                <picture>
+                <picture className="absolute inset-0 block">
                     <source media="(max-width: 768px)" srcSet="/background/404/404_mobile.webp" />
                     <Image
                         src="/background/404/404.webp"
@@ -28,7 +28,7 @@ export default function NotFound() {
                     initial={{ opacity: 0, y: 20 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.8, delay: 0.2 }}
-                    className="text-white/95 text-lg md:text-xl lg:text-2xl font-medium tracking-tight mb-6 whitespace-nowrap"
+                    className="text-[#1A0B2E] text-lg md:text-xl lg:text-2xl font-medium tracking-tight mb-6 whitespace-normal max-w-[90%] md:max-w-md text-center"
                 >
                     We're sorry. We seem to be lost beyond the known internet.
                 </motion.p>
@@ -42,10 +42,10 @@ export default function NotFound() {
                         href="/"
                         className="
                             group relative px-6 py-2 rounded-lg overflow-hidden 
-                            bg-white/10 backdrop-blur-xl border border-white/20
-                            text-white font-medium text-sm tracking-wide
+                            bg-[#1A0B2E]/10 backdrop-blur-xl border border-[#1A0B2E]/20
+                            text-[#1A0B2E] font-medium text-sm tracking-wide
                             transition-all duration-300 ease-out
-                            hover:bg-white/20 hover:border-white/40
+                            hover:bg-[#1A0B2E]/20 hover:border-[#1A0B2E]/40
                             hover:scale-105 active:scale-95
                         "
                     >
@@ -61,12 +61,12 @@ export default function NotFound() {
                     margin-bottom: 0 !important; 
                     border-radius: 0 !important;
                     overflow: visible !important;
-                    background: black !important;
+                    background: #F3F3F3 !important;
                     height: 100vh !important;
                 }
                 
                 /* Hide everything else */
-                header, nav, footer, [class*="FooterRevealWrapper"], [class*="FooterCurtain"], #footer-curtain, .footer-reveal-container { 
+                header, nav, footer, .mergex-navbar, [class*="FooterRevealWrapper"], [class*="FooterCurtain"], #footer-curtain, .footer-reveal-container { 
                     display: none !important; 
                     opacity: 0 !important;
                     pointer-events: none !important;
@@ -81,7 +81,7 @@ export default function NotFound() {
                     width: 100vw !important;
                     height: 100vh !important;
                     z-index: 2147483647 !important; /* Max CSS z-index */
-                    background: black;
+                    background: #F3F3F3;
                 }
             ` }} />
         </main>
