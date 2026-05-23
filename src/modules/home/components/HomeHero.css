@@ -315,6 +315,16 @@
     animation: none;
   }
 
+  .hh-content {
+    justify-content: flex-end;
+    padding-top: 64px;
+  }
+
+  .hh-top-content {
+    margin-top: auto;
+    margin-bottom: 48px;
+  }
+
   .about-inner {
     flex-direction: column;
     gap: 32px;
@@ -337,7 +347,10 @@
 
 @media (max-width: 640px) {
   .hh-content {
-    padding: clamp(120px, 14vh, 140px) 20px 48px;
+    padding-top: 64px;
+    padding-left: 20px;
+    padding-right: 20px;
+    padding-bottom: 48px;
     max-width: 100%;
   }
 
