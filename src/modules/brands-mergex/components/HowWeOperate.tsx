@@ -8,7 +8,7 @@ const SCALE_STEPS = [
   {
     letter: 'C',
     title: 'Compress',
-    desc: 'Compress diagnostic findings into a single precise constraint statement. Not a list of problems — one root cause. The constraint that, if resolved, unlocks the most movement across the system.',
+    desc: 'Compress diagnostic findings into a single precise constraint statement. Not a list of problems - one root cause. The constraint that, if resolved, unlocks the most movement across the system.',
     output: 'Constraint statement + root cause analysis',
   },
   {
@@ -71,7 +71,7 @@ export function HowWeOperate() {
               lineHeight: 1.6,
             }}
           >
-            The S.C.A.L.E. Methodology — five stages, one constraint, precise prescription.
+            The S.C.A.L.E. Methodology - five stages, one constraint, precise prescription.
           </p>
         </div>
 

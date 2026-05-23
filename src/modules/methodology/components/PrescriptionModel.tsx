@@ -12,12 +12,12 @@ const PRESCRIPTIONS = [
     {
         num: '03',
         title: 'Marketing',
-        desc: 'The acquisition architecture — channels, messaging, and content systems — that brings the right buyers into the commercial motion at the right moment.',
+        desc: 'The acquisition architecture - channels, messaging, and content systems - that brings the right buyers into the commercial motion at the right moment.',
     },
     {
         num: '04',
         title: 'Sales',
-        desc: 'The conversion infrastructure — qualification, pipeline, and closing frameworks — that turns inbound demand into predictable, repeatable revenue.',
+        desc: 'The conversion infrastructure - qualification, pipeline, and closing frameworks - that turns inbound demand into predictable, repeatable revenue.',
     },
 ];
 
@@ -33,7 +33,7 @@ export function PrescriptionModel() {
                     <p className="mp-prose">
                         The diagnostic determines <strong>what to build</strong>. The prescription 
                         names the specific outputs across our four operational domains. Every prescription 
-                        is a direct response to the constraint — nothing is built speculatively.
+                        is a direct response to the constraint - nothing is built speculatively.
                     </p>
                     <p className="mp-prose">
                         Most engagements require intervention in two or three domains. Rarely all four. 
@@ -50,7 +50,7 @@ export function PrescriptionModel() {
                     </div>
                     <p className="mp-prose" style={{ marginTop: '32px' }}>
                         Ownership transfer is built into every engagement. We do not create 
-                        dependency. The system we build belongs entirely to the business — with 
+                        dependency. The system we build belongs entirely to the business - with 
                         full documentation, training, and operational playbooks included.
                     </p>
                 </div>

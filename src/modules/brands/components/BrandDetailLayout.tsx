@@ -10,7 +10,7 @@ const STATUS_STYLES = {
 
 interface BrandDetailLayoutProps {
   brand: Brand;
-  /** What this brand does — 2-3 paragraphs */
+  /** What this brand does - 2-3 paragraphs */
   whatItDoes: ReactNode;
   /** Any brand-specific section (methodology, services, etc.) */
   specialSection?: ReactNode;

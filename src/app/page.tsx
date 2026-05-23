@@ -11,25 +11,25 @@ import {
 export default function HomePage() {
     return (
         <main>
-            {/* 01 — Hero */}
+            {/* 01 - Hero */}
             <HomeHero />
 
-            {/* 02 — Problem Statement */}
+            {/* 02 - Problem Statement */}
             <ProblemStatement />
 
-            {/* 03 — The Diagnostic Approach */}
+            {/* 03 - The Diagnostic Approach */}
             <DiagnosticApproach />
 
-            {/* 04 — Social Proof */}
+            {/* 04 - Social Proof */}
             <Proof />
 
-            {/* 05 — Insights Preview */}
+            {/* 05 - Insights Preview */}
             <InsightsPreview />
 
-            {/* 06 — CTA */}
+            {/* 06 - CTA */}
             <FinalCTA />
 
-            {/* Marquee Strip — before footer */}
+            {/* Marquee Strip - before footer */}
             <MarqueeStrip />
         </main>
     );

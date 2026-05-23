@@ -22,7 +22,7 @@ export function OpportunitiesSection() {
                 </motion.div>
 
                 <div className="grid gap-12 lg:grid-cols-5">
-                    {/* Left Side — Open Roles */}
+                    {/* Left Side - Open Roles */}
                     <div className="lg:col-span-3">
                         <div className="space-y-6">
                             {OPPORTUNITIES.roles.map((role, index) => (
@@ -57,7 +57,7 @@ export function OpportunitiesSection() {
                         </div>
                     </div>
 
-                    {/* Right Side — Open Application */}
+                    {/* Right Side - Open Application */}
                     <div className="lg:col-span-2">
                         <motion.div
                             className="sticky top-32 rounded-3xl bg-gray-900 p-8 text-white shadow-2xl"

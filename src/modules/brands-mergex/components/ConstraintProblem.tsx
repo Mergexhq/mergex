@@ -2,7 +2,7 @@ const PROBLEMS = [
   {
     num: '01',
     title: 'Revenue growing. Margin collapsing.',
-    body: 'Sales are increasing but profitability is not. The operational infrastructure that worked at £1M cannot support £5M. Something structural broke — but it is not visible from the surface.',
+    body: 'Sales are increasing but profitability is not. The operational infrastructure that worked at £1M cannot support £5M. Something structural broke - but it is not visible from the surface.',
   },
   {
     num: '02',
@@ -12,7 +12,7 @@ const PROBLEMS = [
   {
     num: '03',
     title: 'The team is the constraint.',
-    body: 'Nothing moves without founder sign-off. Leadership bandwidth is the ceiling on every function. The business has not built systems — it has built dependency.',
+    body: 'Nothing moves without founder sign-off. Leadership bandwidth is the ceiling on every function. The business has not built systems - it has built dependency.',
   },
   {
     num: '04',

@@ -3,7 +3,7 @@ import { BrandDetailLayout } from '@/modules/brands/components';
 import { BRANDS } from '@/modules/brands/data/brands';
 
 export const metadata: Metadata = {
-  title: 'MergeX Foundry — Brands — The MergeX Company',
+  title: 'MergeX Foundry - Brands - The MergeX Company',
   description:
     'MergeX Foundry is the product and technology infrastructure layer of The MergeX Company ecosystem.',
   alternates: {
@@ -36,13 +36,13 @@ export default function FoundryBrandPage() {
         <>
           <p className="text-foreground">
             MergeX Foundry is the product and technology execution layer. It
-            builds the digital infrastructure — SaaS products, internal tools,
-            and client-facing platforms — that modern scaling businesses
+            builds the digital infrastructure - SaaS products, internal tools,
+            and client-facing platforms - that modern scaling businesses
             require.
           </p>
           <p className="text-foreground-muted">
             Foundry takes a systems-first approach to every build. The
-            architecture serves the business model — not the other way around.
+            architecture serves the business model - not the other way around.
             We do not build features. We build systems that produce outcomes.
           </p>
           <p className="text-foreground-muted">

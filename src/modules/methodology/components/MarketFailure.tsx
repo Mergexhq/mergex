@@ -13,7 +13,7 @@ export function MarketFailure() {
                     <p className="mp-prose">
                         The default response to a growth ceiling is to <strong>add more inputs</strong>: 
                         more marketing spend, more salespeople, more product features. It rarely works. 
-                        Not because the inputs are wrong — but because the constraint is upstream of all of them.
+                        Not because the inputs are wrong - but because the constraint is upstream of all of them.
                     </p>
                     <p className="mp-prose">
                         Businesses plateau for one of five reasons: unclear positioning, broken sales motion, 

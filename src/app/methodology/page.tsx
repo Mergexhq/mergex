@@ -10,30 +10,30 @@ import {
 import './methodology.css';
 
 export const metadata: Metadata = {
-    title: 'Methodology — The MergeX Company',
+    title: 'Methodology - The MergeX Company',
     description:
-        'The S.C.A.L.E. Methodology — MergeX\'s proprietary diagnostic methodology for identifying and resolving the real constraints holding your business back from scaling.',
+        'The S.C.A.L.E. Methodology - MergeX\'s proprietary diagnostic methodology for identifying and resolving the real constraints holding your business back from scaling.',
 };
 
 export default function MethodologyPage() {
     return (
         <main className="methodology-page">
-            {/* 01 — Hero */}
+            {/* 01 - Hero */}
             <MethodologyHero />
 
-            {/* 02 — Why Scale Breaks */}
+            {/* 02 - Why Scale Breaks */}
             <MarketFailure />
 
-            {/* 03 — The S.C.A.L.E. Methodology */}
+            {/* 03 - The S.C.A.L.E. Methodology */}
             <ScaleMethodology />
 
-            {/* 04 — The Prescription Model */}
+            {/* 04 - The Prescription Model */}
             <PrescriptionModel />
 
-            {/* 05 — Selected Insights */}
+            {/* 05 - Selected Insights */}
             <MethodologyInsights />
 
-            {/* 06 — Final CTA */}
+            {/* 06 - Final CTA */}
             <MethodologyCTA />
         </main>
     );

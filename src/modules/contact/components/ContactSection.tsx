@@ -247,7 +247,7 @@ function UnifiedForm() {
                                     transition={{ duration: 0.4 }}
                                     className="flex flex-col gap-12 pt-4 border-t border-gray-200"
                                 >
-                                    {/* 01 — Request a Diagnostic */}
+                                    {/* 01 - Request a Diagnostic */}
                                     {form.inquiryType === 'Request a Diagnostic' && (
                                         <>
                                             <div>
@@ -300,7 +300,7 @@ function UnifiedForm() {
                                         </>
                                     )}
 
-                                    {/* 02 — Partnership Inquiry */}
+                                    {/* 02 - Partnership Inquiry */}
                                     {form.inquiryType === 'Partnership Inquiry' && (
                                         <>
                                             <div>
@@ -323,7 +323,7 @@ function UnifiedForm() {
                                         </>
                                     )}
 
-                                    {/* 03 — Careers */}
+                                    {/* 03 - Careers */}
                                     {form.inquiryType === 'Careers' && (
                                         <>
                                             <div>
@@ -358,7 +358,7 @@ function UnifiedForm() {
                                         </>
                                     )}
 
-                                    {/* 04 — General Inquiry */}
+                                    {/* 04 - General Inquiry */}
                                     {form.inquiryType === 'General Inquiry' && (
                                         <>
                                             <div>

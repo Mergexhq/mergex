@@ -1,9 +1,9 @@
 // Contact Page Content
-// MergeX — Qualification & Diagnostic Entry Point
+// MergeX - Qualification & Diagnostic Entry Point
 
 export const CONTACT_HERO = {
     headline: "Let's Get Started.",
-    subheadline: 'Every business wants growth. Few know what is actually preventing it. Every MergeX consulting engagement begins with diagnosing the real constraint — before any solution is prescribed.',
+    subheadline: 'Every business wants growth. Few know what is actually preventing it. Every MergeX consulting engagement begins with diagnosing the real constraint - before any solution is prescribed.',
 } as const;
 
 export const UNIFIED_FORM = {
@@ -16,7 +16,7 @@ export const UNIFIED_FORM = {
         'Careers',
         'General Inquiry',
     ],
-    // — Diagnostic fields
+    // - Diagnostic fields
     industries: [
         'Technology & Software',
         'E-Commerce & Retail',
@@ -46,7 +46,7 @@ export const UNIFIED_FORM = {
         'AI Automation',
         'Not Sure Yet',
     ],
-    // — Partnership fields
+    // - Partnership fields
     partnershipTypes: [
         'Strategic Partnership',
         'Agency Collaboration',
@@ -56,7 +56,7 @@ export const UNIFIED_FORM = {
         'Media / Community',
         'Other',
     ],
-    // — Careers fields
+    // - Careers fields
     applyingFor: [
         'Internship',
         'Full-Time Role',
@@ -73,7 +73,7 @@ export const UNIFIED_FORM = {
         'Strategy',
         'Other',
     ],
-    // — General Inquiry fields
+    // - General Inquiry fields
     inquiryCategories: [
         'General Question',
         'Support',

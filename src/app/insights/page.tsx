@@ -4,7 +4,7 @@ import EmptyState from '@/components/EmptyState';
 import type { Metadata } from 'next';
 
 export const metadata: Metadata = {
-  title: 'Insights — The MergeX Company',
+  title: 'Insights - The MergeX Company',
   description:
     'Perspectives on systems, scaling, and execution from The MergeX Company.',
 };
@@ -38,7 +38,7 @@ export default async function InsightsPage({
           scaling, and execution.
         </h1>
         <p className="text-foreground-muted text-lg max-w-xl">
-          {INSIGHTS.length} article{INSIGHTS.length !== 1 ? 's' : ''} — ideas that
+          {INSIGHTS.length} article{INSIGHTS.length !== 1 ? 's' : ''} - ideas that
           compound.
         </p>
       </section>
@@ -47,7 +47,7 @@ export default async function InsightsPage({
       <section className="pr-4 md:pr-8 pb-12 max-w-[1400px] mx-auto">
         <div className="rounded-r-3xl bg-white shadow-sm border border-black/5 border-l-0 overflow-hidden flex min-h-[80vh] items-stretch">
 
-          {/* Mobile filters — outside the card */}
+          {/* Mobile filters - outside the card */}
           <div className="lg:hidden p-4">
             <InsightSidebar mode="filter" activeCategory={activeCategory} />
           </div>

@@ -75,7 +75,7 @@ export function ProblemStatement() {
               color: 'var(--foreground-muted)',
             }}
           >
-            They hire more people, add more tools, run more campaigns — and wonder
+            They hire more people, add more tools, run more campaigns - and wonder
             why nothing compounds. The answer is almost always the same: there&apos;s no
             underlying system connecting the effort to the outcome.
           </p>

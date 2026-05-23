@@ -4,7 +4,7 @@ import React from 'react';
 import { motion } from 'framer-motion';
 
 /**
- * MarqueeStrip — pixel-perfect match to the original legacy component.
+ * MarqueeStrip - pixel-perfect match to the original legacy component.
  *
  * Specs:
  * - White outer wrapper with py-8 (top/bottom space)

@@ -1,5 +1,5 @@
 /* ═══════════════════════════════════════════════
-   HOME HERO — Scroll-driven card reveal
+   HOME HERO - Scroll-driven card reveal
    Starts full-screen. As the user scrolls,
    framer-motion scales + rounds the corners
    to collapse it into a card state.
@@ -14,7 +14,7 @@
   --hh-sans: var(--font-manrope, 'Manrope', sans-serif);
   --hh-serif: var(--font-playfair-display, 'Playfair Display', Georgia, serif);
 
-  /* Taller than 100vh — gives scroll distance for the card animation */
+  /* Taller than 100vh - gives scroll distance for the card animation */
   height: 175vh;
   font-family: var(--hh-sans);
 
@@ -70,7 +70,7 @@
     );
 }
 
-/* ── CONTENT BLOCK — lower-left inside card ── */
+/* ── CONTENT BLOCK - lower-left inside card ── */
 .hh-content {
   position: relative;
   z-index: 2;

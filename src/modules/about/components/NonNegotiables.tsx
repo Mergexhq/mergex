@@ -7,25 +7,25 @@ const STANDARDS = [
     num: '01',
     text: 'We diagnose before we prescribe. Always.',
     explain:
-      'No engagement begins with a solution. Every engagement begins with a structured diagnosis of the actual constraint. The prescription follows the finding — never the other way around.',
+      'No engagement begins with a solution. Every engagement begins with a structured diagnosis of the actual constraint. The prescription follows the finding - never the other way around.',
   },
   {
     num: '02',
-    text: 'We work selectively — not with everyone who can pay.',
+    text: 'We work selectively - not with everyone who can pay.',
     explain:
       'MergeX works with revenue-generating businesses that are ready to scale. Not pre-revenue startups. Not founders looking for the cheapest option. Selectivity is how we protect the depth of every engagement.',
   },
   {
     num: '03',
-    text: 'We build systems — not dependencies.',
+    text: 'We build systems - not dependencies.',
     explain:
-      'Every system we build is designed to operate without us. Our success is measured by how little a business needs us after the engagement ends — not by how much they do.',
+      'Every system we build is designed to operate without us. Our success is measured by how little a business needs us after the engagement ends - not by how much they do.',
   },
   {
     num: '04',
     text: 'We measure outcomes. Not activity.',
     explain:
-      'Reports on hours spent, content published, and campaigns run are not outcomes. Revenue growth, operational clarity, and founder independence are. We are accountable to the second list — not the first.',
+      'Reports on hours spent, content published, and campaigns run are not outcomes. Revenue growth, operational clarity, and founder independence are. We are accountable to the second list - not the first.',
   },
 ];
 

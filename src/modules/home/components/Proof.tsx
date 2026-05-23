@@ -35,7 +35,7 @@ export function Proof() {
                     {/* Content */}
                     <div className="relative z-10 grid grid-cols-1 lg:grid-cols-2 items-start gap-8 lg:gap-16 px-10 pt-8 pb-10 md:px-14 md:pt-10 md:pb-12">
 
-                        {/* Left — Title */}
+                        {/* Left - Title */}
                         <div>
                             <h2
                                 className="text-2xl md:text-3xl lg:text-[2.25rem] font-normal"
@@ -52,7 +52,7 @@ export function Proof() {
                             </h2>
                         </div>
 
-                        {/* Right — Description + CTA */}
+                        {/* Right - Description + CTA */}
                         <div className="flex flex-col items-end gap-8">
                             <p
                                 className="text-base md:text-lg leading-relaxed text-left w-full tracking-wide"

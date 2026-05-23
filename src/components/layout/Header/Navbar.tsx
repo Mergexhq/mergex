@@ -100,8 +100,8 @@ export function Navbar() {
         : 'bg-transparent rounded-none shadow-none';
 
     const pillBgClass = isDropdownOpen || !isScrolled
-        ? 'bg-transparent shadow-none border-0'
-        : 'bg-[#ebebea] border border-[#d8d8d6] shadow-[0_1px_4px_rgba(0,0,0,0.06)]';
+        ? 'bg-transparent shadow-none border-transparent'
+        : 'bg-[#ebebea] border-[#d8d8d6] shadow-[0_1px_4px_rgba(0,0,0,0.06)]';
 
     const pillTextClass = isDropdownOpen
         ? 'text-white/70 hover:text-white'
@@ -164,9 +164,9 @@ export function Navbar() {
                 <div className="w-full max-w-[1400px] mx-auto px-4 mt-4">
                     <div className={`w-full relative transition-all duration-500 ease-in-out ${isDropdownOpen ? cardBgClass + ' overflow-hidden' : 'bg-transparent'}`} style={{ border: 'none' }}>
                         <nav className="w-full h-20 flex items-center justify-between relative pointer-events-auto bg-transparent z-10 px-4">
-                            {/* Logo — Left */}
+                            {/* Logo - Left */}
                             <div className="flex items-center">
-                                <div className={`flex items-center gap-1 py-1 px-3 rounded-[10px] transition-all duration-500 ease-in-out ${pillBgClass}`}>
+                                <div className={`flex items-center gap-1 py-1 px-3 rounded-[10px] border transition-all duration-500 ease-in-out ${pillBgClass}`}>
                                     <Link href="/" className="flex items-center gap-0">
                                         <Image
                                             src="/logo/mergex-logo.png"
@@ -185,9 +185,9 @@ export function Navbar() {
                                 </div>
                             </div>
 
-                            {/* Menu Capsule — Right */}
+                            {/* Menu Capsule - Right */}
                             <div className="flex items-center">
-                                <div className={`flex items-center gap-1 p-2 rounded-[10px] transition-all duration-500 ease-in-out ${pillBgClass}`}>
+                                <div className={`flex items-center gap-1 p-2 rounded-[10px] border transition-all duration-500 ease-in-out ${pillBgClass}`}>
                                     <Link
                                         href="/about"
                                         className={`font-roboto text-[11px] font-bold tracking-[0.18em] uppercase transition-all duration-200 px-4 py-2.5 rounded-[7px] ${getActiveLinkClass(pathname === '/about')}`}
@@ -301,7 +301,7 @@ export function Navbar() {
                                         {/* RIGHT PANEL */}
                                         <div className="w-[60%] py-10 px-6 md:px-10 lg:px-12 flex flex-col">
                                             <div className="flex flex-col gap-0 w-full">
-                                                {/* PRIMARY — MergeX */}
+                                                {/* PRIMARY - MergeX */}
                                                 <Link
                                                     href="/brands/mergex"
                                                     className="group flex flex-col border-b border-white/6 pb-4 mb-4 w-full"
@@ -324,7 +324,7 @@ export function Navbar() {
                                                     <span className="text-white/40 text-xs mt-1.5">Operational scaling systems</span>
                                                 </Link>
 
-                                                {/* SECONDARY — Methodology */}
+                                                {/* SECONDARY - Methodology */}
                                                 <Link
                                                     href="/methodology"
                                                     className="group flex flex-col border-b border-white/6 pb-4 mb-4 w-full"
@@ -344,7 +344,7 @@ export function Navbar() {
                                                     <span className="text-white/35 text-xs mt-1">The S.C.A.L.E framework</span>
                                                 </Link>
 
-                                                {/* ACTION — Diagnostic */}
+                                                {/* ACTION - Diagnostic */}
                                                 <Link
                                                     href="/diagnostic"
                                                     className="group flex flex-col w-full"

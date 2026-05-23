@@ -98,12 +98,12 @@ export function MergeXCTA() {
             }}
           >
             Not a proposal. Not a pitch. A structured consulting engagement
-            begins with diagnosing the real constraint in your business — and
+            begins with diagnosing the real constraint in your business - and
             determining whether MergeX is the right firm for it.
           </p>
         </div>
 
-        {/* Right — CTA card */}
+        {/* Right - CTA card */}
         <div
           style={{
             border: '1px solid var(--color-border)',
@@ -134,7 +134,7 @@ export function MergeXCTA() {
               letterSpacing: '-0.01em',
             }}
           >
-            Request a diagnostic — not a sales call.
+            Request a diagnostic - not a sales call.
           </p>
           <p
             style={{

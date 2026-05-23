@@ -21,7 +21,7 @@ export function HomeHero() {
     offset: ['start start', 'end start'],
   });
 
-  // Raw transforms — scale the sticky container down, not padding
+  // Raw transforms - scale the sticky container down, not padding
   const scale = useTransform(scrollYProgress, [0, 0.6], [1, 0.985]);
   const radiusRaw = useTransform(scrollYProgress, [0, 0.5], [0, 12]);
 
@@ -30,7 +30,7 @@ export function HomeHero() {
 
   return (
     <section ref={sectionRef} className="home-hero-scroll-wrapper">
-      {/* Sticky layer — stays pinned; scale drives the "card pull-away" */}
+      {/* Sticky layer - stays pinned; scale drives the "card pull-away" */}
       <motion.div
         className="home-hero"
         style={{

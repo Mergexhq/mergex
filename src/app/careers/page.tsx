@@ -15,7 +15,7 @@ export const metadata: Metadata = {
     openGraph: {
         title: "Careers | The MergeX Company",
         description:
-            "Don't just work. Build. Explore career opportunities at MergeX — where builders ship real systems.",
+            "Don't just work. Build. Explore career opportunities at MergeX - where builders ship real systems.",
     },
 };
 

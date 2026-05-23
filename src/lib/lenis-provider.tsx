@@ -15,9 +15,9 @@ if (typeof window !== 'undefined') {
  * True inertial/momentum scrolling using the official lenis package.
  * 
  * Config:
- *   lerp: 0.05 — physics-based interpolation (lower = more inertia/float)
- *   wheelMultiplier: 0.9 — each wheel tick covers slightly less distance, inertia carries the rest
- *   touchMultiplier: 1.8 — responsive on touch without overshooting
+ *   lerp: 0.05 - physics-based interpolation (lower = more inertia/float)
+ *   wheelMultiplier: 0.9 - each wheel tick covers slightly less distance, inertia carries the rest
+ *   touchMultiplier: 1.8 - responsive on touch without overshooting
  */
 export function LenisProvider({ children }: { children: React.ReactNode }) {
     useEffect(() => {
@@ -35,7 +35,7 @@ export function LenisProvider({ children }: { children: React.ReactNode }) {
         // Sync Lenis scroll events with GSAP ScrollTrigger
         lenis.on('scroll', ScrollTrigger.update);
 
-        // Ticker-based RAF — GSAP ticker keeps perfect 60/120fps sync
+        // Ticker-based RAF - GSAP ticker keeps perfect 60/120fps sync
         const onTick = (time: number) => lenis.raf(time * 1000);
         gsap.ticker.add(onTick);
         gsap.ticker.lagSmoothing(0); // Prevent stutters when tab loses focus

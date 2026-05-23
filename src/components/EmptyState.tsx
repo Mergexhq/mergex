@@ -22,13 +22,13 @@ interface EmptyStateProps {
 }
 
 /**
- * Universal EmptyState — shown whenever a section/page has no content yet.
+ * Universal EmptyState - shown whenever a section/page has no content yet.
  * Uses the undraw illustration from /public/background/empty-state/
  * Drop-in across pages: work, insights, case studies, chat history, etc.
  */
 export default function EmptyState({
   headline = 'Nothing here yet',
-  subtext = 'Check back soon — content is on its way.',
+  subtext = 'Check back soon - content is on its way.',
   ctaLabel = 'Go to homepage',
   ctaHref = '/',
   secondaryLabel,

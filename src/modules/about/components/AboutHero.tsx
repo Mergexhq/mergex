@@ -20,7 +20,7 @@ export function AboutHero() {
       {/* Vertical rule */}
       <div className="hero-vline" />
 
-      <p className="hero-eyebrow hero-animate">The MergeX Company — Est. 2025</p>
+      <p className="hero-eyebrow hero-animate">The MergeX Company - Est. 2025</p>
 
       <div className="hero-grid">
         {/* Left */}
@@ -44,7 +44,7 @@ export function AboutHero() {
             constraint limiting your growth.
             <br /><br />
             Most consulting firms sell advice. We identify the actual constraint
-            first — then build only what resolves it.
+            first - then build only what resolves it.
           </p>
           <div className="hero-scroll hero-animate">
             <span className="hero-scroll-line" />

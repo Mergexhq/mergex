@@ -148,7 +148,7 @@ export function SelectedCaseStudies() {
               <div
                 key={cs.slug}
                 style={{
-                  // Each slot is exactly one viewport width — DO NOT add
+                  // Each slot is exactly one viewport width - DO NOT add
                   // horizontal padding here or it overflows the slot and
                   // the right-side padding gets clipped by overflow:hidden.
                   width: windowWidth ? `${windowWidth}px` : '100vw',
@@ -160,7 +160,7 @@ export function SelectedCaseStudies() {
               >
                 {/*
                   Inner wrapper carries the horizontal gap so the card
-                  is inset from BOTH edges — fully within the slot width.
+                  is inset from BOTH edges - fully within the slot width.
                 */}
                 <div
                   style={{
@@ -261,7 +261,7 @@ export function SelectedCaseStudies() {
                         </p>
                       </div>
 
-                      {/* Arrow button — solid white circle */}
+                      {/* Arrow button - solid white circle */}
                       <Link
                         href={`/insights/case-studies/${cs.slug}`}
                         style={{

@@ -4,7 +4,7 @@ import EmptyState from '@/components/EmptyState';
 import type { Metadata } from 'next';
 
 export const metadata: Metadata = {
-  title: 'Case Studies — The MergeX Company',
+  title: 'Case Studies - The MergeX Company',
   description:
     'Selected case studies from The MergeX Company. Real constraints. Real systems. Measurable results.',
 };
@@ -39,7 +39,7 @@ export default async function CaseStudiesPage({
         </h1>
         <p className="text-foreground-muted text-lg max-w-xl">
           {CASE_STUDIES.length} case{' '}
-          {CASE_STUDIES.length !== 1 ? 'studies' : 'study'} — selected engagements
+          {CASE_STUDIES.length !== 1 ? 'studies' : 'study'} - selected engagements
           from The MergeX Company.
         </p>
       </section>

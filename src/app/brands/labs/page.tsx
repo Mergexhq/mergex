@@ -3,7 +3,7 @@ import { BrandDetailLayout } from '@/modules/brands/components';
 import { BRANDS } from '@/modules/brands/data/brands';
 
 export const metadata: Metadata = {
-  title: 'MergeX Studio — Brands — The MergeX Company',
+  title: 'MergeX Studio - Brands - The MergeX Company',
   description:
     'MergeX Studio is the creative and brand infrastructure layer of The MergeX Company ecosystem.',
   alternates: {
@@ -15,10 +15,10 @@ const brand = BRANDS.find((b) => b.slug === 'labs')!;
 
 const CAPABILITIES = [
   { title: 'Brand Strategy', desc: 'Defining positioning, audience, and the commercial narrative that differentiates.' },
-  { title: 'Identity Design', desc: 'Visual systems — logo, colour, typography, and brand language built to scale.' },
+  { title: 'Identity Design', desc: 'Visual systems - logo, colour, typography, and brand language built to scale.' },
   { title: 'Positioning Clarity', desc: 'Ensuring the brand communicates what the business actually does and why it matters.' },
   { title: 'Content Systems', desc: 'Structured content frameworks that make brand communication consistent and repeatable.' },
-  { title: 'Creative Direction', desc: 'Coordinating visual execution across touchpoints — digital, print, and environmental.' },
+  { title: 'Creative Direction', desc: 'Coordinating visual execution across touchpoints - digital, print, and environmental.' },
 ];
 
 export default function StudioBrandPage() {
@@ -35,12 +35,12 @@ export default function StudioBrandPage() {
           </p>
           <p className="text-foreground-muted">
             As a business grows, its positioning, identity, and communication
-            often lag behind operational reality. Studio aligns these — so the
+            often lag behind operational reality. Studio aligns these - so the
             brand works as hard as the business model it represents.
           </p>
           <p className="text-foreground-muted">
             Studio does not create brands in isolation. Every engagement is
-            informed by the operational context — what the business does, who
+            informed by the operational context - what the business does, who
             it serves, and what the commercial system requires the brand to
             communicate.
           </p>

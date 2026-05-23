@@ -23,7 +23,7 @@ export async function generateMetadata({
   const cs = getCaseStudyBySlug(slug);
   if (!cs) return {};
   return {
-    title: `${cs.title} — Case Studies — The MergeX Company`,
+    title: `${cs.title} - Case Studies - The MergeX Company`,
     description: cs.excerpt,
   };
 }
@@ -194,7 +194,7 @@ export default async function CaseStudyDetailPage({
                   &ldquo;{cs.clientNote}&rdquo;
                 </p>
                 <span className="text-xs font-bold uppercase tracking-widest text-foreground-muted">
-                  — Client, {cs.industry}
+                  - Client, {cs.industry}
                 </span>
               </blockquote>
             )}

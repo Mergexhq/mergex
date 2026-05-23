@@ -19,7 +19,7 @@ export async function generateMetadata({
   const insight = getInsightBySlug(slug);
   if (!insight) return {};
   return {
-    title: `${insight.title} — Insights — The MergeX Company`,
+    title: `${insight.title} - Insights - The MergeX Company`,
     description: insight.excerpt,
   };
 }

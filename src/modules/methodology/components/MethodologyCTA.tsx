@@ -12,7 +12,7 @@ export function MethodologyCTA() {
                 </h2>
                 <p className="methodology-cta-body">
                     Every engagement begins with a diagnostic conversation. Not a pitch, 
-                    not a proposal — a structured session to find the real constraint in your 
+                    not a proposal - a structured session to find the real constraint in your 
                     business. If you are running a revenue-generating business that has hit 
                     a ceiling, this is where we start.
                 </p>

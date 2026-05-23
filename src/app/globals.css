@@ -182,7 +182,7 @@ html, body {
 .font-serif { font-family: var(--font-serif); }
 .font-roboto { font-family: var(--font-roboto, 'Roboto', sans-serif); }
 .font-great-vibes { font-family: var(--font-great-vibes), cursive; }
-/* Clash Display — loaded via Fontshare CDN in layout.tsx <head> */
+/* Clash Display - loaded via Fontshare CDN in layout.tsx <head> */
 .font-clash {
   font-family: 'Clash Display', var(--font-manrope), system-ui, sans-serif !important;
   font-weight: 600;
@@ -201,7 +201,7 @@ html, body {
   box-shadow: var(--shadow-md);
 }
 
-/* Hide Scrollbar — all browsers, maximum specificity */
+/* Hide Scrollbar - all browsers, maximum specificity */
 html { scrollbar-width: none; -ms-overflow-style: none; }
 html::-webkit-scrollbar { display: none; width: 0; height: 0; }
 body { scrollbar-width: none; -ms-overflow-style: none; }

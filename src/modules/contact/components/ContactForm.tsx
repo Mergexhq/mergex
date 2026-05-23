@@ -84,7 +84,7 @@ export function ContactForm() {
                             </div>
 
                             <div className="space-y-8">
-                                {/* — Basic — */}
+                                {/* - Basic - */}
                                 <div>
                                     <p className="mb-4 text-[11px] font-bold tracking-[0.2em] text-gray-300 uppercase">
                                         Basic
@@ -144,7 +144,7 @@ export function ContactForm() {
                                     </div>
                                 </div>
 
-                                {/* — Qualification — */}
+                                {/* - Qualification - */}
                                 <div>
                                     <p className="mb-4 text-[11px] font-bold tracking-[0.2em] text-gray-300 uppercase">
                                         Qualification
@@ -238,7 +238,7 @@ export function ContactForm() {
                                     </div>
                                 </div>
 
-                                {/* — Optional — */}
+                                {/* - Optional - */}
                                 <div>
                                     <p className="mb-4 text-[11px] font-bold tracking-[0.2em] text-gray-300 uppercase">
                                         Optional
@@ -286,7 +286,7 @@ export function ContactForm() {
                             </div>
                         </motion.form>
                     ) : (
-                        /* — Post-Submission State — */
+                        /* - Post-Submission State - */
                         <motion.div
                             key="success"
                             initial={{ opacity: 0, scale: 0.97 }}

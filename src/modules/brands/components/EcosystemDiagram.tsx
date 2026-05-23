@@ -21,7 +21,7 @@ export function EcosystemDiagram() {
         </p>
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
-          {/* Left — description */}
+          {/* Left - description */}
           <div>
             <h2 className="text-3xl md:text-4xl font-bold text-white leading-tight mb-6">
               One parent company.
@@ -30,12 +30,12 @@ export function EcosystemDiagram() {
             </h2>
             <p className="text-white/50 text-base leading-relaxed max-w-md">
               The MergeX Company operates as the central holding structure.
-              Each brand is a focused operational capability — not a separate
+              Each brand is a focused operational capability - not a separate
               business, but a specialized layer of the same system.
             </p>
           </div>
 
-          {/* Right — architecture map */}
+          {/* Right - architecture map */}
           <div className="relative">
             {/* Parent node */}
             <motion.div

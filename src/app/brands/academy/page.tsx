@@ -3,7 +3,7 @@ import { BrandDetailLayout } from '@/modules/brands/components';
 import { BRANDS } from '@/modules/brands/data/brands';
 
 export const metadata: Metadata = {
-  title: 'MergeX Academy — Brands — The MergeX Company',
+  title: 'MergeX Academy - Brands - The MergeX Company',
   description:
     'MergeX Academy is the knowledge and capability development layer of The MergeX Company ecosystem.',
   alternates: {
@@ -16,7 +16,7 @@ const brand = BRANDS.find((b) => b.slug === 'academy')!;
 const TRACKS = [
   {
     name: 'Operational Foundations',
-    desc: 'The core frameworks for running a scaling business — systems thinking, constraint identification, and operational design.',
+    desc: 'The core frameworks for running a scaling business - systems thinking, constraint identification, and operational design.',
     availability: 'In Development',
   },
   {
@@ -46,7 +46,7 @@ export default function AcademyBrandPage() {
           <p className="text-foreground-muted">
             Academy delivers structured knowledge programs and capability
             development that make operational gains permanent. Not generic
-            training content — frameworks derived directly from the MergeX
+            training content - frameworks derived directly from the MergeX
             operating methodology.
           </p>
           <p className="text-foreground-muted">

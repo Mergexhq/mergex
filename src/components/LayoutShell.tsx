@@ -15,13 +15,13 @@ const FooterCurtain = dynamic(() => import('@/components/FooterCurtain'), {
     ssr: true,
 });
 
-// Loaded client-side only — uses localStorage, SpeechSynthesis, and window events
+// Loaded client-side only - uses localStorage, SpeechSynthesis, and window events
 const AskMergeXWidget = dynamic(() => import('@/components/ask-mergex'), {
     ssr: false,
 });
 
 /**
- * LayoutShell — wraps every page with Navbar, Footer curtain reveal,
+ * LayoutShell - wraps every page with Navbar, Footer curtain reveal,
  * and the global AskMergeXWidget floating button.
  */
 export default function LayoutShell({ children }: { children: ReactNode }) {
@@ -37,7 +37,7 @@ export default function LayoutShell({ children }: { children: ReactNode }) {
             <FooterRevealWrapper>
                 <FooterCurtain />
             </FooterRevealWrapper>
-            {/* Global AI widget — visible on every page */}
+            {/* Global AI widget - visible on every page */}
             <AskMergeXWidget />
         </LenisProvider>
     );

@@ -99,7 +99,7 @@ export function SolutionsAsPrescriptions() {
             margin: '0 auto',
           }}
         >
-          Every intervention is prescribed based on the actual operational constraint —
+          Every intervention is prescribed based on the actual operational constraint -
           not packaged services.
         </p>
       </div>

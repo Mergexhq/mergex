@@ -11,7 +11,7 @@ export function MethodologyHero() {
                         we find the <em>exact constraint.</em>
                     </h1>
                     <p style={{ fontSize: '11px', color: 'var(--mp-text-tertiary)', letterSpacing: '0.06em', textTransform: 'uppercase' }}>
-                        S.C.A.L.E. Methodology — Proprietary IP
+                        S.C.A.L.E. Methodology - Proprietary IP
                     </p>
                 </div>
                 <div className="methodology-hero-right">
@@ -22,7 +22,7 @@ export function MethodologyHero() {
                     </p>
                     <p className="methodology-hero-para">
                         The S.C.A.L.E. Methodology is the diagnostic framework that
-                        drives every consulting engagement — a systematic approach to
+                        drives every consulting engagement - a systematic approach to
                         identifying the real constraint and prescribing only what is
                         needed to resolve it.
                     </p>

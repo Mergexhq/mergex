@@ -144,7 +144,7 @@ export function MobileNav({ isOpen, onClose }: MobileNavProps) {
                                     <ArrowUpRight size={20} className="text-white/30 group-hover:text-violet-400 transition-colors" />
                                 </Link>
 
-                                {/* What We Do — Accordion */}
+                                {/* What We Do - Accordion */}
                                 <div className="border-b border-white/10">
                                     <button
                                         onClick={() => setIsWhatWeDoOpen(!isWhatWeDoOpen)}

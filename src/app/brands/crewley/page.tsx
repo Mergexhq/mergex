@@ -3,7 +3,7 @@ import { BrandDetailLayout } from '@/modules/brands/components';
 import { BRANDS } from '@/modules/brands/data/brands';
 
 export const metadata: Metadata = {
-  title: 'Crewley — Brands — The MergeX Company',
+  title: 'Crewley - Brands - The MergeX Company',
   description:
     'Crewley is the talent infrastructure layer of The MergeX Company ecosystem.',
   alternates: {
@@ -16,7 +16,7 @@ const brand = BRANDS.find((b) => b.slug === 'crewley')!;
 const PRINCIPLES = [
   {
     label: 'Talent is a system',
-    body: 'Hiring problems are almost always structural problems. Crewley designs the architecture first — role clarity, team shape, hiring criteria — before running a single search.',
+    body: 'Hiring problems are almost always structural problems. Crewley designs the architecture first - role clarity, team shape, hiring criteria - before running a single search.',
   },
   {
     label: 'Structure before headcount',
@@ -40,8 +40,8 @@ export default function CrewleyBrandPage() {
             team structure is misaligned with the work that needs to be done.
           </p>
           <p className="text-foreground-muted">
-            Crewley designs and implements the talent architecture — hiring
-            processes, role definition, team structure, and onboarding systems —
+            Crewley designs and implements the talent architecture - hiring
+            processes, role definition, team structure, and onboarding systems -
             that allow businesses to grow without fragmenting.
           </p>
           <p className="text-foreground-muted">

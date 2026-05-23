@@ -11,7 +11,7 @@ import LayoutShell from "@/components/LayoutShell";
 
 /* ─────────────────────────────────────────────────────────────────────
    Fonts
-   Note: Great Vibes is decorative — keep here only if used globally.
+   Note: Great Vibes is decorative - keep here only if used globally.
    If only used in one component, move it there to avoid loading it
    on every page unnecessarily.
 ───────────────────────────────────────────────────────────────────── */
@@ -43,14 +43,14 @@ const roboto = Roboto({
 
 /* ─────────────────────────────────────────────────────────────────────
    Site URL
-   Uses env variable in staging/preview — falls back to production.
+   Uses env variable in staging/preview - falls back to production.
    Set NEXT_PUBLIC_SITE_URL in your .env.local for local dev if needed.
 ───────────────────────────────────────────────────────────────────── */
 const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? "https://mergex.in";
 
 /* ─────────────────────────────────────────────────────────────────────
    Metadata
-   OG image must be a public URL path — never a local disk path.
+   OG image must be a public URL path - never a local disk path.
    Place og-cover.jpg inside /public/ and reference as "/og-cover.jpg".
 ───────────────────────────────────────────────────────────────────── */
 export const metadata: Metadata = {
@@ -84,7 +84,7 @@ export const metadata: Metadata = {
 
   /* ── Open Graph ──────────────────────────────────────────────────
      Used by LinkedIn, WhatsApp, Facebook, Slack previews.
-     og-cover.jpg must be in /public/og-cover.jpg — 1200×630px.
+     og-cover.jpg must be in /public/og-cover.jpg - 1200×630px.
   ─────────────────────────────────────────────────────────────── */
   openGraph: {
     title: "The MergeX Company",
@@ -99,7 +99,7 @@ export const metadata: Metadata = {
         url: "/og-cover.jpg",       // → resolves to https://mergex.in/og-cover.jpg
         width: 1200,
         height: 630,
-        alt: "The MergeX Company — Diagnosis before everything.",
+        alt: "The MergeX Company | Diagnosis before everything.",
       },
     ],
   },
@@ -167,7 +167,7 @@ export default function RootLayout({
       `}
     >
       <head>
-        {/* Clash Display — not on Google Fonts, loaded via Fontshare CDN */}
+        {/* Clash Display - not on Google Fonts, loaded via Fontshare CDN */}
         <link rel="preconnect" href="https://api.fontshare.com" crossOrigin="anonymous" />
         <link rel="dns-prefetch" href="https://api.fontshare.com" />
         <link
@@ -175,7 +175,7 @@ export default function RootLayout({
           href="https://api.fontshare.com/v2/css?f[]=clash-display@400,500,600,700&display=swap"
         />
 
-        {/* Theme color — matches your background token for mobile browser chrome */}
+        {/* Theme color - matches your background token for mobile browser chrome */}
         <meta name="theme-color" content="#0A0A0A" />
       </head>
 

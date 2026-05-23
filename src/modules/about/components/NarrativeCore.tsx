@@ -12,7 +12,7 @@ const BELIEFS = [
   {
     num: '02',
     text: 'A business that depends on its founder cannot scale.',
-    sub: 'Systems create freedom. Every engagement ends with ownership transferred — not dependency created.',
+    sub: 'Systems create freedom. Every engagement ends with ownership transferred - not dependency created.',
   },
   {
     num: '03',
@@ -26,7 +26,7 @@ const BELIEFS = [
   },
   {
     num: '05',
-    text: 'Scale is an infrastructure problem — not a marketing one.',
+    text: 'Scale is an infrastructure problem - not a marketing one.',
     sub: 'When growth stalls, the answer is rarely more execution. It is almost always clearer systems.',
   },
 ];
@@ -79,7 +79,7 @@ export function NarrativeCore() {
 
         {/* Content */}
         <div className="narrative-content">
-          <div className="phase-label">What we are — why we exist</div>
+          <div className="phase-label">What we are - why we exist</div>
 
           <p className="thesis fade-up">
             Businesses don&apos;t fail from lack of effort.<br />
@@ -89,7 +89,7 @@ export function NarrativeCore() {
 
           <p className="about-prose fade-up">
             Every year, founders hire agencies, run campaigns, rebuild their brand,
-            and invest in technology — without ever asking the more important question:{' '}
+            and invest in technology - without ever asking the more important question:{' '}
             <strong>is this actually what&apos;s stopping our growth?</strong>{' '}
             The answer, most of the time, is no.
           </p>
@@ -103,14 +103,14 @@ export function NarrativeCore() {
 
           <p className="about-prose fade-up">
             MergeX is a business consulting firm built to fix this. Not by doing
-            more — but by <strong>understanding precisely what needs to be done</strong>{' '}
+            more - but by <strong>understanding precisely what needs to be done</strong>{' '}
             before anything is built. We use a diagnostic-led consulting approach:
             identify the exact structural or operational constraint first, then
             architect and build only what resolves it.
           </p>
 
           <p className="about-prose fade-up">
-            We call this approach the <strong>S.C.A.L.E. Methodology</strong> —
+            We call this approach the <strong>S.C.A.L.E. Methodology</strong> -
             a five-stage diagnostic and execution framework that identifies
             your real growth constraint and builds the infrastructure to resolve it.{' '}
             <Link href="/methodology" className="about-link">Learn how it works →</Link>
@@ -133,7 +133,7 @@ export function NarrativeCore() {
           <div className="eco-teaser fade-up">
             <div className="eco-label">The MergeX Company</div>
             <p className="eco-intro">
-              MergeX is the flagship brand of <strong>The MergeX Company</strong> —
+              MergeX is the flagship brand of <strong>The MergeX Company</strong> -
               a scaling ecosystem building specialized infrastructure
               across systems, creative, talent, knowledge, and products.
               Today, two divisions are active.

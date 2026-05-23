@@ -14,7 +14,7 @@ const LETTERS = [
   {
     id: 'S',
     name: 'Scan',
-    desc: 'Map the full business system — revenue, sales motion, operations, and leadership capacity.',
+    desc: 'Map the full business system - revenue, sales motion, operations, and leadership capacity.',
     direction: 'bottom' as const,
   },
   {
@@ -32,7 +32,7 @@ const LETTERS = [
   {
     id: 'L',
     name: 'Launch',
-    desc: 'Execute against the blueprint — sequenced, intentional, and measured.',
+    desc: 'Execute against the blueprint - sequenced, intentional, and measured.',
     direction: 'top' as const,
   },
   {
@@ -113,7 +113,7 @@ export function ScaleMethodology() {
         }
       });
 
-      // Final — all letters full opacity, CTA appears
+      // Final - all letters full opacity, CTA appears
       tl.to(
         '.scale-big-letter',
         { opacity: 1, duration: 1, ease: 'power2.inOut' },
@@ -139,7 +139,7 @@ export function ScaleMethodology() {
 
 
 
-        {/* Section label — top left */}
+        {/* Section label - top left */}
         <div className="absolute top-8 left-6 md:top-14 md:left-14 z-20">
           <p
             style={{
@@ -150,11 +150,11 @@ export function ScaleMethodology() {
               color: 'var(--color-foreground-muted)',
             }}
           >
-            Section 02 — The S.C.A.L.E. Methodology
+            Section 02 - The S.C.A.L.E. Methodology
           </p>
         </div>
 
-        {/* Stage counter — top right, updates via CSS */}
+        {/* Stage counter - top right, updates via CSS */}
         <div className="absolute top-8 right-6 md:top-14 md:right-14 z-20">
           <p
             style={{
@@ -346,7 +346,7 @@ export function ScaleMethodology() {
           </div>
         </div>
 
-        {/* Final CTA — fades in after all letters revealed */}
+        {/* Final CTA - fades in after all letters revealed */}
         <div className="scale-cta-container absolute bottom-12 md:bottom-16 left-1/2 -translate-x-1/2 z-30 flex flex-col items-center gap-4">
           <p
             style={{
