@@ -305,6 +305,16 @@
    ═══════════════════════════════════════════════ */
 
 @media (max-width: 768px) {
+  .home-hero-scroll-wrapper {
+    --hh-bg-image: url('/background/hero/hero_mobile.webp');
+  }
+
+  .home-hero {
+    background-size: cover;
+    background-position: center center;
+    animation: none;
+  }
+
   .about-inner {
     flex-direction: column;
     gap: 32px;
