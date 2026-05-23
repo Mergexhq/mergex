@@ -161,22 +161,22 @@ export function Navbar() {
                 animate={{ y: forceHidden || hidden ? '-100%' : 0 }}
                 transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
             >
-                <div className="w-full max-w-[1400px] mx-auto px-4 mt-4">
+                <div className="w-full max-w-[1400px] xl:max-w-[1600px] 2xl:max-w-[1800px] mx-auto px-4 mt-4">
                     <div className={`w-full relative transition-all duration-500 ease-in-out ${isDropdownOpen ? cardBgClass + ' overflow-hidden' : 'bg-transparent'}`} style={{ border: 'none' }}>
-                        <nav className="w-full h-20 flex items-center justify-between relative pointer-events-auto bg-transparent z-10 px-4">
+                        <nav className="w-full h-20 xl:h-24 flex items-center justify-between relative pointer-events-auto bg-transparent z-10 px-4 xl:px-6">
                             {/* Logo - Left */}
                             <div className="flex items-center">
-                                <div className={`flex items-center gap-1 py-1 px-3 rounded-[10px] border transition-all duration-500 ease-in-out ${pillBgClass}`}>
+                                <div className={`flex items-center gap-1 xl:gap-1.5 py-1 xl:py-1.5 px-3 xl:px-4 rounded-[10px] xl:rounded-[12px] border transition-all duration-500 ease-in-out ${pillBgClass}`}>
                                     <Link href="/" className="flex items-center gap-0">
                                         <Image
                                             src="/logo/mergex-logo.png"
                                             alt="MergeX Logo"
-                                            width={44}
-                                            height={44}
-                                            className={`object-contain transition-all duration-300 ${isDropdownOpen ? 'brightness-0 invert' : ((isLightPage || isScrolled) ? '' : 'brightness-0 invert')}`}
+                                            width={52}
+                                            height={52}
+                                            className={`object-contain transition-all duration-300 w-11 h-11 xl:w-12 xl:h-12 2xl:w-[52px] 2xl:h-[52px] ${isDropdownOpen ? 'brightness-0 invert' : ((isLightPage || isScrolled) ? '' : 'brightness-0 invert')}`}
                                         />
                                         <span
-                                            className={`font-clash font-bold text-xl tracking-wide ml-1.5 flex items-center ${textColorClass} transition-colors duration-300`}
+                                            className={`font-clash font-bold text-xl xl:text-2xl 2xl:text-3xl tracking-wide ml-1.5 xl:ml-2 flex items-center ${textColorClass} transition-colors duration-300`}
                                             style={{ fontFamily: "'Clash Display', sans-serif" }}
                                         >
                                             <span>MERGEX</span>
@@ -187,10 +187,10 @@ export function Navbar() {
 
                             {/* Menu Capsule - Right */}
                             <div className="flex items-center">
-                                <div className={`flex items-center gap-1 p-2 rounded-[10px] border transition-all duration-500 ease-in-out ${pillBgClass}`}>
+                                <div className={`flex items-center gap-1 xl:gap-1.5 p-2 xl:p-2.5 rounded-[10px] xl:rounded-[12px] border transition-all duration-500 ease-in-out ${pillBgClass}`}>
                                     <Link
                                         href="/about"
-                                        className={`font-roboto text-[11px] font-bold tracking-[0.18em] uppercase transition-all duration-200 px-4 py-2.5 rounded-[7px] ${getActiveLinkClass(pathname === '/about')}`}
+                                        className={`font-roboto text-[11px] xl:text-[12px] 2xl:text-[13px] font-bold tracking-[0.18em] uppercase transition-all duration-200 px-4 xl:px-5 py-2.5 xl:py-3 rounded-[7px] xl:rounded-[9px] ${getActiveLinkClass(pathname === '/about')}`}
                                     >
                                         Who We Are
                                     </Link>
@@ -203,7 +203,7 @@ export function Navbar() {
                                         onMouseLeave={closeDropdown}
                                     >
                                         <button
-                                            className={`flex items-center gap-1.5 font-roboto text-[11px] font-bold tracking-[0.18em] uppercase transition-all duration-200 px-4 py-2.5 rounded-[7px] ${
+                                            className={`flex items-center gap-1.5 font-roboto text-[11px] xl:text-[12px] 2xl:text-[13px] font-bold tracking-[0.18em] uppercase transition-all duration-200 px-4 xl:px-5 py-2.5 xl:py-3 rounded-[7px] xl:rounded-[9px] ${
                                                 isDropdownOpen
                                                     ? 'bg-white/20 text-white'
                                                     : getActiveLinkClass(pathname?.startsWith('/brands') || pathname === '/methodology' || pathname === '/diagnostic')
@@ -228,13 +228,13 @@ export function Navbar() {
 
                                     <Link
                                         href="/insights"
-                                        className={`font-roboto text-[11px] font-bold tracking-[0.18em] uppercase transition-all duration-200 px-4 py-2.5 rounded-[7px] ${getActiveLinkClass(pathname?.startsWith('/insights'))}`}
+                                        className={`font-roboto text-[11px] xl:text-[12px] 2xl:text-[13px] font-bold tracking-[0.18em] uppercase transition-all duration-200 px-4 xl:px-5 py-2.5 xl:py-3 rounded-[7px] xl:rounded-[9px] ${getActiveLinkClass(pathname?.startsWith('/insights'))}`}
                                     >
                                         Insights
                                     </Link>
                                     <Link
                                         href="/contact"
-                                        className={`font-roboto text-[11px] font-bold tracking-[0.18em] uppercase transition-all duration-200 px-4 py-2.5 rounded-[7px] ${getActiveLinkClass(pathname?.startsWith('/contact'))}`}
+                                        className={`font-roboto text-[11px] xl:text-[12px] 2xl:text-[13px] font-bold tracking-[0.18em] uppercase transition-all duration-200 px-4 xl:px-5 py-2.5 xl:py-3 rounded-[7px] xl:rounded-[9px] ${getActiveLinkClass(pathname?.startsWith('/contact'))}`}
                                     >
                                         Contact
                                     </Link>
@@ -243,7 +243,7 @@ export function Navbar() {
                                         href="/login"
                                         target="_blank"
                                         rel="noopener noreferrer"
-                                        className={`flex items-center gap-1.5 font-roboto text-[11px] font-bold tracking-[0.18em] uppercase transition-all duration-200 px-4 py-2.5 rounded-[7px] ${
+                                        className={`flex items-center gap-1.5 font-roboto text-[11px] xl:text-[12px] 2xl:text-[13px] font-bold tracking-[0.18em] uppercase transition-all duration-200 px-4 xl:px-5 py-2.5 xl:py-3 rounded-[7px] xl:rounded-[9px] ${
                                             isDropdownOpen
                                                 ? 'text-white/70 hover:text-white'
                                                 : (!isScrolled && !isLightPage
@@ -276,18 +276,18 @@ export function Navbar() {
                                     {/* Main Content Row */}
                                     <div className="flex relative z-10 w-full">
                                         {/* LEFT PANEL */}
-                                        <div className="w-[40%] py-10 px-6 md:px-10 lg:px-12 flex flex-col justify-between">
+                                        <div className="w-[40%] py-10 xl:py-14 px-6 md:px-10 lg:px-12 xl:px-16 flex flex-col justify-between">
                                             <div>
                                                 <p className="text-white/30 uppercase tracking-[0.2em] text-[10px] font-semibold mb-4">
                                                     What We Do
                                                 </p>
                                                 <h2
-                                                    className="text-[1.75rem] leading-[1.15] font-clash font-semibold text-white mb-3"
+                                                    className="text-[1.75rem] xl:text-[2.25rem] leading-[1.15] font-clash font-semibold text-white mb-3"
                                                     style={{ fontFamily: "'Clash Display', sans-serif" }}
                                                 >
                                                     Business <span className="font-serif italic font-medium">Consulting</span>
                                                 </h2>
-                                                <p className="text-white/50 text-xs leading-relaxed">
+                                                <p className="text-white/50 text-xs xl:text-sm leading-relaxed">
                                                     MergeX is a consulting firm for scaling businesses.<br />We diagnose the real operational and structural<br />constraint before building any solution.
                                                 </p>
                                             </div>
@@ -299,7 +299,7 @@ export function Navbar() {
                                         </div>
 
                                         {/* RIGHT PANEL */}
-                                        <div className="w-[60%] py-10 px-6 md:px-10 lg:px-12 flex flex-col">
+                                        <div className="w-[60%] py-10 xl:py-14 px-6 md:px-10 lg:px-12 xl:px-16 flex flex-col">
                                             <div className="flex flex-col gap-0 w-full">
                                                 {/* PRIMARY - MergeX */}
                                                 <Link
@@ -309,7 +309,7 @@ export function Navbar() {
                                                     <p className="text-white/25 uppercase tracking-[0.18em] text-[9px] font-semibold mb-1.5">Brand</p>
                                                     <div className="flex items-center justify-between w-full">
                                                         <span
-                                                            className="text-white text-xl font-clash font-semibold leading-none group-hover:text-violet-300 transition-colors duration-300"
+                                                            className="text-white text-xl xl:text-2xl font-clash font-semibold leading-none group-hover:text-violet-300 transition-colors duration-300"
                                                             style={{ fontFamily: "'Clash Display', sans-serif" }}
                                                         >
                                                             MergeX
@@ -321,7 +321,7 @@ export function Navbar() {
                                                             <path d="M7 17L17 7M17 7H7M17 7V17" stroke="currentColor" strokeWidth="1.75" strokeLinecap="square" strokeLinejoin="miter"/>
                                                         </svg>
                                                     </div>
-                                                    <span className="text-white/40 text-xs mt-1.5">Operational scaling systems</span>
+                                                    <span className="text-white/40 text-xs xl:text-sm mt-1.5">Operational scaling systems</span>
                                                 </Link>
 
                                                 {/* SECONDARY - Methodology */}
@@ -331,7 +331,7 @@ export function Navbar() {
                                                 >
                                                     <p className="text-white/25 uppercase tracking-[0.18em] text-[9px] font-semibold mb-1.5">Framework</p>
                                                     <div className="flex items-center justify-between w-full">
-                                                        <span className="text-white text-lg font-medium group-hover:text-violet-300 transition-colors duration-300">
+                                                        <span className="text-white text-lg xl:text-xl font-medium group-hover:text-violet-300 transition-colors duration-300">
                                                             Methodology
                                                         </span>
                                                         <svg
@@ -341,7 +341,7 @@ export function Navbar() {
                                                             <path d="M7 17L17 7M17 7H7M17 7V17" stroke="currentColor" strokeWidth="1.75" strokeLinecap="square" strokeLinejoin="miter"/>
                                                         </svg>
                                                     </div>
-                                                    <span className="text-white/35 text-xs mt-1">The S.C.A.L.E framework</span>
+                                                    <span className="text-white/35 text-xs xl:text-sm mt-1">The S.C.A.L.E framework</span>
                                                 </Link>
 
                                                 {/* ACTION - Diagnostic */}
@@ -351,7 +351,7 @@ export function Navbar() {
                                                 >
                                                     <p className="text-white/25 uppercase tracking-[0.18em] text-[9px] font-semibold mb-1.5">Start Here</p>
                                                     <div className="flex items-center justify-between w-full">
-                                                        <span className="text-white/80 text-sm font-medium group-hover:text-violet-300 transition-colors duration-300">
+                                                        <span className="text-white/80 text-sm xl:text-base font-medium group-hover:text-violet-300 transition-colors duration-300">
                                                             Diagnostic
                                                         </span>
                                                         <svg
@@ -361,7 +361,7 @@ export function Navbar() {
                                                             <path d="M7 17L17 7M17 7H7M17 7V17" stroke="currentColor" strokeWidth="1.75" strokeLinecap="square" strokeLinejoin="miter"/>
                                                         </svg>
                                                     </div>
-                                                    <span className="text-white/40 text-xs mt-1">The entry point to every consulting engagement</span>
+                                                    <span className="text-white/40 text-xs xl:text-sm mt-1">The entry point to every consulting engagement</span>
                                                 </Link>
                                             </div>
                                         </div>

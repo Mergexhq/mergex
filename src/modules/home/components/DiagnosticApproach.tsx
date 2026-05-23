@@ -2,11 +2,11 @@ import Link from 'next/link';
 
 export function DiagnosticApproach() {
     const steps = [
-        { num: '01', letter: 'S', title: 'Scan', desc: 'Deep diagnostic of current operations.' },
-        { num: '02', letter: 'C', title: 'Clarify', desc: 'Define the real constraints.' },
-        { num: '03', letter: 'A', title: 'Architect', desc: 'Design the system blueprint.' },
-        { num: '04', letter: 'L', title: 'Launch', desc: 'Execute with precision.' },
-        { num: '05', letter: 'E', title: 'Evolve', desc: 'Iterate and compound growth.' },
+        { num: '01', letter: 'S', title: 'Scan', desc: 'Map the full business system and operations.' },
+        { num: '02', letter: 'C', title: 'Compress', desc: 'Identify the single root constraint holding you back.' },
+        { num: '03', letter: 'A', title: 'Architect', desc: 'Design the precise operational system needed to scale.' },
+        { num: '04', letter: 'L', title: 'Launch', desc: 'Execute against the blueprint with precision.' },
+        { num: '05', letter: 'E', title: 'Embed', desc: 'Transfer full system ownership to your team.' },
     ];
 
     return (

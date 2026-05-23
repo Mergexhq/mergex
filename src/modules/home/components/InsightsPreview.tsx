@@ -33,58 +33,58 @@ export function InsightsPreview() {
                         <Link
                             key={insight.slug}
                             href={`/insights/${insight.slug}`}
-                            className="group relative aspect-[4/3] w-full overflow-hidden rounded-[12px] border border-black/5 hover:shadow-lg transition-all duration-500 flex flex-col justify-end"
+                            className="group flex flex-col gap-5 w-full transition-all duration-300"
                         >
-                            {/* Full Card Cover Image */}
-                            {insight.coverImage && (
-                                <Image 
-                                    src={insight.coverImage} 
-                                    alt={insight.title}
-                                    fill
-                                    className="object-cover"
-                                />
-                            )}
-                            
-                            {/* Rich Dark Gradient Overlay for Typography Readability */}
-                            <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent z-10 pointer-events-none" />
+                            {/* Image Container with reduced height */}
+                            <div className="relative aspect-[16/9] w-full overflow-hidden rounded-[12px] border border-black/5 transition-all duration-500">
+                                {insight.coverImage && (
+                                    <Image 
+                                        src={insight.coverImage} 
+                                        alt={insight.title}
+                                        fill
+                                        className="object-cover group-hover:scale-103 transition-transform duration-500 ease-out"
+                                    />
+                                )}
+                            </div>
 
-                            {/* Text Content Container */}
-                            <div className="relative z-20 p-8 md:p-10 flex flex-col">
-                                <span className="text-[10px] font-bold uppercase tracking-[0.2em] text-violet-300 mb-2 block">
+                            {/* Text Content Container (Outside & Underneath) */}
+                            <div className="flex flex-col">
+                                <span className="text-[10px] font-bold uppercase tracking-[0.2em] text-primary/70 mb-2.5 block">
                                     {insight.category} · {insight.readTime}
                                 </span>
                                 
                                 <h3 
-                                    className="text-xl md:text-2xl font-normal text-white leading-snug mb-3"
-                                    style={{ fontFamily: 'Garamond, Georgia, serif' }}
+                                    className="text-xl md:text-2xl font-normal leading-snug mb-3 group-hover:text-primary transition-colors duration-300"
+                                    style={{ 
+                                        fontFamily: 'Garamond, Georgia, serif',
+                                        color: '#1A0D2E'
+                                    }}
                                 >
                                     {insight.title}
                                 </h3>
                                 
-                                <p className="text-xs md:text-sm text-gray-300 leading-relaxed line-clamp-2 max-w-xl">
+                                <p className="text-xs md:text-sm text-[#1A0D2E]/65 leading-relaxed line-clamp-2 max-w-xl mb-4">
                                     {insight.excerpt}
                                 </p>
 
-                                {/* Animated 'Learn more' Button Revealed on Hover */}
-                                <div className="opacity-0 max-h-0 translate-y-3 group-hover:opacity-100 group-hover:max-h-12 group-hover:translate-y-0 transition-all duration-300 ease-out overflow-hidden mt-4">
-                                    <span className="inline-flex items-center gap-1.5 px-4 py-2 bg-white hover:bg-white/90 text-[#1A0D2E] text-xs font-semibold rounded-md transition-colors shadow-sm">
-                                        Learn more
-                                        <svg
-                                            width="10"
-                                            height="10"
-                                            viewBox="0 0 10 10"
-                                            fill="none"
-                                            stroke="currentColor"
-                                            className="stroke-current"
-                                        >
-                                            <path
-                                                d="M1 5h8M5 1l4 4-4 4"
-                                                strokeWidth="1.5"
-                                                strokeLinecap="round"
-                                                strokeLinejoin="round"
-                                            />
-                                        </svg>
-                                    </span>
+                                {/* Animated 'Read article →' link indicator */}
+                                <div className="inline-flex items-center gap-1 text-xs font-semibold text-primary transition-opacity duration-300">
+                                    <span>Read article</span>
+                                    <svg
+                                        width="12"
+                                        height="12"
+                                        viewBox="0 0 12 12"
+                                        fill="none"
+                                        stroke="currentColor"
+                                        className="transform group-hover:translate-x-1 transition-transform duration-300"
+                                    >
+                                        <path
+                                            d="M2 6h8M6 2l4 4-4 4"
+                                            strokeWidth="1.5"
+                                            strokeLinecap="round"
+                                            strokeLinejoin="round"
+                                        />
+                                    </svg>
                                 </div>
                             </div>
                         </Link>
