@@ -6,6 +6,9 @@ export const metadata: Metadata = {
   title: 'Brands — The MergeX Company',
   description:
     'Specialized brands built under The MergeX Company. Each brand operates with a focused role across systems, technology, execution, products, talent, and education.',
+  alternates: {
+    canonical: 'https://mergex.in/brands',
+  },
 };
 
 export default function BrandsPage() {

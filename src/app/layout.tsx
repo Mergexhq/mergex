@@ -3,6 +3,7 @@ import {
   Manrope,
   Playfair_Display,
   Great_Vibes,
+  Roboto,
 } from "next/font/google";
 
 import "./globals.css";
@@ -30,6 +31,13 @@ const greatVibes = Great_Vibes({
   weight: "400",
   subsets: ["latin"],
   variable: "--font-great-vibes",
+  display: "swap",
+});
+
+const roboto = Roboto({
+  weight: ["300", "400", "500", "700"],
+  subsets: ["latin"],
+  variable: "--font-roboto",
   display: "swap",
 });
 
@@ -152,6 +160,7 @@ export default function RootLayout({
         ${manrope.variable}
         ${playfair.variable}
         ${greatVibes.variable}
+        ${roboto.variable}
         h-full
         scroll-smooth
         antialiased
@@ -159,7 +168,8 @@ export default function RootLayout({
     >
       <head>
         {/* Clash Display — not on Google Fonts, loaded via Fontshare CDN */}
-        <link rel="preconnect" href="https://api.fontshare.com" />
+        <link rel="preconnect" href="https://api.fontshare.com" crossOrigin="anonymous" />
+        <link rel="dns-prefetch" href="https://api.fontshare.com" />
         <link
           rel="stylesheet"
           href="https://api.fontshare.com/v2/css?f[]=clash-display@400,500,600,700&display=swap"

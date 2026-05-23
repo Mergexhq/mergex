@@ -6,6 +6,9 @@ export const metadata: Metadata = {
   title: 'MergeX Academy — Brands — The MergeX Company',
   description:
     'MergeX Academy is the knowledge and capability development layer of The MergeX Company ecosystem.',
+  alternates: {
+    canonical: 'https://mergex.in/brands/academy',
+  },
 };
 
 const brand = BRANDS.find((b) => b.slug === 'academy')!;

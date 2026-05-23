@@ -9,6 +9,9 @@ export const metadata: Metadata = {
     title: "Careers | The MergeX Company",
     description:
         "Join MergeX and build real infrastructure for growing companies. Explore full-time roles, internships, and opportunities to work on systems that matter.",
+    alternates: {
+        canonical: 'https://mergex.in/careers',
+    },
     openGraph: {
         title: "Careers | The MergeX Company",
         description:

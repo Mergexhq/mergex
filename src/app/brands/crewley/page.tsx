@@ -6,6 +6,9 @@ export const metadata: Metadata = {
   title: 'Crewley — Brands — The MergeX Company',
   description:
     'Crewley is the talent infrastructure layer of The MergeX Company ecosystem.',
+  alternates: {
+    canonical: 'https://mergex.in/brands/crewley',
+  },
 };
 
 const brand = BRANDS.find((b) => b.slug === 'crewley')!;

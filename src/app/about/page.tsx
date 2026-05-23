@@ -6,6 +6,9 @@ export const metadata: Metadata = {
   title: 'About — The MergeX Company',
   description:
     'MergeX is a business consulting firm for scaling companies. We diagnose the exact structural, operational, and strategic constraint limiting your growth — then build the precise system to resolve it.',
+  alternates: {
+    canonical: 'https://mergex.in/about',
+  },
 };
 
 export default function AboutPage() {

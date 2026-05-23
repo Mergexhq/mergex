@@ -6,6 +6,9 @@ export const metadata: Metadata = {
   title: 'MergeX Foundry — Brands — The MergeX Company',
   description:
     'MergeX Foundry is the product and technology infrastructure layer of The MergeX Company ecosystem.',
+  alternates: {
+    canonical: 'https://mergex.in/brands/foundry',
+  },
 };
 
 const brand = BRANDS.find((b) => b.slug === 'foundry')!;
