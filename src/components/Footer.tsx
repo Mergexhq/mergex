@@ -20,7 +20,7 @@ function FooterLink({ href, label }: { href: string; label: string }) {
 /* ─── Data ─────────────────────────────────────────────────────────── */
 const FOOTER_LINKS = {
     column1: [
-        { label: 'Learn about MergeX', href: '/about' },
+        { label: 'About MergeX', href: '/about' },
         { label: 'Case Studies', href: '/insights/case-studies' },
         { label: 'Insights', href: '/insights' },
         { label: 'Sitemap', href: '/sitemap' },

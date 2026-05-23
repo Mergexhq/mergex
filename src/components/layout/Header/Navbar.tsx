@@ -89,19 +89,35 @@ export function Navbar() {
         pathname?.startsWith('/methodology') ||
         pathname?.startsWith('/diagnostic');
 
-    const textColorClass = isLightPage && !isDropdownOpen ? 'text-black' : 'text-white';
+    const textColorClass = (isLightPage || isScrolled) && !isDropdownOpen ? 'text-black' : 'text-white';
     const navItemColorClass = isLightPage && !isDropdownOpen
         ? 'text-black/80 hover:text-violet-600'
         : 'text-white/80 hover:text-white';
     
     // Dropdown open: force dark bg to blend with mega menu.
-    // Light page + scrolled: solid white.
-    // Everything else (including hero scroll): stay transparent.
     const cardBgClass = isDropdownOpen
-        ? 'bg-black rounded-xl border border-white/10 shadow-2xl'
-        : (isScrolled && isLightPage
-            ? 'bg-[#F3F3F3] border-b border-gray-200/50 border-t-transparent border-l-transparent border-r-transparent rounded-none shadow-none'
-            : 'bg-transparent border border-transparent rounded-none shadow-none');
+        ? 'bg-black rounded-[12px] shadow-2xl'
+        : 'bg-transparent rounded-none shadow-none';
+
+    const pillBgClass = isDropdownOpen || !isScrolled
+        ? 'bg-transparent shadow-none border-0'
+        : 'bg-[#ebebea] border border-[#d8d8d6] shadow-[0_1px_4px_rgba(0,0,0,0.06)]';
+
+    const pillTextClass = isDropdownOpen
+        ? 'text-white/70 hover:text-white'
+        : (!isScrolled && !isLightPage
+            ? 'text-white/70 hover:text-white'
+            : 'text-black/70 hover:text-black'
+          );
+
+    const getActiveLinkClass = (isActive: boolean) => {
+        if (!isActive) return pillTextClass;
+        if (isDropdownOpen) return 'bg-white/20 text-white';
+        if (!isScrolled) {
+            return isLightPage ? 'bg-[#110326] text-white' : 'bg-white/20 text-white';
+        }
+        return 'bg-[#110326] text-white';
+    };
 
     const openDropdown = () => {
         if (timeoutRef.current) clearTimeout(timeoutRef.current);
@@ -145,91 +161,103 @@ export function Navbar() {
                 animate={{ y: forceHidden || hidden ? '-100%' : 0 }}
                 transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
             >
-                <div className={`w-full transition-all duration-500 ease-in-out ${isDropdownOpen ? 'p-2 lg:p-3' : 'p-0'}`}>
-                    <div className={`w-full relative transition-all duration-500 ease-in-out overflow-hidden ${cardBgClass}`}>
-                        <nav className="w-full h-16 pl-6 pr-8 flex items-center justify-center relative pointer-events-auto bg-transparent z-10">
-                            {/* Logo — absolute left */}
-                            <div className="absolute left-6 h-full flex items-center">
-                                <Link href="/" className="flex items-center gap-0">
-                                    <Image
-                                        src="/logo/mergex-logo.png"
-                                        alt="MergeX Logo"
-                                        width={60}
-                                        height={60}
-                                        className={`object-contain transition-all duration-300 ${isDropdownOpen ? 'brightness-0 invert' : (isLightPage ? '' : 'brightness-0 invert')}`}
-                                    />
-                                    <span
-                                        className={`font-clash font-bold text-2xl tracking-wide ml-1.5 mt-1 flex items-center gap-1.5 ${textColorClass} transition-colors duration-300`}
-                                        style={{ fontFamily: "'Clash Display', sans-serif" }}
-                                    >
-                                        <span>MERGEX</span>
-                                    </span>
-                                </Link>
-                            </div>
-
-                            {/* Login — absolute right */}
-                            <div className="absolute right-6 h-full flex items-center">
-                                <Link
-                                    href="/login"
-                                    target="_blank"
-                                    rel="noopener noreferrer"
-                                    className={`flex items-center gap-2 text-lg font-semibold transition-colors duration-300 ${navItemColorClass}`}
-                                >
-                                    Login
-                                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" className="opacity-70 mt-0.5">
-                                        <path d="M7 17L17 7M17 7H7M17 7V17" />
-                                    </svg>
-                                </Link>
-                            </div>
-
-                            {/* Center Menu */}
-                            <div className="flex items-center gap-8 h-full">
-                                <Link
-                                    href="/about"
-                                    className={`relative h-full flex items-center px-1 text-base font-medium transition-colors duration-300 ${navItemColorClass}`}
-                                >
-                                    Who We Are
-                                </Link>
-
-                                {/* What We Do Mega Dropdown Trigger */}
-                                <div
-                                    ref={dropdownRef}
-                                    className="h-full flex items-center"
-                                    onMouseEnter={openDropdown}
-                                    onMouseLeave={closeDropdown}
-                                >
-                                    <button
-                                        className={`relative flex items-center gap-1.5 px-1 text-base font-medium transition-colors duration-300 ${navItemColorClass}`}
-                                        aria-expanded={isDropdownOpen}
-                                        aria-haspopup="true"
-                                    >
-                                        What We Do
-                                        <motion.svg
-                                            width="8"
-                                            height="5"
-                                            viewBox="0 0 10 6"
-                                            fill="currentColor"
-                                            className="text-violet-500"
-                                            animate={{ rotate: isDropdownOpen ? 180 : 0 }}
-                                            transition={{ duration: 0.2 }}
+                <div className="w-full max-w-[1400px] mx-auto px-4 mt-4">
+                    <div className={`w-full relative transition-all duration-500 ease-in-out ${isDropdownOpen ? cardBgClass + ' overflow-hidden' : 'bg-transparent'}`} style={{ border: 'none' }}>
+                        <nav className="w-full h-20 flex items-center justify-between relative pointer-events-auto bg-transparent z-10 px-4">
+                            {/* Logo — Left */}
+                            <div className="flex items-center">
+                                <div className={`flex items-center gap-1 py-1 px-3 rounded-[10px] transition-all duration-500 ease-in-out ${pillBgClass}`}>
+                                    <Link href="/" className="flex items-center gap-0">
+                                        <Image
+                                            src="/logo/mergex-logo.png"
+                                            alt="MergeX Logo"
+                                            width={44}
+                                            height={44}
+                                            className={`object-contain transition-all duration-300 ${isDropdownOpen ? 'brightness-0 invert' : ((isLightPage || isScrolled) ? '' : 'brightness-0 invert')}`}
+                                        />
+                                        <span
+                                            className={`font-clash font-bold text-xl tracking-wide ml-1.5 flex items-center ${textColorClass} transition-colors duration-300`}
+                                            style={{ fontFamily: "'Clash Display', sans-serif" }}
                                         >
-                                            <polygon points="0,0 10,0 5,6" />
-                                        </motion.svg>
-                                    </button>
+                                            <span>MERGEX</span>
+                                        </span>
+                                    </Link>
                                 </div>
+                            </div>
 
-                                <Link
-                                    href="/insights"
-                                    className={`relative h-full flex items-center px-1 text-base font-medium transition-colors duration-300 ${navItemColorClass}`}
-                                >
-                                    Insights
-                                </Link>
-                                <Link
-                                    href="/contact"
-                                    className={`relative h-full flex items-center px-1 text-base font-medium transition-colors duration-300 ${navItemColorClass}`}
-                                >
-                                    Contact
-                                </Link>
+                            {/* Menu Capsule — Right */}
+                            <div className="flex items-center">
+                                <div className={`flex items-center gap-1 p-2 rounded-[10px] transition-all duration-500 ease-in-out ${pillBgClass}`}>
+                                    <Link
+                                        href="/about"
+                                        className={`font-roboto text-[11px] font-bold tracking-[0.18em] uppercase transition-all duration-200 px-4 py-2.5 rounded-[7px] ${getActiveLinkClass(pathname === '/about')}`}
+                                    >
+                                        Who We Are
+                                    </Link>
+
+                                    {/* What We Do Mega Dropdown Trigger */}
+                                    <div
+                                        ref={dropdownRef}
+                                        className="flex items-center"
+                                        onMouseEnter={openDropdown}
+                                        onMouseLeave={closeDropdown}
+                                    >
+                                        <button
+                                            className={`flex items-center gap-1.5 font-roboto text-[11px] font-bold tracking-[0.18em] uppercase transition-all duration-200 px-4 py-2.5 rounded-[7px] ${
+                                                isDropdownOpen
+                                                    ? 'bg-white/20 text-white'
+                                                    : getActiveLinkClass(pathname?.startsWith('/brands') || pathname === '/methodology' || pathname === '/diagnostic')
+                                            }`}
+                                            aria-expanded={isDropdownOpen}
+                                            aria-haspopup="true"
+                                        >
+                                            What We Do
+                                            <motion.svg
+                                                width="8"
+                                                height="5"
+                                                viewBox="0 0 10 6"
+                                                fill="currentColor"
+                                                className="opacity-60"
+                                                animate={{ rotate: isDropdownOpen ? 180 : 0 }}
+                                                transition={{ duration: 0.2 }}
+                                            >
+                                                <polygon points="0,0 10,0 5,6" />
+                                            </motion.svg>
+                                        </button>
+                                    </div>
+
+                                    <Link
+                                        href="/insights"
+                                        className={`font-roboto text-[11px] font-bold tracking-[0.18em] uppercase transition-all duration-200 px-4 py-2.5 rounded-[7px] ${getActiveLinkClass(pathname?.startsWith('/insights'))}`}
+                                    >
+                                        Insights
+                                    </Link>
+                                    <Link
+                                        href="/contact"
+                                        className={`font-roboto text-[11px] font-bold tracking-[0.18em] uppercase transition-all duration-200 px-4 py-2.5 rounded-[7px] ${getActiveLinkClass(pathname?.startsWith('/contact'))}`}
+                                    >
+                                        Contact
+                                    </Link>
+
+                                    <Link
+                                        href="/login"
+                                        target="_blank"
+                                        rel="noopener noreferrer"
+                                        className={`flex items-center gap-1.5 font-roboto text-[11px] font-bold tracking-[0.18em] uppercase transition-all duration-200 px-4 py-2.5 rounded-[7px] ${
+                                            isDropdownOpen
+                                                ? 'text-white/70 hover:text-white'
+                                                : (!isScrolled && !isLightPage
+                                                    ? 'text-white/70 hover:text-white'
+                                                    : 'text-violet-700 hover:text-violet-900'
+                                                  )
+                                        }`}
+                                    >
+                                        Login
+                                        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" className="opacity-75">
+                                            <path d="M7 17L17 7M17 7H7M17 7V17" />
+                                        </svg>
+                                    </Link>
+                                </div>
                             </div>
                         </nav>
 
