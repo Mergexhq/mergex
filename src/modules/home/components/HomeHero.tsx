@@ -176,7 +176,7 @@ export function HomeHero() {
             {/* Right Column */}
             <div className="about-right">
               <p className="about-body">
-                A business scaling ecosystem that builds specialized infrastructure across systems, creative, talent, knowledge, and products to support modern businesses scale with clarity and precision.
+                The MergeX Company builds operational, creative, and educational systems designed to support scalable modern businesses.
               </p>
               <Link
                 href="/methodology"

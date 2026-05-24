@@ -38,20 +38,13 @@ export default function AcademyBrandPage() {
       whatItDoes={
         <>
           <p className="text-foreground">
-            MergeX Academy is the knowledge and capability layer of the
-            ecosystem. It exists to address a consistent pattern: businesses
-            that build strong operational systems through MergeX see those
-            systems degrade when the team lacks the frameworks to maintain them.
+            MergeX Academy delivers business and creator-focused education designed for modern industries and scalable digital careers.
           </p>
           <p className="text-foreground-muted">
-            Academy delivers structured knowledge programs and capability
-            development that make operational gains permanent. Not generic
-            training content - frameworks derived directly from the MergeX
-            operating methodology.
+            We deliver structured knowledge programs, training infrastructure, and capability development designed to make business and creator careers scalable.
           </p>
           <p className="text-foreground-muted">
-            Academy is currently in development. The first cohorts will be
-            invitation-only, offered to current and past MergeX clients.
+            Academy is currently in development. The first cohorts will be invitation-only, offered to current and past MergeX clients and partners.
           </p>
         </>
       }

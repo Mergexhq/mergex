@@ -13,7 +13,7 @@ const whatWeDoColumns = [
         items: [
             {
                 label: 'MergeX',
-                description: 'Operational scaling systems',
+                description: 'Business Consulting',
                 href: '/brands/mergex',
             },
         ],
@@ -40,6 +40,36 @@ const whatWeDoColumns = [
     },
 ];
 
+const getMegamenuLeftPanelContent = (pathname: string | null) => {
+    if (pathname === '/brands/ovrn-studios') {
+        return {
+            title: 'Creative',
+            italicTitle: 'Production',
+            description: 'OVRN creates commercial visuals, branded content, and production systems designed for modern digital brands.',
+        };
+    }
+    if (pathname === '/brands/mergex') {
+        return {
+            title: 'Business',
+            italicTitle: 'Consulting',
+            description: 'MergeX helps businesses improve operations, branding, technology, and growth systems through structured consulting built for scalable execution.',
+        };
+    }
+    if (pathname === '/brands/academy') {
+        return {
+            title: 'Education',
+            italicTitle: 'Infrastructure',
+            description: 'MergeX Academy delivers business and creator-focused education designed for modern industries and scalable digital careers.',
+        };
+    }
+    // Default / Parent company
+    return {
+        title: 'Business',
+        italicTitle: 'Infrastructure',
+        description: 'The MergeX Company builds operational, creative, and educational systems designed to support scalable modern businesses.',
+    };
+};
+
 export function Navbar() {
     const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
     const [forceHidden, setForceHidden] = useState(false);
@@ -50,6 +80,7 @@ export function Navbar() {
     const dropdownRef = useRef<HTMLDivElement>(null);
     const timeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
     const pathname = usePathname();
+    const panelContent = getMegamenuLeftPanelContent(pathname);
     const { scrollY } = useScroll();
 
     useMotionValueEvent(scrollY, "change", (latest) => {
@@ -82,10 +113,10 @@ export function Navbar() {
         pathname?.startsWith('/partner') ||
         pathname === '/pricing' ||
         pathname?.startsWith('/contact') ||
-        pathname === '/about' ||
+        (pathname === '/about' && isScrolled) ||
         pathname === '/careers' ||
         pathname === '/sitemap' ||
-        pathname?.startsWith('/brands') ||
+        (pathname?.startsWith('/brands') && pathname !== '/brands/ovrn-studios') ||
         pathname?.startsWith('/methodology') ||
         pathname?.startsWith('/diagnostic');
 
@@ -181,21 +212,32 @@ export function Navbar() {
                             {/* Logo - Left */}
                             <div className="flex items-center">
                                 <div className={`flex items-center gap-1 xl:gap-1.5 py-1 xl:py-1.5 px-3 xl:px-4 rounded-[10px] xl:rounded-[12px] border transition-all duration-500 ease-in-out ${pillBgClass}`}>
-                                    <Link href="/" className="flex items-center gap-0">
-                                        <Image
-                                            src="/logo/mergex-logo.png"
-                                            alt="MergeX Logo"
-                                            width={52}
-                                            height={52}
-                                            className={`object-contain transition-all duration-300 w-11 h-11 xl:w-12 xl:h-12 2xl:w-[52px] 2xl:h-[52px] ${isDropdownOpen ? 'brightness-0 invert' : ((isLightPage || isScrolled) ? '' : 'brightness-0 invert')}`}
-                                        />
-                                        <span
-                                            className={`font-clash font-bold text-xl xl:text-2xl 2xl:text-3xl tracking-wide ml-1.5 xl:ml-2 flex items-center ${textColorClass} transition-colors duration-300`}
-                                            style={{ fontFamily: "'Clash Display', sans-serif" }}
-                                        >
-                                            <span>MERGEX</span>
-                                        </span>
-                                    </Link>
+                                    {pathname === '/brands/ovrn-studios' ? (
+                                        <Link href="/brands/ovrn-studios" className="flex items-center gap-0 py-1.5 px-1">
+                                            <span
+                                                className={`font-clash font-bold text-xl xl:text-2xl 2xl:text-3xl tracking-wider flex items-center ${textColorClass} transition-colors duration-300`}
+                                                style={{ fontFamily: "'Clash Display', sans-serif" }}
+                                            >
+                                                OVRN STUDIOS
+                                            </span>
+                                        </Link>
+                                    ) : (
+                                        <Link href="/" className="flex items-center gap-0">
+                                            <Image
+                                                src="/logo/mergex-logo.png"
+                                                alt="MergeX Logo"
+                                                width={52}
+                                                height={52}
+                                                className={`object-contain transition-all duration-300 w-11 h-11 xl:w-12 xl:h-12 2xl:w-[52px] 2xl:h-[52px] ${isDropdownOpen ? 'brightness-0 invert' : ((isLightPage || isScrolled) ? '' : 'brightness-0 invert')}`}
+                                            />
+                                            <span
+                                                className={`font-clash font-bold text-xl xl:text-2xl 2xl:text-3xl tracking-wide ml-1.5 xl:ml-2 flex items-center ${textColorClass} transition-colors duration-300`}
+                                                style={{ fontFamily: "'Clash Display', sans-serif" }}
+                                            >
+                                                <span>MERGEX</span>
+                                            </span>
+                                        </Link>
+                                    )}
                                 </div>
                             </div>
 
@@ -220,7 +262,7 @@ export function Navbar() {
                                             className={`flex items-center gap-1.5 font-roboto text-[11px] xl:text-[12px] 2xl:text-[13px] font-bold tracking-[0.18em] uppercase transition-all duration-200 px-4 xl:px-5 py-2.5 xl:py-3 rounded-[7px] xl:rounded-[9px] ${
                                                 isDropdownOpen
                                                     ? 'bg-white/20 text-white'
-                                                    : getActiveLinkClass(pathname?.startsWith('/brands') || pathname === '/methodology' || pathname === '/diagnostic')
+                                                    : getActiveLinkClass(pathname === '/methodology' || pathname === '/diagnostic')
                                             }`}
                                             aria-expanded={isDropdownOpen}
                                             aria-haspopup="true"
@@ -299,10 +341,10 @@ export function Navbar() {
                                                     className="text-[1.75rem] xl:text-[2.25rem] leading-[1.15] font-clash font-semibold text-white mb-3"
                                                     style={{ fontFamily: "'Clash Display', sans-serif" }}
                                                 >
-                                                    Business <span className="font-serif italic font-medium">Consulting</span>
+                                                    {panelContent.title} <span className="font-serif italic font-medium">{panelContent.italicTitle}</span>
                                                 </h2>
-                                                <p className="text-white/50 text-xs xl:text-sm leading-relaxed">
-                                                    MergeX is a consulting firm for scaling businesses.<br />We diagnose the real operational and structural<br />constraint before building any solution.
+                                                <p className="text-white/50 text-xs xl:text-sm leading-relaxed whitespace-pre-line">
+                                                    {panelContent.description}
                                                 </p>
                                             </div>
                                             <div className="mt-auto pt-8">
@@ -335,7 +377,7 @@ export function Navbar() {
                                                             <path d="M7 17L17 7M17 7H7M17 7V17" stroke="currentColor" strokeWidth="1.75" strokeLinecap="square" strokeLinejoin="miter"/>
                                                         </svg>
                                                     </div>
-                                                    <span className="text-white/40 text-xs xl:text-sm mt-1.5">Operational scaling systems</span>
+                                                    <span className="text-white/40 text-xs xl:text-sm mt-1.5">Business Consulting</span>
                                                 </Link>
 
                                                 {/* SECONDARY - Methodology */}
@@ -445,25 +487,38 @@ export function Navbar() {
                         </button>
 
                         {/* Centered Logo + Text */}
-                        <Link href="/" className="absolute left-1/2 -translate-x-1/2 flex items-center justify-center gap-1 z-10">
-                            <Image
-                                src="/logo/mergex-logo.png"
-                                alt="MergeX Logo"
-                                width={40}
-                                height={40}
-                                className={`object-contain transition-all duration-300 ${
-                                    isMobileMenuOpen || isLightPage ? '' : 'brightness-0 invert'
-                                }`}
-                            />
-                            <span
-                                className={`font-clash font-bold text-2xl tracking-wide ${
-                                    isMobileMenuOpen || isLightPage ? 'text-black' : 'text-white'
-                                }`}
-                                style={{ fontFamily: "'Clash Display', sans-serif" }}
-                            >
-                                MERGEX
-                            </span>
-                        </Link>
+                        {pathname === '/brands/ovrn-studios' ? (
+                            <Link href="/brands/ovrn-studios" className="absolute left-1/2 -translate-x-1/2 flex items-center justify-center gap-1 z-10">
+                                <span
+                                    className={`font-clash font-bold text-xl tracking-wider ${
+                                        isMobileMenuOpen || isLightPage ? 'text-black' : 'text-white'
+                                    }`}
+                                    style={{ fontFamily: "'Clash Display', sans-serif" }}
+                                >
+                                    OVRN STUDIOS
+                                </span>
+                            </Link>
+                        ) : (
+                            <Link href="/" className="absolute left-1/2 -translate-x-1/2 flex items-center justify-center gap-1 z-10">
+                                <Image
+                                    src="/logo/mergex-logo.png"
+                                    alt="MergeX Logo"
+                                    width={40}
+                                    height={40}
+                                    className={`object-contain transition-all duration-300 ${
+                                        isMobileMenuOpen || isLightPage ? '' : 'brightness-0 invert'
+                                    }`}
+                                />
+                                <span
+                                    className={`font-clash font-bold text-2xl tracking-wide ${
+                                        isMobileMenuOpen || isLightPage ? 'text-black' : 'text-white'
+                                    }`}
+                                    style={{ fontFamily: "'Clash Display', sans-serif" }}
+                                >
+                                    MERGEX
+                                </span>
+                            </Link>
+                        )}
 
                         {/* Right: Login Icon */}
                         <Link

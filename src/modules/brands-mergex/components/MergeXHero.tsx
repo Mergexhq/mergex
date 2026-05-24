@@ -53,7 +53,7 @@ export function MergeXHero() {
                 maxWidth: '680px',
               }}
             >
-              We help businesses identify the constraints preventing sustainable growth.
+              MergeX helps businesses improve operations, branding, technology, and growth systems through structured consulting built for scalable execution.
             </p>
           </motion.div>
         </div>

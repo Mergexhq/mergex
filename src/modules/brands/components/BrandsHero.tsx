@@ -18,8 +18,7 @@ export function BrandsHero() {
           <span className="text-foreground-muted">The MergeX Company.</span>
         </h1>
         <p className="text-foreground-muted text-lg max-w-2xl leading-relaxed">
-          Each brand operates with a focused role across systems, technology,
-          execution, products, talent, and education.
+          The MergeX Company builds operational, creative, and educational systems designed to support scalable modern businesses.
         </p>
       </motion.div>
 

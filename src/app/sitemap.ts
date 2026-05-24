@@ -58,25 +58,13 @@ export default function sitemap(): MetadataRoute.Sitemap {
       priority: 0.7,
     },
     {
-      url: `${siteUrl}/brands/foundry`,
-      lastModified: now,
-      changeFrequency: 'monthly',
-      priority: 0.7,
-    },
-    {
-      url: `${siteUrl}/brands/crewley`,
-      lastModified: now,
-      changeFrequency: 'monthly',
-      priority: 0.7,
-    },
-    {
       url: `${siteUrl}/brands/academy`,
       lastModified: now,
       changeFrequency: 'monthly',
       priority: 0.7,
     },
     {
-      url: `${siteUrl}/brands/labs`,
+      url: `${siteUrl}/brands/ovrn-studios`,
       lastModified: now,
       changeFrequency: 'monthly',
       priority: 0.7,

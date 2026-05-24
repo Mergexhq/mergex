@@ -26,7 +26,7 @@ export function EcosystemDiagram() {
             <h2 className="text-3xl md:text-4xl font-bold text-white leading-tight mb-6">
               One parent company.
               <br />
-              <span className="text-white/50">Five operational layers.</span>
+              <span className="text-white/50">Three operational layers.</span>
             </h2>
             <p className="text-white/50 text-base leading-relaxed max-w-md">
               The MergeX Company operates as the central holding structure.

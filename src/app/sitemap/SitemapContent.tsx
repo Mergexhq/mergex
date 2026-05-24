@@ -29,10 +29,8 @@ const SITEMAP = [
                 group: 'Strategic Layers',
                 links: [
                     { label: 'MergeX', href: '/brands/mergex' },
-                    { label: 'Foundry', href: '/brands/foundry' },
-                    { label: 'Crewley', href: '/brands/crewley' },
                     { label: 'Academy', href: '/brands/academy' },
-                    { label: 'Labs', href: '/brands/labs' },
+                    { label: 'OVRN Studios', href: '/brands/ovrn-studios' },
                 ],
             },
             {

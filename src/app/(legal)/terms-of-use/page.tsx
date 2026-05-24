@@ -56,9 +56,7 @@ export default function TermsOfUsePage() {
                 <ul>
                     <li>MergeX</li>
                     <li>MergeX Systems</li>
-                    <li>MergeX Labs / Studio</li>
-                    <li>Foundry</li>
-                    <li>Crewley</li>
+                    <li>OVRN Studios</li>
                     <li>MergeX Academy</li>
                 </ul>
                 <p>
