@@ -1,6 +1,6 @@
 'use client';
 
-import { X, Plus, MessageSquare } from 'lucide-react';
+import { Minimize2, Plus, History } from 'lucide-react';
 import { MergeXOrb } from '@/components/ui/mergex-orb';
 
 interface ChatHeaderProps {
@@ -11,37 +11,38 @@ interface ChatHeaderProps {
 
 export function ChatHeader({ onClose, onNewConversation, onToggleHistory }: ChatHeaderProps) {
     return (
-        <div className="flex items-center justify-between px-3 md:px-4 py-3 border-b border-gray-100 bg-white shrink-0">
-            <div className="flex items-center gap-2 md:gap-2.5">
-                <MergeXOrb size={24} className="md:w-[28px] md:h-[28px]" />
-                <div>
-                    <p className="text-[12px] md:text-[13px] font-bold text-gray-900 leading-none">MergeX</p>
-                    <p className="text-[10px] text-violet-500 font-semibold uppercase tracking-widest mt-0.5">Intelligence</p>
-                </div>
+        <div className="flex items-center justify-between px-4 py-4 border-b border-white/5 bg-[#0d0d11] shrink-0 select-none">
+            {/* Title with orb decoration */}
+            <div className="relative flex items-center gap-2.5">
+                <MergeXOrb size={20} />
+                <p className="text-[14px] font-semibold text-[#F3F3F5] tracking-wide leading-none">MergeX Intelligence</p>
             </div>
+
+            {/* Header controls: New Chat, Toggle History, Minimize */}
             <div className="flex items-center gap-1">
                 <button
-                    onClick={onToggleHistory}
-                    className="p-2 rounded-xl text-gray-400 hover:text-gray-700 hover:bg-gray-100 transition-colors"
-                    aria-label="History"
-                    title="Chat history"
-                >
-                    <MessageSquare className="w-4 h-4" />
-                </button>
-                <button
                     onClick={onNewConversation}
-                    className="p-2 rounded-xl text-gray-400 hover:text-gray-700 hover:bg-gray-100 transition-colors"
-                    aria-label="New conversation"
+                    className="p-1.5 rounded-lg text-[#71717A] hover:text-[#F3F3F5] hover:bg-white/5 transition-all cursor-pointer"
+                    aria-label="New Chat"
                     title="New conversation"
                 >
-                    <Plus className="w-4 h-4" />
+                    <Plus className="w-3.5 h-3.5" />
+                </button>
+                <button
+                    onClick={onToggleHistory}
+                    className="p-1.5 rounded-lg text-[#71717A] hover:text-[#F3F3F5] hover:bg-white/5 transition-all cursor-pointer"
+                    aria-label="Chat History"
+                    title="Toggle history"
+                >
+                    <History className="w-3.5 h-3.5" />
                 </button>
                 <button
                     onClick={onClose}
-                    className="p-2 rounded-xl text-gray-400 hover:text-gray-700 hover:bg-gray-100 transition-colors"
-                    aria-label="Close"
+                    className="p-1.5 rounded-lg text-[#71717A] hover:text-[#F3F3F5] hover:bg-white/5 transition-all cursor-pointer"
+                    aria-label="Minimize"
+                    title="Minimize panel"
                 >
-                    <X className="w-4 h-4" />
+                    <Minimize2 className="w-3.5 h-3.5" />
                 </button>
             </div>
         </div>

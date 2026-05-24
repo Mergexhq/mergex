@@ -46,11 +46,11 @@ export function GuidedFlow({
                         <p className="text-[10px] font-bold text-violet-500 uppercase tracking-widest">
                             Question {guidedStep + 1} of 3
                         </p>
-                        <button onClick={onClose} className="text-gray-400 hover:text-gray-600">
+                        <button onClick={onClose} className="text-white/40 hover:text-white transition-colors">
                             <X className="w-3.5 h-3.5" />
                         </button>
                     </div>
-                    <p className="text-[15px] font-bold text-gray-900 mb-4">
+                    <p className="text-[15px] font-bold text-white mb-4">
                         {GUIDED_QUESTIONS[guidedStep].question}
                     </p>
                     <div className="space-y-2">
@@ -58,7 +58,7 @@ export function GuidedFlow({
                             <button
                                 key={i}
                                 onClick={() => onAnswer(opt.value)}
-                                className="w-full text-left px-4 py-3 rounded-xl border border-gray-100 hover:border-violet-200 hover:bg-violet-50/50 text-[12px] font-medium text-gray-600 hover:text-violet-700 transition-all flex items-center justify-between group"
+                                className="w-full text-left px-4 py-3 rounded-xl border border-white/5 bg-white/[0.02] hover:border-violet-500/30 hover:bg-violet-500/5 text-[12px] font-medium text-white/70 hover:text-violet-300 transition-all flex items-center justify-between group"
                             >
                                 {opt.label}
                                 <ChevronRight className="w-3.5 h-3.5 opacity-0 group-hover:opacity-100 text-violet-400" />
@@ -71,12 +71,12 @@ export function GuidedFlow({
                 <div className="text-left py-2">
                     <div className="flex justify-between items-center mb-5">
                         <p className="text-[10px] font-bold text-violet-500 uppercase tracking-widest">Last Step</p>
-                        <button onClick={onClose} className="text-gray-400 hover:text-gray-600">
+                        <button onClick={onClose} className="text-white/40 hover:text-white transition-colors">
                             <X className="w-3.5 h-3.5" />
                         </button>
                     </div>
-                    <p className="text-[15px] font-bold text-gray-900 mb-2">Want help with this?</p>
-                    <p className="text-[12px] text-gray-500 mb-4">
+                    <p className="text-[15px] font-bold text-white mb-2">Want help with this?</p>
+                    <p className="text-[12px] text-white/50 mb-4">
                         Leave your details and we'll send a quick plan specific to your answers.
                     </p>
                     <form onSubmit={onLeadSubmit} className="space-y-2.5 mb-3">
@@ -86,7 +86,7 @@ export function GuidedFlow({
                             required
                             value={leadData.name}
                             onChange={e => onLeadChange({ ...leadData, name: e.target.value })}
-                            className="w-full bg-gray-50 border border-gray-100 rounded-xl px-3.5 py-2.5 text-[12px] outline-none focus:border-violet-300 focus:ring-1 focus:ring-violet-200"
+                            className="w-full bg-white/[0.03] border border-white/5 text-white placeholder-white/30 rounded-xl px-3.5 py-2.5 text-[12px] outline-none focus:border-violet-500/40 focus:ring-1 focus:ring-violet-500/20"
                         />
                         <input
                             type="email"
@@ -94,18 +94,18 @@ export function GuidedFlow({
                             required
                             value={leadData.email}
                             onChange={e => onLeadChange({ ...leadData, email: e.target.value })}
-                            className="w-full bg-gray-50 border border-gray-100 rounded-xl px-3.5 py-2.5 text-[12px] outline-none focus:border-violet-300 focus:ring-1 focus:ring-violet-200"
+                            className="w-full bg-white/[0.03] border border-white/5 text-white placeholder-white/30 rounded-xl px-3.5 py-2.5 text-[12px] outline-none focus:border-violet-500/40 focus:ring-1 focus:ring-violet-500/20"
                         />
                         <button
                             type="submit"
-                            className="w-full py-2.5 bg-violet-600 text-white rounded-xl font-bold text-[12px] shadow-md shadow-violet-200 hover:bg-violet-700 transition-all mt-1"
+                            className="w-full py-2.5 bg-violet-600 text-white rounded-xl font-bold text-[12px] shadow-md hover:bg-violet-500 transition-all mt-1"
                         >
                             Get My Custom Plan
                         </button>
                     </form>
                     <button
                         onClick={onSkipLead}
-                        className="w-full text-center text-[11px] text-gray-400 hover:text-gray-600 font-medium pb-2"
+                        className="w-full text-center text-[11px] text-white/40 hover:text-white font-medium pb-2 transition-colors"
                     >
                         Skip & see recommendation →
                     </button>
@@ -113,34 +113,34 @@ export function GuidedFlow({
             ) : (
                 /* Step 4: Results */
                 <div className="text-center py-4">
-                    <div className="w-12 h-12 bg-violet-100/50 rounded-full flex items-center justify-center mx-auto mb-4">
+                    <div className="w-12 h-12 bg-violet-500/10 rounded-full flex items-center justify-center mx-auto mb-4">
                         <img
                             src="/icons/sparkle-star.webp"
                             alt="Sparkles"
-                            className="w-6 h-6 opacity-80 object-contain"
+                            className="w-6 h-6 opacity-80 object-contain animate-pulse"
                         />
                     </div>
-                    <p className="text-[15px] font-bold text-gray-900 mb-2">{recommendation.title}</p>
-                    <p className="text-[12px] text-gray-500 leading-relaxed mb-6">{recommendation.desc}</p>
+                    <p className="text-[15px] font-bold text-white mb-2">{recommendation.title}</p>
+                    <p className="text-[12px] text-white/50 leading-relaxed mb-6">{recommendation.desc}</p>
                     <div className="flex flex-col gap-2 mb-3">
                         <Link
                             href={recommendation.cta1.href}
                             onClick={onClosePanel}
-                            className="block w-full py-3 bg-violet-600 text-white rounded-xl font-bold text-[12px] shadow-md shadow-violet-200 hover:bg-violet-700 transition-all"
+                            className="block w-full py-3 bg-violet-600 text-white rounded-xl font-bold text-[12px] hover:bg-violet-500 transition-all"
                         >
                             {recommendation.cta1.label}
                         </Link>
                         <Link
                             href={recommendation.cta2.href}
                             onClick={onClosePanel}
-                            className="block w-full py-3 bg-white border border-gray-200 text-gray-700 rounded-xl font-bold text-[12px] hover:bg-gray-50 hover:border-gray-300 transition-all"
+                            className="block w-full py-3 bg-white/[0.03] border border-white/10 text-white rounded-xl font-bold text-[12px] hover:bg-white/[0.08] hover:border-white/20 transition-all"
                         >
                             {recommendation.cta2.label}
                         </Link>
                     </div>
                     <button
                         onClick={onClose}
-                        className="text-[12px] text-gray-500 font-medium hover:text-gray-700"
+                        className="text-[12px] text-white/40 font-medium hover:text-white transition-colors"
                     >
                         Back to Chat
                     </button>

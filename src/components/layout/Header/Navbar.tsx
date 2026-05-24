@@ -96,7 +96,7 @@ export function Navbar() {
     
     // Dropdown open: force dark bg to blend with mega menu.
     const cardBgClass = isDropdownOpen
-        ? 'bg-black rounded-[12px] shadow-2xl'
+        ? 'bg-[#0a0a0a] rounded-[12px] shadow-2xl'
         : 'bg-transparent rounded-none shadow-none';
 
     const pillBgClass = isDropdownOpen || !isScrolled
@@ -154,6 +154,20 @@ export function Navbar() {
 
     return (
         <>
+            {/* Desktop Megamenu Backdrop Overlay */}
+            <AnimatePresence>
+                {isDropdownOpen && (
+                    <motion.div
+                        initial={{ opacity: 0 }}
+                        animate={{ opacity: 1 }}
+                        exit={{ opacity: 0 }}
+                        transition={{ duration: 0.3 }}
+                        className="hidden lg:block fixed inset-0 bg-black/20 backdrop-blur-[6px] z-40 pointer-events-auto"
+                        onClick={() => setIsDropdownOpen(false)}
+                    />
+                )}
+            </AnimatePresence>
+
             {/* Desktop Navbar */}
             <motion.div
                 className="hidden lg:block w-full fixed top-0 left-0 right-0 z-50 pointer-events-none mergex-navbar"

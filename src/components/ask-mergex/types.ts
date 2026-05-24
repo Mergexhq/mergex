@@ -17,14 +17,14 @@ export const SESSIONS_KEY = 'mergex_ai_sessions';
 export const MAX_SESSIONS = 30;
 
 export const SUGGESTIONS = [
-    'Which MergeX solution fits my business?',
-    'How can MergeX automate my workflows?',
-    'What can MergeX build for my company?',
-    'Should I start with Labs or Systems?',
+    'Revenue growth feels inconsistent',
+    'Operations are becoming difficult to manage',
+    'Sales depend too much on the founder',
+    'We scaled fast but structure broke',
 ];
 
 export const PLACEHOLDERS = [
-    'Describe your challenge...',
+    'What operational issue are you trying to solve?',
 ];
 
 export const GUIDED_QUESTIONS = [

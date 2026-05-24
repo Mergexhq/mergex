@@ -73,8 +73,8 @@ export function ChatMessages({
                                         className={cn(
                                             'p-1.5 rounded-lg transition-all',
                                             speakingId === msg.id
-                                                ? 'bg-violet-100 text-violet-600 scale-110'
-                                                : 'text-gray-300 hover:text-gray-500 hover:bg-gray-100'
+                                                ? 'bg-violet-500/20 text-violet-300 scale-110'
+                                                : 'text-white/30 hover:text-white hover:bg-white/10'
                                         )}
                                     >
                                         {speakingId === msg.id
@@ -83,7 +83,7 @@ export function ChatMessages({
                                         }
                                     </button>
                                 </div>
-                                <div className="bg-gray-50 border border-gray-100 rounded-2xl rounded-bl-md px-4 py-3 text-[13.5px] text-gray-700 leading-relaxed shadow-sm">
+                                <div className="bg-white/[0.03] border border-white/5 rounded-2xl rounded-bl-md px-4 py-3 text-[13.5px] text-white/90 leading-relaxed shadow-sm">
                                     <div className="markdown-content prose-sm max-w-none">
                                         <ReactMarkdown
                                             components={{
@@ -95,7 +95,7 @@ export function ChatMessages({
                                                     return (
                                                         <Link
                                                             href={props.href || '#'}
-                                                            className="text-violet-600 font-bold hover:underline"
+                                                            className="text-violet-400 font-bold hover:underline"
                                                             onClick={(e) => { e.stopPropagation(); onClosePanel(); }}
                                                         >
                                                             {label}
@@ -103,8 +103,8 @@ export function ChatMessages({
                                                     );
                                                 },
                                                 p: ({ children }) => <p className="mb-2 last:mb-0">{children}</p>,
-                                                strong: ({ children }) => <strong className="font-bold text-gray-900">{children}</strong>,
-                                                em: ({ children }) => <em className="italic text-gray-800">{children}</em>,
+                                                strong: ({ children }) => <strong className="font-bold text-white">{children}</strong>,
+                                                em: ({ children }) => <em className="italic text-white/85">{children}</em>,
                                             }}
                                         >
                                             {msg.content}
@@ -120,17 +120,17 @@ export function ChatMessages({
                                         transition={{ delay: 0.4 }}
                                         className="mt-2.5 flex flex-col gap-1.5"
                                     >
-                                        <p className="text-[11px] font-medium text-gray-500 ml-1">Want to explore this solution?</p>
+                                        <p className="text-[11px] font-medium text-white/40 ml-1">Want to explore this solution?</p>
                                         <div className="flex flex-wrap gap-1.5">
                                             {getTopicCTAs(msg.content + (messages[idx - 1]?.content || '')).map((cta, ci) => (
                                                 <Link
                                                     key={ci}
                                                     href={cta.href}
                                                     onClick={onClosePanel}
-                                                    className="flex items-center gap-1.5 px-2.5 py-1 rounded-lg border border-gray-100 bg-white hover:border-violet-200 hover:bg-violet-50 transition-all group text-[11px] font-semibold text-gray-600 hover:text-violet-700 shadow-sm"
+                                                    className="flex items-center gap-1.5 px-2.5 py-1 rounded-lg border border-white/5 bg-white/[0.02] hover:border-violet-500/30 hover:bg-violet-500/5 transition-all group text-[11px] font-semibold text-white/70 hover:text-violet-300 shadow-sm"
                                                 >
                                                     {cta.label}
-                                                    <ArrowRight className="w-2.5 h-2.5 text-gray-300 group-hover:text-violet-400 group-hover:translate-x-0.5 transition-all" />
+                                                    <ArrowRight className="w-2.5 h-2.5 text-white/20 group-hover:text-violet-400 group-hover:translate-x-0.5 transition-all" />
                                                 </Link>
                                             ))}
                                         </div>
@@ -154,13 +154,13 @@ export function ChatMessages({
                         <div className="shrink-0 mt-0.5">
                             <MergeXOrb size={22} />
                         </div>
-                        <div className="bg-gray-50 border border-gray-100 rounded-2xl rounded-bl-md px-3.5 py-2.5 flex items-center gap-2 shadow-sm">
+                        <div className="bg-white/[0.03] border border-white/5 rounded-2xl rounded-bl-md px-3.5 py-2.5 flex items-center gap-2 shadow-sm">
                             <img
                                 src="/icons/sparkle-star.webp"
                                 alt="Sparkles"
                                 className="w-3 h-3 animate-pulse opacity-60 object-contain"
                             />
-                            <span className="text-[11px] text-gray-400">Thinking</span>
+                            <span className="text-[11px] text-white/40">Thinking</span>
                             <TypingDots />
                         </div>
                     </motion.div>

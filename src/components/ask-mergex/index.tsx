@@ -27,6 +27,27 @@ export default function AskMergeXWidget() {
         return () => clearTimeout(timer);
     }, []);
 
+    // Prevent body scrolling when the chatbot is open (pin screen)
+    useEffect(() => {
+        const lenis = (window as any).lenis;
+
+        if (open) {
+            document.body.style.overflow = 'hidden';
+            document.body.style.touchAction = 'none'; // Prevents mobile pull-to-refresh
+            if (lenis) lenis.stop();
+        } else {
+            document.body.style.overflow = '';
+            document.body.style.touchAction = '';
+            if (lenis) lenis.start();
+        }
+
+        return () => {
+            document.body.style.overflow = '';
+            document.body.style.touchAction = '';
+            if (lenis) lenis.start();
+        };
+    }, [open]);
+
     // Listen to mobile menu toggle to hide the widget
     useEffect(() => {
         const handleMobileMenu = (e: Event) => {
@@ -236,7 +257,7 @@ export default function AskMergeXWidget() {
                         animate={{ opacity: 1 }}
                         exit={{ opacity: 0 }}
                         onClick={() => setOpen(false)}
-                        className="fixed inset-0 z-118 bg-black/10 backdrop-blur-[6px]"
+                        className="fixed inset-0 z-118 bg-black/25 backdrop-blur-[5px]"
                     />
                 )}
             </AnimatePresence>
@@ -265,10 +286,10 @@ export default function AskMergeXWidget() {
                         style={{
                             width: 'min(420px, calc(100vw - 32px))',
                             height: 'min(600px, calc(100dvh - 100px))',
-                            background: '#ffffff',
-                            borderRadius: '20px',
-                            boxShadow: '0 24px 64px rgba(0,0,0,0.18), 0 4px 16px rgba(0,0,0,0.08)',
-                            border: '1px solid rgba(0,0,0,0.07)',
+                            background: '#0a0a0a',
+                            borderRadius: '12px',
+                            boxShadow: '0 24px 64px rgba(0,0,0,0.4), 0 4px 16px rgba(0,0,0,0.2)',
+                            border: '1px solid rgba(255,255,255,0.08)',
                             overflow: 'hidden',
                         }}
                     >
@@ -303,7 +324,7 @@ export default function AskMergeXWidget() {
                                     className="flex-1 flex flex-col min-h-0"
                                 >
                                     <div className="flex-1 relative overflow-hidden min-h-0">
-                                        <div className="h-full overflow-y-auto px-4 py-4 pb-32 scroll-smooth" data-lenis-prevent="true">
+                                        <div className="h-full overflow-y-auto px-4 py-4 pb-[145px] scroll-smooth" data-lenis-prevent="true">
 
                                             {/* Welcome / Guided flow */}
                                             {!hasStarted && (
@@ -343,7 +364,7 @@ export default function AskMergeXWidget() {
                                         </div>
 
                                         {/* Fade overlay */}
-                                        <div className="absolute bottom-0 left-0 right-0 h-32 bg-linear-to-t from-white via-white/90 to-transparent pointer-events-none z-15" />
+                                        <div className="absolute bottom-0 left-0 right-0 h-32 bg-linear-to-t from-[#0a0a0a] via-[#0a0a0a]/90 to-transparent pointer-events-none z-15" />
                                     </div>
 
                                     <ChatInput

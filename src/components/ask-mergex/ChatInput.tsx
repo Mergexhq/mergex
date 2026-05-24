@@ -32,48 +32,55 @@ export function ChatInput({
     return (
         <div className="absolute bottom-0 left-0 right-0 px-3 py-6 z-20 pointer-events-none">
             <div className="pointer-events-auto">
-                <div className="relative group z-10">
-                    {/* Glow on focus */}
-                    <div className={cn(
-                        'absolute -inset-1 bg-linear-to-r from-violet-400 via-fuchsia-300 to-indigo-400 rounded-xl blur-xl transition-all duration-500 z-0',
-                        inputFocused ? 'opacity-30 scale-100' : 'opacity-0 scale-90 group-hover:opacity-10'
-                    )} />
+                <div className={cn(
+                    'relative rounded-lg transition-all duration-500',
+                    inputFocused ? 'scale-[1.005]' : 'scale-100'
+                )}>
+                    {/* Inner card surface: handles background, standard border, and pixel-perfect uniform gradient border */}
+                    <div
+                        className={cn(
+                            'relative z-10 rounded-lg transition-all duration-300 border',
+                            inputFocused
+                                ? 'shadow-md'
+                                : 'bg-white/[0.03] hover:bg-white/[0.05] border-white/10 hover:border-white/20'
+                        )}
+                        style={inputFocused ? {
+                            border: '1px solid transparent',
+                            background: 'linear-gradient(#0c0c10, #0c0c10) padding-box, linear-gradient(to right, #c084fc, #8b5cf6, #581c87, #8b5cf6, #c084fc) border-box',
+                        } : undefined}
+                    >
+                        {/* Perfect flex layout to align input, blinking pointer, and arrow in one row */}
+                        <div className="relative flex items-center justify-between px-3 py-1">
+                            <div className="relative flex-1 flex items-center min-w-0">
+                                <textarea
+                                    ref={textareaRef}
+                                    value={input}
+                                    onChange={e => onInputChange(e.target.value)}
+                                    onKeyDown={onKeyDown}
+                                    onFocus={onFocus}
+                                    onBlur={onBlur}
+                                    disabled={isTyping}
+                                    rows={1}
+                                    className="w-full bg-transparent resize-none outline-none text-[13px] text-white placeholder-transparent leading-[20px] py-1.5 pr-8 block min-h-[32px]"
+                                />
+                                {!input && (
+                                    <div className="absolute inset-y-0 left-0 flex items-center pointer-events-none">
+                                        <TypingAnimation
+                                            words={PLACEHOLDERS}
+                                            blinkCursor
+                                            pauseDelay={2500}
+                                            loop
+                                            startOnView={false}
+                                            className="text-[13px] text-white/40 font-normal"
+                                            duration={45}
+                                            delay={80}
+                                            deleteSpeed={25}
+                                        />
+                                    </div>
+                                )}
+                            </div>
 
-                    <div className={cn(
-                        'relative z-10 bg-white/90 backdrop-blur-sm rounded-xl transition-all duration-300 shadow-sm',
-                        inputFocused
-                            ? 'border-violet-300 shadow-md ring-1 ring-violet-200'
-                            : 'border border-gray-200 hover:border-gray-300'
-                    )}>
-                        <div className="relative px-3 pt-2.5 pb-1.5">
-                            <textarea
-                                ref={textareaRef}
-                                value={input}
-                                onChange={e => onInputChange(e.target.value)}
-                                onKeyDown={onKeyDown}
-                                onFocus={onFocus}
-                                onBlur={onBlur}
-                                disabled={isTyping}
-                                rows={1}
-                                className="w-full bg-transparent resize-none outline-none text-[13px] text-gray-900 placeholder-transparent leading-relaxed min-h-[44px] pr-9"
-                            />
-                            {!input && (
-                                <div className="absolute top-2.5 left-3 pointer-events-none">
-                                    <TypingAnimation
-                                        words={PLACEHOLDERS}
-                                        blinkCursor
-                                        pauseDelay={2500}
-                                        loop
-                                        startOnView={false}
-                                        className="text-[13px] text-gray-400 font-normal"
-                                        duration={45}
-                                        delay={80}
-                                        deleteSpeed={25}
-                                    />
-                                </div>
-                            )}
-
-                            {/* Send button */}
+                            {/* Send button perfectly aligned in the same flex row */}
                             <motion.button
                                 type="button"
                                 onClick={onSend}
@@ -81,10 +88,10 @@ export function ChatInput({
                                 whileTap={{ scale: 0.94 }}
                                 disabled={isTyping || !input.trim()}
                                 className={cn(
-                                    'absolute right-2 bottom-2 w-7 h-7 rounded-lg flex items-center justify-center transition-all',
+                                    'w-7 h-7 rounded-lg flex items-center justify-center transition-all shrink-0 ml-1',
                                     input.trim() && !isTyping
-                                        ? 'bg-black hover:bg-gray-900 cursor-pointer text-white shadow-md'
-                                        : 'bg-gray-100 text-gray-300 cursor-not-allowed'
+                                        ? 'bg-white hover:bg-white/90 cursor-pointer text-black shadow-md'
+                                        : 'bg-white/5 text-white/20 cursor-not-allowed'
                                 )}
                             >
                                 {isTyping
@@ -94,10 +101,17 @@ export function ChatInput({
                             </motion.button>
                         </div>
                     </div>
+
+                    {/* Soft continuous light violet to dark violet outer glow blur */}
+                    <div
+                        aria-hidden="true"
+                        className={cn(
+                            'absolute -inset-0.5 rounded-lg blur-md transition-opacity duration-500 pointer-events-none z-0',
+                            'bg-[linear-gradient(to_right,#c084fc,#8b5cf6,#581c87,#c084fc)]',
+                            inputFocused ? 'opacity-30' : 'opacity-0'
+                        )}
+                    />
                 </div>
-                <p className="text-center text-[10px] text-gray-300 mt-2.5 flex items-center justify-center gap-1.5 bg-white/40 backdrop-blur-sm py-1 rounded-full w-fit mx-auto px-3 border border-white/20">
-                    Powered by MergeX Intelligence
-                </p>
             </div>
         </div>
     );
