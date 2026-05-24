@@ -380,87 +380,93 @@ export function Navbar() {
                 transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
                 className="lg:hidden fixed top-0 left-0 right-0 z-50 pointer-events-none mergex-navbar"
             >
-                <div
-                    className={`w-full transition-all duration-300 ease-in-out pointer-events-auto ${
-                        isMobileMenuOpen
-                            ? 'bg-[#F3F3F3] border-b border-b-gray-200/50'
-                            : (isScrolled 
-                                ? (isLightPage ? 'bg-[#F3F3F3] border-b border-b-gray-200/50' : 'bg-black border-b border-b-white/10')
-                                : 'bg-transparent border-b border-b-transparent'
-                              )
-                    } px-5 h-14 flex items-center justify-between relative`}
-                >
-                    {/* Left: Hamburger */}
-                    <button
-                        onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-                        className={`p-2 -ml-2 focus:outline-none z-10 ${
-                            isMobileMenuOpen || isLightPage ? 'text-black' : 'text-white'
-                        }`}
-                        aria-label="Toggle menu"
+                <div className="w-full px-4 pt-3">
+                    <div
+                        className={`w-full transition-all duration-300 ease-in-out pointer-events-auto rounded-[16px] border backdrop-blur-md ${
+                            isMobileMenuOpen
+                                ? 'bg-[#F3F3F3] border-gray-200/50 shadow-[0_8px_30px_rgba(0,0,0,0.08)]'
+                                : (isScrolled 
+                                    ? (isLightPage 
+                                        ? 'bg-[#ebebea]/95 border-[#d8d8d6] shadow-[0_4px_20px_rgba(0,0,0,0.06)]' 
+                                        : 'bg-black/85 border-white/10 shadow-[0_8px_30px_rgba(0,0,0,0.2)]')
+                                    : (isLightPage 
+                                        ? 'bg-transparent border-transparent shadow-none' 
+                                        : 'bg-transparent border-transparent shadow-none')
+                                  )
+                        } px-5 h-14 flex items-center justify-between relative`}
                     >
-                        <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            {isMobileMenuOpen ? (
-                                <path
-                                    strokeLinecap="round"
-                                    strokeLinejoin="round"
-                                    strokeWidth={2}
-                                    d="M6 18L18 6M6 6l12 12"
-                                />
-                            ) : (
-                                <>
-                                    <path
-                                        strokeLinecap="round"
-                                        strokeLinejoin="round"
-                                        strokeWidth={2.5}
-                                        d="M4 8h16"
-                                    />
-                                    <path
-                                        strokeLinecap="round"
-                                        strokeLinejoin="round"
-                                        strokeWidth={2.5}
-                                        d="M4 16h16"
-                                    />
-                                </>
-                            )}
-                        </svg>
-                    </button>
-
-                    {/* Centered Logo + Text */}
-                    <Link href="/" className="absolute left-1/2 -translate-x-1/2 flex items-center justify-center gap-1 z-10">
-                        <Image
-                            src="/logo/mergex-logo.png"
-                            alt="MergeX Logo"
-                            width={40}
-                            height={40}
-                            className={`object-contain transition-all duration-300 ${
-                                isMobileMenuOpen || isLightPage ? '' : 'brightness-0 invert'
-                            }`}
-                        />
-                        <span
-                            className={`font-clash font-bold text-2xl tracking-wide ${
+                        {/* Left: Hamburger */}
+                        <button
+                            onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+                            className={`p-2 -ml-2 focus:outline-none z-10 ${
                                 isMobileMenuOpen || isLightPage ? 'text-black' : 'text-white'
                             }`}
-                            style={{ fontFamily: "'Clash Display', sans-serif" }}
+                            aria-label="Toggle menu"
                         >
-                            MERGEX
-                        </span>
-                    </Link>
+                            <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                {isMobileMenuOpen ? (
+                                    <path
+                                        strokeLinecap="round"
+                                        strokeLinejoin="round"
+                                        strokeWidth={2}
+                                        d="M6 18L18 6M6 6l12 12"
+                                    />
+                                ) : (
+                                    <>
+                                        <path
+                                            strokeLinecap="round"
+                                            strokeLinejoin="round"
+                                            strokeWidth={2.5}
+                                            d="M4 8h16"
+                                        />
+                                        <path
+                                            strokeLinecap="round"
+                                            strokeLinejoin="round"
+                                            strokeWidth={2.5}
+                                            d="M4 16h16"
+                                        />
+                                    </>
+                                )}
+                            </svg>
+                        </button>
 
-                    {/* Right: Login Icon */}
-                    <Link
-                        href="/login"
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className={`p-2 -mr-2 z-10 flex items-center justify-center ${
-                            isMobileMenuOpen || isLightPage ? 'text-black' : 'text-white'
-                        } transition-colors hover:opacity-70`}
-                        aria-label="Login"
-                    >
-                        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                            <path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2" />
-                            <circle cx="12" cy="7" r="4" />
-                        </svg>
-                    </Link>
+                        {/* Centered Logo + Text */}
+                        <Link href="/" className="absolute left-1/2 -translate-x-1/2 flex items-center justify-center gap-1 z-10">
+                            <Image
+                                src="/logo/mergex-logo.png"
+                                alt="MergeX Logo"
+                                width={40}
+                                height={40}
+                                className={`object-contain transition-all duration-300 ${
+                                    isMobileMenuOpen || isLightPage ? '' : 'brightness-0 invert'
+                                }`}
+                            />
+                            <span
+                                className={`font-clash font-bold text-2xl tracking-wide ${
+                                    isMobileMenuOpen || isLightPage ? 'text-black' : 'text-white'
+                                }`}
+                                style={{ fontFamily: "'Clash Display', sans-serif" }}
+                            >
+                                MERGEX
+                            </span>
+                        </Link>
+
+                        {/* Right: Login Icon */}
+                        <Link
+                            href="/login"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className={`p-2 -mr-2 z-10 flex items-center justify-center ${
+                                isMobileMenuOpen || isLightPage ? 'text-black' : 'text-white'
+                            } transition-colors hover:opacity-70`}
+                            aria-label="Login"
+                        >
+                            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                                <path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2" />
+                                <circle cx="12" cy="7" r="4" />
+                            </svg>
+                        </Link>
+                    </div>
                 </div>
             </motion.div>
 
