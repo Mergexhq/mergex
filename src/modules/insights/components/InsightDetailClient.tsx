@@ -35,8 +35,6 @@ function extractSections(body: string): { id: string; label: string }[] {
   const lines = body.split('\n');
   const sections: { id: string; label: string }[] = [];
 
-  // Always anchor: AI Overview at the top
-  sections.push({ id: 'overview', label: 'AI Overview' });
 
   lines.forEach((line) => {
     const h2 = line.match(/^##\s+(.+)/);
@@ -52,13 +50,80 @@ function extractSections(body: string): { id: string; label: string }[] {
     }
   });
 
-  // Fixed closing anchors
+  // Fixed closing anchor
   sections.push({ id: 'tldr', label: 'The Bottom Line' });
-  sections.push({ id: 'related', label: 'Related Insights' });
 
   return sections;
 }
 
+
+/** Mobile-only share + meta block shown after The Bottom Line */
+function MobileShare({ readTime, date }: { readTime: string; date: string }) {
+  const [copied, setCopied] = useState(false);
+
+  const copyLink = () => {
+    navigator.clipboard.writeText(window.location.href).then(() => {
+      setCopied(true);
+      setTimeout(() => setCopied(false), 2000);
+    });
+  };
+  const shareX = () => {
+    const url = encodeURIComponent(window.location.href);
+    window.open(`https://x.com/intent/tweet?url=${url}&text=${encodeURIComponent(document.title)}`, '_blank');
+  };
+  const shareLinkedIn = () => {
+    window.open(`https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(window.location.href)}`, '_blank');
+  };
+  const shareEmail = () => {
+    const subject = encodeURIComponent(document.title);
+    const body = encodeURIComponent(window.location.href);
+    window.open(`mailto:?subject=${subject}&body=${body}`);
+  };
+
+  return (
+    <div className="lg:hidden border border-black/5 dark:border-white/8 rounded-2xl p-5 my-8 max-w-[740px] bg-[#F5F3F0] dark:bg-[#111] transition-colors duration-500">
+      <p className="text-[9px] font-bold uppercase tracking-[0.2em] text-foreground-muted/50 mb-4">Share this article</p>
+      <div className="flex items-center gap-2">
+        {/* Copy link */}
+        <button onClick={copyLink} title="Copy link"
+          className="flex items-center gap-2 px-3 py-2 rounded-lg bg-white dark:bg-white/5 border border-black/8 dark:border-white/8 text-[11px] font-medium text-foreground-muted hover:text-foreground transition-all duration-200">
+          {copied ? (
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" className="text-violet-500 shrink-0">
+              <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
+            </svg>
+          ) : (
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className="shrink-0">
+              <path strokeLinecap="round" strokeLinejoin="round" d="M10 13a5 5 0 007.54.54l3-3a5 5 0 00-7.07-7.07l-1.72 1.71" />
+              <path strokeLinecap="round" strokeLinejoin="round" d="M14 11a5 5 0 00-7.54-.54l-3 3a5 5 0 007.07 7.07l1.71-1.71" />
+            </svg>
+          )}
+          {copied ? 'Copied!' : 'Copy Link'}
+        </button>
+        {/* Email */}
+        <button onClick={shareEmail} title="Email"
+          className="w-9 h-9 rounded-lg bg-white dark:bg-white/5 border border-black/8 dark:border-white/8 flex items-center justify-center text-foreground-muted hover:text-foreground transition-all duration-200">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+            <path strokeLinecap="round" strokeLinejoin="round" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+          </svg>
+        </button>
+        {/* X */}
+        <button onClick={shareX} title="Share on X"
+          className="w-9 h-9 rounded-lg bg-white dark:bg-white/5 border border-black/8 dark:border-white/8 flex items-center justify-center text-foreground-muted hover:text-foreground transition-all duration-200">
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor">
+            <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.74l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" />
+          </svg>
+        </button>
+        {/* LinkedIn */}
+        <button onClick={shareLinkedIn} title="Share on LinkedIn"
+          className="w-9 h-9 rounded-lg bg-white dark:bg-white/5 border border-black/8 dark:border-white/8 flex items-center justify-center text-foreground-muted hover:text-foreground transition-all duration-200">
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor">
+            <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z" />
+          </svg>
+        </button>
+      </div>
+    </div>
+  );
+}
 
 export function InsightDetailClient({ insight, related }: InsightDetailClientProps) {
   const [showMoreAI, setShowMoreAI] = useState(false);
@@ -159,15 +224,26 @@ export function InsightDetailClient({ insight, related }: InsightDetailClientPro
             </p>
             
             {/* Author info & Read time row */}
-            <div className="flex items-center gap-3 border-t border-b border-black/5 dark:border-white/5 py-4 mb-10 transition-colors duration-500">
+            <div className="flex items-center gap-3 border-t border-black/5 dark:border-white/5 pt-4 transition-colors duration-500">
               <div className="w-9 h-9 rounded-full bg-violet-600/10 dark:bg-violet-600/20 flex items-center justify-center text-violet-700 dark:text-violet-300 font-bold text-xs transition-colors duration-500">
                 {insight.category.slice(0, 2).toUpperCase()}
               </div>
               <div>
                 <p className="text-sm font-semibold text-foreground">Manikandan S</p>
-                <p className="text-xs text-foreground-muted">
-                  Principal Consultant · {insight.readTime}
-                </p>
+                <p className="text-xs text-foreground-muted">Principal Consultant</p>
+              </div>
+            </div>
+
+            {/* Mobile-only: Reading Time + Published meta bar */}
+            <div className="lg:hidden flex items-center gap-5 border-b border-black/5 dark:border-white/5 py-4 mb-10 transition-colors duration-500">
+              <div>
+                <p className="text-[9px] font-bold uppercase tracking-[0.18em] text-foreground-muted/60 mb-0.5">Reading Time</p>
+                <p className="text-xs text-foreground-muted">{insight.readTime}</p>
+              </div>
+              <div className="w-px h-5 bg-black/8 dark:bg-white/8 shrink-0" />
+              <div>
+                <p className="text-[9px] font-bold uppercase tracking-[0.18em] text-foreground-muted/60 mb-0.5">Published</p>
+                <p className="text-xs text-foreground-muted">{sidebarMeta.date}</p>
               </div>
             </div>
           </header>
@@ -358,6 +434,9 @@ export function InsightDetailClient({ insight, related }: InsightDetailClientPro
               </li>
             </ul>
           </section>
+
+          {/* Mobile-only: Share row after The Bottom Line */}
+          <MobileShare readTime={insight.readTime} date={sidebarMeta.date} />
 
           {/* Section 5: Related Insights Grid */}
           <section id="related" className="mt-20 pt-12 border-t border-black/5 dark:border-white/5 transition-colors duration-500">
