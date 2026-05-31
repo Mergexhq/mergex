@@ -658,15 +658,7 @@ export function Navbar() {
                             </svg>
                         </button>
 
-                        {/* Centered Logo + Text */}
-                        {pathname === '/brands/ovrn-studios' ? (
-                            <Link href="/brands/ovrn-studios" className="absolute left-1/2 -translate-x-1/2 flex items-center justify-center gap-1 z-10">
-                                <span
-                                    className={`font-clash font-bold text-xl tracking-wider ${
-                                        isMobileMenuOpen || isLightPage ? 'text-black' : 'text-white'
-                                    }`}
-                                    style={{ fontFamily: "'Clash Display', sans-serif" }}
-                        {/* Centered Logo / Wordmark — path-aware */}
+                        {/* Centered Wordmark — path-aware */}
                         {(() => {
                           // OVRN Studios brand page
                           if (pathname === '/brands/ovrn-studios') {
@@ -706,14 +698,10 @@ export function Navbar() {
                                   alt="MergeX Logo"
                                   width={40}
                                   height={40}
-                                  className={`object-contain transition-all duration-300 ${
-                                    isMobileMenuOpen || isLightPage ? '' : 'brightness-0 invert'
-                                  }`}
+                                  className={`object-contain transition-all duration-300 ${isMobileMenuOpen || isLightPage ? '' : 'brightness-0 invert'}`}
                                 />
                                 <span
-                                  className={`font-clash font-bold text-2xl tracking-wide ${
-                                    isMobileMenuOpen || isLightPage ? 'text-black' : 'text-white'
-                                  }`}
+                                  className={`font-clash font-bold text-2xl tracking-wide ${isMobileMenuOpen || isLightPage ? 'text-black' : 'text-white'}`}
                                   style={{ fontFamily: "'Clash Display', sans-serif" }}
                                 >
                                   MERGEX
@@ -721,15 +709,11 @@ export function Navbar() {
                               </Link>
                             );
                           }
-                          // Parent site pages — "The MergeX Company"
                           return (
-                            <Link href="/" className={`absolute left-1/2 -translate-x-1/2 flex items-center justify-center gap-0 z-10 ${isDetailPage ? 'opacity-0 pointer-events-none' : ''}`}>
-                              <span className={`text-[17px] leading-none tracking-tight select-none ${ isMobileMenuOpen || isLightPage ? 'text-black' : 'text-white'}`}>
+                            <Link href="/" className={`absolute left-1/2 -translate-x-1/2 flex items-center justify-center z-10 ${isDetailPage ? 'opacity-0 pointer-events-none' : ''}`}>
+                              <span className={`text-[17px] leading-none tracking-tight select-none ${isMobileMenuOpen || isLightPage ? 'text-black' : 'text-white'}`}>
                                 <span className="font-serif italic font-normal">The </span>
-                                <span
-                                  className="font-clash font-bold tracking-wide"
-                                  style={{ fontFamily: "'Clash Display', sans-serif" }}
-                                >MergeX</span>
+                                <span className="font-clash font-bold tracking-wide" style={{ fontFamily: "'Clash Display', sans-serif" }}>MergeX</span>
                                 <span className="font-serif italic font-normal"> Company</span>
                               </span>
                             </Link>
