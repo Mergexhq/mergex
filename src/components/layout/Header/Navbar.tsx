@@ -666,31 +666,75 @@ export function Navbar() {
                                         isMobileMenuOpen || isLightPage ? 'text-black' : 'text-white'
                                     }`}
                                     style={{ fontFamily: "'Clash Display', sans-serif" }}
+                        {/* Centered Logo / Wordmark — path-aware */}
+                        {(() => {
+                          // OVRN Studios brand page
+                          if (pathname === '/brands/ovrn-studios') {
+                            return (
+                              <Link href="/brands/ovrn-studios" className="absolute left-1/2 -translate-x-1/2 flex items-center justify-center gap-1 z-10">
+                                <span
+                                  className={`font-clash font-bold text-xl tracking-wider ${
+                                    isMobileMenuOpen || isLightPage ? 'text-black' : 'text-white'
+                                  }`}
+                                  style={{ fontFamily: "'Clash Display', sans-serif" }}
                                 >
-                                    OVRN STUDIOS
+                                  OVRN Studio
                                 </span>
-                            </Link>
-                        ) : (
-                            <Link href="/" className={`absolute left-1/2 -translate-x-1/2 flex items-center justify-center gap-1 z-10 ${isDetailPage ? 'opacity-0 pointer-events-none' : ''}`}>
+                              </Link>
+                            );
+                          }
+                          // MergeX Academy brand page
+                          if (pathname === '/brands/academy') {
+                            return (
+                              <Link href="/brands/academy" className="absolute left-1/2 -translate-x-1/2 flex items-center justify-center gap-1 z-10">
+                                <span className={`text-xl leading-none ${ isMobileMenuOpen || isLightPage ? 'text-black' : 'text-white'}`}>
+                                  <span
+                                    className="font-clash font-bold tracking-wide"
+                                    style={{ fontFamily: "'Clash Display', sans-serif" }}
+                                  >MergeX</span>{' '}
+                                  <span className="font-clash font-light tracking-wide" style={{ fontFamily: "'Clash Display', sans-serif" }}>Academy</span>
+                                </span>
+                              </Link>
+                            );
+                          }
+                          // MergeX brand page — logo + MERGEX (keep as-is)
+                          if (pathname === '/brands/mergex') {
+                            return (
+                              <Link href="/brands/mergex" className={`absolute left-1/2 -translate-x-1/2 flex items-center justify-center gap-1 z-10 ${isDetailPage ? 'opacity-0 pointer-events-none' : ''}`}>
                                 <Image
-                                    src="/logo/mergex-logo.png"
-                                    alt="MergeX Logo"
-                                    width={40}
-                                    height={40}
-                                    className={`object-contain transition-all duration-300 ${
-                                        isMobileMenuOpen || isLightPage ? '' : 'brightness-0 invert'
-                                    }`}
+                                  src="/logo/mergex-logo.png"
+                                  alt="MergeX Logo"
+                                  width={40}
+                                  height={40}
+                                  className={`object-contain transition-all duration-300 ${
+                                    isMobileMenuOpen || isLightPage ? '' : 'brightness-0 invert'
+                                  }`}
                                 />
                                 <span
-                                    className={`font-clash font-bold text-2xl tracking-wide ${
-                                        isMobileMenuOpen || isLightPage ? 'text-black' : 'text-white'
-                                    }`}
-                                    style={{ fontFamily: "'Clash Display', sans-serif" }}
+                                  className={`font-clash font-bold text-2xl tracking-wide ${
+                                    isMobileMenuOpen || isLightPage ? 'text-black' : 'text-white'
+                                  }`}
+                                  style={{ fontFamily: "'Clash Display', sans-serif" }}
                                 >
-                                    MERGEX
+                                  MERGEX
                                 </span>
+                              </Link>
+                            );
+                          }
+                          // Parent site pages — "The MergeX Company"
+                          return (
+                            <Link href="/" className={`absolute left-1/2 -translate-x-1/2 flex items-center justify-center gap-0 z-10 ${isDetailPage ? 'opacity-0 pointer-events-none' : ''}`}>
+                              <span className={`text-[17px] leading-none tracking-tight select-none ${ isMobileMenuOpen || isLightPage ? 'text-black' : 'text-white'}`}>
+                                <span className="font-serif italic font-normal">The </span>
+                                <span
+                                  className="font-clash font-bold tracking-wide"
+                                  style={{ fontFamily: "'Clash Display', sans-serif" }}
+                                >MergeX</span>
+                                <span className="font-serif italic font-normal"> Company</span>
+                              </span>
                             </Link>
-                        )}
+                          );
+                        })()}
 
                         {/* Right: Login Icon */}
                         <Link
@@ -711,7 +755,7 @@ export function Navbar() {
                 </div>
             </motion.div>
 
-            <MobileNav isOpen={isMobileMenuOpen} onClose={() => setIsMobileMenuOpen(false)} />
+            <MobileNav isOpen={isMobileMenuOpen} onClose={() => setIsMobileMenuOpen(false)} pathname={pathname} />
         </>
     );
 }

@@ -9,9 +9,10 @@ import { ArrowUpRight } from 'lucide-react';
 interface MobileNavProps {
     isOpen: boolean;
     onClose: () => void;
+    pathname: string | null;
 }
 
-export function MobileNav({ isOpen, onClose }: MobileNavProps) {
+export function MobileNav({ isOpen, onClose, pathname }: MobileNavProps) {
     const [isExpanded, setIsExpanded] = useState(false);
 
     // Prevent scrolling when menu is open
@@ -74,24 +75,32 @@ export function MobileNav({ isOpen, onClose }: MobileNavProps) {
                             <div className="w-16 h-1 bg-white/20 rounded-full hover:bg-white/40 transition-colors" />
                         </div>
 
-                        {/* Unified Header Row */}
-                        <div className="flex items-center justify-center px-6 pb-4 border-b border-white/10 shrink-0 relative">
-                            {/* Centered Logo Icon */}
-                            <Link href="/" onClick={onClose} className="flex items-center gap-1">
-                                <Image
-                                    src="/logo/mergex-logo.png"
-                                    alt="MergeX Logo"
-                                    width={40}
-                                    height={40}
-                                    className="object-contain brightness-0 invert"
-                                />
-                                <span
-                                    className="font-clash font-bold text-2xl tracking-wide text-white"
-                                    style={{ fontFamily: "'Clash Display', sans-serif" }}
-                                >
-                                    MERGEX
-                                </span>
+                        {/* Contextual wordmark */}
+                        <div className="flex items-center justify-center px-6 pb-4 border-b border-white/10 shrink-0">
+                          {pathname === '/brands/ovrn-studios' ? (
+                            <Link href="/brands/ovrn-studios" onClick={onClose}
+                              className="font-clash font-bold text-2xl tracking-wider text-white"
+                              style={{ fontFamily: "'Clash Display', sans-serif" }}
+                            >OVRN Studio</Link>
+                          ) : pathname === '/brands/academy' ? (
+                            <Link href="/brands/academy" onClick={onClose} className="text-2xl leading-none text-white">
+                              <span className="font-clash font-bold tracking-wide" style={{ fontFamily: "'Clash Display', sans-serif" }}>MergeX</span>{' '}
+                              <span className="font-clash font-light tracking-wide" style={{ fontFamily: "'Clash Display', sans-serif" }}>Academy</span>
                             </Link>
+                          ) : pathname === '/brands/mergex' ? (
+                            <Link href="/brands/mergex" onClick={onClose} className="flex items-center gap-1">
+                              <Image src="/logo/mergex-logo.png" alt="MergeX Logo" width={40} height={40} className="object-contain brightness-0 invert" />
+                              <span className="font-clash font-bold text-2xl tracking-wide text-white" style={{ fontFamily: "'Clash Display', sans-serif" }}>MERGEX</span>
+                            </Link>
+                          ) : (
+                            <Link href="/" onClick={onClose} className="flex items-center">
+                              <span className="text-[19px] leading-none tracking-tight text-white select-none">
+                                <span className="font-serif italic font-normal">The </span>
+                                <span className="font-clash font-bold tracking-wide" style={{ fontFamily: "'Clash Display', sans-serif" }}>MergeX</span>
+                                <span className="font-serif italic font-normal"> Company</span>
+                              </span>
+                            </Link>
+                          )}
                         </div>
 
                         {/* Scrollable Menu Content Area */}

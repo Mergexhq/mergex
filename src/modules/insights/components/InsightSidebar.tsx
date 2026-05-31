@@ -130,10 +130,10 @@ export function InsightSidebar({
         )}
 
         {/* ── Nav items ── */}
-        <nav className="relative z-10 flex-1 overflow-y-auto px-4 py-4 space-y-0.5">
+        <nav className="relative z-10 flex-1 overflow-y-auto flex flex-col justify-center px-6 py-8">
           {!isToc ? (
             <>
-              <p className="text-[9px] font-bold uppercase tracking-[0.18em] text-white/25 px-3 mb-4">
+              <p className="text-[9px] font-bold uppercase tracking-[0.18em] text-white/25 px-2 mb-4">
                 Topics
               </p>
               {CATEGORIES.map((cat) => {
@@ -173,40 +173,49 @@ export function InsightSidebar({
               })}
             </>
           ) : (
-            <>
-              <p className="text-[9px] font-bold uppercase tracking-[0.18em] text-white/25 px-3 mb-3">
+            <div>
+              {/* Section label */}
+              <p className="text-[9px] font-bold uppercase tracking-[0.2em] text-white/25 mb-5">
                 On This Page
               </p>
-              {sections.map((section) => {
-                const isActive = activeId === section.id;
-                return (
-                  <a
-                    key={section.id}
-                    href={`#${section.id}`}
-                    className={`group flex items-center gap-3 w-full px-3 py-2 rounded-md transition-all duration-300 ${
-                      isActive ? 'bg-white/8' : 'hover:bg-white/5'
-                    }`}
-                  >
-                    <div
-                      className={`w-1.5 h-1.5 rounded-full transition-all duration-300 shrink-0 ${
-                        isActive
-                          ? 'bg-violet-400 scale-125 shadow-[0_0_10px_rgba(167,139,250,0.6)]'
-                          : 'bg-white/20 group-hover:bg-white/40'
-                      }`}
-                    />
-                    <span
-                      className={`text-[11px] leading-snug transition-colors duration-300 ${
-                        isActive ? 'text-white font-medium' : 'text-white/45 group-hover:text-white/75'
+
+              {/* Items */}
+              <div className="space-y-1">
+                {sections.map((section) => {
+                  const isActive = activeId === section.id;
+                  return (
+                    <a
+                      key={section.id}
+                      href={`#${section.id}`}
+                      className={`group flex items-center gap-3 w-full py-3 px-3 rounded-md transition-all duration-300 ${
+                        isActive ? 'bg-white/6' : 'hover:bg-white/4'
                       }`}
                     >
-                      {section.label}
-                    </span>
-                  </a>
-                );
-              })}
-            </>
+                      {/* Active bar indicator */}
+                      <span
+                        className={`w-[2px] h-4 rounded-full shrink-0 transition-all duration-300 ${
+                          isActive
+                            ? 'bg-violet-400'
+                            : 'bg-white/12 group-hover:bg-white/25'
+                        }`}
+                      />
+                      <span
+                        className={`text-xs leading-snug transition-colors duration-300 ${
+                          isActive
+                            ? 'text-white font-medium'
+                            : 'text-white/40 group-hover:text-white/70'
+                        }`}
+                      >
+                        {section.label}
+                      </span>
+                    </a>
+                  );
+                })}
+              </div>
+            </div>
           )}
         </nav>
+
 
         {/* ── Share + Meta + Footer (TOC mode only) ── */}
         {isToc ? (
