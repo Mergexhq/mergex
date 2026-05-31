@@ -712,8 +712,9 @@ export function Navbar() {
                           return (
                             <Link href="/" className={`absolute left-1/2 -translate-x-1/2 flex items-center justify-center z-10 ${isDetailPage ? 'opacity-0 pointer-events-none' : ''}`}>
                               <span className={`text-[17px] leading-none tracking-tight select-none ${isMobileMenuOpen || isLightPage ? 'text-black' : 'text-white'}`}>
-                                <span className="font-serif italic font-normal">The </span>
-                                <span className="font-clash font-bold tracking-wide" style={{ fontFamily: "'Clash Display', sans-serif" }}>MergeX</span>
+                                <span className="font-serif italic font-normal mr-0.5">The</span>
+                                {' '}
+                                <span className="font-clash font-bold tracking-wide" style={{ fontFamily: "'Clash Display', sans-serif" }}>MERGEX</span>
                                 <span className="font-serif italic font-normal"> Company</span>
                               </span>
                             </Link>

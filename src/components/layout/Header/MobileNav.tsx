@@ -95,8 +95,9 @@ export function MobileNav({ isOpen, onClose, pathname }: MobileNavProps) {
                           ) : (
                             <Link href="/" onClick={onClose} className="flex items-center">
                               <span className="text-[19px] leading-none tracking-tight text-white select-none">
-                                <span className="font-serif italic font-normal">The </span>
-                                <span className="font-clash font-bold tracking-wide" style={{ fontFamily: "'Clash Display', sans-serif" }}>MergeX</span>
+                                <span className="font-serif italic font-normal mr-0.5">The</span>
+                                {' '}
+                                <span className="font-clash font-bold tracking-wide" style={{ fontFamily: "'Clash Display', sans-serif" }}>MERGEX</span>
                                 <span className="font-serif italic font-normal"> Company</span>
                               </span>
                             </Link>
