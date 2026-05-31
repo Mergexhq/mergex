@@ -90,13 +90,11 @@ export function CaseStudyDetailClient({ caseStudy, related }: CaseStudyDetailCli
 
   // Build dynamic TOC from actual sections present in this case study
   const tocSections = [
-    { id: 'overview', label: 'AI Overview' },
     ...(caseStudy.challenge ? [{ id: 'challenge', label: 'The Challenge' }] : []),
     ...(caseStudy.diagnosis ? [{ id: 'diagnosis', label: 'The Diagnosis' }] : []),
     ...(caseStudy.strategy  ? [{ id: 'strategy',  label: 'The Strategy'  }] : []),
     ...(caseStudy.outcome   ? [{ id: 'outcome',   label: 'The Outcome'   }] : []),
     { id: 'tldr',    label: 'The Bottom Line' },
-    { id: 'related', label: 'Related Work' },
   ];
 
   // Local theme setup (only for detailed page experience)
