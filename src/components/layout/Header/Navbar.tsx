@@ -74,14 +74,22 @@ export function Navbar() {
     const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
     const [forceHidden, setForceHidden] = useState(false);
     const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+    const [isDetailMenuOpen, setIsDetailMenuOpen] = useState(false);
     const [hidden, setHidden] = useState(false);
     const [isScrolled, setIsScrolled] = useState(false);
     const [isPastHero, setIsPastHero] = useState(false);
     const dropdownRef = useRef<HTMLDivElement>(null);
+    const detailMenuRef = useRef<HTMLDivElement>(null);
     const timeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
     const pathname = usePathname();
     const panelContent = getMegamenuLeftPanelContent(pathname);
     const { scrollY } = useScroll();
+
+    const isDetailPage = 
+        pathname && 
+        pathname.startsWith('/insights/') && 
+        pathname !== '/insights' && 
+        pathname !== '/insights/case-studies';
 
     useMotionValueEvent(scrollY, "change", (latest) => {
         if (latest > 50) {
@@ -97,6 +105,12 @@ export function Navbar() {
         }
 
         const previous = scrollY.getPrevious() ?? 0;
+
+        // Close detailed menu on scroll
+        if (Math.abs(latest - previous) > 5) {
+            setIsDetailMenuOpen(false);
+        }
+
         // Hide on scroll down after 150px, show on scroll up
         if (latest > previous && latest > 150) {
             setHidden(true);
@@ -130,12 +144,12 @@ export function Navbar() {
         ? 'bg-[#0a0a0a] rounded-[12px] shadow-2xl'
         : 'bg-transparent rounded-none shadow-none';
 
-    const pillBgClass = isDropdownOpen || !isScrolled
+    const pillBgClass = isDropdownOpen || (!isScrolled && !isDetailPage)
         ? 'bg-transparent shadow-none border-transparent'
         : 'bg-[#ebebea] border-[#d8d8d6] shadow-[0_1px_4px_rgba(0,0,0,0.06)]';
 
     const pillTextClass = isDropdownOpen
-        ? 'text-white/70 hover:text-white'
+        ? 'text-white/70 hover:text-violet-500 transition-colors duration-200'
         : (!isScrolled && !isLightPage
             ? 'text-white/70 hover:text-white'
             : 'text-black/70 hover:text-black'
@@ -143,7 +157,7 @@ export function Navbar() {
 
     const getActiveLinkClass = (isActive: boolean) => {
         if (!isActive) return pillTextClass;
-        if (isDropdownOpen) return 'bg-white/20 text-white';
+        if (isDropdownOpen) return 'bg-transparent text-white';
         if (!isScrolled) {
             return isLightPage ? 'bg-[#110326] text-white' : 'bg-white/20 text-white';
         }
@@ -173,7 +187,34 @@ export function Navbar() {
     // Also close dropdown on path change
     useEffect(() => {
         setIsDropdownOpen(false);
+        setIsDetailMenuOpen(false);
     }, [pathname]);
+
+    // Click outside detail menu handler
+    useEffect(() => {
+        function handleClickOutside(event: MouseEvent) {
+            if (detailMenuRef.current && !detailMenuRef.current.contains(event.target as Node)) {
+                setIsDetailMenuOpen(false);
+            }
+        }
+        function handleEscape(event: KeyboardEvent) {
+            if (event.key === 'Escape') {
+                setIsDetailMenuOpen(false);
+            }
+        }
+
+        if (isDetailMenuOpen) {
+            document.addEventListener('mousedown', handleClickOutside);
+            document.addEventListener('keydown', handleEscape);
+        }
+
+        return () => {
+            document.removeEventListener('mousedown', handleClickOutside);
+            document.removeEventListener('keydown', handleEscape);
+        };
+    }, [isDetailMenuOpen]);
+
+
 
     // Notify AskMergeXWidget when mobile menu state changes
     useEffect(() => {
@@ -211,7 +252,7 @@ export function Navbar() {
                         <nav className="w-full h-20 xl:h-24 flex items-center justify-between relative pointer-events-auto bg-transparent z-10 px-4 xl:px-6">
                             {/* Logo - Left */}
                             <div className="flex items-center">
-                                <div className={`flex items-center gap-1 xl:gap-1.5 py-1 xl:py-1.5 px-3 xl:px-4 rounded-[10px] xl:rounded-[12px] border transition-all duration-500 ease-in-out ${pillBgClass}`}>
+                                <div className={`flex items-center gap-1 xl:gap-1.5 py-1 xl:py-1.5 px-3 xl:px-4 rounded-[10px] xl:rounded-[12px] border transition-all duration-500 ease-in-out ${pillBgClass} ${isDetailPage && !isDropdownOpen ? 'opacity-0 pointer-events-none' : 'opacity-100'}`}>
                                     {pathname === '/brands/ovrn-studios' ? (
                                         <Link href="/brands/ovrn-studios" className="flex items-center gap-0 py-1.5 px-1">
                                             <span
@@ -243,77 +284,208 @@ export function Navbar() {
 
                             {/* Menu Capsule - Right */}
                             <div className="flex items-center">
-                                <div className={`flex items-center gap-1 xl:gap-1.5 p-2 xl:p-2.5 rounded-[10px] xl:rounded-[12px] border transition-all duration-500 ease-in-out ${pillBgClass}`}>
-                                    <Link
-                                        href="/about"
-                                        className={`font-roboto text-[11px] xl:text-[12px] 2xl:text-[13px] font-bold tracking-[0.18em] uppercase transition-all duration-200 px-4 xl:px-5 py-2.5 xl:py-3 rounded-[7px] xl:rounded-[9px] ${getActiveLinkClass(pathname === '/about')}`}
-                                    >
-                                        Who We Are
-                                    </Link>
+                                {(isDetailPage || isScrolled) ? (
+                                     /* Expanding Hamburger Menu Card */
+                                     <motion.div
+                                         ref={detailMenuRef}
+                                         layout
+                                         transition={{ type: 'spring', stiffness: 350, damping: 30 }}
+                                         className={`flex items-center pointer-events-auto cursor-default transition-[background-color,border-color,box-shadow,border-radius,padding] duration-300 ease-in-out ${
+                                             isDetailMenuOpen
+                                                 ? `gap-1 xl:gap-1.5 p-2 xl:p-2.5 rounded-[10px] xl:rounded-[12px] border ${pillBgClass}`
+                                                 : (isDropdownOpen
+                                                     ? 'bg-transparent border-transparent shadow-none h-12 xl:h-14 p-1 rounded-[12px] xl:rounded-[14px]'
+                                                     : 'bg-white border border-[#d8d8d6] shadow-[0_4px_25px_rgba(0,0,0,0.06)] rounded-[12px] xl:rounded-[14px] h-12 xl:h-14 p-1')
+                                         }`}
+                                     >
+                                         {/* Inner links & Button with smooth AnimatePresence transition */}
+                                         <AnimatePresence initial={false} mode="wait">
+                                             {isDetailMenuOpen ? (
+                                                 <motion.div
+                                                     key="menu-links"
+                                                     initial={{ opacity: 0, x: -8, scale: 0.96 }}
+                                                     animate={{ opacity: 1, x: 0, scale: 1 }}
+                                                     exit={{ opacity: 0, x: -8, scale: 0.96 }}
+                                                     transition={{ duration: 0.2, ease: "easeOut" }}
+                                                     className="flex items-center"
+                                                 >
+                                                     {/* Standard capsule links */}
+                                                     <Link
+                                                         href="/about"
+                                                         className={`font-roboto text-[11px] xl:text-[12px] 2xl:text-[13px] font-bold tracking-[0.18em] uppercase transition-all duration-200 px-4 xl:px-5 py-2.5 xl:py-3 rounded-[7px] xl:rounded-[9px] ${getActiveLinkClass(pathname === '/about')}`}
+                                                         onClick={() => setIsDetailMenuOpen(false)}
+                                                     >
+                                                         Who We Are
+                                                     </Link>
 
-                                    {/* What We Do Mega Dropdown Trigger */}
-                                    <div
-                                        ref={dropdownRef}
-                                        className="flex items-center"
-                                        onMouseEnter={openDropdown}
-                                        onMouseLeave={closeDropdown}
-                                    >
-                                        <button
+                                                     <div
+                                                         ref={dropdownRef}
+                                                         className="flex items-center"
+                                                         onMouseEnter={openDropdown}
+                                                         onMouseLeave={closeDropdown}
+                                                     >
+                                                         <button
+                                                             className={`flex items-center gap-1.5 font-roboto text-[11px] xl:text-[12px] 2xl:text-[13px] font-bold tracking-[0.18em] uppercase transition-all duration-200 px-4 xl:px-5 py-2.5 xl:py-3 rounded-[7px] xl:rounded-[9px] ${
+                                                                 isDropdownOpen
+                                                                     ? 'bg-transparent text-white hover:text-violet-500'
+                                                                     : getActiveLinkClass(pathname === '/methodology' || pathname === '/diagnostic')
+                                                             }`}
+                                                             aria-expanded={isDropdownOpen}
+                                                             aria-haspopup="true"
+                                                         >
+                                                             What We Do
+                                                             <motion.svg
+                                                                 width="8"
+                                                                 height="5"
+                                                                 viewBox="0 0 10 6"
+                                                                 fill="currentColor"
+                                                                 className="opacity-60"
+                                                                 animate={{ rotate: isDropdownOpen ? 180 : 0 }}
+                                                                 transition={{ duration: 0.2 }}
+                                                             >
+                                                                 <polygon points="0,0 10,0 5,6" />
+                                                             </motion.svg>
+                                                         </button>
+                                                     </div>
+
+                                                     <Link
+                                                         href="/insights"
+                                                         className={`font-roboto text-[11px] xl:text-[12px] 2xl:text-[13px] font-bold tracking-[0.18em] uppercase transition-all duration-200 px-4 xl:px-5 py-2.5 xl:py-3 rounded-[7px] xl:rounded-[9px] ${getActiveLinkClass(pathname?.startsWith('/insights'))}`}
+                                                         onClick={() => setIsDetailMenuOpen(false)}
+                                                     >
+                                                         Insights
+                                                     </Link>
+                                                     <Link
+                                                         href="/contact"
+                                                         className={`font-roboto text-[11px] xl:text-[12px] 2xl:text-[13px] font-bold tracking-[0.18em] uppercase transition-all duration-200 px-4 xl:px-5 py-2.5 xl:py-3 rounded-[7px] xl:rounded-[9px] ${getActiveLinkClass(pathname?.startsWith('/contact'))}`}
+                                                         onClick={() => setIsDetailMenuOpen(false)}
+                                                     >
+                                                         Contact
+                                                     </Link>
+
+                                                     <Link
+                                                         href="/login"
+                                                         target="_blank"
+                                                         rel="noopener noreferrer"
+                                                         className={`flex items-center gap-1.5 font-roboto text-[11px] xl:text-[12px] 2xl:text-[13px] font-bold tracking-[0.18em] uppercase transition-all duration-200 px-4 xl:px-5 py-2.5 xl:py-3 rounded-[7px] xl:rounded-[9px] ${
+                                                             isDropdownOpen
+                                                                 ? 'text-white/70 hover:text-violet-500'
+                                                                 : (!isScrolled && !isLightPage
+                                                                     ? 'text-white/70 hover:text-white'
+                                                                     : 'text-violet-700 hover:text-violet-900'
+                                                                   )
+                                                         }`}
+                                                         onClick={() => setIsDetailMenuOpen(false)}
+                                                     >
+                                                         Login
+                                                         <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" className="opacity-75">
+                                                             <path d="M7 17L17 7M17 7H7M17 7V17" />
+                                                         </svg>
+                                                     </Link>
+                                                 </motion.div>
+                                             ) : (
+                                                 <motion.button
+                                                     key="hamburger-button"
+                                                     onClick={() => setIsDetailMenuOpen(true)}
+                                                     initial={{ opacity: 0, scale: 0.85 }}
+                                                     animate={{ opacity: 1, scale: 1 }}
+                                                     exit={{ opacity: 0, scale: 0.85 }}
+                                                     transition={{ duration: 0.15 }}
+                                                     className={`w-10 xl:w-12 h-10 xl:h-12 rounded-[8px] xl:rounded-[10px] flex items-center justify-center transition-colors duration-200 focus:outline-none ${
+                                                         isDropdownOpen ? 'hover:bg-white/10' : 'hover:bg-gray-100/85'
+                                                     }`}
+                                                     aria-label="Open menu"
+                                                 >
+                                                     <div className="w-5 h-[12px] flex flex-col justify-between relative">
+                                                         <span
+                                                             className={`w-full h-[3px] rounded-full origin-center transition-colors duration-200 ${
+                                                                 isDropdownOpen ? 'bg-white' : 'bg-black'
+                                                             }`}
+                                                         />
+                                                         <span
+                                                             className={`w-full h-[3px] rounded-full origin-center transition-colors duration-200 ${
+                                                                 isDropdownOpen ? 'bg-white' : 'bg-black'
+                                                             }`}
+                                                         />
+                                                     </div>
+                                                 </motion.button>
+                                             )}
+                                         </AnimatePresence>
+                                     </motion.div>
+                                ) : (
+                                    /* DEFAULT Menu Capsule */
+                                    <div className={`flex items-center gap-1 xl:gap-1.5 p-2 xl:p-2.5 rounded-[10px] xl:rounded-[12px] border transition-all duration-500 ease-in-out ${pillBgClass}`}>
+                                        <Link
+                                            href="/about"
+                                            className={`font-roboto text-[11px] xl:text-[12px] 2xl:text-[13px] font-bold tracking-[0.18em] uppercase transition-all duration-200 px-4 xl:px-5 py-2.5 xl:py-3 rounded-[7px] xl:rounded-[9px] ${getActiveLinkClass(pathname === '/about')}`}
+                                        >
+                                            Who We Are
+                                        </Link>
+
+                                        {/* What We Do Mega Dropdown Trigger */}
+                                        <div
+                                            ref={dropdownRef}
+                                            className="flex items-center"
+                                            onMouseEnter={openDropdown}
+                                            onMouseLeave={closeDropdown}
+                                        >
+                                            <button
+                                                className={`flex items-center gap-1.5 font-roboto text-[11px] xl:text-[12px] 2xl:text-[13px] font-bold tracking-[0.18em] uppercase transition-all duration-200 px-4 xl:px-5 py-2.5 xl:py-3 rounded-[7px] xl:rounded-[9px] ${
+                                                    isDropdownOpen
+                                                        ? 'bg-transparent text-white hover:text-violet-500'
+                                                        : getActiveLinkClass(pathname === '/methodology' || pathname === '/diagnostic')
+                                                }`}
+                                                aria-expanded={isDropdownOpen}
+                                                aria-haspopup="true"
+                                            >
+                                                What We Do
+                                                <motion.svg
+                                                    width="8"
+                                                    height="5"
+                                                    viewBox="0 0 10 6"
+                                                    fill="currentColor"
+                                                    className="opacity-60"
+                                                    animate={{ rotate: isDropdownOpen ? 180 : 0 }}
+                                                    transition={{ duration: 0.2 }}
+                                                >
+                                                    <polygon points="0,0 10,0 5,6" />
+                                                </motion.svg>
+                                            </button>
+                                        </div>
+
+                                        <Link
+                                            href="/insights"
+                                            className={`font-roboto text-[11px] xl:text-[12px] 2xl:text-[13px] font-bold tracking-[0.18em] uppercase transition-all duration-200 px-4 xl:px-5 py-2.5 xl:py-3 rounded-[7px] xl:rounded-[9px] ${getActiveLinkClass(pathname?.startsWith('/insights'))}`}
+                                        >
+                                            Insights
+                                        </Link>
+                                        <Link
+                                            href="/contact"
+                                            className={`font-roboto text-[11px] xl:text-[12px] 2xl:text-[13px] font-bold tracking-[0.18em] uppercase transition-all duration-200 px-4 xl:px-5 py-2.5 xl:py-3 rounded-[7px] xl:rounded-[9px] ${getActiveLinkClass(pathname?.startsWith('/contact'))}`}
+                                        >
+                                            Contact
+                                        </Link>
+
+                                        <Link
+                                            href="/login"
+                                            target="_blank"
+                                            rel="noopener noreferrer"
                                             className={`flex items-center gap-1.5 font-roboto text-[11px] xl:text-[12px] 2xl:text-[13px] font-bold tracking-[0.18em] uppercase transition-all duration-200 px-4 xl:px-5 py-2.5 xl:py-3 rounded-[7px] xl:rounded-[9px] ${
                                                 isDropdownOpen
-                                                    ? 'bg-white/20 text-white'
-                                                    : getActiveLinkClass(pathname === '/methodology' || pathname === '/diagnostic')
-                                            }`}
-                                            aria-expanded={isDropdownOpen}
-                                            aria-haspopup="true"
-                                        >
-                                            What We Do
-                                            <motion.svg
-                                                width="8"
-                                                height="5"
-                                                viewBox="0 0 10 6"
-                                                fill="currentColor"
-                                                className="opacity-60"
-                                                animate={{ rotate: isDropdownOpen ? 180 : 0 }}
-                                                transition={{ duration: 0.2 }}
-                                            >
-                                                <polygon points="0,0 10,0 5,6" />
-                                            </motion.svg>
-                                        </button>
-                                    </div>
-
-                                    <Link
-                                        href="/insights"
-                                        className={`font-roboto text-[11px] xl:text-[12px] 2xl:text-[13px] font-bold tracking-[0.18em] uppercase transition-all duration-200 px-4 xl:px-5 py-2.5 xl:py-3 rounded-[7px] xl:rounded-[9px] ${getActiveLinkClass(pathname?.startsWith('/insights'))}`}
-                                    >
-                                        Insights
-                                    </Link>
-                                    <Link
-                                        href="/contact"
-                                        className={`font-roboto text-[11px] xl:text-[12px] 2xl:text-[13px] font-bold tracking-[0.18em] uppercase transition-all duration-200 px-4 xl:px-5 py-2.5 xl:py-3 rounded-[7px] xl:rounded-[9px] ${getActiveLinkClass(pathname?.startsWith('/contact'))}`}
-                                    >
-                                        Contact
-                                    </Link>
-
-                                    <Link
-                                        href="/login"
-                                        target="_blank"
-                                        rel="noopener noreferrer"
-                                        className={`flex items-center gap-1.5 font-roboto text-[11px] xl:text-[12px] 2xl:text-[13px] font-bold tracking-[0.18em] uppercase transition-all duration-200 px-4 xl:px-5 py-2.5 xl:py-3 rounded-[7px] xl:rounded-[9px] ${
-                                            isDropdownOpen
-                                                ? 'text-white/70 hover:text-white'
-                                                : (!isScrolled && !isLightPage
                                                     ? 'text-white/70 hover:text-white'
-                                                    : 'text-violet-700 hover:text-violet-900'
-                                                  )
-                                        }`}
-                                    >
-                                        Login
-                                        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" className="opacity-75">
-                                            <path d="M7 17L17 7M17 7H7M17 7V17" />
-                                        </svg>
-                                    </Link>
-                                </div>
+                                                    : (!isScrolled && !isLightPage
+                                                        ? 'text-white/70 hover:text-white'
+                                                        : 'text-violet-700 hover:text-violet-900'
+                                                      )
+                                            }`}
+                                        >
+                                            Login
+                                            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" className="opacity-75">
+                                                <path d="M7 17L17 7M17 7H7M17 7V17" />
+                                            </svg>
+                                        </Link>
+                                    </div>
+                                )}
                             </div>
                         </nav>
 
@@ -365,7 +537,7 @@ export function Navbar() {
                                                     <p className="text-white/25 uppercase tracking-[0.18em] text-[9px] font-semibold mb-1.5">Brand</p>
                                                     <div className="flex items-center justify-between w-full">
                                                         <span
-                                                            className="text-white text-xl xl:text-2xl font-clash font-semibold leading-none group-hover:text-violet-300 transition-colors duration-300"
+                                                            className="text-white text-xl xl:text-2xl font-clash font-semibold leading-none group-hover:text-violet-500 transition-colors duration-300"
                                                             style={{ fontFamily: "'Clash Display', sans-serif" }}
                                                         >
                                                             MergeX
@@ -379,7 +551,7 @@ export function Navbar() {
                                                     </div>
                                                     <span className="text-white/40 text-xs xl:text-sm mt-1.5">Business Consulting</span>
                                                 </Link>
-
+ 
                                                 {/* SECONDARY - Methodology */}
                                                 <Link
                                                     href="/methodology"
@@ -387,7 +559,7 @@ export function Navbar() {
                                                 >
                                                     <p className="text-white/25 uppercase tracking-[0.18em] text-[9px] font-semibold mb-1.5">Framework</p>
                                                     <div className="flex items-center justify-between w-full">
-                                                        <span className="text-white text-lg xl:text-xl font-medium group-hover:text-violet-300 transition-colors duration-300">
+                                                        <span className="text-white text-lg xl:text-xl font-medium group-hover:text-violet-500 transition-colors duration-300">
                                                             Methodology
                                                         </span>
                                                         <svg
@@ -399,7 +571,7 @@ export function Navbar() {
                                                     </div>
                                                     <span className="text-white/35 text-xs xl:text-sm mt-1">The S.C.A.L.E framework</span>
                                                 </Link>
-
+ 
                                                 {/* ACTION - Diagnostic */}
                                                 <Link
                                                     href="/diagnostic"
@@ -407,7 +579,7 @@ export function Navbar() {
                                                 >
                                                     <p className="text-white/25 uppercase tracking-[0.18em] text-[9px] font-semibold mb-1.5">Start Here</p>
                                                     <div className="flex items-center justify-between w-full">
-                                                        <span className="text-white/80 text-sm xl:text-base font-medium group-hover:text-violet-300 transition-colors duration-300">
+                                                        <span className="text-white text-sm xl:text-base font-medium group-hover:text-violet-500 transition-colors duration-300">
                                                             Diagnostic
                                                         </span>
                                                         <svg
@@ -499,7 +671,7 @@ export function Navbar() {
                                 </span>
                             </Link>
                         ) : (
-                            <Link href="/" className="absolute left-1/2 -translate-x-1/2 flex items-center justify-center gap-1 z-10">
+                            <Link href="/" className={`absolute left-1/2 -translate-x-1/2 flex items-center justify-center gap-1 z-10 ${isDetailPage ? 'opacity-0 pointer-events-none' : ''}`}>
                                 <Image
                                     src="/logo/mergex-logo.png"
                                     alt="MergeX Logo"

@@ -142,7 +142,8 @@ export function AlsoFromMergeX() {
                                                 </motion.div>
                                             )}
                                             <h3 
-                                                className="font-display text-xl md:text-2xl lg:text-3xl font-semibold tracking-tight text-foreground group-hover:text-primary transition-colors duration-300"
+                                                className="font-clash text-xl md:text-2xl lg:text-3xl font-bold uppercase tracking-wide text-foreground group-hover:text-primary transition-colors duration-300"
+                                                style={{ fontFamily: "'Clash Display', sans-serif" }}
                                             >
                                                 {brand.title}
                                             </h3>

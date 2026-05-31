@@ -1,49 +1,139 @@
 'use client';
 
 import Link from 'next/link';
+import { usePathname } from 'next/navigation';
+import Image from 'next/image';
+import { useState, useEffect, useCallback } from 'react';
+import { AnimatedThemeToggler } from '@/components/ui/animated-theme-toggler';
 
 const INDUSTRIES = ['All', 'Retail / E-commerce', 'Technology / SaaS', 'Professional Services', 'D2C'];
 
 interface CaseStudySidebarProps {
   mode?: 'filter' | 'toc';
   activeIndustry?: string;
-  sections?: { id: string; label: string; done?: boolean }[];
+  sections?: { id: string; label: string }[];
+  meta?: {
+    client: string;
+    industry: string;
+    date: string;
+  };
 }
 
 export function CaseStudySidebar({
   mode = 'filter',
   activeIndustry = 'All',
   sections = [],
+  meta,
 }: CaseStudySidebarProps) {
+  usePathname();
+  const [activeId, setActiveId] = useState<string>('');
+  const [copied, setCopied] = useState(false);
+
+  // IntersectionObserver for scroll-spy TOC
+  useEffect(() => {
+    if (mode !== 'toc' || sections.length === 0) return;
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            setActiveId(entry.target.id);
+          }
+        });
+      },
+      {
+        rootMargin: '-80px 0px -70% 0px',
+        threshold: 0,
+      }
+    );
+
+    sections.forEach((section) => {
+      const el = document.getElementById(section.id);
+      if (el) observer.observe(el);
+    });
+
+    return () => {
+      sections.forEach((section) => {
+        const el = document.getElementById(section.id);
+        if (el) observer.unobserve(el);
+      });
+    };
+  }, [sections, mode]);
+
+  const handleCopyLink = useCallback(() => {
+    navigator.clipboard.writeText(window.location.href).then(() => {
+      setCopied(true);
+      setTimeout(() => setCopied(false), 2000);
+    });
+  }, []);
+
+  const handleShareX = useCallback(() => {
+    const url = encodeURIComponent(window.location.href);
+    const text = encodeURIComponent(document.title);
+    window.open(`https://x.com/intent/tweet?url=${url}&text=${text}`, '_blank');
+  }, []);
+
+  const handleShareLinkedIn = useCallback(() => {
+    const url = encodeURIComponent(window.location.href);
+    window.open(`https://www.linkedin.com/sharing/share-offsite/?url=${url}`, '_blank');
+  }, []);
+
+  const isToc = mode === 'toc';
+
   return (
     <>
-      {/* ── Desktop: MergeX black+purple sidebar card ── */}
-      <aside className="hidden lg:flex flex-col w-60 shrink-0 sticky top-0 self-start h-[calc(100vh-0)] overflow-hidden bg-[#0A0A0A]">
-
+      {/* ── Desktop sidebar ── */}
+      <aside
+        className={`hidden lg:flex flex-col shrink-0 overflow-hidden transition-all duration-500 ${
+          isToc
+            ? 'w-[290px] sticky top-2 h-[calc(100vh-16px)] bg-[#020202] dark:bg-[#020202] rounded-xl border border-white/8 dark:border-white/10 shadow-none'
+            : 'w-[290px] sticky top-0 self-start h-[calc(100vh-0)] overflow-hidden bg-[#020202] dark:bg-[#020202]'
+        }`}
+      >
         {/* Purple glow top-left */}
         <div className="absolute -top-24 -left-24 w-64 h-64 bg-violet-600/25 blur-[100px] rounded-full pointer-events-none z-0" />
         {/* Purple glow bottom-right */}
         <div className="absolute -bottom-24 -right-8 w-56 h-56 bg-violet-600/20 blur-[90px] rounded-full pointer-events-none z-0" />
-        {/* Subtle noise overlay */}
-        <div
-          className="absolute inset-0 opacity-[0.03] mix-blend-screen pointer-events-none z-0"
-          style={{ backgroundImage: "url(\"data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E\")" }}
-        />
 
-        {/* Logo mark */}
-        <div className="relative z-10 px-6 pt-6 pb-5 border-b border-white/8">
-          <div className="w-8 h-8 rounded-lg bg-violet-600/30 border border-violet-500/30 flex items-center justify-center">
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none">
-              <path d="M12 2L4 6v6c0 4.4 3.4 8.5 8 9.5 4.6-1 8-5.1 8-9.5V6l-8-4z" fill="white" fillOpacity="0.9"/>
-            </svg>
-          </div>
+        {/* ── Logo ── */}
+        <div className="relative z-10 px-5 pt-5 pb-4 border-b border-white/8">
+          <Link href="/" className="flex items-center gap-2 group">
+            <Image
+              src="/logo/mergex-logo.png"
+              alt="MergeX Logo"
+              width={44}
+              height={44}
+              className="brightness-0 invert object-contain transition-transform duration-300 group-hover:scale-105"
+            />
+            <span
+              className="font-clash font-bold text-base tracking-wider text-white"
+              style={{ fontFamily: "'Clash Display', sans-serif" }}
+            >
+              MERGEX
+            </span>
+          </Link>
         </div>
 
-        {/* Nav items */}
-        <nav className="relative z-10 flex-1 overflow-y-auto px-4 py-5 space-y-0.5">
-          {mode === 'filter' ? (
+        {/* ── Horizontal meta row (TOC mode only) ── */}
+        {isToc && meta && (
+          <div className="relative z-10 px-5 py-3.5 border-b border-white/8 flex items-center gap-5">
+            <div>
+              <p className="text-[8px] font-bold uppercase tracking-[0.18em] text-white/20 mb-0.5">Client</p>
+              <p className="text-[11px] text-white/50 truncate max-w-[100px]">{meta.client}</p>
+            </div>
+            <div className="w-px h-6 bg-white/8 shrink-0" />
+            <div>
+              <p className="text-[8px] font-bold uppercase tracking-[0.18em] text-white/20 mb-0.5">Published</p>
+              <p className="text-[11px] text-white/50">{meta.date}</p>
+            </div>
+          </div>
+        )}
+
+        {/* ── Nav items ── */}
+        <nav className="relative z-10 flex-1 overflow-y-auto px-4 py-4 space-y-0.5">
+          {!isToc ? (
             <>
-              <p className="text-[10px] font-bold uppercase tracking-[0.18em] text-white/25 px-3 mb-4">
+              <p className="text-[9px] font-bold uppercase tracking-[0.18em] text-white/25 px-3 mb-4">
                 Industry
               </p>
               {INDUSTRIES.map((ind) => {
@@ -60,15 +150,21 @@ export function CaseStudySidebar({
                       isActive ? 'bg-white/8' : 'hover:bg-white/5'
                     }`}
                   >
-                    <div className={`mt-0.5 w-5 h-5 rounded-full border-2 flex items-center justify-center shrink-0 transition-all duration-200 ${
-                      isActive
-                        ? 'border-violet-400 bg-violet-500'
-                        : 'border-white/20 bg-transparent'
-                    }`}>
+                    <div
+                      className={`mt-0.5 w-5 h-5 rounded-full border-2 flex items-center justify-center shrink-0 transition-all duration-200 ${
+                        isActive
+                          ? 'border-violet-400 bg-violet-500'
+                          : 'border-white/20 bg-transparent'
+                      }`}
+                    >
                       {isActive && <div className="w-2 h-2 rounded-full bg-white" />}
                     </div>
                     <div className="min-w-0">
-                      <p className={`text-sm font-semibold leading-tight ${isActive ? 'text-white' : 'text-white/50 group-hover:text-white/80'}`}>
+                      <p
+                        className={`text-sm font-semibold leading-tight ${
+                          isActive ? 'text-white' : 'text-white/50 group-hover:text-white/80'
+                        }`}
+                      >
                         {ind}
                       </p>
                       <p className="text-[11px] text-white/25 mt-0.5 leading-tight">
@@ -81,61 +177,137 @@ export function CaseStudySidebar({
             </>
           ) : (
             <>
-              <p className="text-[10px] font-bold uppercase tracking-[0.18em] text-white/25 px-3 mb-4">
-                Sections
+              <p className="text-[9px] font-bold uppercase tracking-[0.18em] text-white/25 px-3 mb-3">
+                On This Page
               </p>
-              {sections.map((section) => (
-                <a
-                  key={section.id}
-                  href={`#${section.id}`}
-                  className="group flex items-start gap-3 w-full px-3 py-3 rounded-xl hover:bg-white/5 transition-all duration-200"
-                >
-                  <div className={`mt-0.5 w-5 h-5 rounded-full border-2 flex items-center justify-center shrink-0 ${
-                    section.done
-                      ? 'border-violet-400 bg-violet-500'
-                      : 'border-white/20'
-                  }`}>
-                    {section.done ? (
-                      <svg width="8" height="8" viewBox="0 0 8 8" fill="none">
-                        <path d="M1.5 4l2 2 3-3" stroke="white" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
-                      </svg>
-                    ) : null}
-                  </div>
-                  <div className="min-w-0">
-                    <p className="text-sm font-semibold text-white/50 group-hover:text-white/80 leading-tight transition-colors">
+              {sections.map((section) => {
+                const isActive = activeId === section.id;
+                return (
+                  <a
+                    key={section.id}
+                    href={`#${section.id}`}
+                    className={`group flex items-center gap-3 w-full px-3 py-2 rounded-md transition-all duration-300 ${
+                      isActive ? 'bg-white/8' : 'hover:bg-white/5'
+                    }`}
+                  >
+                    <div
+                      className={`w-1.5 h-1.5 rounded-full transition-all duration-300 shrink-0 ${
+                        isActive
+                          ? 'bg-violet-400 scale-125 shadow-[0_0_10px_rgba(167,139,250,0.6)]'
+                          : 'bg-white/20 group-hover:bg-white/40'
+                      }`}
+                    />
+                    <span
+                      className={`text-[11px] leading-snug transition-colors duration-300 ${
+                        isActive ? 'text-white font-medium' : 'text-white/45 group-hover:text-white/75'
+                      }`}
+                    >
                       {section.label}
-                    </p>
-                    {section.done && (
-                      <p className="text-[11px] text-white/25 mt-0.5">Complete</p>
-                    )}
-                  </div>
-                </a>
-              ))}
+                    </span>
+                  </a>
+                );
+              })}
             </>
           )}
         </nav>
 
-        {/* Footer actions */}
-        <div className="relative z-10 px-6 py-6 border-t border-white/8 flex items-center justify-between">
-          <Link
-            href="/insights/case-studies"
-            className="flex items-center gap-1.5 text-xs text-white/30 hover:text-white/60 transition-colors"
-          >
-            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-              <path strokeLinecap="round" strokeLinejoin="round" d="M10 19l-7-7m0 0l7-7m-7 7h18"/>
-            </svg>
-            All Work
-          </Link>
-          <Link
-            href="/contact"
-            className="text-xs text-white/30 hover:text-white/60 transition-colors"
-          >
-            Need help?
-          </Link>
-        </div>
+        {/* ── Share + Meta + Footer (TOC mode only) ── */}
+        {isToc ? (
+          <div className="relative z-10 border-t border-white/8">
+
+            {/* Share row */}
+            <div className="px-5 py-4 border-b border-white/8">
+              <p className="text-[9px] font-bold uppercase tracking-[0.18em] text-white/25 mb-3">
+                Share
+              </p>
+              <div className="flex items-center gap-2">
+                {/* Copy link */}
+                <button
+                  onClick={handleCopyLink}
+                  title="Copy link"
+                  className="w-8 h-8 rounded-md bg-white/5 hover:bg-white/10 border border-white/8 hover:border-white/15 flex items-center justify-center transition-all duration-200 group"
+                >
+                  {copied ? (
+                    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" className="text-violet-400">
+                      <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
+                    </svg>
+                  ) : (
+                    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className="text-white/40 group-hover:text-white/70">
+                      <path strokeLinecap="round" strokeLinejoin="round" d="M10 13a5 5 0 007.54.54l3-3a5 5 0 00-7.07-7.07l-1.72 1.71" />
+                      <path strokeLinecap="round" strokeLinejoin="round" d="M14 11a5 5 0 00-7.54-.54l-3 3a5 5 0 007.07 7.07l1.71-1.71" />
+                    </svg>
+                  )}
+                </button>
+                {/* Email */}
+                <button
+                  onClick={() => {
+                    const subject = encodeURIComponent(document.title);
+                    const body = encodeURIComponent(window.location.href);
+                    window.open(`mailto:?subject=${subject}&body=${body}`);
+                  }}
+                  title="Share via email"
+                  className="w-8 h-8 rounded-md bg-white/5 hover:bg-white/10 border border-white/8 hover:border-white/15 flex items-center justify-center transition-all duration-200 group"
+                >
+                  <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className="text-white/40 group-hover:text-white/70">
+                    <path strokeLinecap="round" strokeLinejoin="round" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+                  </svg>
+                </button>
+                {/* X / Twitter */}
+                <button
+                  onClick={handleShareX}
+                  title="Share on X"
+                  className="w-8 h-8 rounded-md bg-white/5 hover:bg-white/10 border border-white/8 hover:border-white/15 flex items-center justify-center transition-all duration-200 group"
+                >
+                  <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor" className="text-white/40 group-hover:text-white/70">
+                    <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.74l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" />
+                  </svg>
+                </button>
+                {/* LinkedIn */}
+                <button
+                  onClick={handleShareLinkedIn}
+                  title="Share on LinkedIn"
+                  className="w-8 h-8 rounded-md bg-white/5 hover:bg-white/10 border border-white/8 hover:border-white/15 flex items-center justify-center transition-all duration-200 group"
+                >
+                  <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor" className="text-white/40 group-hover:text-white/70">
+                    <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z" />
+                  </svg>
+                </button>
+              </div>
+            </div>
+
+
+
+            {/* Back + Theme toggle */}
+            <div className="px-5 py-4 flex items-center justify-between">
+              <Link
+                href="/insights/case-studies"
+                className="flex items-center gap-1.5 text-[11px] text-white/35 hover:text-white/65 transition-colors duration-200"
+              >
+                <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M10 19l-7-7m0 0l7-7m-7 7h18" />
+                </svg>
+                Back to Case Studies
+              </Link>
+              <AnimatedThemeToggler />
+            </div>
+          </div>
+        ) : (
+          /* Filter mode footer */
+          <div className="relative z-10 px-5 py-4 border-t border-white/8 flex items-center justify-between">
+            <Link
+              href="/insights/case-studies"
+              className="flex items-center gap-1.5 text-xs text-white/40 hover:text-white/70 transition-colors duration-200"
+            >
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                <path strokeLinecap="round" strokeLinejoin="round" d="M10 19l-7-7m0 0l7-7m-7 7h18" />
+              </svg>
+              Back to Case Studies
+            </Link>
+          </div>
+        )}
       </aside>
 
-      {/* ── Mobile: horizontal pills ── */}
+      {/* ── Mobile: horizontal pills (filter mode only) ── */}
       {mode === 'filter' && (
         <div className="lg:hidden flex gap-2 flex-wrap mb-8">
           {INDUSTRIES.map((ind) => {
@@ -150,7 +322,7 @@ export function CaseStudySidebar({
                 href={href}
                 className={`px-4 py-1.5 rounded-full text-sm font-medium transition-colors duration-200 ${
                   isActive
-                    ? 'bg-[#0A0A0A] text-white'
+                    ? 'bg-[#020202] text-white'
                     : 'bg-background-subtle text-foreground-muted hover:text-foreground'
                 }`}
               >

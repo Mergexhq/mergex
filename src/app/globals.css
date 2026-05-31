@@ -113,26 +113,26 @@
 
 /* Dark Mode Styles - Strategic & Selective */
 .dark {
-  --background: #121212;
-  --background-soft: #1a1a1a;
-  --background-subtle: #242424;
+  --background: #080808;
+  --background-soft: #101010;
+  --background-subtle: #1a1a1a;
   --foreground: #ECECE8;
   --foreground-muted: #a1a1aa;
   
   --border: #242424;
   --border-light: #333333;
   
-  --card: #1a1a1a;
+  --card: #101010;
   --card-foreground: #ECECE8;
-  --popover: #1a1a1a;
+  --popover: #101010;
   --popover-foreground: #ECECE8;
-  --secondary: #242424;
+  --secondary: #1a1a1a;
   --secondary-foreground: #ECECE8;
-  --muted: #242424;
+  --muted: #1a1a1a;
   --muted-foreground: #a1a1aa;
   --input: #333333;
   
-  --sidebar: #121212;
+  --sidebar: #020202;
   --sidebar-foreground: #ECECE8;
   --sidebar-accent: #242424;
   --sidebar-accent-foreground: #ECECE8;
@@ -215,3 +215,32 @@ html.lenis, html.lenis body { height: auto; }
 .lenis.lenis-smooth [data-lenis-prevent] { overscroll-behavior: contain; }
 .lenis.lenis-stopped { overflow: clip; }
 .lenis.lenis-smooth iframe { pointer-events: none; }
+
+/* ── View Transitions Theme Toggler circular ripple support ── */
+::view-transition-old(root),
+::view-transition-new(root) {
+  animation: none;
+  mix-blend-mode: normal;
+}
+
+[data-theme-vt="active"]::view-transition-old(root) {
+  animation: none !important;
+  z-index: 1;
+}
+
+[data-theme-vt="active"]::view-transition-new(root) {
+  animation: none !important;
+  clip-path: var(--theme-vt-clip-from);
+  z-index: 9999;
+}
+
+/* ── Dark Mode background gradient override ── */
+.dark body::before {
+  background:
+    radial-gradient(at 0% 0%, rgba(139, 92, 246, 0.05) 0px, transparent 50%),
+    radial-gradient(at 100% 0%, rgba(139, 92, 246, 0.03) 0px, transparent 50%),
+    radial-gradient(at 100% 100%, rgba(139, 92, 246, 0.03) 0px, transparent 50%),
+    radial-gradient(at 0% 100%, rgba(139, 92, 246, 0.03) 0px, transparent 50%),
+    radial-gradient(at 50% 50%, rgba(139, 92, 246, 0.02) 0px, transparent 100%),
+    linear-gradient(180deg, #080808 0%, #080808 100%) !important;
+}
