@@ -12,12 +12,10 @@ export function FinalCTA() {
                             GET STARTED
                         </span>
                         <h2 className="font-serif text-3xl md:text-5xl font-normal leading-tight text-foreground mb-4" style={{ letterSpacing: '0.02em' }}>
-                            Ready to build something
-                            <br className="hidden md:block" />
-                            that actually scales?
+                            Ready to scale with more clarity?
                         </h2>
                         <p className="text-base text-foreground-muted max-w-xl">
-                            If you&apos;re running a revenue-generating business that&apos;s hit a growth ceiling, every MergeX consulting engagement starts with identifying the real constraint. No pitch, no pressure.
+                            Every engagement begins with understanding the business before proposing a solution.
                         </p>
                     </div>
 

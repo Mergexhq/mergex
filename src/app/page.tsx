@@ -5,6 +5,7 @@ import {
     DiagnosticApproach,
     Proof,
     InsightsPreview,
+    AlsoFromMergeX,
     FinalCTA
 } from '@/modules/home/components';
 
@@ -26,7 +27,10 @@ export default function HomePage() {
             {/* 05 - Insights Preview */}
             <InsightsPreview />
 
-            {/* 06 - CTA */}
+            {/* 06 - Ecosystem Brand Showcase */}
+            <AlsoFromMergeX />
+
+            {/* 07 - CTA */}
             <FinalCTA />
 
             {/* Marquee Strip - before footer */}
