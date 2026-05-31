@@ -130,7 +130,7 @@ export function InsightSidebar({
         )}
 
         {/* ── Nav items ── */}
-        <nav className="relative z-10 flex-1 overflow-y-auto flex flex-col justify-center px-6 py-8">
+        <nav className="relative z-10 flex-1 overflow-y-auto px-6 py-6">
           {!isToc ? (
             <>
               <p className="text-[9px] font-bold uppercase tracking-[0.18em] text-white/25 px-2 mb-4">
@@ -173,7 +173,7 @@ export function InsightSidebar({
               })}
             </>
           ) : (
-            <div>
+            <div className="flex flex-col justify-center min-h-full">
               {/* Section label */}
               <p className="text-[9px] font-bold uppercase tracking-[0.2em] text-white/25 mb-5">
                 On This Page

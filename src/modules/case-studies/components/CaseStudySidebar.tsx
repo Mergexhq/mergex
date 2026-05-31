@@ -118,8 +118,8 @@ export function CaseStudySidebar({
         {isToc && meta && (
           <div className="relative z-10 px-5 py-3.5 border-b border-white/8 flex items-center gap-5">
             <div>
-              <p className="text-[8px] font-bold uppercase tracking-[0.18em] text-white/20 mb-0.5">Client</p>
-              <p className="text-[11px] text-white/50 truncate max-w-[100px]">{meta.client}</p>
+              <p className="text-[8px] font-bold uppercase tracking-[0.18em] text-white/20 mb-0.5">Industry</p>
+              <p className="text-[11px] text-white/50">{meta.industry ?? 'Consulting'}</p>
             </div>
             <div className="w-px h-6 bg-white/8 shrink-0" />
             <div>
@@ -130,7 +130,7 @@ export function CaseStudySidebar({
         )}
 
         {/* ── Nav items ── */}
-        <nav className="relative z-10 flex-1 overflow-y-auto flex flex-col justify-center px-6 py-8">
+        <nav className="relative z-10 flex-1 overflow-y-auto px-6 py-6">
           {!isToc ? (
             <>
               <p className="text-[9px] font-bold uppercase tracking-[0.18em] text-white/25 px-2 mb-4">
@@ -176,7 +176,7 @@ export function CaseStudySidebar({
               })}
             </>
           ) : (
-            <div>
+            <div className="flex flex-col justify-center min-h-full">
               {/* Section label */}
               <p className="text-[9px] font-bold uppercase tracking-[0.2em] text-white/25 mb-5">
                 On This Page
