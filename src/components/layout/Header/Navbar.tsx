@@ -678,13 +678,11 @@ export function Navbar() {
                           // MergeX Academy brand page
                           if (pathname === '/brands/academy') {
                             return (
-                              <Link href="/brands/academy" className="absolute left-1/2 -translate-x-1/2 flex items-center justify-center gap-1 z-10">
-                                <span className={`text-xl leading-none ${ isMobileMenuOpen || isLightPage ? 'text-black' : 'text-white'}`}>
-                                  <span
-                                    className="font-clash font-bold tracking-wide"
-                                    style={{ fontFamily: "'Clash Display', sans-serif" }}
-                                  >MergeX</span>{' '}
-                                  <span className="font-clash font-light tracking-wide" style={{ fontFamily: "'Clash Display', sans-serif" }}>Academy</span>
+                              <Link href="/brands/academy" className="absolute left-1/2 -translate-x-1/2 flex items-center justify-center z-10">
+                                <span className={`text-[14px] leading-none whitespace-nowrap ${isMobileMenuOpen || isLightPage ? 'text-black' : 'text-white'}`}>
+                                  <span className="font-clash font-bold tracking-wide" style={{ fontFamily: "'Clash Display', sans-serif" }}>MergeX</span>
+                                  {' '}
+                                  <span className="font-clash font-thin tracking-wide" style={{ fontFamily: "'Clash Display', sans-serif" }}>Academy</span>
                                 </span>
                               </Link>
                             );

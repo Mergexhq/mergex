@@ -83,9 +83,9 @@ export function MobileNav({ isOpen, onClose, pathname }: MobileNavProps) {
                               style={{ fontFamily: "'Clash Display', sans-serif" }}
                             >OVRN Studio</Link>
                           ) : pathname === '/brands/academy' ? (
-                            <Link href="/brands/academy" onClick={onClose} className="text-2xl leading-none text-white">
+                            <Link href="/brands/academy" onClick={onClose} className="text-[17px] leading-none whitespace-nowrap text-white">
                               <span className="font-clash font-bold tracking-wide" style={{ fontFamily: "'Clash Display', sans-serif" }}>MergeX</span>{' '}
-                              <span className="font-clash font-light tracking-wide" style={{ fontFamily: "'Clash Display', sans-serif" }}>Academy</span>
+                              <span className="font-clash font-thin tracking-wide" style={{ fontFamily: "'Clash Display', sans-serif" }}>Academy</span>
                             </Link>
                           ) : pathname === '/brands/mergex' ? (
                             <Link href="/brands/mergex" onClick={onClose} className="flex items-center gap-1">
