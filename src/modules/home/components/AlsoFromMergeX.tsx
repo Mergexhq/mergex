@@ -23,13 +23,7 @@ export function AlsoFromMergeX() {
             description: 'Operational systems for businesses ready to scale.',
             ctaText: 'Explore MergeX',
             href: '/brands/mergex',
-            logo: (
-                <img 
-                    src="/logo/mergex-logo.png" 
-                    alt="MergeX Logo" 
-                    className="h-12 w-12 object-contain dark:brightness-0 dark:invert transition-all duration-300"
-                />
-            )
+            logo: null
         },
         {
             id: 'ovrn-studios',
