@@ -45,33 +45,6 @@ export const structure: StructureResolver = (S) =>
                             .filter('_type == "insight" && featuredInsight == true')
                         ),
                       S.listItem()
-                        .title('By Category')
-                        .icon(BookOpen)
-                        .child(
-                          S.list()
-                            .title('Categories')
-                            .items(
-                              [
-                                'Systems',
-                                'Operations',
-                                'Commercial',
-                                'Brand',
-                                'Scale',
-                                'Infrastructure',
-                                'Leadership',
-                              ].map((cat) =>
-                                S.listItem()
-                                  .title(cat)
-                                  .child(
-                                    S.documentTypeList('insight')
-                                      .title(`${cat} Insights`)
-                                      .filter('_type == "insight" && category == $cat')
-                                      .params({ cat })
-                                  )
-                              )
-                            )
-                        ),
-                      S.listItem()
                         .title('Drafts')
                         .icon(FileSignature)
                         .child(

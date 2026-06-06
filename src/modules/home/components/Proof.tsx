@@ -4,18 +4,9 @@ import Link from 'next/link';
 
 export function Proof() {
     return (
-        <section
-            className="px-6 py-16 md:py-20"
-            style={{ backgroundColor: 'var(--background)' }}
-        >
-            <div className="max-w-[84rem] mx-auto">
-                <div
-                    className="relative overflow-hidden rounded-3xl"
-                    style={{
-                        backgroundColor: '#0E0B18',
-                        border: '1px solid rgba(139,92,246,0.14)',
-                    }}
-                >
+        <section className="bg-background px-6 py-16 md:py-20">
+            <div className="max-w-content mx-auto">
+                <div className="relative overflow-hidden rounded-token-xl border border-white/10 bg-[#0E0B18]">
                     {/* Purple corner glow */}
                     <div
                         className="absolute -top-24 -left-24 w-72 h-72 rounded-full pointer-events-none"
@@ -37,34 +28,23 @@ export function Proof() {
 
                         {/* Left - Title */}
                         <div>
-                            <h2
-                                className="text-2xl md:text-3xl lg:text-[2.25rem] font-normal"
-                                style={{
-                                    fontFamily: 'Garamond, Georgia, serif',
-                                    color: '#ECECE8',
-                                    lineHeight: '1.45',
-                                    letterSpacing: '0.03em',
-                                }}
-                            >
+                            <h2 className="font-serif text-2xl md:text-3xl lg:text-[2.25rem] font-normal text-[#ECECE8] leading-[1.45] tracking-[0.03em]">
                                 How businesses scale when
                                 <br />
-                                <span style={{ color: 'rgba(167,139,250,0.9)' }}>the right problem gets fixed.</span>
+                                <span className="text-primary-light font-semibold">the right problem gets fixed.</span>
                             </h2>
                         </div>
 
                         {/* Right - Description + CTA */}
                         <div className="flex flex-col items-end gap-8">
-                            <p
-                                className="text-base md:text-lg leading-relaxed text-left w-full tracking-wide"
-                                style={{ color: 'rgba(236,236,232,0.6)' }}
-                            >
+                            <p className="text-base md:text-lg leading-relaxed text-left w-full tracking-wide text-[#ECECE8]/60">
                                 A collection of businesses we helped solve operational and structural issues limiting scale with creating clearer systems, better execution, and sustainable growth.
                             </p>
 
                             <Link
                                 href="/insights/case-studies"
                                 id="view-transformation-archive-cta"
-                                className="group inline-flex items-center gap-2 px-5 py-2.5 rounded-lg text-sm font-semibold tracking-wide transition-all duration-300 hover:scale-[1.02] active:scale-[0.98] self-end mt-6 md:mt-8 bg-linear-to-b from-violet-400 to-violet-900 hover:opacity-95"
+                                className="group inline-flex items-center gap-2 px-5 py-2.5 rounded-lg text-sm font-semibold tracking-wide transition-all duration-300 hover:scale-[1.02] active:scale-[0.98] bg-linear-to-b from-violet-400 to-violet-900 hover:opacity-95 text-white self-end mt-6 md:mt-8"
                                 style={{
                                     color: '#FFFFFF',
                                 }}

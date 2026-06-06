@@ -77,7 +77,7 @@ function Section({ id, label, content }: { id: string; label: string; content: s
       <span className="text-xs font-bold uppercase tracking-[0.2em] text-violet-600 block mb-4">
         {label}
       </span>
-      <div className="space-y-5 text-foreground-muted font-light max-w-[740px]">
+      <div className="space-y-5 text-foreground-muted font-light max-w-prose">
         {blocks.map(renderBlock)}
       </div>
     </section>
@@ -171,7 +171,7 @@ export function CaseStudyDetailClient({ caseStudy, related }: CaseStudyDetailCli
         <CaseStudySidebar mode="toc" sections={tocSections} meta={sidebarMeta} />
 
         {/* Right Content Workspace */}
-        <div className="flex-1 min-w-0 max-w-[800px] lg:pl-4 pt-28">
+        <div className="flex-1 min-w-0 max-w-prose lg:pl-4 pt-28">
           
           {/* Section 1: Hero Block */}
           <header className="mb-12">
@@ -203,7 +203,7 @@ export function CaseStudyDetailClient({ caseStudy, related }: CaseStudyDetailCli
           </header>
 
           {/* Section 2: Google AI Overview Block */}
-          <section id="overview" className="rounded-[24px] bg-[#F5F2F9] dark:bg-[#1b1724] border border-violet-500/10 dark:border-violet-500/20 p-6 md:p-8 mb-12 relative overflow-hidden transition-colors duration-500">
+          <section id="overview" className="rounded-[24px] bg-brand-50 dark:bg-brand-900/20 border border-violet-500/10 dark:border-violet-500/20 p-6 md:p-8 mb-12 relative overflow-hidden transition-colors duration-500">
             <div className="absolute top-0 right-0 w-48 h-48 bg-violet-600/5 blur-[50px] rounded-full pointer-events-none" />
             
             <div className="flex items-center gap-2.5 mb-4 relative z-10">
@@ -266,7 +266,7 @@ export function CaseStudyDetailClient({ caseStudy, related }: CaseStudyDetailCli
 
           {/* Client note Blockquote */}
           {caseStudy.clientNote && (
-            <blockquote className="border-y border-black/5 dark:border-white/5 py-10 my-14 text-center max-w-[740px] transition-colors duration-500">
+            <blockquote className="border-y border-black/5 dark:border-white/5 py-10 my-14 text-center max-w-prose transition-colors duration-500">
               <p className="font-serif italic text-lg md:text-xl text-foreground leading-relaxed max-w-2xl mx-auto">
                 &ldquo;{caseStudy.clientNote}&rdquo;
               </p>
@@ -277,7 +277,7 @@ export function CaseStudyDetailClient({ caseStudy, related }: CaseStudyDetailCli
           )}
 
           {/* Section 4: The Bottom Line Summary Block */}
-          <section id="tldr" className="rounded-[24px] bg-[#EAE8E4] dark:bg-[#1e1d1b] border border-black/5 dark:border-white/5 p-8 my-16 max-w-[740px] transition-colors duration-500">
+          <section id="tldr" className="rounded-[24px] bg-bg-tertiary border border-black/5 dark:border-white/5 p-8 my-16 max-w-prose transition-colors duration-500">
             <h3 className="font-serif text-2xl text-foreground font-semibold mb-4">
               The Bottom Line
             </h3>

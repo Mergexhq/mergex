@@ -2,7 +2,6 @@ import type { Metadata } from "next";
 import {
   Manrope,
   Playfair_Display,
-  Great_Vibes,
   Roboto,
 } from "next/font/google";
 
@@ -24,13 +23,6 @@ const manrope = Manrope({
 const playfair = Playfair_Display({
   subsets: ["latin"],
   variable: "--font-playfair-display",
-  display: "swap",
-});
-
-const greatVibes = Great_Vibes({
-  weight: "400",
-  subsets: ["latin"],
-  variable: "--font-great-vibes",
   display: "swap",
 });
 
@@ -159,7 +151,6 @@ export default function RootLayout({
       className={`
         ${manrope.variable}
         ${playfair.variable}
-        ${greatVibes.variable}
         ${roboto.variable}
         h-full
         scroll-smooth
@@ -176,7 +167,7 @@ export default function RootLayout({
         />
 
         {/* Theme color - matches your background token for mobile browser chrome */}
-        <meta name="theme-color" content="#0A0A0A" />
+        <meta name="theme-color" content="#080808" />
       </head>
 
       <body

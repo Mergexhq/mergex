@@ -286,7 +286,7 @@ export default function AskMergeXWidget() {
                         style={{
                             width: 'min(420px, calc(100vw - 32px))',
                             height: 'min(600px, calc(100dvh - 100px))',
-                            background: '#0a0a0a',
+                            background: '#080808',
                             borderRadius: '12px',
                             boxShadow: '0 24px 64px rgba(0,0,0,0.4), 0 4px 16px rgba(0,0,0,0.2)',
                             border: '1px solid rgba(255,255,255,0.08)',
@@ -364,7 +364,7 @@ export default function AskMergeXWidget() {
                                         </div>
 
                                         {/* Fade overlay */}
-                                        <div className="absolute bottom-0 left-0 right-0 h-32 bg-linear-to-t from-[#0a0a0a] via-[#0a0a0a]/90 to-transparent pointer-events-none z-15" />
+                                        <div className="absolute bottom-0 left-0 right-0 h-32 bg-linear-to-t from-[#080808] via-[#080808]/90 to-transparent pointer-events-none z-15" />
                                     </div>
 
                                     <ChatInput

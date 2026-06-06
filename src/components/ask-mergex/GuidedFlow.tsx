@@ -86,7 +86,7 @@ export function GuidedFlow({
                             required
                             value={leadData.name}
                             onChange={e => onLeadChange({ ...leadData, name: e.target.value })}
-                            className="w-full bg-white/[0.03] border border-white/5 text-white placeholder-white/30 rounded-xl px-3.5 py-2.5 text-[12px] outline-none focus:border-violet-500/40 focus:ring-1 focus:ring-violet-500/20"
+                            className="input-field"
                         />
                         <input
                             type="email"
@@ -94,11 +94,11 @@ export function GuidedFlow({
                             required
                             value={leadData.email}
                             onChange={e => onLeadChange({ ...leadData, email: e.target.value })}
-                            className="w-full bg-white/[0.03] border border-white/5 text-white placeholder-white/30 rounded-xl px-3.5 py-2.5 text-[12px] outline-none focus:border-violet-500/40 focus:ring-1 focus:ring-violet-500/20"
+                            className="input-field"
                         />
                         <button
                             type="submit"
-                            className="w-full py-2.5 bg-violet-600 text-white rounded-xl font-bold text-[12px] shadow-md hover:bg-violet-500 transition-all mt-1"
+                            className="btn-accent w-full mt-1"
                         >
                             Get My Custom Plan
                         </button>

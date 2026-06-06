@@ -269,7 +269,7 @@ export function SelectedCaseStudies() {
                           height: isMobile ? '40px' : '52px',
                           borderRadius: '50%',
                           background: '#FFFFFF',
-                          color: '#0a0a0a',
+                          color: '#121212',
                           display: 'flex',
                           alignItems: 'center',
                           justifyContent: 'center',

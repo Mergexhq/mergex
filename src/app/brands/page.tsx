@@ -21,7 +21,7 @@ export default function BrandsPage() {
       <EcosystemDiagram />
 
       {/* 03 - Brand Sections */}
-      <section className="max-w-6xl mx-auto px-6 md:px-12 pb-0">
+      <section className="max-w-content mx-auto px-6 md:px-12 pb-0">
         <div className="flex items-center gap-4 mb-20">
           <p className="text-xs font-bold uppercase tracking-widest text-foreground-muted">
             The Brands

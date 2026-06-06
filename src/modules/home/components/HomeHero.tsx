@@ -179,7 +179,7 @@ export function HomeHero() {
                 The MergeX Company builds operational, creative, and educational systems designed to support scalable modern businesses.
               </p>
               <Link
-                href="/methodology"
+                href="/about"
                 className="group inline-flex items-center gap-2 px-5 py-2.5 rounded-lg text-sm font-semibold tracking-wide transition-all duration-300 hover:scale-[1.02] active:scale-[0.98] bg-linear-to-b from-violet-400 to-violet-900 hover:opacity-95 text-white self-end"
                 style={{
                   color: '#FFFFFF',

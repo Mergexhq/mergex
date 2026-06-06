@@ -5,27 +5,27 @@
 
 /* ── DESIGN TOKENS ── */
 .about-page {
-  --ap-bg:          #F3F3F3;
-  --ap-surface:     #EBEBEB;
-  --ap-border:      #E2E2DE;
-  --ap-border-mid:  #CECECA;
-  --ap-purple:      #8B5CF6;
-  --ap-purple-dim:  rgba(139,92,246,0.10);
+  --ap-bg:          var(--background);
+  --ap-surface:     var(--bg-secondary);
+  --ap-border:      var(--border);
+  --ap-border-mid:  var(--border-primary);
+  --ap-purple:      var(--primary);
+  --ap-purple-dim:  var(--color-brand-100);
   --ap-purple-glow: rgba(139,92,246,0.06);
 
   /* Dark hero tokens */
-  --ap-dark:        #0F0F0F;
-  --ap-dark-mid:    #1A1A1A;
-  --ap-dark-border: rgba(255,255,255,0.08);
-  --ap-dark-text:   rgba(255,255,255,0.92);
-  --ap-dark-muted:  rgba(255,255,255,0.45);
+  --ap-dark:        var(--bg-primary);
+  --ap-dark-mid:    var(--bg-secondary);
+  --ap-dark-border: var(--border-primary);
+  --ap-dark-text:   var(--text-primary);
+  --ap-dark-muted:  var(--text-secondary);
 
-  --ap-text-primary:   #121212;
-  --ap-text-secondary: #5A5A58;
-  --ap-text-tertiary:  #9A9A98;
+  --ap-text-primary:   var(--text-primary);
+  --ap-text-secondary: var(--text-secondary);
+  --ap-text-tertiary:  var(--text-tertiary);
 
-  --ap-serif: var(--font-playfair-display, 'Playfair Display', Georgia, serif);
-  --ap-sans:  var(--font-manrope, 'Manrope', sans-serif);
+  --ap-serif: var(--font-serif);
+  --ap-sans:  var(--font-body);
 
   position: relative;
   background: var(--ap-bg);
@@ -730,7 +730,7 @@
   }
 }
 
-@media (max-width: 900px) {
+@media (max-width: 1024px) {
   .about-hero { padding: 8px; } /* extreme narrow equal padding on mobile */
 
   .hero-panel { min-height: 92vh; border-radius: 12px; }

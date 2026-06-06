@@ -81,7 +81,7 @@ function MobileShare({ readTime, date }: { readTime: string; date: string }) {
   };
 
   return (
-    <div className="lg:hidden border border-black/5 dark:border-white/8 rounded-2xl p-5 my-8 max-w-[740px] bg-[#F5F3F0] dark:bg-[#111] transition-colors duration-500">
+    <div className="lg:hidden border border-black/5 dark:border-white/8 rounded-2xl p-5 my-8 max-w-prose bg-bg-secondary transition-colors duration-500">
       <p className="text-[9px] font-bold uppercase tracking-[0.2em] text-foreground-muted/50 mb-4">Share this article</p>
       <div className="flex items-center gap-2">
         {/* Copy link */}
@@ -209,7 +209,7 @@ export function InsightDetailClient({ insight, related }: InsightDetailClientPro
         <InsightSidebar mode="toc" sections={tocSections} meta={sidebarMeta} />
 
         {/* Right Content Workspace */}
-        <div className="flex-1 min-w-0 max-w-[800px] lg:pl-4 pt-28">
+        <div className="flex-1 min-w-0 max-w-prose lg:pl-4 pt-28">
           
           {/* Section 1: Hero Block */}
           <header className="mb-12">
@@ -263,7 +263,7 @@ export function InsightDetailClient({ insight, related }: InsightDetailClientPro
           )}
 
           {/* Section 2: Google AI Overview Block */}
-          <section id="overview" className="rounded-[24px] bg-[#F5F2F9] dark:bg-[#1b1724] border border-violet-500/10 dark:border-violet-500/20 p-6 md:p-8 mb-12 relative overflow-hidden transition-colors duration-500">
+          <section id="overview" className="rounded-[24px] bg-brand-50 dark:bg-brand-900/20 border border-violet-500/10 dark:border-violet-500/20 p-6 md:p-8 mb-12 relative overflow-hidden transition-colors duration-500">
             <div className="absolute top-0 right-0 w-48 h-48 bg-violet-600/5 blur-[50px] rounded-full pointer-events-none" />
             
             <div className="flex items-center gap-2.5 mb-4 relative z-10">
@@ -317,7 +317,7 @@ export function InsightDetailClient({ insight, related }: InsightDetailClientPro
           </section>
 
           {/* Section 3: Premium Editorial Content */}
-          <article id="content" className="prose-custom max-w-[740px] text-foreground-muted text-sm md:text-base leading-relaxed space-y-6 font-light">
+          <article id="content" className="prose-custom max-w-prose text-foreground-muted text-sm md:text-base leading-relaxed space-y-6 font-light">
             {bodyParagraphs.map((block, i) => {
               if (block.startsWith('## ')) {
                 const heading = block.replace('## ', '');
@@ -409,7 +409,7 @@ export function InsightDetailClient({ insight, related }: InsightDetailClientPro
           </article>
 
           {/* Section 4: The Bottom Line Summary Block */}
-          <section id="tldr" className="rounded-[24px] bg-[#EAE8E4] dark:bg-[#1e1d1b] border border-black/5 dark:border-white/5 p-8 my-16 max-w-[740px] transition-colors duration-500">
+          <section id="tldr" className="rounded-[24px] bg-bg-tertiary border border-black/5 dark:border-white/5 p-8 my-16 max-w-prose transition-colors duration-500">
             <h3 className="font-serif text-2xl text-foreground font-semibold mb-4">
               The Bottom Line
             </h3>

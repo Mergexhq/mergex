@@ -11,7 +11,7 @@ export function MergeXHero() {
         orbOpacity={0.28}
         className="relative w-full min-h-screen pt-32 pb-24 flex items-center justify-center overflow-hidden"
       >
-        <div className="max-w-5xl mx-auto px-6 md:px-12 flex flex-col items-center text-center relative z-10">
+        <div className="max-w-content mx-auto px-6 md:px-12 flex flex-col items-center text-center relative z-10">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}

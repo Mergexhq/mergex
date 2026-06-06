@@ -4,7 +4,7 @@ import { motion } from 'framer-motion';
 
 export function BrandsHero() {
   return (
-    <section className="pt-40 pb-24 px-6 md:px-12 max-w-6xl mx-auto">
+    <section className="pt-40 pb-24 px-6 md:px-12 max-w-content mx-auto">
       <motion.div
         initial={{ opacity: 0, y: 24 }}
         animate={{ opacity: 1, y: 0 }}
@@ -13,7 +13,7 @@ export function BrandsHero() {
         <p className="text-xs font-bold uppercase tracking-widest text-primary mb-6">
           Brands
         </p>
-        <h1 className="text-5xl md:text-7xl font-bold text-foreground tracking-tight leading-none mb-8 max-w-3xl">
+        <h1 className="text-5xl md:text-7xl font-serif font-bold text-foreground tracking-tight leading-none mb-8 max-w-3xl">
           Specialized brands built under{' '}
           <span className="text-foreground-muted">The MergeX Company.</span>
         </h1>
@@ -27,7 +27,7 @@ export function BrandsHero() {
         initial={{ opacity: 0, y: 16 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.6, delay: 0.3, ease: [0.22, 1, 0.36, 1] }}
-        className="mt-16 flex items-start gap-6 p-6 rounded-2xl border border-border bg-background-subtle max-w-xl"
+        className="mt-16 flex items-start gap-6 p-6 rounded-token-xl border border-border bg-background-subtle max-w-xl"
       >
         <div className="w-10 h-10 rounded-xl bg-primary/10 flex items-center justify-center shrink-0 mt-0.5">
           <svg className="w-5 h-5 text-primary" fill="none" stroke="currentColor" strokeWidth={1.5} viewBox="0 0 24 24">

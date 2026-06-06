@@ -5,6 +5,7 @@ import { usePathname } from 'next/navigation';
 import Image from 'next/image';
 import { useState, useEffect, useCallback } from 'react';
 import { AnimatedThemeToggler } from '@/components/ui/animated-theme-toggler';
+import { ArrowLeft } from 'lucide-react';
 
 const CATEGORIES = ['All', 'Systems', 'Operations', 'Strategy', 'Leadership'];
 
@@ -86,8 +87,8 @@ export function InsightSidebar({
       <aside
         className={`hidden lg:flex flex-col shrink-0 overflow-hidden transition-all duration-500 ${
           isToc
-            ? 'w-[290px] sticky top-2 h-[calc(100vh-16px)] bg-[#020202] dark:bg-[#020202] rounded-xl border border-white/8 dark:border-white/10 shadow-none'
-            : 'w-[290px] sticky top-0 self-start h-[calc(100vh-0)] bg-[#020202] dark:bg-[#020202]'
+            ? 'w-[290px] sticky top-2 h-[calc(100vh-16px)] bg-[#080808] dark:bg-[#080808] rounded-xl border border-white/8 dark:border-white/10 shadow-none'
+            : 'w-[290px] sticky top-0 self-start h-[calc(100vh-0)] bg-[#080808] dark:bg-[#080808]'
         }`}
       >
         {/* Purple glow top-left */}
@@ -107,7 +108,6 @@ export function InsightSidebar({
             />
             <span
               className="font-clash font-bold text-base tracking-wider text-white"
-              style={{ fontFamily: "'Clash Display', sans-serif" }}
             >
               MERGEX
             </span>
@@ -289,9 +289,7 @@ export function InsightSidebar({
                 href="/insights"
                 className="flex items-center gap-1.5 text-[11px] text-white/35 hover:text-white/65 transition-colors duration-200"
               >
-                <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                  <path strokeLinecap="round" strokeLinejoin="round" d="M10 19l-7-7m0 0l7-7m-7 7h18" />
-                </svg>
+                <ArrowLeft size={11} />
                 Back to Insights
               </Link>
               <AnimatedThemeToggler />
@@ -304,9 +302,7 @@ export function InsightSidebar({
               href="/insights"
               className="flex items-center gap-1.5 text-xs text-white/40 hover:text-white/70 transition-colors duration-200"
             >
-              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                <path strokeLinecap="round" strokeLinejoin="round" d="M10 19l-7-7m0 0l7-7m-7 7h18" />
-              </svg>
+              <ArrowLeft size={13} />
               Back to Insights
             </Link>
           </div>
@@ -325,7 +321,7 @@ export function InsightSidebar({
                 href={href}
                 className={`px-4 py-1.5 rounded-full text-sm font-medium transition-colors duration-200 ${
                   isActive
-                    ? 'bg-[#020202] text-white'
+                    ? 'bg-text-primary text-bg-primary'
                     : 'bg-background-subtle text-foreground-muted hover:text-foreground'
                 }`}
               >

@@ -590,7 +590,7 @@ function SidebarLink({ href, title, description, icon }: { href: string, title: 
 export function GeneralInquirySection() {
     return (
         <section className="bg-white pt-16 pb-48" id="inquiry">
-            <div className="container mx-auto max-w-6xl px-6">
+            <div className="container mx-auto max-w-content px-6">
                 <div className="grid gap-8 lg:grid-cols-12 lg:gap-12">
                     <div className="lg:col-span-7 xl:col-span-8 lg:-ml-12">
                         <UnifiedForm />
@@ -617,7 +617,7 @@ export function GeneralInquirySection() {
 export function DiagnosticSection() {
     return (
         <section className="bg-white pt-24 pb-48" id="diagnostic">
-            <div className="container mx-auto max-w-6xl px-6">
+            <div className="container mx-auto max-w-content px-6">
                 {/* Header Section */}
                 <div className="mb-10 lg:-ml-12">
                     <p className="mb-4 text-[16px] font-bold tracking-[0.2em] uppercase bg-linear-to-b from-violet-400 to-violet-900 bg-clip-text text-transparent">

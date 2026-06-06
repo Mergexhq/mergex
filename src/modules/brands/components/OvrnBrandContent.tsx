@@ -105,7 +105,7 @@ const staggerContainer: Variants = {
 
 export function OvrnBrandContent() {
   return (
-    <div className="relative min-h-screen bg-[#0B0B0B] text-white selection:bg-purple-500/30 font-sans z-20">
+    <div className="relative min-h-screen bg-[#0B0B0B] dark text-white selection:bg-purple-500/30 font-sans z-20">
       {/* Radial ambient glow */}
       <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top,rgba(139,92,246,0.06)_0%,transparent_50%),radial-gradient(ellipse_at_bottom,rgba(139,92,246,0.02)_0%,transparent_50%)] pointer-events-none" />
 
@@ -120,7 +120,7 @@ export function OvrnBrandContent() {
           <div className="w-1/4 h-full border-r border-white" />
         </div>
 
-        <div className="max-w-6xl mx-auto w-full relative z-10">
+        <div className="max-w-content mx-auto w-full relative z-10">
           <motion.div
             initial="hidden"
             animate="visible"
@@ -170,7 +170,7 @@ export function OvrnBrandContent() {
          2. ABOUT OVRN STUDIOS
          ──────────────────────────────────────────────────────── */}
       <section className="py-24 md:py-32 px-6 md:px-12 border-b border-white/5 relative">
-        <div className="max-w-6xl mx-auto">
+        <div className="max-w-content mx-auto">
           <motion.div
             initial="hidden"
             whileInView="visible"
@@ -213,7 +213,7 @@ export function OvrnBrandContent() {
          3. PRODUCTION PIPELINE
          ──────────────────────────────────────────────────────── */}
       <section className="py-24 md:py-32 px-6 md:px-12 border-b border-white/5 relative">
-        <div className="max-w-6xl mx-auto">
+        <div className="max-w-content mx-auto">
           {/* Section heading */}
           <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-16 md:mb-20">
             <div>
@@ -280,7 +280,7 @@ export function OvrnBrandContent() {
          4. CAPABILITIES
          ──────────────────────────────────────────────────────── */}
       <section className="py-24 md:py-32 px-6 md:px-12 border-b border-white/5 relative">
-        <div className="max-w-6xl mx-auto">
+        <div className="max-w-content mx-auto">
           {/* Section heading */}
           <div className="mb-16 md:mb-20 text-center max-w-2xl mx-auto">
             <span className="text-[10px] font-bold tracking-[0.2em] uppercase text-zinc-500 block mb-3">
@@ -333,7 +333,7 @@ export function OvrnBrandContent() {
          5. SELECTED WORK / PROOF REELS
          ──────────────────────────────────────────────────────── */}
       <section id="selected-work" className="py-24 md:py-32 px-6 md:px-12 border-b border-white/5 relative">
-        <div className="max-w-6xl mx-auto">
+        <div className="max-w-content mx-auto">
           {/* Section heading */}
           <div className="mb-16 md:mb-20">
             <span className="text-[10px] font-bold tracking-[0.2em] uppercase text-purple-400 block mb-3">
@@ -365,7 +365,7 @@ export function OvrnBrandContent() {
                     style={{ backgroundImage: `url(${card.bgImage})` }}
                   />
                   {/* Subtle dark overlay */}
-                  <div className="absolute inset-0 bg-gradient-to-t from-[#0B0B0B] via-transparent to-black/30" />
+                  <div className="absolute inset-0 bg-gradient-to-t from-zinc-950 via-transparent to-black/30" />
                   
                   {/* Play badge */}
                   <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
@@ -400,7 +400,7 @@ export function OvrnBrandContent() {
          6. INSIGHTS / PERSPECTIVES
          ──────────────────────────────────────────────────────── */}
       <section className="py-24 md:py-32 px-6 md:px-12 border-b border-white/5 relative">
-        <div className="max-w-6xl mx-auto">
+        <div className="max-w-content mx-auto">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start">
             {/* Left Column - Heading */}
             <div className="lg:col-span-4">
@@ -488,7 +488,7 @@ export function OvrnBrandContent() {
          OPTIONAL CLIENT Logo Strip
          ──────────────────────────────────────────────────────── */}
       <section className="py-12 border-t border-white/5 relative z-10 bg-zinc-950/20 backdrop-blur-sm">
-        <div className="max-w-6xl mx-auto px-6 md:px-12 flex flex-wrap justify-between items-center gap-8 opacity-30 text-xs md:text-sm font-semibold tracking-[0.15em] text-white">
+        <div className="max-w-content mx-auto px-6 md:px-12 flex flex-wrap justify-between items-center gap-8 opacity-30 text-xs md:text-sm font-semibold tracking-[0.15em] text-white">
           <span>YOUTUBE</span>
           <span>INSTAGRAM</span>
           <span>META ADS</span>

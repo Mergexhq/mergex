@@ -14,7 +14,7 @@ const LAYER_COLORS: Record<string, string> = {
 export function EcosystemDiagram() {
   return (
     <section className="py-20 px-6 md:px-12 bg-foreground">
-      <div className="max-w-6xl mx-auto">
+      <div className="max-w-content mx-auto">
         {/* Label */}
         <p className="text-xs font-bold uppercase tracking-widest text-white/40 mb-12">
           Ecosystem Overview
@@ -23,7 +23,7 @@ export function EcosystemDiagram() {
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
           {/* Left - description */}
           <div>
-            <h2 className="text-3xl md:text-4xl font-bold text-white leading-tight mb-6">
+            <h2 className="font-serif text-3xl md:text-4xl font-bold text-white leading-tight mb-6">
               One parent company.
               <br />
               <span className="text-white/50">Three operational layers.</span>

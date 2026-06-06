@@ -87,7 +87,7 @@ export default function EmptyState({
       >
         <Link
           href={ctaHref}
-          className="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-black text-white text-sm font-semibold hover:bg-gray-900 transition-all shadow-md shadow-black/10 group"
+          className="btn-primary group"
         >
           {ctaLabel}
           <ArrowRight className="w-4 h-4 group-hover:translate-x-0.5 transition-transform" />

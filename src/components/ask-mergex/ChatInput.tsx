@@ -46,7 +46,7 @@ export function ChatInput({
                         )}
                         style={inputFocused ? {
                             border: '1px solid transparent',
-                            background: 'linear-gradient(#0c0c10, #0c0c10) padding-box, linear-gradient(to right, #c084fc, #8b5cf6, #581c87, #8b5cf6, #c084fc) border-box',
+                            background: 'linear-gradient(#080808, #080808) padding-box, linear-gradient(to right, #c084fc, #8b5cf6, #581c87, #8b5cf6, #c084fc) border-box',
                         } : undefined}
                     >
                         {/* Perfect flex layout to align input, blinking pointer, and arrow in one row */}

@@ -11,7 +11,7 @@ export function DiagnosticApproach() {
 
     return (
         <section className="py-24 md:py-32 px-6 bg-background">
-            <div className="max-w-[84rem] mx-auto">
+            <div className="max-w-content mx-auto">
                 
                 {/* Header */}
                 <div className="max-w-3xl mb-16">

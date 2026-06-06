@@ -118,11 +118,11 @@ export function LegalPageLayout({
 
             {/* Hero Card */}
             <div className="p-2 lg:p-3">
-                <div className="relative w-full rounded-[20px] lg:rounded-[24px] overflow-hidden bg-[#0A0A0A] pt-32 pb-16 md:pt-36 md:pb-20 px-6 flex flex-col items-center justify-center text-center">
+                <div className="relative w-full rounded-[20px] lg:rounded-[24px] overflow-hidden bg-[#080808] pt-32 pb-16 md:pt-36 md:pb-20 px-6 flex flex-col items-center justify-center text-center">
                     {/* Background Gradient / Overlay */}
                     <div className="absolute inset-0 z-0">
                         {/* Dark gradient fade */}
-                        <div className="absolute inset-0 bg-linear-to-b from-[#1A1A1A]/50 to-[#0A0A0A]" />
+                        <div className="absolute inset-0 bg-linear-to-b from-[#101010]/50 to-[#080808]" />
                         
                         {/* Bottom purple glows - mimicking the orange glow in reference but purple */}
                         <div className="absolute -bottom-48 -left-24 w-120 h-120 bg-violet-600/30 blur-[120px] rounded-full mix-blend-screen pointer-events-none" />

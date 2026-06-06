@@ -1,13 +1,6 @@
 'use client';
 
 import { usePathname } from 'next/navigation';
-import { Great_Vibes } from 'next/font/google';
-
-const greatVibes = Great_Vibes({
-    weight: '400',
-    subsets: ['latin'],
-    display: 'swap',
-});
 
 export default function FooterCurtain() {
     const pathname = usePathname();
@@ -63,8 +56,8 @@ export default function FooterCurtain() {
                                 {(pathname === '/labs' || pathname === '/systems') && (
                                     <div className="flex flex-row items-baseline" style={{ marginLeft: '0.3em' }}>
                                         <span
-                                            className="text-[20vw] leading-none font-normal text-white select-none text-center"
-                                            style={{ ...greatVibes.style, overflow: 'visible', padding: '0 0.1em' }}
+                                            className="text-[20vw] leading-none font-normal text-white select-none text-center font-serif italic"
+                                            style={{ overflow: 'visible', padding: '0 0.1em' }}
                                         >
                                             {pathname === '/labs' ? 'L' : 'S'}
                                         </span>

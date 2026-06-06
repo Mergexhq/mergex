@@ -5,7 +5,7 @@ import { CONTACT_NEXT_STEPS } from '../content/contact';
 
 export function ContactNextSteps() {
     return (
-        <section className="bg-[#F3F3F3] py-16 pb-24">
+        <section className="bg-[#F3F3F3] py-section">
             <div className="container mx-auto max-w-3xl px-6">
 
                 <motion.div

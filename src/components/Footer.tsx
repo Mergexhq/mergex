@@ -4,6 +4,7 @@ import Image from 'next/image';
 import { motion } from 'framer-motion';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
+import { ArrowUp } from 'lucide-react';
 
 /* ─── Link helper ──────────────────────────────────────────────────── */
 function FooterLink({ href, label }: { href: string; label: string }) {
@@ -218,7 +219,7 @@ export default function Footer() {
                             />
                             <button
                                 type="submit"
-                                className="text-center text-[14px] font-medium font-body text-white bg-linear-to-b from-violet-400 to-violet-900 hover:opacity-90 rounded-[8px] px-5 py-2 transition-all whitespace-nowrap ml-1"
+                                className="btn-accent ml-1 whitespace-nowrap"
                             >
                                 Subscribe
                             </button>
@@ -263,11 +264,7 @@ export default function Footer() {
                             className="ml-2 w-8 h-8 rounded-full bg-black/5 hover:bg-black hover:text-white transition-all flex items-center justify-center text-black"
                             aria-label="Back to Top"
                         >
-                            <svg className="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
-                                <line x1="5" y1="4" x2="19" y2="4" />
-                                <path d="M12 8v12" />
-                                <path d="M7 13l5-5 5 5" />
-                            </svg>
+                            <ArrowUp size={16} />
                         </button>
                     </div>
                 </motion.div>

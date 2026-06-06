@@ -29,7 +29,7 @@ export function CareersHero() {
                 style={{ background: 'linear-gradient(to bottom, transparent 0%, #F3F3F3 100%)' }}
             />
 
-            <div className="container relative z-10 mx-auto max-w-5xl px-6 text-center">
+            <div className="container relative z-10 mx-auto max-w-content px-6 text-center">
                 <motion.div
                     initial={{ opacity: 0, y: 20 }}
                     animate={{ opacity: 1, y: 0 }}

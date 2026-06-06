@@ -26,7 +26,7 @@ export function BrandDetailLayout({
   return (
     <div className="min-h-screen bg-background">
       {/* Hero */}
-      <section className="pt-40 pb-20 px-6 md:px-12 max-w-6xl mx-auto border-b border-border">
+      <section className="pt-40 pb-20 px-6 md:px-12 max-w-content mx-auto border-b border-border">
         <div className="flex items-center gap-3 mb-8">
           <Link
             href="/brands"
@@ -42,7 +42,7 @@ export function BrandDetailLayout({
             {brand.layer}
           </span>
         </div>
-        <h1 className="text-5xl md:text-7xl font-bold text-foreground tracking-tight leading-none mb-6 max-w-2xl">
+        <h1 className="text-5xl md:text-7xl font-serif font-bold text-foreground tracking-tight leading-none mb-6 max-w-2xl">
           {brand.name}
         </h1>
         <p className="text-xl text-foreground-muted max-w-xl leading-relaxed mb-10">
@@ -51,12 +51,12 @@ export function BrandDetailLayout({
         <div className="flex items-center gap-4">
           <Link
             href="/contact"
-            className="px-6 py-3 bg-foreground text-background rounded-none text-sm font-semibold hover:opacity-80 transition-opacity"
+            className="btn-primary"
           >
             Get in Touch
           </Link>
           <div
-            className={`inline-flex items-center gap-2 px-3 py-1.5 rounded-none text-xs font-semibold ${status.bg} ${status.text}`}
+            className={`inline-flex items-center gap-2 px-3 py-1.5 rounded-token-md text-xs font-semibold ${status.bg} ${status.text}`}
           >
             <div className={`w-1.5 h-1.5 rounded-full ${status.dot}`} />
             {brand.status}
@@ -65,7 +65,7 @@ export function BrandDetailLayout({
       </section>
 
       {/* What it does + Ecosystem Role */}
-      <section className="py-20 px-6 md:px-12 max-w-6xl mx-auto border-b border-border">
+      <section className="py-20 px-6 md:px-12 max-w-content mx-auto border-b border-border">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-16">
           <div>
             <p className="text-xs font-bold uppercase tracking-widest text-foreground-muted mb-6">
@@ -87,7 +87,7 @@ export function BrandDetailLayout({
               {brand.focusAreas.map((area) => (
                 <span
                   key={area}
-                  className="text-xs px-3 py-1.5 rounded-none border border-border text-foreground-muted font-medium"
+                  className="text-xs px-3 py-1.5 rounded-token-md border border-border text-foreground-muted font-medium"
                 >
                   {area}
                 </span>
@@ -99,25 +99,25 @@ export function BrandDetailLayout({
 
       {/* Brand-specific section */}
       {specialSection && (
-        <section className="py-20 px-6 md:px-12 max-w-6xl mx-auto border-b border-border">
+        <section className="py-20 px-6 md:px-12 max-w-content mx-auto border-b border-border">
           {specialSection}
         </section>
       )}
 
       {/* CTA */}
-      <section className="py-20 px-6 md:px-12 max-w-6xl mx-auto">
-        <div className="rounded-2xl bg-foreground p-10 md:p-16 flex flex-col md:flex-row items-start md:items-center justify-between gap-8">
+      <section className="py-20 px-6 md:px-12 max-w-content mx-auto">
+        <div className="rounded-token-xl bg-bg-secondary border border-border p-10 md:p-16 flex flex-col md:flex-row items-start md:items-center justify-between gap-8">
           <div>
-            <p className="text-xs font-bold uppercase tracking-widest text-white/40 mb-3">
+            <p className="text-xs font-bold uppercase tracking-widest text-foreground-muted mb-3">
               Next Step
             </p>
-            <h3 className="text-2xl md:text-3xl font-bold text-white leading-tight max-w-sm">
+            <h3 className="text-2xl md:text-3xl font-serif font-bold text-foreground leading-tight max-w-sm">
               Ready to explore {brand.name}?
             </h3>
           </div>
           <Link
             href="/contact"
-            className="shrink-0 px-8 py-4 bg-white text-foreground rounded-none text-sm font-semibold hover:opacity-90 transition-opacity inline-flex items-center gap-2"
+            className="btn-accent shrink-0"
           >
             Start a Conversation
             <svg className="w-4 h-4" fill="none" stroke="currentColor" strokeWidth={2} viewBox="0 0 24 24">

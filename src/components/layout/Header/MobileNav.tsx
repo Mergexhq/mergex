@@ -65,7 +65,7 @@ export function MobileNav({ isOpen, onClose, pathname }: MobileNavProps) {
                         }}
                         exit={{ y: '100%' }}
                         transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
-                        className="fixed bottom-0 left-0 right-0 w-full bg-[#0a0a0a] z-[61] flex flex-col shadow-[0_-20px_50px_rgba(0,0,0,0.5)] border-t border-white/10 rounded-t-3xl overflow-hidden"
+                        className="fixed bottom-0 left-0 right-0 w-full bg-[#080808] z-[61] flex flex-col shadow-[0_-20px_50px_rgba(0,0,0,0.5)] border-t border-white/10 rounded-t-3xl overflow-hidden"
                     >
                         {/* Drag Handle Indicator */}
                         <div 
@@ -80,24 +80,23 @@ export function MobileNav({ isOpen, onClose, pathname }: MobileNavProps) {
                           {pathname === '/brands/ovrn-studios' ? (
                             <Link href="/brands/ovrn-studios" onClick={onClose}
                               className="font-clash font-bold text-2xl tracking-wider text-white"
-                              style={{ fontFamily: "'Clash Display', sans-serif" }}
                             >OVRN Studio</Link>
                           ) : pathname === '/brands/academy' ? (
                             <Link href="/brands/academy" onClick={onClose} className="text-[17px] leading-none whitespace-nowrap text-white">
-                              <span className="font-clash font-bold tracking-wide" style={{ fontFamily: "'Clash Display', sans-serif" }}>MergeX</span>{' '}
-                              <span className="font-clash font-thin tracking-wide" style={{ fontFamily: "'Clash Display', sans-serif" }}>Academy</span>
+                              <span className="font-clash font-bold tracking-wide">MergeX</span>{' '}
+                              <span className="font-clash font-thin tracking-wide">Academy</span>
                             </Link>
                           ) : pathname === '/brands/mergex' ? (
                             <Link href="/brands/mergex" onClick={onClose} className="flex items-center gap-1">
                               <Image src="/logo/mergex-logo.png" alt="MergeX Logo" width={40} height={40} className="object-contain brightness-0 invert" />
-                              <span className="font-clash font-bold text-2xl tracking-wide text-white" style={{ fontFamily: "'Clash Display', sans-serif" }}>MERGEX</span>
+                              <span className="font-clash font-bold text-2xl tracking-wide text-white">MERGEX</span>
                             </Link>
                           ) : (
                             <Link href="/" onClick={onClose} className="flex items-center">
                               <span className="text-[16px] leading-none tracking-tight text-white select-none whitespace-nowrap">
                                 <span className="font-serif italic font-normal mr-0.5">The</span>
                                 {' '}
-                                <span className="font-clash font-bold tracking-wide" style={{ fontFamily: "'Clash Display', sans-serif" }}>MERGEX</span>
+                                <span className="font-clash font-bold tracking-wide">MERGEX</span>
                                 <span className="font-serif italic font-normal"> Company</span>
                               </span>
                             </Link>
@@ -196,7 +195,7 @@ export function MobileNav({ isOpen, onClose, pathname }: MobileNavProps) {
                         </div>
 
                         {/* Fixed Footer Tagline (Always Visible at the Bottom) */}
-                        <div className="w-full py-5 border-t border-white/5 bg-[#0a0a0a] shrink-0 text-center">
+                        <div className="w-full py-5 border-t border-white/5 bg-[#080808] shrink-0 text-center">
                             <p className="text-white/45 text-[10px] sm:text-xs font-semibold tracking-[0.22em] uppercase font-roboto">
                                 one system, zero friction.
                             </p>

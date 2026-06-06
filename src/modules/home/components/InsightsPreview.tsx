@@ -6,7 +6,7 @@ export function InsightsPreview() {
     const previewInsights = INSIGHTS.slice(0, 2);
 
     return (
-        <section className="py-24 md:py-32 px-6 relative overflow-hidden" style={{ backgroundColor: '#F5F3EF' }}>
+        <section className="py-24 md:py-32 px-6 relative overflow-hidden bg-background">
             {/* Subtle noise texture */}
             <div className="absolute inset-0 opacity-[0.03] pointer-events-none" style={{ backgroundImage: 'url("data:image/svg+xml,%3Csvg viewBox=%220 0 200 200%22 xmlns=%22http://www.w3.org/2000/svg%22%3E%3Cfilter id=%22noiseFilter%22%3E%3CfeTurbulence type=%22fractalNoise%22 baseFrequency=%220.65%22 numOctaves=%223%22 stitchTiles=%22stitch%22/%3E%3C/filter%3E%3Crect width=%22100%25%22 height=%22100%25%22 filter=%22url(%23noiseFilter)%22/%3E%3C/svg%3E")' }}></div>
 
@@ -16,12 +16,8 @@ export function InsightsPreview() {
                     <p className="text-xs font-bold uppercase tracking-widest text-primary mb-4">
                         OUR THINKING
                     </p>
-                    <h2 
-                        className="text-3xl md:text-4xl lg:text-5xl font-normal leading-[1.2] tracking-[-0.01em] w-full max-w-none"
-                        style={{ 
-                            fontFamily: 'Garamond, Georgia, serif', 
-                            color: '#1A0D2E' 
-                        }}
+                    <h2
+                        className="text-3xl md:text-4xl lg:text-5xl font-normal leading-[1.2] tracking-[-0.01em] w-full max-w-none text-foreground font-serif"
                     >
                         The latest perspectives from MergeX.
                     </h2>
@@ -35,11 +31,11 @@ export function InsightsPreview() {
                             href={`/insights/${insight.slug}`}
                             className="group flex flex-col gap-5 w-full transition-all duration-300"
                         >
-                            {/* Image Container with reduced height */}
-                            <div className="relative aspect-[16/9] w-full overflow-hidden rounded-[12px] border border-black/5 transition-all duration-500">
+                            {/* Image Container */}
+                            <div className="relative aspect-[16/9] w-full overflow-hidden rounded-[12px] border border-border/50 transition-all duration-500">
                                 {insight.coverImage && (
-                                    <Image 
-                                        src={insight.coverImage} 
+                                    <Image
+                                        src={insight.coverImage}
                                         alt={insight.title}
                                         fill
                                         className="object-cover group-hover:scale-103 transition-transform duration-500 ease-out"
@@ -47,27 +43,23 @@ export function InsightsPreview() {
                                 )}
                             </div>
 
-                            {/* Text Content Container (Outside & Underneath) */}
+                            {/* Text Content */}
                             <div className="flex flex-col">
                                 <span className="text-[10px] font-bold uppercase tracking-[0.2em] text-primary/70 mb-2.5 block">
                                     {insight.category} · {insight.readTime}
                                 </span>
-                                
-                                <h3 
-                                    className="text-xl md:text-2xl font-normal leading-snug mb-3 group-hover:text-primary transition-colors duration-300"
-                                    style={{ 
-                                        fontFamily: 'Garamond, Georgia, serif',
-                                        color: '#1A0D2E'
-                                    }}
+
+                                <h3
+                                    className="text-xl md:text-2xl font-normal leading-snug mb-3 group-hover:text-primary transition-colors duration-300 text-foreground font-serif"
                                 >
                                     {insight.title}
                                 </h3>
-                                
-                                <p className="text-xs md:text-sm text-[#1A0D2E]/65 leading-relaxed line-clamp-2 max-w-xl mb-4">
+
+                                <p className="text-xs md:text-sm text-foreground-muted leading-relaxed line-clamp-2 max-w-xl mb-4">
                                     {insight.excerpt}
                                 </p>
 
-                                {/* Animated 'Read article →' link indicator */}
+                                {/* Read article link */}
                                 <div className="inline-flex items-center gap-1 text-xs font-semibold text-primary transition-opacity duration-300">
                                     <span>Read article</span>
                                     <svg
@@ -95,7 +87,7 @@ export function InsightsPreview() {
                 <div className="flex justify-center">
                     <Link
                         href="/insights"
-                        className="group inline-flex items-center gap-2 px-6 py-3 rounded-lg text-sm font-semibold tracking-wide border border-[#1A0D2E] text-[#1A0D2E] bg-transparent hover:bg-[#1A0D2E] hover:text-[#F5F3EF] transition-all duration-300 hover:scale-[1.02] active:scale-[0.98]"
+                        className="group inline-flex items-center gap-2 px-6 py-3 rounded-lg text-sm font-semibold tracking-wide border border-foreground text-foreground bg-transparent hover:bg-foreground hover:text-background transition-all duration-300 hover:scale-[1.02] active:scale-[0.98]"
                     >
                         <span>See all insights</span>
                         <svg

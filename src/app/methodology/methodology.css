@@ -4,17 +4,17 @@
    ═══════════════════════════════════════════════ */
 
 .methodology-page {
-  --mp-bg: #F3F3F3;
-  --mp-surface: #EBEBEB;
-  --mp-border: #E2E2DE;
-  --mp-border-mid: #CECECA;
-  --mp-purple: #8B5CF6;
-  --mp-purple-dim: rgba(139,92,246,0.10);
-  --mp-text-primary: #121212;
-  --mp-text-secondary: #5A5A58;
-  --mp-text-tertiary: #9A9A98;
-  --mp-serif: var(--font-playfair-display, 'Playfair Display', Georgia, serif);
-  --mp-sans: var(--font-manrope, 'Manrope', sans-serif);
+  --mp-bg: var(--background);
+  --mp-surface: var(--bg-secondary);
+  --mp-border: var(--border);
+  --mp-border-mid: var(--border-primary);
+  --mp-purple: var(--primary);
+  --mp-purple-dim: var(--color-brand-100);
+  --mp-text-primary: var(--text-primary);
+  --mp-text-secondary: var(--text-secondary);
+  --mp-text-tertiary: var(--text-tertiary);
+  --mp-serif: var(--font-serif);
+  --mp-sans: var(--font-body);
 
   background: var(--mp-bg);
   color: var(--mp-text-primary);
@@ -322,7 +322,7 @@
 .methodology-cta-btn:hover { opacity: 0.85; }
 
 /* ── RESPONSIVE ── */
-@media (max-width: 900px) {
+@media (max-width: 1024px) {
   .methodology-hero { padding: 0 24px 60px; }
   .methodology-hero .hero-vline { left: 24px; }
   .methodology-eyebrow { padding-left: 48px; }

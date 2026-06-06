@@ -28,7 +28,7 @@ export function NeonOrbs({
   return (
     <div className={cn(
       "relative w-full overflow-hidden flex items-center justify-center transition-colors duration-500", 
-      !hasBgOverride && "bg-slate-100 dark:bg-[#050a18]",
+      !hasBgOverride && "bg-slate-100 dark:bg-background",
       className
     )}>
       {/* Top-left orb */}
@@ -194,7 +194,7 @@ export function NeonOrbs({
         }
         
         .dark .orb-light {
-          background: radial-gradient(circle at 50% 50%, #050a18 0%, #050a18 90%, transparent 100%);
+          background: radial-gradient(circle at 50% 50%, var(--background) 0%, var(--background) 90%, transparent 100%);
           box-shadow: 
             0 0 60px 2px rgba(124, 58, 237, 0.4),
             0 0 100px 5px rgba(124, 58, 237, 0.2),
