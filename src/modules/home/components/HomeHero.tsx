@@ -145,7 +145,7 @@ export function HomeHero() {
                 CSS animation fill-mode:both overrides GSAP inline styles,
                 so we animate the parent and let .hh-animate live on the child. */}
             <div ref={eyebrowRef}>
-              <p className="hh-eyebrow hh-animate">The MergeX Company</p>
+              <p className="hh-eyebrow hh-animate">SCALING INFRASTRUCTURE COMPANY</p>
             </div>
 
             <h1 ref={headingRef} className="hh-heading">
