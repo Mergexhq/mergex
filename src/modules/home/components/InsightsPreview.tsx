@@ -1,6 +1,6 @@
 import Link from 'next/link';
-import Image from 'next/image';
 import { INSIGHTS } from '@/lib/data/insights';
+import { InsightCard } from '@/modules/insights/components';
 
 export function InsightsPreview() {
     const previewInsights = INSIGHTS.slice(0, 2);
@@ -25,61 +25,13 @@ export function InsightsPreview() {
 
                 {/* Cards Container */}
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-8 lg:gap-12 mb-16">
-                    {previewInsights.map((insight) => (
-                        <Link
+                    {previewInsights.map((insight, index) => (
+                        <InsightCard
                             key={insight.slug}
-                            href={`/insights/${insight.slug}`}
-                            className="group flex flex-col gap-5 w-full transition-all duration-300"
-                        >
-                            {/* Image Container */}
-                            <div className="relative aspect-[16/9] w-full overflow-hidden rounded-[12px] border border-border/50 transition-all duration-500">
-                                {insight.coverImage && (
-                                    <Image
-                                        src={insight.coverImage}
-                                        alt={insight.title}
-                                        fill
-                                        className="object-cover group-hover:scale-103 transition-transform duration-500 ease-out"
-                                    />
-                                )}
-                            </div>
-
-                            {/* Text Content */}
-                            <div className="flex flex-col">
-                                <span className="text-[10px] font-bold uppercase tracking-[0.2em] text-primary/70 mb-2.5 block">
-                                    {insight.category} · {insight.readTime}
-                                </span>
-
-                                <h3
-                                    className="text-xl md:text-2xl font-normal leading-snug mb-3 group-hover:text-primary transition-colors duration-300 text-foreground font-serif"
-                                >
-                                    {insight.title}
-                                </h3>
-
-                                <p className="text-xs md:text-sm text-foreground-muted leading-relaxed line-clamp-2 max-w-xl mb-4">
-                                    {insight.excerpt}
-                                </p>
-
-                                {/* Read article link */}
-                                <div className="inline-flex items-center gap-1 text-xs font-semibold text-primary transition-opacity duration-300">
-                                    <span>Read article</span>
-                                    <svg
-                                        width="12"
-                                        height="12"
-                                        viewBox="0 0 12 12"
-                                        fill="none"
-                                        stroke="currentColor"
-                                        className="transform group-hover:translate-x-1 transition-transform duration-300"
-                                    >
-                                        <path
-                                            d="M2 6h8M6 2l4 4-4 4"
-                                            strokeWidth="1.5"
-                                            strokeLinecap="round"
-                                            strokeLinejoin="round"
-                                        />
-                                    </svg>
-                                </div>
-                            </div>
-                        </Link>
+                            insight={insight}
+                            variant="compact"
+                            index={index}
+                        />
                     ))}
                 </div>
 

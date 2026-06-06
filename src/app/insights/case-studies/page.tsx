@@ -1,6 +1,7 @@
 import { CASE_STUDIES } from '@/lib/data/case-studies';
-import { CaseStudyCard, CaseStudySidebar } from '@/modules/case-studies/components';
+import { CaseStudyCard } from '@/modules/case-studies/components';
 import EmptyState from '@/components/EmptyState';
+import Link from 'next/link';
 import type { Metadata } from 'next';
 
 export const metadata: Metadata = {
@@ -25,79 +26,97 @@ export default async function CaseStudiesPage({
   const featured = filtered.find((cs) => cs.featured) ?? filtered[0];
   const rest = filtered.filter((cs) => cs.slug !== featured?.slug);
 
+  // Dynamically compute unique industries from data
+  const industries = ['All', ...Array.from(new Set(CASE_STUDIES.map((cs) => cs.industry)))];
+
   return (
-    <div className="min-h-screen bg-[#f0eeea]">
+    <div className="min-h-screen bg-background transition-colors duration-300">
       {/* ── Page header ── */}
-      <section className="pt-40 pb-10 px-6 md:px-12 max-w-[1400px] mx-auto">
-        <p className="text-xs font-bold uppercase tracking-widest text-primary mb-4">
-          Work
-        </p>
-        <h1 className="text-5xl md:text-7xl font-serif text-foreground tracking-tight leading-tight mb-3">
-          Real constraints.
-          <br />
-          Real systems. Real results.
-        </h1>
-        <p className="text-foreground-muted text-lg max-w-xl">
-          {CASE_STUDIES.length} case{' '}
-          {CASE_STUDIES.length !== 1 ? 'studies' : 'study'} - selected engagements
-          from The MergeX Company.
-        </p>
-      </section>
-
-      {/* ── Outer card shell ── */}
-      <section className="pr-4 md:pr-8 pb-12 max-w-[1400px] mx-auto">
-        <div className="rounded-r-3xl bg-white shadow-sm border border-black/5 border-l-0 overflow-hidden flex min-h-[80vh] items-stretch">
-
-          {/* Mobile filters */}
-          <div className="lg:hidden p-4">
-            <CaseStudySidebar mode="filter" activeIndustry={activeIndustry} />
+      <section className="pt-40 pb-16 px-6 md:px-12 max-w-[1400px] mx-auto">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-16 items-start">
+          <div className="lg:col-span-7">
+            <p className="text-xs font-bold uppercase tracking-widest text-[#8b5cf6] mb-4">
+              Work
+            </p>
+            <h1 className="text-6xl md:text-8xl font-sans font-bold text-foreground tracking-tight leading-none">
+              Case Studies
+            </h1>
           </div>
-
-          {/* Dark sidebar */}
-          <CaseStudySidebar mode="filter" activeIndustry={activeIndustry} />
-
-          {/* Right: content pane */}
-          <div className="flex-1 min-w-0 p-8 md:p-12 overflow-y-auto">
-            {filtered.length === 0 ? (
-              <EmptyState
-                headline="No case studies found"
-                subtext={`There are no case studies in the "${activeIndustry}" industry yet. Check back soon.`}
-                ctaLabel="View all case studies"
-                ctaHref="/insights/case-studies"
-              />
-            ) : (
-              <>
-                {/* Featured */}
-                {featured && (
-                  <div className="mb-12">
-                    <p className="text-xs font-bold uppercase tracking-widest text-foreground-muted mb-4">
-                      Featured
-                    </p>
-                    <CaseStudyCard caseStudy={featured} variant="featured" />
-                  </div>
-                )}
-
-                {/* Rest grid */}
-                {rest.length > 0 && (
-                  <>
-                    <div className="flex items-center gap-4 mb-6">
-                      <p className="text-xs font-bold uppercase tracking-widest text-foreground-muted">
-                        All Case Studies
-                      </p>
-                      <div className="h-px flex-1 bg-border" />
-                    </div>
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                      {rest.map((cs) => (
-                        <CaseStudyCard key={cs.slug} caseStudy={cs} variant="compact" />
-                      ))}
-                    </div>
-                  </>
-                )}
-              </>
-            )}
+          <div className="lg:col-span-5 lg:pt-10">
+            <p className="text-foreground-muted dark:text-zinc-400 text-lg md:text-xl leading-relaxed max-w-xl">
+              Real constraints. Real systems. Real results.
+            </p>
           </div>
         </div>
       </section>
+
+      {/* ── Main Content Container ── */}
+      <main className="max-w-[1400px] mx-auto px-6 md:px-12 pb-24">
+        {/* Featured Card */}
+        {featured && (
+          <div className="mb-16">
+            <CaseStudyCard caseStudy={featured} variant="featured" />
+          </div>
+        )}
+
+        {/* Filters and Title Section */}
+        <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-6 mb-10 border-b border-border pb-6">
+          <div className="flex items-baseline gap-2">
+            <h2 className="text-2xl md:text-3xl font-sans font-bold text-foreground">
+              Case Studies
+            </h2>
+            <sup className="text-sm font-semibold text-foreground-muted dark:text-zinc-500">
+              {filtered.length}
+            </sup>
+          </div>
+
+          <div className="flex flex-wrap gap-2">
+            {industries.map((ind) => {
+              const isActive = activeIndustry === ind;
+              const href =
+                ind === 'All'
+                  ? '/insights/case-studies'
+                  : `/insights/case-studies?industry=${encodeURIComponent(ind)}`;
+              return (
+                <Link
+                  key={ind}
+                  href={href}
+                  className={`px-5 py-2 rounded-full text-xs font-bold uppercase tracking-wider transition-all duration-200 border ${
+                    isActive
+                      ? 'bg-[#8b5cf6] text-white border-transparent'
+                      : 'bg-white dark:bg-card text-foreground-muted hover:text-foreground border-border hover:bg-zinc-50 dark:hover:bg-zinc-800'
+                  }`}
+                >
+                  {ind}
+                </Link>
+              );
+            })}
+          </div>
+        </div>
+
+        {/* Compact Grid */}
+        {filtered.length === 0 ? (
+          <EmptyState
+            headline="No case studies found"
+            subtext={`There are no case studies in the "${activeIndustry}" industry yet. Check back soon.`}
+            ctaLabel="View all case studies"
+            ctaHref="/insights/case-studies"
+          />
+        ) : (
+          rest.length > 0 && (
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+              {rest.map((cs, index) => (
+                <CaseStudyCard
+                  key={cs.slug}
+                  caseStudy={cs}
+                  variant="compact"
+                  index={index}
+                />
+              ))}
+            </div>
+          )
+        )}
+      </main>
     </div>
   );
 }

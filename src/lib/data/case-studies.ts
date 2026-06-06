@@ -9,6 +9,7 @@ export const CASE_STUDIES: CaseStudy[] = [
     excerpt:
       'A direct-to-consumer brand had grown from £0 to £4M in 18 months - then hit a wall. Margins were collapsing, the team was burning out, and leadership had no clear picture of why. MergeX was brought in to diagnose the system and rebuild it for the next phase.',
     featured: true,
+    coverImage: 'https://images.unsplash.com/photo-1441986300917-64674bd600d8?q=80&w=2070&auto=format&fit=crop',
     tags: ['Operations', 'Retail', 'Margin Recovery', 'Systems'],
     publishedAt: '2026-04-15',
     aiOverview:
@@ -52,11 +53,6 @@ Crucially, the founders recovered approximately 20 hours per week each - time th
     `.trim(),
     clientNote:
       'MergeX did not just fix the problems we knew about. They found the ones we did not know existed - and built a system that means we can spot them ourselves next time.',
-    metrics: [
-      { label: 'Gross margin improvement', value: '+34%' },
-      { label: 'Fulfilment time reduction', value: '6d → 2d' },
-      { label: 'Refund rate reduction', value: '11% → 4%' },
-    ],
   },
   {
     slug: 'b2b-saas-gtm-rebuild',
@@ -66,6 +62,7 @@ Crucially, the founders recovered approximately 20 hours per week each - time th
     excerpt:
       'A B2B SaaS platform had strong product-market fit and a growing inbound pipeline - but a sales motion that was converting at 8% and a churn rate that was quietly destroying their expansion economics. MergeX rebuilt the go-to-market architecture from diagnosis to close.',
     featured: false,
+    coverImage: 'https://images.unsplash.com/photo-1460925895917-afdab827c52f?q=80&w=2015&auto=format&fit=crop',
     tags: ['SaaS', 'Go-To-Market', 'Sales', 'Retention'],
     publishedAt: '2026-03-20',
     aiOverview:
@@ -124,6 +121,7 @@ The churn reduction, in particular, had a compounding effect on the unit economi
     excerpt:
       'A professional services firm had plateaued at £2M ARR for three consecutive years. Growth had stalled, key talent was leaving, and leadership had no coherent strategy for the next phase. MergeX redesigned the organisational structure and built a compounding growth system.',
     featured: false,
+    coverImage: 'https://images.unsplash.com/photo-1507679799987-c73779587ccf?q=80&w=2071&auto=format&fit=crop',
     tags: ['Leadership', 'Strategy', 'Organisational Design', 'Growth'],
     publishedAt: '2026-02-10',
     aiOverview:
