@@ -4,7 +4,6 @@ import {
     MarketFailure,
     ScaleMethodology,
     PrescriptionModel,
-    MethodologyInsights,
     MethodologyCTA,
 } from '@/modules/methodology/components';
 import './methodology.css';
@@ -30,10 +29,7 @@ export default function MethodologyPage() {
             {/* 04 - The Prescription Model */}
             <PrescriptionModel />
 
-            {/* 05 - Selected Insights */}
-            <MethodologyInsights />
-
-            {/* 06 - Final CTA */}
+            {/* 05 - Final CTA */}
             <MethodologyCTA />
         </main>
     );
