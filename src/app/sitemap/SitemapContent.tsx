@@ -35,6 +35,7 @@ const SITEMAP = [
                 links: [
                     { label: 'All Brands', href: '/brands' },
                     { label: 'Methodology', href: '/methodology' },
+                    { label: 'Diagnostic', href: '/contact/diagnostic' },
                 ],
             },
         ],

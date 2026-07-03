@@ -250,8 +250,16 @@ export function Navbar() {
                                                      </Link>
 
                                                      <Link
+                                                         href="/contact/diagnostic"
+                                                         className={`font-roboto text-[11px] xl:text-[12px] 2xl:text-[13px] font-bold tracking-[0.18em] uppercase transition-all duration-200 px-4 xl:px-5 py-2.5 xl:py-3 rounded-token-sm xl:rounded-token-md ${getActiveLinkClass(pathname === '/contact/diagnostic')}`}
+                                                         onClick={() => setIsDetailMenuOpen(false)}
+                                                     >
+                                                         Diagnostic
+                                                     </Link>
+
+                                                     <Link
                                                          href="/contact"
-                                                         className={`font-roboto text-[11px] xl:text-[12px] 2xl:text-[13px] font-bold tracking-[0.18em] uppercase transition-all duration-200 px-4 xl:px-5 py-2.5 xl:py-3 rounded-token-sm xl:rounded-token-md ${getActiveLinkClass(pathname?.startsWith('/contact'))}`}
+                                                         className={`font-roboto text-[11px] xl:text-[12px] 2xl:text-[13px] font-bold tracking-[0.18em] uppercase transition-all duration-200 px-4 xl:px-5 py-2.5 xl:py-3 rounded-token-sm xl:rounded-token-md ${getActiveLinkClass(pathname?.startsWith('/contact') && pathname !== '/contact/diagnostic')}`}
                                                          onClick={() => setIsDetailMenuOpen(false)}
                                                      >
                                                          Contact
@@ -287,34 +295,39 @@ export function Navbar() {
                                          </AnimatePresence>
                                      </motion.div>
                                 ) : (
-                                    /* DEFAULT Menu Capsule */
-                                    <div className={`flex items-center gap-1 xl:gap-1.5 p-2 xl:p-2.5 rounded-token-md xl:rounded-token-lg border transition-all duration-500 ease-in-out ${pillBgClass}`}>
-                                        <Link
-                                            href="/about"
-                                            className={`font-roboto text-[11px] xl:text-[12px] 2xl:text-[13px] font-bold tracking-[0.18em] uppercase transition-all duration-200 px-4 xl:px-5 py-2.5 xl:py-3 rounded-token-sm xl:rounded-token-md ${getActiveLinkClass(pathname === '/about')}`}
-                                        >
-                                            Who We Are
-                                        </Link>
+                                     /* DEFAULT Menu Capsule */
+                                     <div className={`flex items-center gap-1 xl:gap-1.5 p-2 xl:p-2.5 rounded-token-md xl:rounded-token-lg border transition-all duration-500 ease-in-out ${pillBgClass}`}>
+                                         <Link
+                                             href="/about"
+                                             className={`font-roboto text-[11px] xl:text-[12px] 2xl:text-[13px] font-bold tracking-[0.18em] uppercase transition-all duration-200 px-4 xl:px-5 py-2.5 xl:py-3 rounded-token-sm xl:rounded-token-md ${getActiveLinkClass(pathname === '/about')}`}
+                                         >
+                                             Who We Are
+                                         </Link>
 
-                                        <Link
-                                            href="/methodology"
-                                            className={`font-roboto text-[11px] xl:text-[12px] 2xl:text-[13px] font-bold tracking-[0.18em] uppercase transition-all duration-200 px-4 xl:px-5 py-2.5 xl:py-3 rounded-token-sm xl:rounded-token-md ${getActiveLinkClass(pathname === '/methodology')}`}
-                                        >
-                                            Methodology
-                                        </Link>
+                                         <Link
+                                             href="/methodology"
+                                             className={`font-roboto text-[11px] xl:text-[12px] 2xl:text-[13px] font-bold tracking-[0.18em] uppercase transition-all duration-200 px-4 xl:px-5 py-2.5 xl:py-3 rounded-token-sm xl:rounded-token-md ${getActiveLinkClass(pathname === '/methodology')}`}
+                                         >
+                                             Methodology
+                                         </Link>
 
-                                        <Link
-                                            href="/contact"
-                                            className={`font-roboto text-[11px] xl:text-[12px] 2xl:text-[13px] font-bold tracking-[0.18em] uppercase transition-all duration-200 px-4 xl:px-5 py-2.5 xl:py-3 rounded-token-sm xl:rounded-token-md ${getActiveLinkClass(pathname?.startsWith('/contact'))}`}
-                                        >
-                                            Contact
-                                        </Link>
-                                    </div>
+                                         <Link
+                                             href="/contact/diagnostic"
+                                             className={`font-roboto text-[11px] xl:text-[12px] 2xl:text-[13px] font-bold tracking-[0.18em] uppercase transition-all duration-200 px-4 xl:px-5 py-2.5 xl:py-3 rounded-token-sm xl:rounded-token-md ${getActiveLinkClass(pathname === '/contact/diagnostic')}`}
+                                         >
+                                             Diagnostic
+                                         </Link>
+
+                                         <Link
+                                             href="/contact"
+                                             className={`font-roboto text-[11px] xl:text-[12px] 2xl:text-[13px] font-bold tracking-[0.18em] uppercase transition-all duration-200 px-4 xl:px-5 py-2.5 xl:py-3 rounded-token-sm xl:rounded-token-md ${getActiveLinkClass(pathname?.startsWith('/contact') && pathname !== '/contact/diagnostic')}`}
+                                         >
+                                             Contact
+                                         </Link>
+                                     </div>
                                 )}
                             </div>
                         </nav>
-
-
                     </div>
                 </div>
             </motion.div>

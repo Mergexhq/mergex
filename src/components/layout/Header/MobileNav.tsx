@@ -142,6 +142,18 @@ export function MobileNav({ isOpen, onClose, pathname }: MobileNavProps) {
                                     <ArrowUpRight size={20} className="text-white/30 group-hover:text-violet-400 transition-colors" />
                                 </Link>
 
+                                {/* Diagnostic */}
+                                <Link
+                                    href="/contact/diagnostic"
+                                    onClick={onClose}
+                                    className="group flex items-center justify-between py-5 border-b border-white/10"
+                                >
+                                    <span className="text-xl font-medium text-white tracking-[0.05em] group-hover:text-violet-400 transition-colors">
+                                        Diagnostic
+                                    </span>
+                                    <ArrowUpRight size={20} className="text-white/30 group-hover:text-violet-400 transition-colors" />
+                                </Link>
+
                                 {/* Contact */}
                                 <Link
                                     href="/contact"
