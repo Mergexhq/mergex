@@ -16,7 +16,7 @@ export function CareersHero() {
         <section className="relative overflow-hidden min-h-screen flex items-start pt-24 md:pt-32 bg-[#F3F3F3]">
             <div className="absolute inset-0 z-0">
                 <Image
-                    src="/background/careers/career-hero.webp"
+                    src="/background/careers/career-hero.png"
                     alt=""
                     fill
                     className="object-cover"
