@@ -22,8 +22,6 @@ function FooterLink({ href, label }: { href: string; label: string }) {
 const FOOTER_LINKS = {
     column1: [
         { label: 'About MergeX', href: '/about' },
-        { label: 'Case Studies', href: '/insights/case-studies' },
-        { label: 'Insights', href: '/insights' },
         { label: 'Sitemap', href: '/sitemap' },
     ],
     column2: [
@@ -197,10 +195,10 @@ export default function Footer() {
                         variants={fadeInUp}
                     >
                         <h4 className="font-body font-medium mb-4 text-black text-lg tracking-wide">
-                            Featured Insights
+                            Stay Updated
                         </h4>
                         <p className="text-gray-600 text-sm font-body mb-8 leading-relaxed">
-                            Thoughts on building businesses that scale with clarity and structure.
+                            Subscribe to receive updates on our latest news, services, and strategic frameworks.
                         </p>
                         <form
                             className="relative flex items-center w-full bg-white border border-gray-300 rounded-[10px] p-1.5 focus-within:border-gray-400 transition-all shadow-sm"

@@ -14,8 +14,6 @@ const SITEMAP = [
                 links: [
                     { label: 'Homepage', href: '/' },
                     { label: 'About MergeX', href: '/about' },
-                    { label: 'Work', href: '/insights/case-studies' },
-                    { label: 'Insights', href: '/insights' },
                     { label: 'Contact', href: '/contact' },
                 ],
             },
@@ -28,7 +26,6 @@ const SITEMAP = [
             {
                 group: 'Strategic Layers',
                 links: [
-                    { label: 'MergeX', href: '/brands/mergex' },
                     { label: 'Academy', href: '/brands/academy' },
                     { label: 'OVRN Studios', href: '/brands/ovrn-studios' },
                 ],
@@ -38,20 +35,6 @@ const SITEMAP = [
                 links: [
                     { label: 'All Brands', href: '/brands' },
                     { label: 'Methodology', href: '/methodology' },
-                    { label: 'Diagnostic', href: '/contact/diagnostic' },
-                ],
-            },
-        ],
-    },
-    {
-        section: 'Insights & Resources',
-        href: '/insights',
-        children: [
-            {
-                group: 'Content Hub',
-                links: [
-                    { label: 'All Articles', href: '/insights' },
-                    { label: 'Case Studies', href: '/insights/case-studies' },
                 ],
             },
         ],

@@ -1,7 +1,5 @@
 'use client';
 
-import Link from 'next/link';
-
 export function Proof() {
     return (
         <section className="bg-background px-6 py-16 md:py-20">
@@ -35,37 +33,11 @@ export function Proof() {
                             </h2>
                         </div>
 
-                        {/* Right - Description + CTA */}
+                        {/* Right - Description */}
                         <div className="flex flex-col items-end gap-8">
                             <p className="text-base md:text-lg leading-relaxed text-left w-full tracking-wide text-[#ECECE8]/60">
                                 A collection of businesses we helped solve operational and structural issues limiting scale with creating clearer systems, better execution, and sustainable growth.
                             </p>
-
-                            <Link
-                                href="/insights/case-studies"
-                                id="view-transformation-archive-cta"
-                                className="group inline-flex items-center gap-2 px-5 py-2.5 rounded-lg text-sm font-semibold tracking-wide transition-all duration-300 hover:scale-[1.02] active:scale-[0.98] bg-linear-to-b from-violet-400 to-violet-900 hover:opacity-95 text-white self-end mt-6 md:mt-8"
-                                style={{
-                                    color: '#FFFFFF',
-                                }}
-                            >
-                                <span>Explore work</span>
-                                <svg
-                                    width="14"
-                                    height="14"
-                                    viewBox="0 0 14 14"
-                                    fill="none"
-                                    className="transform group-hover:translate-x-1 transition-transform duration-300"
-                                >
-                                    <path
-                                        d="M2 7h10M8 3l4 4-4 4"
-                                        stroke="currentColor"
-                                        strokeWidth="2"
-                                        strokeLinecap="round"
-                                        strokeLinejoin="round"
-                                    />
-                                </svg>
-                            </Link>
                         </div>
                     </div>
                 </div>

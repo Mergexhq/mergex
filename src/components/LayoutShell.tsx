@@ -28,11 +28,8 @@ const AskMergeXWidget = dynamic(() => import('@/components/ask-mergex'), {
 export default function LayoutShell({ children }: { children: ReactNode }) {
     const pathname = usePathname() || '';
     
-    // Check if the current route is a detail page for insights or case studies
-    const segments = pathname.split('/').filter(Boolean);
-    const isInsightsDetail = segments[0] === 'insights' && segments.length === 2 && segments[1] !== 'case-studies';
-    const isCaseStudyDetail = segments[0] === 'insights' && segments[1] === 'case-studies' && segments.length === 3;
-    const isDetailPage = isInsightsDetail || isCaseStudyDetail;
+    // Check if the current route is a detail page (disabled as insights pages are removed)
+    const isDetailPage = false;
 
     return (
         <LenisProvider>

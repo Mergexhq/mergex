@@ -26,12 +26,6 @@ export default function sitemap(): MetadataRoute.Sitemap {
       priority: 0.8,
     },
     {
-      url: `${siteUrl}/contact/diagnostic`,
-      lastModified: now,
-      changeFrequency: 'monthly',
-      priority: 0.8,
-    },
-    {
       url: `${siteUrl}/methodology`,
       lastModified: now,
       changeFrequency: 'monthly',
@@ -52,12 +46,6 @@ export default function sitemap(): MetadataRoute.Sitemap {
       priority: 0.8,
     },
     {
-      url: `${siteUrl}/brands/mergex`,
-      lastModified: now,
-      changeFrequency: 'monthly',
-      priority: 0.7,
-    },
-    {
       url: `${siteUrl}/brands/academy`,
       lastModified: now,
       changeFrequency: 'monthly',
@@ -67,20 +55,6 @@ export default function sitemap(): MetadataRoute.Sitemap {
       url: `${siteUrl}/brands/ovrn-studios`,
       lastModified: now,
       changeFrequency: 'monthly',
-      priority: 0.7,
-    },
-
-    /* ── Insights ────────────────────────────────────────── */
-    {
-      url: `${siteUrl}/insights`,
-      lastModified: now,
-      changeFrequency: 'weekly',
-      priority: 0.7,
-    },
-    {
-      url: `${siteUrl}/insights/case-studies`,
-      lastModified: now,
-      changeFrequency: 'weekly',
       priority: 0.7,
     },
 

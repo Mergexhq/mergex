@@ -142,52 +142,14 @@ export function MobileNav({ isOpen, onClose, pathname }: MobileNavProps) {
                                     <ArrowUpRight size={20} className="text-white/30 group-hover:text-violet-400 transition-colors" />
                                 </Link>
 
-                                {/* MergeX */}
-                                <Link
-                                    href="/brands/mergex"
-                                    onClick={onClose}
-                                    className="group flex items-center justify-between py-5 border-b border-white/10"
-                                >
-                                    <span className="text-xl font-medium text-white tracking-[0.05em] group-hover:text-violet-400 transition-colors">
-                                        MergeX
-                                    </span>
-                                    <ArrowUpRight size={20} className="text-white/30 group-hover:text-violet-400 transition-colors" />
-                                </Link>
-
-                                {/* Insights */}
-                                <Link
-                                    href="/insights"
-                                    onClick={onClose}
-                                    className="group flex items-center justify-between py-5 border-b border-white/10"
-                                >
-                                    <span className="text-xl font-medium text-white tracking-[0.05em] group-hover:text-violet-400 transition-colors">
-                                        Insights
-                                    </span>
-                                    <ArrowUpRight size={20} className="text-white/30 group-hover:text-violet-400 transition-colors" />
-                                </Link>
-
                                 {/* Contact */}
                                 <Link
                                     href="/contact"
                                     onClick={onClose}
-                                    className="group flex items-center justify-between py-5 border-b border-white/10"
-                                >
-                                    <span className="text-xl font-medium text-white tracking-[0.05em] group-hover:text-violet-400 transition-colors">
-                                        Contact
-                                    </span>
-                                    <ArrowUpRight size={20} className="text-white/30 group-hover:text-violet-400 transition-colors" />
-                                </Link>
-
-                                {/* Login */}
-                                <Link
-                                    href="/login"
-                                    target="_blank"
-                                    rel="noopener noreferrer"
-                                    onClick={onClose}
                                     className="group flex items-center justify-between py-5"
                                 >
                                     <span className="text-xl font-medium text-white tracking-[0.05em] group-hover:text-violet-400 transition-colors">
-                                        Login
+                                        Contact
                                     </span>
                                     <ArrowUpRight size={20} className="text-white/30 group-hover:text-violet-400 transition-colors" />
                                 </Link>
