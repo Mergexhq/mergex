@@ -6,6 +6,11 @@ import { useGSAP } from "@gsap/react";
 import { Project, worksData } from "../data/works";
 import { TextSplitter } from "./TextSplitter";
 import { ArrowLeft, ArrowRight } from "lucide-react";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+
+if (typeof window !== "undefined") {
+  gsap.registerPlugin(ScrollTrigger);
+}
 
 import { useGlobalVideoObserver } from "@/lib/videoObserver";
 
@@ -147,6 +152,18 @@ export const CinematicHero = () => {
         { y: 0, opacity: 1, duration: 1, ease: "power3.out", delay: 0.8 }
       );
     }
+
+    // Scroll parallax for text and gradient to scroll up with the page
+    gsap.to(".parallax-content", {
+      y: () => -window.innerHeight,
+      ease: "none",
+      scrollTrigger: {
+        trigger: document.querySelector(".showcase-feed-container"),
+        start: "top top",
+        end: () => `+=${window.innerHeight}`,
+        scrub: true,
+      }
+    });
   }, { scope: containerRef });
 
   const heroProjects = worksData.slice(0, 4);
@@ -170,9 +187,9 @@ export const CinematicHero = () => {
                 isActive={index === activeIndex || index === nextIndex} 
               />
               
-              <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent pointer-events-none" />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent pointer-events-none parallax-content" />
 
-              <div className="absolute bottom-0 left-0 w-full p-4 md:p-8 lg:p-12 flex flex-col md:flex-row justify-between items-end z-30">
+              <div className="absolute bottom-0 left-0 w-full p-4 md:p-8 lg:p-12 flex flex-col md:flex-row justify-between items-end z-30 parallax-content">
                 <div className="max-w-3xl lg:max-w-4xl xl:max-w-5xl carousel-text text-white">
                   <p className="text-xs sm:text-sm md:text-base lg:text-lg uppercase tracking-widest font-bold mb-2 md:mb-4 opacity-80 font-roboto text-[var(--primary-light)]">
                     {project.category}

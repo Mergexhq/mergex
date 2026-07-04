@@ -50,10 +50,12 @@ export const ShowcaseFeed = () => {
   );
 
   return (
-    <div ref={containerRef} className="w-full pb-32">
-      <CinematicHero />
+    <div ref={containerRef} className="w-full relative showcase-feed-container">
+      <div className="sticky top-0 z-0 rounded-t-2xl overflow-hidden shadow-[0_-10px_40px_rgba(0,0,0,0.1)]">
+        <CinematicHero />
+      </div>
 
-      <section className="w-full mt-12 flex flex-col gap-12 md:gap-20">
+      <section className="relative z-10 bg-[var(--bg-primary)] w-full pt-16 pb-32 flex flex-col gap-12 md:gap-20 rounded-t-[2rem] shadow-[0_-10px_40px_rgba(0,0,0,0.05)] -mt-8">
         {rails.map((rail) => (
           <WorkRail key={rail.title} title={rail.title} data={rail.data} />
         ))}
