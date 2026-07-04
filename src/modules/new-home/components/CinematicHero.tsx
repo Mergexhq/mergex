@@ -162,6 +162,7 @@ export const CinematicHero = () => {
         start: "top top",
         end: () => `+=${window.innerHeight}`,
         scrub: true,
+        pinnedContainer: document.querySelector(".showcase-feed-pinned-container") || undefined
       }
     });
   }, { scope: containerRef });

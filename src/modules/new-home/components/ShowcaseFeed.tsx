@@ -41,7 +41,11 @@ export const ShowcaseFeed = () => {
             opacity: 1,
             duration: 0.7,
             ease: "power2.out",
-            scrollTrigger: { trigger: rail, start: "top 92%" },
+            scrollTrigger: { 
+              trigger: rail, 
+              start: "top 92%",
+              pinnedContainer: document.querySelector(".showcase-feed-pinned-container") || undefined
+            },
           }
         );
       });
