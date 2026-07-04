@@ -473,6 +473,16 @@ body::-webkit-scrollbar {
   height: 0;
 }
 
+/* Hide scrollbar while keeping scroll (horizontal rails) */
+.hide-scrollbar {
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+.hide-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
 /* Custom sleek scrollbar for specific elements */
 .custom-scrollbar {
   scrollbar-width: auto;

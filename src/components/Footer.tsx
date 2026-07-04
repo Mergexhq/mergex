@@ -211,6 +211,7 @@ export default function Footer() {
                                 </svg>
                             </div>
                             <input
+                                suppressHydrationWarning
                                 type="email"
                                 placeholder="Enter your email"
                                 className="flex-1 min-w-0 bg-transparent border-none text-[15px] font-body text-black placeholder:text-gray-400 focus:outline-none focus:ring-0 px-1 py-1.5"

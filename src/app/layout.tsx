@@ -148,6 +148,7 @@ export default function RootLayout({
     <html
       lang="en"
       suppressHydrationWarning            // ← prevents hydration mismatch from theme systems
+      data-scroll-behavior="smooth"
       className={`
         ${manrope.variable}
         ${playfair.variable}
