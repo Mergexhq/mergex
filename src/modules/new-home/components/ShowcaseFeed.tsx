@@ -17,7 +17,6 @@ if (typeof window !== "undefined") {
 }
 
 const EASE_OUT = [0.22, 1, 0.36, 1] as const;
-const HOVER_INTENT_MS = 400;
 
 export const ShowcaseFeed = () => {
   const containerRef = useRef<HTMLDivElement>(null);
@@ -29,9 +28,10 @@ export const ShowcaseFeed = () => {
     { title: "Because you watched Vanguard", data: worksData.slice(2, 8) },
   ];
 
-  // Scroll-reveal only — transform/opacity, no layout properties.
+  // Scroll-reveal for rails and Parallax for CinematicHero text
   useGSAP(
     () => {
+      // 1. Rails reveal
       gsap.utils.toArray<HTMLElement>(".work-rail").forEach((rail) => {
         gsap.fromTo(
           rail,
@@ -54,12 +54,14 @@ export const ShowcaseFeed = () => {
   );
 
   return (
-    <div ref={containerRef} className="w-full relative showcase-feed-container">
-      <div className="sticky top-0 z-0 rounded-t-2xl overflow-hidden shadow-[0_-10px_40px_rgba(0,0,0,0.1)]">
+    <div ref={containerRef} className="w-full relative showcase-feed-container bg-[var(--bg-primary)]">
+      <div className="relative z-0 rounded-t-2xl overflow-hidden shadow-[0_-10px_40px_rgba(0,0,0,0.1)]">
         <CinematicHero />
       </div>
 
-      <section className="relative z-10 bg-[var(--bg-primary)] w-full pt-16 pb-32 flex flex-col gap-12 md:gap-20 rounded-t-[2rem] shadow-[0_-10px_40px_rgba(0,0,0,0.05)] -mt-8">
+      {/* Rails follow the hero directly. The rounded section pulls up over the hero's
+          bottom edge (-mt-8) for a seamless hand-off — no blank gap between them. */}
+      <section className="relative z-10 bg-[var(--bg-primary)] w-full pt-12 pb-32 flex flex-col gap-12 md:gap-20 rounded-t-[2rem] shadow-[0_-10px_40px_rgba(0,0,0,0.05)] -mt-8">
         {rails.map((rail) => (
           <WorkRail key={rail.title} title={rail.title} data={rail.data} />
         ))}
@@ -103,7 +105,7 @@ const WorkRail = ({ title, data }: { title: string; data: Project[] }) => {
   const touchOnly = !hasCursor && hasTouch;
 
   return (
-    <div className="work-rail group/rail w-full">
+    <div className="work-rail group/rail relative w-full">
       {/* Title */}
       <div className={`mb-4 flex items-center justify-between md:mb-6 ${padding}`}>
         <h2 className="inline-flex w-fit cursor-pointer items-center gap-1.5 font-clash text-2xl font-semibold text-[var(--text-primary)] transition-colors hover:text-[var(--primary)] md:text-3xl">
