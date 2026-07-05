@@ -69,12 +69,12 @@ export function ScaleMethodology() {
       // Phase 1: Expand layout smoothly (novel solution to spacing)
       tl.add('expand');
       tl.to('.scale-header-container', {
-        y: 60, // Fixed pixels instead of vh to prevent mobile resize jumps
+        y: '6vh',
         duration: 1,
         ease: 'power2.inOut'
       }, 'expand');
       tl.to('.scale-giant-container', {
-        y: 160, // Fixed pixels, smoothly pushes giant text down into the bottom padding
+        y: '18vh', // Smoothly pushes giant text down, eating into the large bottom padding
         duration: 1,
         ease: 'power2.inOut'
       }, 'expand');
@@ -146,7 +146,7 @@ export function ScaleMethodology() {
     <section
       id="methodology"
       ref={sectionRef}
-      className="scale-sticky-viewport relative w-full bg-background flex flex-col overflow-hidden pb-40 md:pb-56 lg:pb-72"
+      className="scale-sticky-viewport relative w-full bg-background flex flex-col overflow-hidden pb-[20vh] md:pb-[25vh] lg:pb-[30vh]"
       style={{ 
         fontFamily: 'var(--font-manrope, sans-serif)',
       }}
