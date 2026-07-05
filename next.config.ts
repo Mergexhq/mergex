@@ -1,6 +1,46 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
+  /* ── Dev Server Tunnel Support ───────────────────────────────── */
+  allowedDevOrigins: [
+    'localhost',
+    '*.localhost',
+    '*.ngrok-free.app',
+    '*.ngrok.app',
+    '*.ngrok.io',
+    '*.trycloudflare.com',
+    '*.localtunnel.me',
+    '*.pinggy.link',
+    '*.loclx.io',
+    '*.expose.dev',
+    '*.tunnelto.dev',
+    '*.lvh.me',
+    '*.tunnel.dev',
+    '*.sharedwithexpose.com',
+  ],
+
+  /* ── Server Actions (if any) Tunnel Support ──────────────────── */
+  experimental: {
+    serverActions: {
+      allowedOrigins: [
+        'localhost',
+        '*.localhost',
+        '*.ngrok-free.app',
+        '*.ngrok.app',
+        '*.ngrok.io',
+        '*.trycloudflare.com',
+        '*.localtunnel.me',
+        '*.pinggy.link',
+        '*.loclx.io',
+        '*.expose.dev',
+        '*.tunnelto.dev',
+        '*.lvh.me',
+        '*.tunnel.dev',
+        '*.sharedwithexpose.com',
+      ],
+    },
+  },
+
   /* ── Performance ─────────────────────────────────────────────── */
   compress: true,           // Enable gzip/brotli compression
   poweredByHeader: false,   // Remove X-Powered-By: Next.js (security)
@@ -11,7 +51,7 @@ const nextConfig: NextConfig = {
     remotePatterns: [
       {
         protocol: 'https',
-        hostname: 'images.unsplash.com',
+        hostname: '**',
       },
     ],
   },
