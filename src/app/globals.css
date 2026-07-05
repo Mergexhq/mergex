@@ -464,6 +464,7 @@ html,
 body {
   scrollbar-width: none;
   -ms-overflow-style: none;
+  overscroll-behavior-y: none; /* Prevents pull-to-refresh on mobile */
 }
 
 html::-webkit-scrollbar,

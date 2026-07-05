@@ -51,7 +51,7 @@ export function ScaleMethodology() {
         scrollTrigger: {
           trigger: sectionRef.current,
           start: 'top top',
-          end: '+=400%',
+          end: '+=450%',
           scrub: 1,
           pin: true,
           anticipatePin: 1,
@@ -62,6 +62,21 @@ export function ScaleMethodology() {
       gsap.set('.scale-annotation-line', { scaleY: 0, opacity: 0 });
       gsap.set('.scale-annotation-dot', { scale: 0, opacity: 0 });
       gsap.set('.scale-annotation-text', { opacity: 0, y: 8 });
+
+      // Phase 1: Expand layout smoothly (novel solution to spacing)
+      tl.add('expand');
+      tl.to('.scale-header-container', {
+        y: '6vh',
+        duration: 1,
+        ease: 'power2.inOut'
+      }, 'expand');
+      tl.to('.scale-giant-container', {
+        y: '18vh', // Smoothly pushes giant text down, eating into the large bottom padding
+        duration: 1,
+        ease: 'power2.inOut'
+      }, 'expand');
+
+      tl.to({}, { duration: 0.2 }); // small pause
 
       // Step through each letter
       LETTERS.forEach((letter, i) => {
@@ -125,15 +140,29 @@ export function ScaleMethodology() {
     <section
       id="methodology"
       ref={sectionRef}
-      className="scale-sticky-viewport relative w-full h-screen bg-background grid overflow-hidden"
+      className="scale-sticky-viewport relative w-full bg-background flex flex-col overflow-hidden pb-[20vh] md:pb-[25vh] lg:pb-[30vh]"
       style={{ 
         fontFamily: 'var(--font-manrope, sans-serif)',
-        gridTemplateRows: '1fr auto 1fr'
       }}
     >
       {/* Top area: Static Section Header */}
-      <div className="w-full h-full flex flex-col justify-start z-20 pointer-events-none">
-        <div className="w-full max-w-[1400px] xl:max-w-[1600px] 2xl:max-w-[1800px] mx-auto px-6 md:px-14 pt-10 md:pt-16 lg:pt-24 shrink-0 pointer-events-auto">
+      <div className="w-full flex flex-col justify-start z-20 pointer-events-none">
+        <div className="scale-header-container relative w-full max-w-[1400px] xl:max-w-[1600px] 2xl:max-w-[1800px] mx-auto px-6 md:px-14 pt-4 md:pt-8 lg:pt-10 shrink-0 pointer-events-auto">
+          {/* Stage counter - top right */}
+          <div className="absolute top-4 right-6 md:top-8 md:right-14 lg:top-10 z-20 hidden md:block">
+            <p
+              style={{
+                fontSize: '11px',
+                fontWeight: 700,
+                letterSpacing: '0.14em',
+                textTransform: 'uppercase',
+                color: 'var(--color-foreground-muted)',
+              }}
+            >
+              Scroll to reveal
+            </p>
+          </div>
+          
           <span className="text-[10px] font-bold uppercase tracking-[0.25em] text-primary mb-4 block">
             Our Framework
           </span>
@@ -147,25 +176,10 @@ export function ScaleMethodology() {
       </div>
 
       {/* Center area: Animation Viewport */}
-      <div className="relative w-full flex flex-col items-center justify-center bg-transparent min-h-0">
-
-        {/* Stage counter - top right, updates via CSS */}
-        <div className="absolute top-20 right-6 md:top-28 md:right-14 lg:top-32 z-20 hidden md:block">
-          <p
-            style={{
-              fontSize: '11px',
-              fontWeight: 700,
-              letterSpacing: '0.14em',
-              textTransform: 'uppercase',
-              color: 'var(--color-foreground-muted)',
-            }}
-          >
-            Scroll to reveal
-          </p>
-        </div>
+      <div className="scale-giant-container relative w-full flex flex-col items-center justify-center bg-transparent mt-8 md:mt-12 lg:mt-16">
 
         {/* Giant S.C.A.L.E centrepiece */}
-        <div className="absolute inset-0 flex items-center justify-center z-10">
+        <div className="relative w-full flex items-center justify-center z-10 py-12 md:py-16">
           <div
             className="flex items-baseline justify-center px-4"
             style={{
@@ -343,9 +357,6 @@ export function ScaleMethodology() {
 
 
       </div>
-
-      {/* Bottom area: Balancing empty block */}
-      <div className="w-full h-full pointer-events-none"></div>
     </section>
   );
 }
