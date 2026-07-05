@@ -46,6 +46,11 @@ export const LogoScrollTransition = ({
               if (feedInnerRef.current) {
                 gsap.set(feedInnerRef.current, { clearProps: "transform" });
               }
+            },
+            onEnterBack: () => {
+              if (feedInnerRef.current) {
+                gsap.set(feedInnerRef.current, { transformOrigin: "center top", transformPerspective: 900 });
+              }
             }
           },
         });
@@ -68,6 +73,7 @@ export const LogoScrollTransition = ({
         // Pivot around the top edge so the hero (OUR WORKS + carousel) stays locked at the
         // top while the lower rails recede back into Z-space, then everything flattens and
         // docks — the heading ends exactly where it started, no vertical drift.
+
         gsap.set(feedInnerRef.current, { transformOrigin: "center top", transformPerspective: 900 });
 
         tl.fromTo(
