@@ -10,7 +10,7 @@ import { worksData, Project } from "../data/works";
 import { CinematicHero } from "./CinematicHero";
 import { ChevronRight, ChevronLeft, ArrowUpRight, X } from "lucide-react";
 import { useInputType } from "@/components/LayoutShell";
-import { useGlobalVideoObserver } from "@/lib/videoObserver";
+import { PosterVideo } from "@/components/PosterVideo";
 
 if (typeof window !== "undefined") {
   gsap.registerPlugin(ScrollTrigger);
@@ -21,11 +21,11 @@ const EASE_OUT = [0.22, 1, 0.36, 1] as const;
 export const ShowcaseFeed = () => {
   const containerRef = useRef<HTMLDivElement>(null);
 
-  // Curated groupings for each rail.
+  // Curated groupings for each rail — built from real project data.
   const rails = [
-    { title: "Brand Identity & Experiences", data: worksData.slice(0, 6) },
-    { title: "Trending in Fintech", data: worksData.slice(4, 10).reverse() },
-    { title: "Because you watched Vanguard", data: worksData.slice(2, 8) },
+    { title: "E-Commerce & Platforms", data: worksData.filter(p => ["E-Commerce Platform", "B2B/B2C Industrial Platform", "D2C Clean Beauty"].includes(p.category)) },
+    { title: "Brand & Corporate", data: worksData.filter(p => ["Corporate Website", "D2C Clean Beauty"].includes(p.category)) },
+    { title: "All Projects", data: worksData },
   ];
 
   // Scroll-reveal for rails and Parallax for CinematicHero text
@@ -201,10 +201,7 @@ const WorkCard = ({
 }) => {
   const [expanded, setExpanded] = useState(false);
   const cardRef = useRef<HTMLDivElement>(null);
-  const videoRef = useRef<HTMLVideoElement>(null);
   const [rect, setRect] = useState<DOMRect | null>(null);
-
-  useGlobalVideoObserver(videoRef);
 
   const handleExpand = () => {
     if (expanded) return;
@@ -223,13 +220,9 @@ const WorkCard = ({
         onClick={handleExpand}
       >
         <div className="relative aspect-video w-full flex-none self-start overflow-hidden rounded-xl">
-          <video
-            ref={videoRef}
-            src={project.videoUrl}
-            muted
-            loop
-            playsInline
-            preload="auto"
+          <PosterVideo
+            videoUrl={project.videoUrl}
+            posterUrl={project.posterUrl}
             className="absolute inset-0 h-full w-full object-cover"
           />
           <div className="absolute inset-x-0 bottom-0 z-10 flex items-center justify-between bg-gradient-to-t from-black/60 via-black/10 to-transparent pt-8 pb-4 px-4 md:pb-6 md:px-6 lg:pb-8 lg:px-8">
@@ -401,6 +394,7 @@ const ExpandedPortalCard = ({
           <video
             ref={videoRef}
             src={project.videoUrl}
+            poster={project.posterUrl}
             muted
             loop
             playsInline

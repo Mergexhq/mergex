@@ -12,26 +12,10 @@ if (typeof window !== "undefined") {
   gsap.registerPlugin(ScrollTrigger);
 }
 
-import { useGlobalVideoObserver } from "@/lib/videoObserver";
+import { PosterVideo } from "@/components/PosterVideo";
 
 // The hero carousel showcases only the first few flagship projects.
 const HERO_PROJECTS = worksData.slice(0, 4);
-
-const CarouselVideo = ({ src, isActive }: { src: string; isActive: boolean }) => {
-  const videoRef = useRef<HTMLVideoElement>(null);
-  useGlobalVideoObserver(videoRef, isActive);
-  
-  return (
-    <video 
-      ref={videoRef}
-      src={src}
-      muted
-      loop
-      playsInline
-      className="absolute inset-0 w-full h-full object-cover"
-    />
-  );
-};
 
 export const CinematicHero = () => {
   const containerRef = useRef<HTMLDivElement>(null);
@@ -183,9 +167,12 @@ export const CinematicHero = () => {
                 opacity: index === activeIndex || index === nextIndex ? 1 : 0,
               }}
             >
-              <CarouselVideo 
-                src={project.videoUrl} 
-                isActive={index === activeIndex || index === nextIndex} 
+              <PosterVideo
+                videoUrl={project.videoUrl}
+                posterUrl={project.posterUrl}
+                shouldPlay={index === activeIndex || index === nextIndex}
+                priority={100 - index}
+                className="absolute inset-0 w-full h-full object-cover"
               />
               
               <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent pointer-events-none parallax-content" />
