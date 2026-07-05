@@ -4,6 +4,7 @@ import {
     LogoScrollTransition
 } from '@/modules/home/components';
 import { ShowcaseFeed } from '@/modules/new-home/components/ShowcaseFeed';
+import { ScaleMethodology } from '@/modules/methodology/components';
 
 export default function HomePage() {
     return (
@@ -14,6 +15,9 @@ export default function HomePage() {
             >
                 <ShowcaseFeed />
             </LogoScrollTransition>
+
+            {/* Scale Methodology Scroll Animation */}
+            <ScaleMethodology />
 
             {/* 06 - CTA */}
             <FinalCTA />

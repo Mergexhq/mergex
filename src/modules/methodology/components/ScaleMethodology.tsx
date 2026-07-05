@@ -4,7 +4,6 @@ import React, { useRef, Fragment } from 'react';
 import { useGSAP } from '@gsap/react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
-import Link from 'next/link';
 
 if (typeof window !== 'undefined') {
   gsap.registerPlugin(ScrollTrigger);
@@ -63,7 +62,6 @@ export function ScaleMethodology() {
       gsap.set('.scale-annotation-line', { scaleY: 0, opacity: 0 });
       gsap.set('.scale-annotation-dot', { scale: 0, opacity: 0 });
       gsap.set('.scale-annotation-text', { opacity: 0, y: 8 });
-      gsap.set('.scale-cta-container', { opacity: 0, y: 20, pointerEvents: 'none' });
 
       // Step through each letter
       LETTERS.forEach((letter, i) => {
@@ -113,16 +111,11 @@ export function ScaleMethodology() {
         }
       });
 
-      // Final - all letters full opacity, CTA appears
+      // Final - all letters full opacity
       tl.to(
         '.scale-big-letter',
         { opacity: 1, duration: 1, ease: 'power2.inOut' },
         'final'
-      );
-      tl.to(
-        '.scale-cta-container',
-        { opacity: 1, y: 0, pointerEvents: 'auto', duration: 1.5, ease: 'power2.out' },
-        'final+=0.5'
       );
     },
     { scope: sectionRef }
@@ -131,31 +124,32 @@ export function ScaleMethodology() {
   return (
     <section
       ref={sectionRef}
-      className="relative w-full bg-background"
-      style={{ fontFamily: 'var(--font-manrope, sans-serif)' }}
+      className="scale-sticky-viewport relative w-full h-screen bg-background grid overflow-hidden"
+      style={{ 
+        fontFamily: 'var(--font-manrope, sans-serif)',
+        gridTemplateRows: '1fr auto 1fr'
+      }}
     >
-      {/* Pinned sticky viewport */}
-      <div className="relative w-full h-screen overflow-hidden flex flex-col items-center justify-center bg-background">
-
-
-
-        {/* Section label - top left */}
-        <div className="absolute top-8 left-6 md:top-14 md:left-14 z-20">
-          <p
-            style={{
-              fontSize: '11px',
-              fontWeight: 700,
-              letterSpacing: '0.14em',
-              textTransform: 'uppercase',
-              color: 'var(--color-foreground-muted)',
-            }}
+      {/* Top area: Static Section Header */}
+      <div className="w-full h-full flex flex-col justify-start z-20 pointer-events-none">
+        <div className="w-full max-w-[1400px] xl:max-w-[1600px] 2xl:max-w-[1800px] mx-auto px-6 md:px-14 pt-10 md:pt-16 lg:pt-24 shrink-0 pointer-events-auto">
+          <span className="text-[10px] font-bold uppercase tracking-[0.25em] text-primary mb-4 block">
+            Our Framework
+          </span>
+          <h2 
+            className="font-clash font-bold text-3xl sm:text-4xl md:text-5xl lg:text-6xl uppercase tracking-wider"
+            style={{ color: 'var(--color-foreground)', lineHeight: 1.1 }}
           >
-            Section 02 - The S.C.A.L.E. Methodology
-          </p>
+            THE S.C.A.L.E. METHODOLOGY
+          </h2>
         </div>
+      </div>
+
+      {/* Center area: Animation Viewport */}
+      <div className="relative w-full flex flex-col items-center justify-center bg-transparent min-h-0">
 
         {/* Stage counter - top right, updates via CSS */}
-        <div className="absolute top-8 right-6 md:top-14 md:right-14 z-20">
+        <div className="absolute top-20 right-6 md:top-28 md:right-14 lg:top-32 z-20 hidden md:block">
           <p
             style={{
               fontSize: '11px',
@@ -346,45 +340,11 @@ export function ScaleMethodology() {
           </div>
         </div>
 
-        {/* Final CTA - fades in after all letters revealed */}
-        <div className="scale-cta-container absolute bottom-12 md:bottom-16 left-1/2 -translate-x-1/2 z-30 flex flex-col items-center gap-4">
-          <p
-            style={{
-              fontSize: '11px',
-              fontWeight: 700,
-              letterSpacing: '0.14em',
-              textTransform: 'uppercase',
-              color: 'var(--color-foreground-muted)',
-              marginBottom: '8px',
-            }}
-          >
-            Five stages. One constraint.
-          </p>
-          <Link
-            href="/contact/diagnostic"
-            style={{
-              display: 'inline-flex',
-              alignItems: 'center',
-              justifyContent: 'center',
-              gap: '10px',
-              padding: '13px 32px',
-              border: '1px solid var(--color-border)',
-              background: 'var(--color-background)',
-              color: 'var(--color-foreground)',
-              fontSize: '12px',
-              fontWeight: 500,
-              letterSpacing: '0.08em',
-              textTransform: 'uppercase',
-              textDecoration: 'none',
-              borderRadius: '2px',
-              transition: 'background 0.2s, border-color 0.2s',
-            }}
-          >
-            Begin your diagnosis
-            <span style={{ fontSize: '16px' }}>→</span>
-          </Link>
-        </div>
+
       </div>
+
+      {/* Bottom area: Balancing empty block */}
+      <div className="w-full h-full pointer-events-none"></div>
     </section>
   );
 }

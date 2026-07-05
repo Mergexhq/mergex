@@ -2,7 +2,6 @@ import type { Metadata } from 'next';
 import {
     MethodologyHero,
     MarketFailure,
-    ScaleMethodology,
     PrescriptionModel,
     MethodologyCTA,
 } from '@/modules/methodology/components';
@@ -22,9 +21,6 @@ export default function MethodologyPage() {
 
             {/* 02 - Why Scale Breaks */}
             <MarketFailure />
-
-            {/* 03 - The S.C.A.L.E. Methodology */}
-            <ScaleMethodology />
 
             {/* 04 - The Prescription Model */}
             <PrescriptionModel />
