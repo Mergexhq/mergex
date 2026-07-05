@@ -242,8 +242,16 @@ export function Navbar() {
                                                      </Link>
 
                                                      <Link
-                                                         href="/methodology"
-                                                         className={`font-roboto text-[11px] xl:text-[12px] 2xl:text-[13px] font-bold tracking-[0.18em] uppercase transition-all duration-200 px-4 xl:px-5 py-2.5 xl:py-3 rounded-token-sm xl:rounded-token-md ${getActiveLinkClass(pathname === '/methodology')}`}
+                                                         href="/#works"
+                                                         className={`font-roboto text-[11px] xl:text-[12px] 2xl:text-[13px] font-bold tracking-[0.18em] uppercase transition-all duration-200 px-4 xl:px-5 py-2.5 xl:py-3 rounded-token-sm xl:rounded-token-md ${getActiveLinkClass(pathname === '/#works')}`}
+                                                         onClick={() => setIsDetailMenuOpen(false)}
+                                                     >
+                                                         Works
+                                                     </Link>
+
+                                                     <Link
+                                                         href="/#methodology"
+                                                         className={`font-roboto text-[11px] xl:text-[12px] 2xl:text-[13px] font-bold tracking-[0.18em] uppercase transition-all duration-200 px-4 xl:px-5 py-2.5 xl:py-3 rounded-token-sm xl:rounded-token-md ${getActiveLinkClass(pathname === '/#methodology')}`}
                                                          onClick={() => setIsDetailMenuOpen(false)}
                                                      >
                                                          Methodology
@@ -305,8 +313,15 @@ export function Navbar() {
                                          </Link>
 
                                          <Link
-                                             href="/methodology"
-                                             className={`font-roboto text-[11px] xl:text-[12px] 2xl:text-[13px] font-bold tracking-[0.18em] uppercase transition-all duration-200 px-4 xl:px-5 py-2.5 xl:py-3 rounded-token-sm xl:rounded-token-md ${getActiveLinkClass(pathname === '/methodology')}`}
+                                             href="/#works"
+                                             className={`font-roboto text-[11px] xl:text-[12px] 2xl:text-[13px] font-bold tracking-[0.18em] uppercase transition-all duration-200 px-4 xl:px-5 py-2.5 xl:py-3 rounded-token-sm xl:rounded-token-md ${getActiveLinkClass(pathname === '/#works')}`}
+                                         >
+                                             Works
+                                         </Link>
+
+                                         <Link
+                                             href="/#methodology"
+                                             className={`font-roboto text-[11px] xl:text-[12px] 2xl:text-[13px] font-bold tracking-[0.18em] uppercase transition-all duration-200 px-4 xl:px-5 py-2.5 xl:py-3 rounded-token-sm xl:rounded-token-md ${getActiveLinkClass(pathname === '/#methodology')}`}
                                          >
                                              Methodology
                                          </Link>

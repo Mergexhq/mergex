@@ -4,7 +4,7 @@ import Image from 'next/image';
 import { motion } from 'framer-motion';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import { ArrowUp } from 'lucide-react';
+import { ArrowUp, ArrowRight } from 'lucide-react';
 
 /* ─── Link helper ──────────────────────────────────────────────────── */
 function FooterLink({ href, label }: { href: string; label: string }) {
@@ -22,13 +22,13 @@ function FooterLink({ href, label }: { href: string; label: string }) {
 const FOOTER_LINKS = {
     column1: [
         { label: 'About MergeX', href: '/about' },
-        { label: 'Sitemap', href: '/sitemap' },
+        { label: 'Works', href: '/#works' },
+        { label: 'Methodology', href: '/#methodology' },
     ],
     column2: [
-        { label: 'Brands', href: '/brands' },
-        { label: 'Careers', href: '/careers' },
-        { label: 'Methodology', href: '/methodology' },
+        { label: 'Diagnostic', href: '/contact/diagnostic' },
         { label: 'Get in touch', href: '/contact' },
+        { label: 'Sitemap', href: '/sitemap' },
     ],
 };
 
@@ -186,43 +186,27 @@ export default function Footer() {
                         </motion.div>
                     </motion.div>
 
-                    {/* Newsletter / Insights column */}
+                    {/* Partnership column */}
                     <motion.div
-                        className="md:col-span-4 lg:col-span-4 order-first md:order-none"
+                        className="md:col-span-4 lg:col-span-4 order-first md:order-none flex flex-col items-start"
                         initial="hidden"
                         whileInView="visible"
                         viewport={{ once: true }}
                         variants={fadeInUp}
                     >
                         <h4 className="font-body font-medium mb-4 text-black text-lg tracking-wide">
-                            Stay Updated
+                            Partner With Us
                         </h4>
                         <p className="text-gray-600 text-sm font-body mb-8 leading-relaxed">
-                            Subscribe to receive updates on our latest news, services, and strategic frameworks.
+                            We help businesses scale, and we're always open to collaborating with like-minded businesses and partners. Let's grow together.
                         </p>
-                        <form
-                            className="relative flex items-center w-full bg-white border border-gray-300 rounded-[10px] p-1.5 focus-within:border-gray-400 transition-all shadow-sm"
-                            onSubmit={(e) => e.preventDefault()}
+                        <Link
+                            href="/contact"
+                            className="btn-accent whitespace-nowrap group"
                         >
-                            <div className="pl-3 pr-2 text-slate-400">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
-                                    <rect width="20" height="16" x="2" y="4" rx="2" />
-                                    <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7" />
-                                </svg>
-                            </div>
-                            <input
-                                suppressHydrationWarning
-                                type="email"
-                                placeholder="Enter your email"
-                                className="flex-1 min-w-0 bg-transparent border-none text-[15px] font-body text-black placeholder:text-gray-400 focus:outline-none focus:ring-0 px-1 py-1.5"
-                            />
-                            <button
-                                type="submit"
-                                className="btn-accent ml-1 whitespace-nowrap"
-                            >
-                                Subscribe
-                            </button>
-                        </form>
+                            Collaborate with us
+                            <ArrowRight className="w-4 h-4 ml-2 transition-transform duration-300 group-hover:translate-x-1" />
+                        </Link>
                     </motion.div>
                 </div>
 
@@ -238,9 +222,8 @@ export default function Footer() {
                         <p>© 2025-2026 The MergeX Company. All rights reserved.</p>
                         <span className="hidden md:block text-gray-300">|</span>
                         <p
-                            className={`hidden md:block opacity-100 font-medium text-gray-800 ${
-                                isLabsOrSystems ? 'md:text-center' : 'md:text-left'
-                            }`}
+                            className={`hidden md:block opacity-100 font-medium text-gray-800 ${isLabsOrSystems ? 'md:text-center' : 'md:text-left'
+                                }`}
                         >
                             We believe good systems outlast trends.
                         </p>

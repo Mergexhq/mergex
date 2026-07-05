@@ -54,7 +54,7 @@ export const ShowcaseFeed = () => {
   );
 
   return (
-    <div ref={containerRef} className="w-full relative showcase-feed-container bg-[var(--bg-primary)]">
+    <div id="works" ref={containerRef} className="w-full relative showcase-feed-container bg-[var(--bg-primary)]">
       <div className="relative z-0 rounded-t-2xl overflow-hidden shadow-[0_-10px_40px_rgba(0,0,0,0.1)]">
         <CinematicHero />
       </div>

@@ -123,6 +123,7 @@ export function ScaleMethodology() {
 
   return (
     <section
+      id="methodology"
       ref={sectionRef}
       className="scale-sticky-viewport relative w-full h-screen bg-background grid overflow-hidden"
       style={{ 
