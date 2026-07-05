@@ -51,7 +51,7 @@ export function ScaleMethodology() {
         scrollTrigger: {
           trigger: sectionRef.current,
           start: 'top top',
-          end: '+=450%',
+          end: '+=600%', // Increased scroll distance to accommodate buffers
           scrub: 1,
           pin: true,
           anticipatePin: 1,
@@ -63,15 +63,18 @@ export function ScaleMethodology() {
       gsap.set('.scale-annotation-dot', { scale: 0, opacity: 0 });
       gsap.set('.scale-annotation-text', { opacity: 0, y: 8 });
 
+      // Initial buffer to absorb fast scroll when entering
+      tl.to({}, { duration: 1.5 });
+
       // Phase 1: Expand layout smoothly (novel solution to spacing)
       tl.add('expand');
       tl.to('.scale-header-container', {
-        y: '6vh',
+        y: 60, // Fixed pixels instead of vh to prevent mobile resize jumps
         duration: 1,
         ease: 'power2.inOut'
       }, 'expand');
       tl.to('.scale-giant-container', {
-        y: '18vh', // Smoothly pushes giant text down, eating into the large bottom padding
+        y: 160, // Fixed pixels, smoothly pushes giant text down into the bottom padding
         duration: 1,
         ease: 'power2.inOut'
       }, 'expand');
@@ -132,6 +135,9 @@ export function ScaleMethodology() {
         { opacity: 1, duration: 1, ease: 'power2.inOut' },
         'final'
       );
+
+      // Final buffer to absorb fast scroll when exiting
+      tl.to({}, { duration: 2 });
     },
     { scope: sectionRef }
   );
@@ -140,7 +146,7 @@ export function ScaleMethodology() {
     <section
       id="methodology"
       ref={sectionRef}
-      className="scale-sticky-viewport relative w-full bg-background flex flex-col overflow-hidden pb-[20vh] md:pb-[25vh] lg:pb-[30vh]"
+      className="scale-sticky-viewport relative w-full bg-background flex flex-col overflow-hidden pb-40 md:pb-56 lg:pb-72"
       style={{ 
         fontFamily: 'var(--font-manrope, sans-serif)',
       }}
