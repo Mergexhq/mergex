@@ -2,8 +2,8 @@ import Link from 'next/link';
 
 export function FinalCTA() {
     return (
-        <section className="py-20 md:py-28 px-6 bg-background relative">
-            <div className="max-w-7xl mx-auto border-t border-border/80 pt-16 md:pt-20">
+        <section className="pt-10 pb-20 md:pt-16 md:pb-28 px-6 bg-background relative">
+            <div className="max-w-7xl mx-auto border-t border-border/80 pt-10 md:pt-16">
                 <div className="flex flex-col items-center justify-center text-center gap-8 md:gap-10">
                     
                     {/* Centered Editorial Header */}

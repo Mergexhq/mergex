@@ -106,7 +106,7 @@ export function ExperimentsGallery() {
     `;
 
     return (
-        <section ref={sectionRef} className="relative pt-8 pb-32 md:pt-16 overflow-hidden" style={{ backgroundColor: 'var(--bg-primary)' }}>
+        <section ref={sectionRef} className="relative pt-8 pb-8 md:pt-16 overflow-hidden" style={{ backgroundColor: 'var(--bg-primary)' }}>
             <style>{swiperStyles}</style>
             <div className="container mx-auto max-w-[1600px] px-2 text-[var(--text-primary)]">
 
