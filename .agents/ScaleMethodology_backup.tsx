@@ -46,6 +46,7 @@ const LETTERS = [
 export function ScaleMethodology() {
   const sectionRef = useRef<HTMLElement>(null);
   const feedInnerRef = useRef<HTMLDivElement>(null);
+  const layer1Ref = useRef<HTMLDivElement>(null);
 
   useGSAP(
     () => {
@@ -58,7 +59,7 @@ export function ScaleMethodology() {
           scrollTrigger: {
             trigger: sectionRef.current,
             start: 'top top',
-            end: '+=800%',
+            end: '+=800%', // Optimized scroll distance
             scrub: 1,
             pin: true,
             anticipatePin: 1,
@@ -88,7 +89,7 @@ export function ScaleMethodology() {
           const lineEl = `${wrapperEl} .scale-annotation-line`;
           const dotEl = `${wrapperEl} .scale-annotation-dot`;
           const textEl = `${wrapperEl} .scale-annotation-text`;
-          const letterEls = `.scale-big-letter-${letter.id}`;
+          const letterEls = `.scale-big-letter-${letter.id}`; // targets both layers
 
           // Activate letter + annotation
           tl.to(letterEls, { opacity: 1, duration: 0.5, ease: 'power2.out' }, `activate${i}`);
@@ -109,38 +110,35 @@ export function ScaleMethodology() {
         // Final - all letters full opacity
         tl.to('.scale-big-letter', { opacity: 1, duration: 1, ease: 'power2.inOut' }, 'final');
 
-        // ZOOM TRANSITION
-        const preZoom = 'pre_zoom';
-
-        // 1. First, quickly fade out the text UI (header, annotations, dots) to unclutter the screen BEFORE zooming
-        tl.to('.scale-header-container, .scale-annotation-text, .scale-annotation-dot, .scale-annotation-line, .scale-dot', { 
-            opacity: 0, duration: 0.5, ease: 'power2.inOut' 
-        }, preZoom);
-
-        tl.to({}, { duration: 0.5 }); // short buffer
+        // HOLE TRANSITION
+        tl.to({}, { duration: 1.5 }); // buffer before fade out
         
-        const zoomStart = 'zoom_start';
+        const fadeStart = 'fade_start';
+        // Fade out Layer 2 (normal layer) to seamlessly reveal Layer 1 (multiply mask) which is perfectly aligned
+        tl.to('.scale-normal-layer', { opacity: 0, duration: 1.5, ease: 'power2.inOut' }, fadeStart);
 
-        // 2. Fade out the center window background and top/bottom gray bars to reveal ShowcaseFeed
-        tl.to('.center-window-bg, .gray-frame', { opacity: 0, duration: 1.5, ease: 'power2.inOut' }, zoomStart);
+        // Small buffer to admire the hole
+        tl.to({}, { duration: 0.5 });
+        
+        const holeStart = 'hole_start';
 
-        // 3. Zoom the text wrapper directly from the center of the screen
-        tl.to('.scale-text-wrapper', {
-            scale: 150, 
-            ease: 'power2.in', 
-            duration: 3,
-            transformOrigin: "center center" // Zoom uniformly outwards
-        }, zoomStart);
-
-        // 3b. Fade out the text wrapper smoothly during the zoom
-        // Faster fade out ensures the black strokes vanish before they can block the screen!
-        tl.to('.scale-text-wrapper', {
-            opacity: 0,
-            duration: 0.8,
-            ease: 'power1.inOut'
-        }, zoomStart + "+=0.2");
-
-        // 4. Parallax ShowcaseFeed into place behind the transparent window
+        // Zoom text massively
+        tl.to('.scale-giant-container-mask', {
+            scale: 2500, // Massive zoom to clear screen
+            ease: 'power3.inOut',
+            duration: 4,
+            transformOrigin: "center center"
+        }, holeStart);
+        
+        // Expand solid white hole filler to guarantee the center clears the screen
+        tl.to('.scale-hole-filler', {
+            scale: 10,
+            ease: 'power3.in', // Accelerate to cover screen
+            duration: 4,
+            transformOrigin: "center center"
+        }, holeStart);
+        
+        // 3D Parallax ShowcaseFeed into place
         tl.fromTo(
             feedInnerRef.current,
             {
@@ -159,23 +157,26 @@ export function ScaleMethodology() {
               opacity: 1,
               x: 0,
               ease: "power2.out",
-              duration: 3,
+              duration: 4,
             },
-            zoomStart
+            holeStart
         );
 
-        // Clean up: Fade out the ENTIRE Layer 1 overlay so ShowcaseFeed is completely interactive and uncovered
-        tl.to('.layer-1-overlay', { autoAlpha: 0, duration: 0.5 }, "-=0.5");
+        // Hide Layer 1 completely at the very end to clean up unwanted artifacts and allow pointer events
+        tl.to(layer1Ref.current, { autoAlpha: 0, duration: 0.5 }, "-=0.5");
+
       });
 
     },
     { scope: sectionRef }
   );
 
+  // Adjusted typography clamping to fix mobile text cutoff
   const giantTextFontSize = 'clamp(44px, 14vw, 220px)';
   const giantTextGap = 'clamp(2px, 1vw, 32px)';
   const dotFontSize = 'clamp(24px, 6vw, 120px)';
 
+  // Shared variables to ensure EXACT identical positioning and styles
   const sharedTextContainerStyle: React.CSSProperties = {
     gap: giantTextGap,
     fontSize: giantTextFontSize,
@@ -187,7 +188,7 @@ export function ScaleMethodology() {
   const sharedLetterBaseStyle: React.CSSProperties = {
     display: 'inline-block', 
     opacity: 0.12, 
-    // removed fontStyle: 'italic' so the 'A' is symmetric, making the hole mathematically perfectly centered
+    fontStyle: 'italic'
   };
 
   const sharedDotBaseStyle: React.CSSProperties = {
@@ -205,11 +206,12 @@ export function ScaleMethodology() {
       id="methodology"
       ref={sectionRef}
       className="scale-sticky-viewport relative w-full showcase-feed-pinned-container"
-      style={{ fontFamily: 'var(--font-manrope, sans-serif)', backgroundColor: 'transparent' }}
+      style={{ fontFamily: 'var(--font-manrope, sans-serif)' }}
     >
-      {/* LAYER 0: ShowcaseFeed Background (Restored to correct flow height layout) */}
+      {/* LAYER 0: ShowcaseFeed (Takes its natural height and scrolling flow) */}
       <div className="w-full relative z-0">
         <div ref={feedInnerRef} className="w-full relative">
+          {/* OUR WORKS heading sitting ABOVE the section */}
           <div className="absolute w-full flex justify-center pointer-events-none z-10" style={{ bottom: "100%", paddingBottom: "clamp(2rem, 5dvh, 4rem)" }}>
             <h1 className="text-[12vw] sm:text-[14vw] lg:text-[11vw] font-clash font-bold uppercase text-white drop-shadow-[0_10px_30px_rgba(0,0,0,0.8)] leading-none">
               OUR WORKS
@@ -219,13 +221,71 @@ export function ScaleMethodology() {
         </div>
       </div>
 
-      {/* LAYER 1: Full Screen Pinned Overlay */}
-      {/* Must be absolute top-0 left-0 w-full h-[100dvh] to stick to screen viewport while section is pinned */}
-      <div className="layer-1-overlay absolute top-0 left-0 w-full h-[100dvh] z-10 flex flex-col pointer-events-none">
+      {/* LAYER 1: Multiply Mask Layer (S.C.A.L.E. text as a hole) */}
+      <div 
+        ref={layer1Ref}
+        className="absolute top-0 left-0 z-10 w-full h-[100dvh] overflow-hidden flex flex-col pointer-events-none"
+        style={{ 
+          backgroundColor: '#0a0a0c', // subtle shadowed black
+          mixBlendMode: 'multiply' 
+        }}
+      >
+        {/* INVISIBLE HEADER SPACER to perfectly align flex-1 with Layer 2 */}
+        <div className="w-full flex flex-col justify-start z-20 pt-[100px] md:pt-[120px] opacity-0 pointer-events-none">
+          <div className="relative w-full max-w-[1400px] xl:max-w-[1600px] 2xl:max-w-[1800px] mx-auto px-6 md:px-14 shrink-0">
+            <span className="text-[10px] font-bold uppercase tracking-[0.25em] mb-4 block">&nbsp;</span>
+            <h2 className="font-clash font-bold text-3xl sm:text-4xl md:text-5xl lg:text-6xl uppercase tracking-wider" style={{ lineHeight: 1.1 }}>
+              &nbsp;
+            </h2>
+          </div>
+        </div>
+
+        <div className="scale-giant-container-mask relative w-full flex-1 flex flex-col items-center justify-center bg-transparent min-h-0">
+          {/* Centered without transform translate to avoid GSAP override issues */}
+          <div className="absolute inset-0 flex items-center justify-center pointer-events-none z-0">
+             <div className="scale-hole-filler w-4 h-4 bg-white rounded-full opacity-100" style={{ transform: 'scale(0)' }} />
+          </div>
+          <div className="relative w-full flex items-center justify-center z-10 py-4">
+            <div
+              className="flex items-baseline justify-center px-4"
+              style={{
+                ...sharedTextContainerStyle,
+                color: '#fff', // White text creates the transparent hole
+              }}
+            >
+              {LETTERS.map((item, index) => (
+                <Fragment key={item.id}>
+                  <div className="relative flex flex-col items-center">
+                    <span
+                      className={`scale-big-letter scale-big-letter-${item.id} relative z-10`}
+                      style={sharedLetterBaseStyle}
+                    >
+                      {item.id}
+                    </span>
+                  </div>
+                  {index < LETTERS.length - 1 && (
+                    <span
+                      style={{
+                        ...sharedDotBaseStyle,
+                        color: '#fff',
+                      }}
+                    >
+                      .
+                    </span>
+                  )}
+                </Fragment>
+              ))}
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {/* LAYER 2: Normal UI Foreground */}
+      <div className="scale-normal-layer absolute top-0 left-0 z-20 w-full h-[100dvh] overflow-hidden flex flex-col bg-background pointer-events-none">
         
-        {/* Top Solid Gray */}
-        <div className="gray-frame w-full bg-background pt-[100px] md:pt-[120px] pointer-events-auto shrink-0 z-20 relative">
-          <div className="scale-header-container relative w-full max-w-[1400px] xl:max-w-[1600px] 2xl:max-w-[1800px] mx-auto px-6 md:px-14 shrink-0 pb-12">
+        {/* Top area: Static Section Header */}
+        <div className="w-full flex flex-col justify-start z-20 pt-[100px] md:pt-[120px]">
+          <div className="scale-header-container relative w-full max-w-[1400px] xl:max-w-[1600px] 2xl:max-w-[1800px] mx-auto px-6 md:px-14 shrink-0">
             <div className="absolute top-4 right-6 md:top-8 md:right-14 lg:top-10 z-20 hidden md:block">
               <p style={{ fontSize: '11px', fontWeight: 700, letterSpacing: '0.14em', textTransform: 'uppercase', color: 'var(--color-foreground-muted)' }}>
                 Scroll to reveal
@@ -244,17 +304,11 @@ export function ScaleMethodology() {
           </div>
         </div>
 
-        {/* Center Window (This is the specific area the user marked in red) */}
-        {/* Overflow hidden ensures the zoom stays within this area, keeping top/bottom gray intact */}
-        <div className="relative w-full flex-1 pointer-events-auto flex flex-col items-center justify-center z-30 overflow-visible">
-          
-          {/* Fading Background that reveals ShowcaseFeed */}
-          <div className="center-window-bg absolute inset-0 bg-background pointer-events-none z-0"></div>
-
-          {/* Zooming Text Container */}
-          <div className="scale-giant-container relative w-full flex items-center justify-center py-4 z-10 pointer-events-none overflow-visible">
+        {/* Center area: Animation Viewport */}
+        <div className="scale-giant-container relative w-full flex-1 flex flex-col items-center justify-center bg-transparent min-h-0">
+          <div className="relative w-full flex items-center justify-center z-10 py-4">
             <div
-              className="scale-text-wrapper flex items-baseline justify-center"
+              className="flex items-baseline justify-center px-4"
               style={{
                 ...sharedTextContainerStyle,
                 color: 'var(--color-foreground)',
@@ -313,7 +367,6 @@ export function ScaleMethodology() {
                   {/* Dot separator between letters */}
                   {index < LETTERS.length - 1 && (
                     <span
-                      className="scale-dot"
                       style={{
                         ...sharedDotBaseStyle,
                         color: 'var(--color-foreground)',
@@ -328,8 +381,6 @@ export function ScaleMethodology() {
           </div>
         </div>
 
-        {/* Bottom Solid Gray */}
-        <div className="gray-frame w-full h-[15vh] bg-background pointer-events-auto shrink-0 z-20 relative"></div>
       </div>
     </section>
   );
