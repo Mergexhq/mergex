@@ -284,30 +284,46 @@ const ExpandedPortalCard = ({
     }
   }, []);
 
-  // Close on click outside or any scroll
+  // Close on click outside, significant scroll/resize, or Escape key
   const startScrollY = useRef(window.scrollY);
+  const startWidth = useRef(typeof window !== "undefined" ? window.innerWidth : 0);
+  const startHeight = useRef(typeof window !== "undefined" ? window.innerHeight : 0);
 
   useEffect(() => {
     startScrollY.current = window.scrollY;
+    startWidth.current = window.innerWidth;
+    startHeight.current = window.innerHeight;
 
     const handleScroll = () => {
       const delta = Math.abs(window.scrollY - startScrollY.current);
-
       // Ignore tiny scrolls
-      if (delta < 50) return; // adjust threshold (e.g. 30, 50, 100)
-
+      if (delta < 50) return;
       onClose();
     };
 
-    window.addEventListener("scroll", handleScroll, {
-      capture: true,
-      passive: true,
-    });
+    const handleResize = () => {
+      const deltaW = Math.abs(window.innerWidth - startWidth.current);
+      const deltaH = Math.abs(window.innerHeight - startHeight.current);
+      // Close if width changes by more than 50px or height by more than 100px
+      if (deltaW > 50 || deltaH > 100) {
+        onClose();
+      }
+    };
+
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === "Escape") {
+        onClose();
+      }
+    };
+
+    window.addEventListener("scroll", handleScroll, { capture: true, passive: true });
+    window.addEventListener("resize", handleResize, { passive: true });
+    window.addEventListener("keydown", handleKeyDown);
 
     return () => {
-      window.removeEventListener("scroll", handleScroll, {
-        capture: true,
-      });
+      window.removeEventListener("scroll", handleScroll, { capture: true });
+      window.removeEventListener("resize", handleResize);
+      window.removeEventListener("keydown", handleKeyDown);
     };
   }, [onClose]);
 
@@ -326,8 +342,8 @@ const ExpandedPortalCard = ({
   const targetWidth = Math.min(desiredWidth, maxAvailableWidth);
   const scale = targetWidth / rect.width;
 
-  // Estimate height: aspect-video (9/16) + detail drawer (~130px)
-  const unscaledHeight = rect.width * (9 / 16) + 130;
+  // Estimate height: aspect-video (9/16)
+  const unscaledHeight = rect.width * (9 / 16);
   const targetHeight = unscaledHeight * scale;
 
   let baseLeft = rect.left;
@@ -395,9 +411,9 @@ const ExpandedPortalCard = ({
         }}
         transition={{ duration: 0.25, ease: EASE_OUT }}
         style={{ transformOrigin: `${originX} 30%` }}
-        className="absolute bg-[var(--bg-secondary)] shadow-2xl ring-1 ring-black/20 rounded-xl pointer-events-auto flex flex-col"
+        className="absolute shadow-2xl ring-1 ring-black/20 rounded-[1.5rem] pointer-events-auto flex flex-col overflow-hidden bg-black"
       >
-        <div className="relative aspect-video w-full flex-none self-start overflow-hidden rounded-t-xl">
+        <div className="relative aspect-video w-full flex-none self-start">
           <video
             ref={videoRef}
             src={project.videoUrl}
@@ -407,6 +423,8 @@ const ExpandedPortalCard = ({
             playsInline
             className="absolute inset-0 h-full w-full object-cover"
           />
+          
+          <div className="absolute inset-0 bg-black/20 pointer-events-none" />
 
           <button
             onClick={onClose}
@@ -415,40 +433,36 @@ const ExpandedPortalCard = ({
             <X size={18} />
           </button>
 
-          <div className="absolute inset-x-0 bottom-0 z-10 flex items-end bg-gradient-to-t from-black/60 via-black/10 to-transparent pt-8 pb-4 px-4 md:pb-6 md:px-6 lg:pb-8 lg:px-8">
-            <div className="flex items-center gap-3 md:gap-4 mb-1">
-              <h3 className="font-clash text-2xl sm:text-3xl lg:text-4xl 2xl:text-5xl text-white drop-shadow-md">
-                {project.title}
-              </h3>
+          <div className="absolute inset-x-0 bottom-0 z-10 flex flex-col justify-end bg-gradient-to-t from-black via-black/40 to-transparent pt-12 pb-3 px-3 md:pt-32 md:pb-8 md:px-8 lg:pb-10 lg:px-10">
+            <div className="flex flex-row items-end justify-between gap-3 md:gap-8">
+              <div className="flex flex-col gap-1 md:gap-2 max-w-[65%] md:max-w-2xl">
+                <div>
+                  <h3 className="font-clash text-lg sm:text-3xl lg:text-4xl 2xl:text-5xl font-bold text-white drop-shadow-md leading-tight line-clamp-2 md:line-clamp-1">
+                    {project.title}
+                  </h3>
+                  {project.category && (
+                    <p className="text-white/90 text-[10px] sm:text-sm md:text-base font-medium mt-0.5 md:mt-1 line-clamp-1">
+                      {project.category}
+                    </p>
+                  )}
+                </div>
+                <p className="hidden sm:block text-xs md:text-sm text-white/80 line-clamp-2 md:line-clamp-none leading-relaxed mt-1 md:mt-2">
+                  {project.summary}
+                </p>
+              </div>
+
               {project.liveUrl && project.liveUrl.trim() !== "" && project.liveUrl !== "#" && (
                 <a
                   href={liveUrl}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="group flex items-center justify-center rounded-full bg-white/20 text-white backdrop-blur-md transition-all duration-300 hover:bg-white hover:text-black hover:scale-105 h-7 md:h-8 overflow-hidden"
-                  aria-label="Visit site"
+                  className="flex items-center justify-center shrink-0 rounded-full bg-[#FAF9F6] text-black px-3 py-1.5 md:px-8 md:py-3 font-semibold text-[10px] sm:text-xs md:text-sm transition-transform hover:scale-105 shadow-lg whitespace-nowrap"
                 >
-                  <span className={`whitespace-nowrap font-medium uppercase tracking-widest text-[9px] md:text-[10px] transition-all duration-300 ease-out overflow-hidden flex items-center ${isTouchOnly
-                    ? 'max-w-[80px] opacity-100 pl-3'
-                    : 'max-w-0 opacity-0 group-hover:max-w-[80px] group-hover:opacity-100 group-hover:pl-3'
-                    }`}>
-                    {isTouchOnly ? 'Visit site' : 'View site'}
-                  </span>
-                  <div className="h-7 w-7 md:h-8 md:w-8 shrink-0 flex items-center justify-center rounded-full">
-                    <ArrowUpRight size={14} className="transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
-                  </div>
+                  <span className="hidden sm:inline">Visit right now</span>
+                  <span className="sm:hidden">Visit site</span>
                 </a>
               )}
             </div>
-          </div>
-        </div>
-
-        {/* Detail Drawer */}
-        <div className="w-full rounded-b-xl bg-[var(--bg-secondary)] overflow-hidden">
-          <div className="flex flex-col gap-3 px-4 py-4 md:px-6 md:py-5">
-            <p className="text-sm leading-relaxed text-[var(--text-secondary)] md:text-base">
-              {project.summary}
-            </p>
           </div>
         </div>
       </motion.div>

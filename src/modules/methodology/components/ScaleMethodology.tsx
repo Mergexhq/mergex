@@ -107,8 +107,12 @@ export function ScaleMethodology() {
           });
         }
 
-        // Initial buffer
-        tl.to({}, { duration: 1.5 });
+        // Hide header instantly when the first letter 'S' starts animating (desktop only)
+        if (typeof window !== 'undefined' && window.innerWidth >= 768) {
+            tl.to('.scale-header-container', { opacity: 0, duration: 0.1 }, 0);
+        }
+
+        // No initial buffer - start letter animations immediately on first scroll
 
         // Step through each letter
         LETTERS.forEach((letter, i) => {
@@ -140,8 +144,8 @@ export function ScaleMethodology() {
         // ZOOM TRANSITION
         const preZoom = 'pre_zoom';
 
-        // 1. First, quickly fade out the text UI (header, annotations, dots) to unclutter the screen BEFORE zooming
-        tl.to('.scale-header-container, .scale-annotation-text, .scale-annotation-dot, .scale-annotation-line, .scale-dot', { 
+        // 1. First, quickly fade out the text UI (annotations, dots) to unclutter the screen BEFORE zooming
+        tl.to('.scale-annotation-text, .scale-annotation-dot, .scale-annotation-line, .scale-dot', { 
             opacity: 0, duration: 0.5, ease: 'power2.inOut' 
         }, preZoom);
 
@@ -255,28 +259,25 @@ export function ScaleMethodology() {
 
       {/* LAYER 1: Full Screen Pinned Overlay */}
       {/* Must be absolute top-0 left-0 w-full h-[100dvh] to stick to screen viewport while section is pinned */}
-      <div className="layer-1-overlay absolute top-0 left-0 w-full h-[100dvh] z-10 flex flex-col pointer-events-none">
+      <div className="layer-1-overlay absolute top-0 left-0 w-full h-[100dvh] z-10 flex flex-col pointer-events-none overflow-visible">
         
-        {/* Top Solid Gray */}
-        <div className="gray-frame w-full bg-background pt-[100px] md:pt-[120px] pointer-events-auto shrink-0 z-20 relative">
-          <div className="scale-header-container relative w-full max-w-[1400px] xl:max-w-[1600px] 2xl:max-w-[1800px] mx-auto px-6 md:px-14 shrink-0 pb-12">
-            <div className="absolute top-4 right-6 md:top-8 md:right-14 lg:top-10 z-20 hidden md:block">
-              <p style={{ fontSize: '11px', fontWeight: 700, letterSpacing: '0.14em', textTransform: 'uppercase', color: 'var(--color-foreground-muted)' }}>
-                Scroll to reveal
-              </p>
-            </div>
-            
+        {/* Top Header - Absolutely positioned to not offset the vertical centering of the S.C.A.L.E. text */}
+        <div className="scale-header-container absolute top-0 left-0 right-0 w-full px-4 xl:px-6 pb-12 pt-28 z-50">
+          <div className="flex flex-col items-start w-full">
             <span className="text-[10px] font-bold uppercase tracking-[0.25em] text-primary mb-4 block">
               Our Framework
             </span>
             <h2 
-              className="font-clash font-bold text-3xl sm:text-4xl md:text-5xl lg:text-6xl uppercase tracking-wider"
+              className="font-clash font-bold text-3xl sm:text-4xl md:text-5xl lg:text-6xl uppercase tracking-wider text-left"
               style={{ color: 'var(--color-foreground)', lineHeight: 1.1 }}
             >
               THE S.C.A.L.E. METHODOLOGY
             </h2>
           </div>
         </div>
+
+        {/* Top Solid Gray */}
+        <div className="gray-frame w-full h-[15vh] bg-background pointer-events-auto shrink-0 z-20 relative"></div>
 
         {/* Center Window (This is the specific area the user marked in red) */}
         {/* Overflow hidden ensures the zoom stays within this area, keeping top/bottom gray intact */}
@@ -302,11 +303,11 @@ export function ScaleMethodology() {
                     {/* TOP annotation (C and L) */}
                     {item.direction === 'top' && (
                       <div className={`absolute bottom-full flex flex-col items-center scale-annotation-${item.id}`} style={{ marginBottom: '8px' }}>
-                        <div className="scale-annotation-text text-center" style={{ marginBottom: '8px', width: 'clamp(72px, 10vw, 160px)' }}>
-                          <p style={{ fontSize: 'clamp(9px, 0.9vw, 13px)', fontWeight: 700, letterSpacing: '0.12em', textTransform: 'uppercase', color: 'var(--color-foreground)', fontFamily: 'var(--font-manrope, sans-serif)', marginBottom: '4px' }}>
+                        <div className="scale-annotation-text text-center" style={{ marginBottom: '8px', width: 'clamp(100px, 15vw, 220px)' }}>
+                          <p style={{ fontSize: 'clamp(13px, 1.5vw, 20px)', fontWeight: 700, letterSpacing: '0.12em', textTransform: 'uppercase', color: 'var(--color-foreground)', fontFamily: 'var(--font-manrope, sans-serif)', marginBottom: '4px' }}>
                             {item.name}
                           </p>
-                          <p style={{ fontSize: 'clamp(8px, 0.75vw, 11px)', color: 'var(--color-foreground-muted)', lineHeight: 1.5, fontFamily: 'var(--font-manrope, sans-serif)', fontWeight: 400 }}>
+                          <p style={{ fontSize: 'clamp(12px, 1.2vw, 16px)', color: 'var(--color-foreground-muted)', lineHeight: 1.5, fontFamily: 'var(--font-manrope, sans-serif)', fontWeight: 400 }}>
                             {item.desc}
                           </p>
                         </div>
@@ -332,11 +333,11 @@ export function ScaleMethodology() {
                           <div className="scale-annotation-line origin-top" style={{ width: '1px', height: 'clamp(16px, 3vw, 48px)', background: 'var(--color-foreground)', marginBottom: '4px' }} />
                           <div className="scale-annotation-dot rounded-full" style={{ width: 'clamp(4px, 0.5vw, 8px)', height: 'clamp(4px, 0.5vw, 8px)', background: 'var(--color-foreground)' }} />
                         </div>
-                        <div className={`scale-annotation-text ${ item.id === 'S' ? 'text-left sm:text-center' : item.id === 'E' ? 'text-right sm:text-center' : 'text-center' }`} style={{ marginTop: '8px', width: 'clamp(72px, 10vw, 160px)', transform: item.id === 'S' ? 'translateX(10%)' : (item.id === 'E' ? 'translateX(-10%)' : 'none') }}>
-                          <p style={{ fontSize: 'clamp(9px, 0.9vw, 13px)', fontWeight: 700, letterSpacing: '0.12em', textTransform: 'uppercase', color: 'var(--color-foreground)', fontFamily: 'var(--font-manrope, sans-serif)', marginBottom: '4px' }}>
+                        <div className="scale-annotation-text text-center" style={{ marginTop: '8px', width: 'clamp(100px, 15vw, 220px)' }}>
+                          <p style={{ fontSize: 'clamp(13px, 1.5vw, 20px)', fontWeight: 700, letterSpacing: '0.12em', textTransform: 'uppercase', color: 'var(--color-foreground)', fontFamily: 'var(--font-manrope, sans-serif)', marginBottom: '4px' }}>
                             {item.name}
                           </p>
-                          <p style={{ fontSize: 'clamp(8px, 0.75vw, 11px)', color: 'var(--color-foreground-muted)', lineHeight: 1.5, fontFamily: 'var(--font-manrope, sans-serif)', fontWeight: 400 }}>
+                          <p style={{ fontSize: 'clamp(12px, 1.2vw, 16px)', color: 'var(--color-foreground-muted)', lineHeight: 1.5, fontFamily: 'var(--font-manrope, sans-serif)', fontWeight: 400 }}>
                             {item.desc}
                           </p>
                         </div>
