@@ -13,16 +13,51 @@ export interface Project {
   liveUrl?: string;
 }
 
+const buildId = process.env.NEXT_PUBLIC_BUILD_ID || '1';
+const versioned = (url: string) => url.includes('?') ? `${url}&v=${buildId}` : `${url}?v=${buildId}`;
+
 export const worksData: Project[] = [
   {
     id: "01",
+    title: "Cedar Elevators",
+    category: "B2B/B2C Industrial Platform",
+    summary:
+      "Phone calls and manual quotes were costing them scale. We built a B2B e-commerce platform with automated quotes, live inventory, and verified purchasing. Orders that took days now take minutes.",
+    videoUrl: versioned("/works/cedar-elevators.mp4"),
+    posterUrl: versioned("/works/posters/cedar-elevators.jpg"),
+    tags: ["B2B", "E-Commerce", "Enterprise", "Industrial Equipment"],
+    services: [
+      "Full-Stack Development",
+      "Quote Management System",
+      "Business Verification",
+      "CMS Integration",
+    ],
+  },
+  {
+    id: "02",
+    title: "Cinnastratech",
+    category: "Corporate Website",
+    summary:
+      "Great technology, underwhelming web presence. We rebuilt it with performance-first architecture, SEO structure, and UI that earns trust on first scroll. Now the website works as hard as the product.",
+    videoUrl: versioned("/works/cinnastratech.mp4"),
+    posterUrl: versioned("/works/posters/cinnastratech.jpg"),
+    tags: ["Corporate", "Branding", "Motion", "AI & Digital Engineering"],
+    services: [
+      "Web Development",
+      "Brand Design",
+      "Animation & Motion",
+      "SEO Optimisation",
+    ],
+  },
+  {
+    id: "03",
     title: "Dude Men's Wears",
     category: "E-Commerce Platform",
     summary:
-      "A full-stack e-commerce platform for premium men's streetwear. Built with Next.js 16, React 19, and Supabase — featuring Razorpay payments, GST compliance, real-time analytics, and a comprehensive admin dashboard. Achieved 94 Lighthouse score and sub-2s page loads.",
-    videoUrl: "/works/dude-mens-wear.mp4",
-    posterUrl: "/works/posters/dude-mens-wear.jpg",
-    tags: ["E-Commerce", "Full-Stack", "Payments"],
+      "WhatsApp orders were the ceiling. We built a premium e-commerce store that matched the quality of the collections. Monthly revenue went from ₹1–2 lakh to nearly ₹10 lakh.",
+    videoUrl: versioned("/works/dude-mens-wear.mp4"),
+    posterUrl: versioned("/works/posters/dude-mens-wear.jpg"),
+    tags: ["E-Commerce", "Full-Stack", "Payments", "Premium Menswear"],
     services: [
       "Web Development",
       "UI/UX Design",
@@ -32,30 +67,14 @@ export const worksData: Project[] = [
     liveUrl: "https://dudemw.com",
   },
   {
-    id: "02",
-    title: "Cedar Elevators",
-    category: "B2B/B2C Industrial Platform",
-    summary:
-      "A comprehensive digital transformation for a traditional elevator parts distributor. Multi-tier user system with business verification, intelligent quote management, CSV bulk imports, and a 17-module admin panel across 70+ routes and 150+ components.",
-    videoUrl: "/works/cedar-elevators.mp4",
-    posterUrl: "/works/posters/cedar-elevators.jpg",
-    tags: ["B2B", "E-Commerce", "Enterprise"],
-    services: [
-      "Full-Stack Development",
-      "Quote Management System",
-      "Business Verification",
-      "CMS Integration",
-    ],
-  },
-  {
-    id: "03",
+    id: "04",
     title: "Mic and Mac",
     category: "D2C Clean Beauty",
     summary:
-      "A direct-to-consumer e-commerce platform for clean, cruelty-free personal care. Built on Shopify with Liquid templating, emphasising brand storytelling, ingredient transparency, and sustainability — designed mobile-first for conscious consumers.",
-    videoUrl: "/works/mic-and-mac.mp4",
-    posterUrl: "/works/posters/mic-and-mac.jpg",
-    tags: ["D2C", "Shopify", "Brand Identity"],
+      "Competing on ingredients in a market that stopped reading labels. We repositioned the brand around one idea — transit fatigue — and rebuilt everything from there. ₹12 lakh saved in annual marketing spend.",
+    videoUrl: versioned("/works/mic-and-mac.mp4"),
+    posterUrl: versioned("/works/posters/mic-and-mac.jpg"),
+    tags: ["D2C", "Shopify", "Brand Identity", "Clean Beauty"],
     services: [
       "Shopify Development",
       "Brand Storytelling",
@@ -64,41 +83,14 @@ export const worksData: Project[] = [
     ],
   },
   {
-    id: "04",
-    title: "Cinnastratech",
-    category: "Corporate Website",
-    summary:
-      "A modern corporate web presence showcasing services, portfolio, and expertise. Built with Next.js 16 and Framer Motion — featuring 50+ reusable components, WCAG 2.1 AA accessibility, and 90+ Lighthouse scores with sub-2s initial loads.",
-    videoUrl: "/works/cinnastratech.mp4",
-    posterUrl: "/works/posters/cinnastratech.jpg",
-    tags: ["Corporate", "Branding", "Motion"],
-    services: [
-      "Web Development",
-      "Brand Design",
-      "Animation & Motion",
-      "SEO Optimisation",
-    ],
-  },
-  {
     id: "05",
-    title: "Hey Pro Data",
+    title: "HeyProData",
     category: "Corporate Website",
     summary:
-      "A professional networking ecosystem and gigs marketplace designed exclusively for hiring and collaboration in the film and media industries.",
-    videoUrl: "/works/hey-pro-data.mp4",
-    posterUrl: "/works/posters/hey-pro-data.jpg",
-    tags: ["Next.js", "Supabase", "Radix UI"],
+      "Film talent was everywhere. Infrastructure to connect them wasn't. We built the platform — portfolios, gigs, hiring, collaboration — in one place.",
+    videoUrl: versioned("/works/hey-pro-data.mp4"),
+    posterUrl: versioned("/works/posters/hey-pro-data.jpg"),
+    tags: ["Next.js", "Supabase", "Radix UI", "Film Industry Network"],
     services: ["Platform Architecture", "API Development", "Web Development"],
-  },
-  {
-    id: "06",
-    title: "Zeko",
-    category: "Corporate Website",
-    summary:
-      "An innovative RAG-architected platform that enables users to upload PDF documents and seamlessly extract information through an AI-powered conversational interface.",
-    videoUrl: "/works/zeko.mp4",
-    posterUrl: "/works/posters/zeko.jpg",
-    tags: ["AI/LLM", "RAG Architecture", "Next.js"],
-    services: ["AI Integration", "UI/UX Design", "Workflow Automation"],
-  },
+  }
 ];
