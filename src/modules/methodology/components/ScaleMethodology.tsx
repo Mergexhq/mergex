@@ -316,7 +316,7 @@ export function ScaleMethodology() {
                     {/* TOP annotation (C and L) */}
                     {item.direction === 'top' && (
                       <div className={`absolute bottom-full flex flex-col items-center scale-annotation-${item.id}`} style={{ marginBottom: '8px' }}>
-                        <div className="scale-annotation-text text-center" style={{ marginBottom: '8px', width: 'clamp(100px, 15vw, 220px)' }}>
+                        <div className="scale-annotation-text text-center" style={{ marginBottom: '8px', width: 'clamp(150px, 20vw, 240px)' }}>
                           <p style={{ fontSize: 'clamp(13px, 1.5vw, 20px)', fontWeight: 700, letterSpacing: '0.12em', textTransform: 'uppercase', color: 'var(--color-foreground)', fontFamily: 'var(--font-manrope, sans-serif)', marginBottom: '4px' }}>
                             {item.name}
                           </p>
@@ -346,7 +346,7 @@ export function ScaleMethodology() {
                           <div className="scale-annotation-line origin-top" style={{ width: '1px', height: 'clamp(16px, 3vw, 48px)', background: 'var(--color-foreground)', marginBottom: '4px' }} />
                           <div className="scale-annotation-dot rounded-full" style={{ width: 'clamp(4px, 0.5vw, 8px)', height: 'clamp(4px, 0.5vw, 8px)', background: 'var(--color-foreground)' }} />
                         </div>
-                        <div className="scale-annotation-text text-center" style={{ marginTop: '8px', width: 'clamp(100px, 15vw, 220px)' }}>
+                        <div className="scale-annotation-text text-center" style={{ marginTop: '8px', width: 'clamp(150px, 20vw, 240px)' }}>
                           <p style={{ fontSize: 'clamp(13px, 1.5vw, 20px)', fontWeight: 700, letterSpacing: '0.12em', textTransform: 'uppercase', color: 'var(--color-foreground)', fontFamily: 'var(--font-manrope, sans-serif)', marginBottom: '4px' }}>
                             {item.name}
                           </p>
