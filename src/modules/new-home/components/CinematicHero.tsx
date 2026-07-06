@@ -5,7 +5,6 @@ import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
 import { worksData } from "../data/works";
 import { TextSplitter } from "./TextSplitter";
-import { ArrowLeft, ArrowRight } from "lucide-react";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 
 if (typeof window !== "undefined") {
@@ -109,13 +108,6 @@ export const CinematicHero = () => {
     transitionToSlide(newNext, "next");
   };
 
-  const handlePrev = () => {
-    if (isAnimating) return;
-    const total = HERO_PROJECTS.length;
-    const newPrev = (activeIndex - 1 + total) % total;
-    transitionToSlide(newPrev, "prev");
-  };
-
   // Auto-advance the carousel while idle.
   useEffect(() => {
     const interval = setInterval(() => {
@@ -176,43 +168,6 @@ export const CinematicHero = () => {
               />
               
               <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent pointer-events-none parallax-content" />
-
-              <div className="absolute inset-x-0 bottom-0 w-full px-4 pb-12 md:px-8 md:pb-16 flex flex-row justify-between items-end z-30 parallax-content">
-                <div className="max-w-[65%] sm:max-w-xl md:max-w-2xl lg:max-w-4xl xl:max-w-5xl carousel-text text-white">
-                  <p className="text-[10px] sm:text-xs md:text-sm lg:text-base uppercase tracking-[0.2em] font-medium mb-1.5 md:mb-3 opacity-90 font-roboto text-[var(--primary-light)] carousel-category">
-                    {project.category}
-                  </p>
-                  <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-clash font-medium leading-[0.95] tracking-tight mb-2 md:mb-4">
-                    <TextSplitter text={project.title} />
-                  </h1>
-                  <div className="text-sm sm:text-base md:text-lg lg:text-xl xl:text-2xl opacity-80 hidden md:block carousel-summary leading-relaxed font-light mt-3 md:mt-5 max-w-2xl">
-                    {project.summary}
-                  </div>
-                </div>
-                
-                <div className="flex flex-col items-end gap-3 md:gap-5 text-white shrink-0">
-                  <div className="text-[10px] sm:text-xs md:text-sm font-roboto tracking-[0.2em] opacity-80 font-medium">
-                    {String(index + 1).padStart(2, '0')} / {String(HERO_PROJECTS.length).padStart(2, '0')}
-                  </div>
-                  
-                  <div className="flex gap-2 sm:gap-3">
-                    <button 
-                      onClick={handlePrev}
-                      className="w-9 h-9 sm:w-10 sm:h-10 md:w-12 md:h-12 rounded-full border border-white/20 flex items-center justify-center hover:bg-white hover:text-black transition-colors backdrop-blur-sm"
-                      aria-label="Previous Project"
-                    >
-                      <ArrowLeft size={16} className="sm:w-5 sm:h-5" />
-                    </button>
-                    <button 
-                      onClick={handleNext}
-                      className="w-9 h-9 sm:w-10 sm:h-10 md:w-12 md:h-12 rounded-full border border-white/20 flex items-center justify-center hover:bg-white hover:text-black transition-colors backdrop-blur-sm"
-                      aria-label="Next Project"
-                    >
-                      <ArrowRight size={16} className="sm:w-5 sm:h-5" />
-                    </button>
-                  </div>
-                </div>
-              </div>
             </div>
           ))}
           

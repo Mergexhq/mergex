@@ -413,23 +413,25 @@ const ExpandedPortalCard = ({
               <h3 className="font-clash text-2xl sm:text-3xl lg:text-4xl 2xl:text-5xl text-white drop-shadow-md">
                 {project.title}
               </h3>
-              <a
-                href={liveUrl}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="group flex items-center justify-center rounded-full bg-white/20 text-white backdrop-blur-md transition-all duration-300 hover:bg-white hover:text-black hover:scale-105 h-7 md:h-8 overflow-hidden"
-                aria-label="Visit site"
-              >
-                <span className={`whitespace-nowrap font-medium uppercase tracking-widest text-[9px] md:text-[10px] transition-all duration-300 ease-out overflow-hidden flex items-center ${isTouchOnly
-                  ? 'max-w-[80px] opacity-100 pl-3'
-                  : 'max-w-0 opacity-0 group-hover:max-w-[80px] group-hover:opacity-100 group-hover:pl-3'
-                  }`}>
-                  {isTouchOnly ? 'Visit site' : 'View site'}
-                </span>
-                <div className="h-7 w-7 md:h-8 md:w-8 shrink-0 flex items-center justify-center rounded-full">
-                  <ArrowUpRight size={14} className="transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
-                </div>
-              </a>
+              {project.liveUrl && project.liveUrl.trim() !== "" && project.liveUrl !== "#" && (
+                <a
+                  href={liveUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="group flex items-center justify-center rounded-full bg-white/20 text-white backdrop-blur-md transition-all duration-300 hover:bg-white hover:text-black hover:scale-105 h-7 md:h-8 overflow-hidden"
+                  aria-label="Visit site"
+                >
+                  <span className={`whitespace-nowrap font-medium uppercase tracking-widest text-[9px] md:text-[10px] transition-all duration-300 ease-out overflow-hidden flex items-center ${isTouchOnly
+                    ? 'max-w-[80px] opacity-100 pl-3'
+                    : 'max-w-0 opacity-0 group-hover:max-w-[80px] group-hover:opacity-100 group-hover:pl-3'
+                    }`}>
+                    {isTouchOnly ? 'Visit site' : 'View site'}
+                  </span>
+                  <div className="h-7 w-7 md:h-8 md:w-8 shrink-0 flex items-center justify-center rounded-full">
+                    <ArrowUpRight size={14} className="transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+                  </div>
+                </a>
+              )}
             </div>
           </div>
         </div>
