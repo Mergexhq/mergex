@@ -55,13 +55,14 @@ export const ShowcaseFeed = () => {
 
   return (
     <div id="works" ref={containerRef} className="w-full relative showcase-feed-container bg-[var(--bg-primary)]">
-      <div className="relative z-0 rounded-t-2xl overflow-hidden shadow-[0_-10px_40px_rgba(0,0,0,0.1)]">
-        <CinematicHero />
+      <div className="w-full max-w-none m-0 p-0 relative z-20">
+        <div className="relative w-full aspect-[16/9] md:aspect-auto rounded-xl overflow-hidden shadow-[0_20px_60px_rgba(0,0,0,0.25)] border border-black/5">
+          <CinematicHero />
+        </div>
       </div>
 
-      {/* Rails follow the hero directly. The rounded section pulls up over the hero's
-          bottom edge (-mt-8) for a seamless hand-off — no blank gap between them. */}
-      <section className="relative z-10 bg-[var(--bg-primary)] w-full pt-12 pb-32 flex flex-col gap-12 md:gap-20 rounded-t-[2rem] shadow-[0_-10px_40px_rgba(0,0,0,0.05)] -mt-8">
+      {/* Rails follow the hero directly. */}
+      <section className="relative z-10 bg-[var(--bg-primary)] w-full pt-16 md:pt-24 pb-32 flex flex-col gap-12 md:gap-20 rounded-t-2xl md:rounded-t-[1.5rem] -mt-8 md:-mt-16 shadow-[0_-10px_40px_rgba(0,0,0,0.05)]">
         {rails.map((rail) => (
           <WorkRail key={rail.title} title={rail.title} data={rail.data} />
         ))}
@@ -321,7 +322,7 @@ const ExpandedPortalCard = ({
 
   // On mobile, expand to fill most of the screen width. On desktop, stick to an elegant 1.15x scale.
   const maxAvailableWidth = window.innerWidth - (screenPadding * 2);
-  const desiredWidth = isMobile ? maxAvailableWidth : rect.width * 1.15;
+  const desiredWidth = isMobile ? window.innerWidth : rect.width * 1.15;
   const targetWidth = Math.min(desiredWidth, maxAvailableWidth);
   const scale = targetWidth / rect.width;
 
@@ -342,20 +343,26 @@ const ExpandedPortalCard = ({
   let targetX = 0;
   let targetY = -10; // Default subtle upward movement
 
-  // X-axis bounds check
-  if (baseLeft + targetWidth + targetX > window.innerWidth - screenPadding) {
-    targetX = (window.innerWidth - screenPadding) - (baseLeft + targetWidth);
-  }
-  if (baseLeft + targetX < screenPadding) {
-    targetX = screenPadding - baseLeft;
-  }
+  if (isMobile) {
+    // Force exactly to screen edges
+    targetX = -baseLeft;
+    targetY = -baseTop;
+  } else {
+    // X-axis bounds check
+    if (baseLeft + targetWidth + targetX > window.innerWidth - screenPadding) {
+      targetX = (window.innerWidth - screenPadding) - (baseLeft + targetWidth);
+    }
+    if (baseLeft + targetX < screenPadding) {
+      targetX = screenPadding - baseLeft;
+    }
 
-  // Y-axis bounds check
-  if (baseTop + targetHeight + targetY > window.innerHeight - screenPadding) {
-    targetY = (window.innerHeight - screenPadding) - (baseTop + targetHeight);
-  }
-  if (baseTop + targetY < screenPadding) {
-    targetY = screenPadding - baseTop;
+    // Y-axis bounds check
+    if (baseTop + targetHeight + targetY > window.innerHeight - screenPadding) {
+      targetY = (window.innerHeight - screenPadding) - (baseTop + targetHeight);
+    }
+    if (baseTop + targetY < screenPadding) {
+      targetY = screenPadding - baseTop;
+    }
   }
 
   return createPortal(

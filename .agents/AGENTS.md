@@ -1,0 +1,1 @@
+- The Cinematic Hero video must always maintain a strict 16:9 aspect ratio (`aspect-[16/9]`). Do not change it to fill the height or break its original aspect ratio.

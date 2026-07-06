@@ -146,8 +146,8 @@ export const CinematicHero = () => {
   }, { scope: containerRef });
 
   return (
-    <div ref={containerRef} className="w-full">
-      <section className="relative w-full aspect-[16/9] max-h-[100svh]" ref={carouselRef}>
+    <div ref={containerRef} className="w-full h-full">
+      <section className="relative w-full h-full md:aspect-[16/9] md:max-h-[100svh]" ref={carouselRef}>
         <div className="relative w-full h-full overflow-hidden bg-neutral-900">
 
           {HERO_PROJECTS.map((project, index) => (
