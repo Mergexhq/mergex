@@ -1,1 +1,2 @@
 - The Cinematic Hero video must always maintain a strict 16:9 aspect ratio (`aspect-[16/9]`). Do not change it to fill the height or break its original aspect ratio.
+- When working with video or static assets (e.g. in `PosterVideo.tsx`, `videoLoader.ts`), always handle browser caching properly. Ensure cache busting is applied by appending the `NEXT_PUBLIC_BUILD_ID` environment variable as a query parameter (e.g., `?v=${process.env.NEXT_PUBLIC_BUILD_ID || '1'}`) to video and poster URLs. This prevents stale media caches when new versions are deployed to production.
