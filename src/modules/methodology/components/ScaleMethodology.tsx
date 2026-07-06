@@ -156,9 +156,15 @@ export function ScaleMethodology() {
             opacity: 0, duration: 0.5, ease: 'power2.inOut' 
         }, preZoom);
 
-        tl.to({}, { duration: 0.5 }); // short buffer
+        // Also fade IN the scroll indicator to prompt the user to keep scrolling
+        tl.to('.scale-scroll-indicator', { opacity: 1, duration: 0.5, ease: 'power2.inOut' }, preZoom);
+
+        tl.to({}, { duration: 1.0 }); // short buffer (increased slightly to allow the indicator to be seen)
         
         const zoomStart = 'zoom_start';
+
+        // Fade OUT the scroll indicator as soon as the zoom begins
+        tl.to('.scale-scroll-indicator', { opacity: 0, duration: 0.5, ease: 'power2.inOut' }, zoomStart);
 
         // 2. Fade out the center window background and top/bottom gray bars to reveal ShowcaseFeed
         tl.to('.center-window-bg, .gray-frame', { opacity: 0, duration: 1.5, ease: 'power2.inOut' }, zoomStart);
@@ -372,6 +378,16 @@ export function ScaleMethodology() {
 
         {/* Bottom Solid Gray */}
         <div className="gray-frame w-full h-[15vh] bg-background pointer-events-auto shrink-0 z-20 relative"></div>
+
+        {/* Scroll Indicator (Only visible during the pause before zooming) */}
+        <div className="scale-scroll-indicator absolute bottom-8 md:bottom-12 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 z-40 pointer-events-none opacity-0">
+          <span className="text-[10px] uppercase tracking-[0.2em] font-medium text-foreground-muted/60">
+            Keep Scrolling
+          </span>
+          <svg className="w-4 h-4 text-foreground-muted/60 animate-bounce" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M19 14l-7 7m0 0l-7-7m7 7V3" />
+          </svg>
+        </div>
       </div>
     </section>
   );
