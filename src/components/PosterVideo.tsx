@@ -27,8 +27,14 @@ export const PosterVideo = ({
   priority = 0,
   className = "absolute inset-0 h-full w-full object-cover",
 }: PosterVideoProps) => {
+  const buildId = process.env.NEXT_PUBLIC_BUILD_ID || '1';
+  const getVersionedUrl = (url: string) => url.includes('?') ? `${url}&v=${buildId}` : `${url}?v=${buildId}`;
+  
+  const versionedVideoUrl = getVersionedUrl(videoUrl);
+  const versionedPosterUrl = getVersionedUrl(posterUrl);
+
   const videoRef = useRef<HTMLVideoElement>(null);
-  const ready = useBackgroundVideo(videoUrl, priority);
+  const ready = useBackgroundVideo(versionedVideoUrl, priority);
   const [playing, setPlaying] = useState(false);
 
   // Only drive play/pause once the source is actually attached.
@@ -38,7 +44,7 @@ export const PosterVideo = ({
     <>
       {/* Poster — underneath, painted over by the video once it's playing. */}
       <img
-        src={posterUrl}
+        src={versionedPosterUrl}
         alt=""
         aria-hidden
         className={className}
@@ -48,8 +54,8 @@ export const PosterVideo = ({
       {ready && (
         <video
           ref={videoRef}
-          src={videoUrl}
-          poster={posterUrl}
+          src={versionedVideoUrl}
+          poster={versionedPosterUrl}
           muted
           loop
           playsInline
