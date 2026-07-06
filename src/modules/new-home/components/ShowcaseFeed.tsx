@@ -220,12 +220,14 @@ const WorkCard = ({
         className="relative flex-none cursor-pointer snap-start rounded-xl bg-[var(--bg-secondary)] shadow-md ring-1 ring-black/5 w-[85vw] sm:w-[460px] md:w-[540px] lg:w-[620px] 2xl:w-[720px] group transition-transform duration-300 hover:scale-[1.02]"
         onClick={handleExpand}
       >
-        <div className="relative aspect-video w-full flex-none self-start overflow-hidden rounded-xl">
-          <PosterVideo
-            videoUrl={project.videoUrl}
-            posterUrl={project.posterUrl}
-            className="absolute inset-0 h-full w-full object-cover"
-          />
+        <div id={`thumbnail-video-container-${project.id}`} className="relative aspect-video w-full flex-none self-start overflow-hidden rounded-xl">
+          <div id={`video-wrapper-${project.id}`} className="absolute inset-0 z-0 pointer-events-none">
+            <PosterVideo
+              videoUrl={project.videoUrl}
+              posterUrl={project.posterUrl}
+              className="absolute inset-0 h-full w-full object-cover"
+            />
+          </div>
           <div className="absolute inset-x-0 bottom-0 z-10 flex items-center justify-between bg-gradient-to-t from-black/60 via-black/10 to-transparent pt-8 pb-4 px-4 md:pb-6 md:px-6 lg:pb-8 lg:px-8">
             <h3 className="font-clash text-2xl sm:text-3xl lg:text-4xl 2xl:text-5xl text-white drop-shadow-md">
               {project.title}
@@ -271,18 +273,26 @@ const ExpandedPortalCard = ({
   rect: DOMRect;
   onClose: () => void;
 }) => {
-  const videoRef = useRef<HTMLVideoElement>(null);
   const containerRef = useRef<HTMLDivElement>(null);
   const liveUrl = project.liveUrl || "#";
   const inputType = useInputType();
   const isTouchOnly = inputType.hasTouch && !inputType.hasCursor;
 
   useEffect(() => {
-    const v = videoRef.current;
-    if (v) {
-      v.play().catch(() => { });
+    const videoNode = document.getElementById(`video-wrapper-${project.id}`);
+    const expandedContainer = document.getElementById(`expanded-video-container-${project.id}`);
+    
+    if (videoNode && expandedContainer) {
+      expandedContainer.appendChild(videoNode);
     }
-  }, []);
+
+    return () => {
+      const thumbnailContainer = document.getElementById(`thumbnail-video-container-${project.id}`);
+      if (videoNode && thumbnailContainer) {
+        thumbnailContainer.appendChild(videoNode);
+      }
+    };
+  }, [project.id]);
 
   // Close on click outside, significant scroll/resize, or Escape key
   const startScrollY = useRef(window.scrollY);
@@ -414,15 +424,7 @@ const ExpandedPortalCard = ({
         className="absolute shadow-2xl ring-1 ring-black/20 rounded-[1.5rem] pointer-events-auto flex flex-col overflow-hidden bg-black"
       >
         <div className="relative aspect-video w-full flex-none self-start">
-          <video
-            ref={videoRef}
-            src={project.videoUrl}
-            poster={project.posterUrl}
-            muted
-            loop
-            playsInline
-            className="absolute inset-0 h-full w-full object-cover"
-          />
+          <div id={`expanded-video-container-${project.id}`} className="absolute inset-0 z-0 pointer-events-none" />
           
           <div className="absolute inset-0 bg-black/20 pointer-events-none" />
 

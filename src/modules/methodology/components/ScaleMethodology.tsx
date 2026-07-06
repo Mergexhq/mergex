@@ -107,12 +107,13 @@ export function ScaleMethodology() {
           });
         }
 
+        // Initial buffer
+        tl.to({}, { duration: 1.5 });
+
         // Hide header instantly when the first letter 'S' starts animating (desktop only)
         if (typeof window !== 'undefined' && window.innerWidth >= 768) {
-            tl.to('.scale-header-container', { opacity: 0, duration: 0.1 }, 0);
+            tl.to('.scale-header-container', { opacity: 0, duration: 0.1 }, 'activate0');
         }
-
-        // No initial buffer - start letter animations immediately on first scroll
 
         // Step through each letter
         LETTERS.forEach((letter, i) => {
@@ -138,14 +139,20 @@ export function ScaleMethodology() {
           }
         });
 
-        // Final - all letters full opacity
+        // Final - all letters full opacity and all annotations visible
         tl.to('.scale-big-letter', { opacity: 1, duration: 1, ease: 'power2.inOut' }, 'final');
+        tl.to('.scale-annotation-text, .scale-annotation-dot', { opacity: 1, duration: 1, ease: 'power2.inOut' }, 'final');
+        tl.to('.scale-annotation-line', { opacity: 0.35, duration: 1, ease: 'power2.inOut' }, 'final');
+
+        // Hold so the user can read all the abbreviations before the next scroll triggers the zoom fade-out
+        // Increased duration to require one full extra scroll
+        tl.to({}, { duration: 3.5 });
 
         // ZOOM TRANSITION
         const preZoom = 'pre_zoom';
 
-        // 1. First, quickly fade out the text UI (annotations, dots) to unclutter the screen BEFORE zooming
-        tl.to('.scale-annotation-text, .scale-annotation-dot, .scale-annotation-line, .scale-dot', { 
+        // 1. First, quickly fade out the text UI (header, annotations, dots) to unclutter the screen BEFORE zooming
+        tl.to('.scale-header-container, .scale-annotation-text, .scale-annotation-dot, .scale-annotation-line, .scale-dot', { 
             opacity: 0, duration: 0.5, ease: 'power2.inOut' 
         }, preZoom);
 
@@ -267,7 +274,7 @@ export function ScaleMethodology() {
             <span className="text-[10px] font-bold uppercase tracking-[0.25em] text-primary mb-4 block">
               Our Framework
             </span>
-            <h2 
+            <h2
               className="font-clash font-bold text-3xl sm:text-4xl md:text-5xl lg:text-6xl uppercase tracking-wider text-left"
               style={{ color: 'var(--color-foreground)', lineHeight: 1.1 }}
             >
