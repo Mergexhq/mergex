@@ -560,3 +560,19 @@ html.lenis body {
     radial-gradient(at 50% 50%, rgba(139, 92, 246, 0.02) 0px, transparent 100%),
     linear-gradient(180deg, #080808 0%, #080808 100%) !important;
 }
+/* Force Methodology elements to be visible when scrolling backwards */
+.force-all-visible .scale-big-letter,
+.force-all-visible .scale-annotation-text,
+.force-all-visible .scale-annotation-dot {
+  opacity: 1 !important;
+}
+.force-all-visible .scale-annotation-text {
+  transform: translate(0px, 0px) !important;
+}
+.force-all-visible .scale-annotation-dot {
+  transform: scale(1, 1) translate(0px, 0px) !important;
+}
+.force-all-visible .scale-annotation-line {
+  opacity: 0.35 !important;
+  transform: scale(1, 1) !important;
+}
