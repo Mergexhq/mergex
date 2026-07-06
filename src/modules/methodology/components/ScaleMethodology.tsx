@@ -51,8 +51,11 @@ export function ScaleMethodology() {
     () => {
       const mm = gsap.matchMedia();
 
-      mm.add("(min-width: 1px)", () => {
-        const isMobile = window.innerWidth < 768;
+      mm.add({
+        isDesktop: "(min-width: 768px)",
+        isMobile: "(max-width: 767px)"
+      }, (context) => {
+        const { isMobile, isDesktop } = context.conditions as { isMobile: boolean, isDesktop: boolean };
 
         const tl = gsap.timeline({
           scrollTrigger: {
@@ -91,15 +94,25 @@ export function ScaleMethodology() {
           }
         });
 
-        // Move hero text up ONLY when the methodology section hits its bottom edge
-        const hhPushUp = document.querySelector('.hh-push-up');
+        // Move hero text up ONLY when the methodology section hits its bottom edge (with added gap)
+        const hhPushUp = document.querySelector('.hh-push-up') as HTMLElement;
         if (hhPushUp) {
+          const gap = 80; // Added gap between text and incoming section
+          
+          const getUnscrolledBottom = (el: HTMLElement) => {
+            const currentTransform = el.style.transform;
+            el.style.transform = 'none';
+            const bottom = el.getBoundingClientRect().bottom;
+            el.style.transform = currentTransform;
+            return bottom;
+          };
+
           gsap.to(hhPushUp, {
-            y: () => -hhPushUp.getBoundingClientRect().bottom,
+            y: () => -(getUnscrolledBottom(hhPushUp) + gap),
             ease: 'none',
             scrollTrigger: {
               trigger: sectionRef.current,
-              start: () => `top ${hhPushUp.getBoundingClientRect().bottom}px`,
+              start: () => `top ${getUnscrolledBottom(hhPushUp) + gap}px`,
               end: 'top top',
               scrub: true,
               invalidateOnRefresh: true,
@@ -111,7 +124,7 @@ export function ScaleMethodology() {
         tl.to({}, { duration: 1.5 });
 
         // Hide header instantly when the first letter 'S' starts animating (desktop only)
-        if (typeof window !== 'undefined' && window.innerWidth >= 768) {
+        if (isDesktop) {
             tl.to('.scale-header-container', { opacity: 0, duration: 0.1 }, 'activate0');
         }
 
