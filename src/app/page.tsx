@@ -3,6 +3,7 @@ import {
     FinalCTA,
 } from '@/modules/home/components';
 import { ScaleMethodology } from '@/modules/methodology/components';
+import { ExperimentsGallery } from '@/modules/labsPortfolio/components';
 
 export default function HomePage() {
     return (
@@ -11,6 +12,9 @@ export default function HomePage() {
 
             {/* Scale Methodology Scroll Animation */}
             <ScaleMethodology />
+
+            {/* Labs Portfolio Gallery */}
+            <ExperimentsGallery />
 
             {/* 06 - CTA */}
             <FinalCTA />

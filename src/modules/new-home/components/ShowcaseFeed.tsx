@@ -62,7 +62,7 @@ export const ShowcaseFeed = () => {
       </div>
 
       {/* Rails follow the hero directly. */}
-      <section className="relative z-10 bg-[var(--bg-primary)] w-full pt-16 md:pt-24 pb-32 flex flex-col gap-12 md:gap-20 rounded-t-2xl md:rounded-t-[1.5rem] -mt-8 md:-mt-16 shadow-[0_-10px_40px_rgba(0,0,0,0.05)]">
+      <section className="relative z-10 bg-[var(--bg-primary)] w-full pt-16 md:pt-24 pb-12 md:pb-16 flex flex-col gap-12 md:gap-20 rounded-t-2xl md:rounded-t-[1.5rem] -mt-8 md:-mt-16 shadow-[0_-10px_40px_rgba(0,0,0,0.05)]">
         {rails.map((rail) => (
           <WorkRail key={rail.title} title={rail.title} data={rail.data} />
         ))}
