@@ -179,8 +179,8 @@ export function ScaleMethodology() {
         // Fade OUT the scroll indicator as soon as the zoom begins
         tl.to('.scale-scroll-indicator', { opacity: 0, duration: 0.5, ease: 'power2.inOut' }, zoomStart);
 
-        // 2. Fade out the center window background and top/bottom gray bars to reveal ShowcaseFeed
-        tl.to('.center-window-bg, .gray-frame', { opacity: 0, duration: 1.5, ease: 'power2.inOut' }, zoomStart);
+        // 2. Fade out the global overlay background to reveal ShowcaseFeed
+        tl.to('.scale-overlay-bg', { opacity: 0, duration: 1.5, ease: 'power2.inOut' }, zoomStart);
 
         // 3. Zoom the text wrapper directly from the center of the screen
         tl.to('.scale-text-wrapper', {
@@ -285,10 +285,13 @@ export function ScaleMethodology() {
 
       {/* LAYER 1: Full Screen Pinned Overlay */}
       {/* Must be absolute top-0 left-0 w-full h-[100dvh] to stick to screen viewport while section is pinned */}
-      <div className="layer-1-overlay absolute top-0 left-0 w-full h-[100dvh] z-10 flex flex-col pointer-events-none overflow-visible">
+      <div className="layer-1-overlay absolute top-0 left-0 w-full h-[100dvh] z-10 flex flex-col pointer-events-none overflow-hidden">
         
-        {/* Top Header - Absolutely positioned to not offset the vertical centering of the S.C.A.L.E. text */}
-        <div className="scale-header-container absolute top-0 left-0 right-0 w-full px-4 xl:px-6 pb-12 pt-28 z-50">
+        {/* Global Background for the overlay (Replacing split gray frames) */}
+        <div className="scale-overlay-bg absolute inset-0 bg-background pointer-events-none z-0"></div>
+
+        {/* Top Header - Relative on mobile to push content down, Absolute on desktop to center content in full screen */}
+        <div className="scale-header-container w-full px-4 xl:px-6 pb-6 pt-24 sm:pt-28 z-50 shrink-0 max-md:relative md:absolute md:top-0 md:left-0 md:right-0">
           <div className="flex flex-col items-start w-full">
             <span className="text-[10px] font-bold uppercase tracking-[0.25em] text-primary mb-4 block">
               Our Framework
@@ -302,18 +305,13 @@ export function ScaleMethodology() {
           </div>
         </div>
 
-        {/* Top Solid Gray */}
-        <div className="gray-frame w-full h-[15vh] bg-background pointer-events-auto shrink-0 z-20 relative"></div>
-
-        {/* Center Window (This is the specific area the user marked in red) */}
-        {/* Overflow hidden ensures the zoom stays within this area, keeping top/bottom gray intact */}
-        <div className="relative w-full flex-1 pointer-events-auto flex flex-col items-center justify-center z-30 overflow-visible">
-          
-          {/* Fading Background that reveals ShowcaseFeed */}
-          <div className="center-window-bg absolute inset-0 bg-background pointer-events-none z-0"></div>
+        {/* Center Window */}
+        {/* min-h ensures it doesn't get completely crushed on extremely short screens */}
+        <div className="relative w-full flex-1 pointer-events-auto flex flex-col z-30 min-h-[400px]">
 
           {/* Zooming Text Container */}
-          <div className="scale-giant-container relative w-full flex items-center justify-center py-4 z-10 pointer-events-none overflow-visible">
+          {/* my-auto is crucial here: it centers the item vertically, but natively prevents overlapping upwards out of the container when space is tight! */}
+          <div className="scale-giant-container relative w-full flex items-center justify-center py-4 z-10 pointer-events-none my-auto">
             <div
               className="scale-text-wrapper flex items-baseline justify-center"
               style={{
@@ -388,9 +386,6 @@ export function ScaleMethodology() {
             </div>
           </div>
         </div>
-
-        {/* Bottom Solid Gray */}
-        <div className="gray-frame w-full h-[15vh] bg-background pointer-events-auto shrink-0 z-20 relative"></div>
 
         {/* Scroll Indicator (Only visible during the pause before zooming) */}
         <div className="scale-scroll-indicator absolute bottom-8 md:bottom-12 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 z-40 pointer-events-none opacity-0">
