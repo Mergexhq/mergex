@@ -20,18 +20,17 @@ export function HomeHero() {
       <div className="home-hero">
         {/* ── HERO CONTENT ── */}
         <div className="hh-content">
+          <div>
+            <p className="hh-eyebrow hh-animate">SCALING INFRASTRUCTURE COMPANY</p>
+          </div>
           <div className="hh-top-content">
-            <div>
-              <p className="hh-eyebrow hh-animate">SCALING INFRASTRUCTURE COMPANY</p>
-            </div>
-
             <h1 className="hh-heading">
               <span className="hh-heading-line hh-animate">Scale is not luck.</span>
               <span className="hh-heading-accent hh-animate">It&apos;s structure.</span>
             </h1>
           </div>
 
-          <div>
+          <div className="hh-bottom-content">
             <p className="hh-sub hh-animate">
               Infrastructure for businesses that intend to scale deliberately,<br />
               with systems built to reduce friction and support scalable execution.

@@ -81,9 +81,10 @@ export const LogoScrollTransition = ({
           {
             z: -700,        // Pushed back, but the top edge stays near the camera
             rotationX: 32,  // Tilted back — floor/lower rails recede away
-            y: isMobile ? "50dvh" : "100dvh",      // Start closer on mobile
+            y: isMobile ? "50dvh" : "90dvh",      // Start closer on mobile
             scale: 0.62,    // Slightly smaller with the distance
             opacity: 0.7,
+            x: '10%'
           },
           {
             z: 0,
@@ -91,6 +92,7 @@ export const LogoScrollTransition = ({
             y: "0dvh",       // Docks perfectly at the top
             scale: 1,
             opacity: 1,
+            x: 0,
             ease: "power2.out",
             duration: 1,
           },
@@ -166,14 +168,14 @@ export const LogoScrollTransition = ({
         <style>{`
           .showcase-feed-pinned-container {
             --logo-offset-x: 0px;
-            --logo-offset-y: -10dvh;
-            --logo-width: clamp(200px, 45vw, 800px);
+            --logo-offset-y: -15dvh;
+            --logo-width: clamp(160px, 35vw, 300px);
           }
           @media (min-width: 1024px) {
             .showcase-feed-pinned-container {
-              --logo-offset-x: -32vw;
-              --logo-offset-y: 8dvh;
-              --logo-width: clamp(200px, 22vw, 400px);
+              --logo-offset-x: 0px;
+              --logo-offset-y: -15dvh;
+              --logo-width: clamp(200px, 15vw, 250px);
             }
           }
         `}</style>
@@ -190,10 +192,11 @@ export const LogoScrollTransition = ({
           alt="Mergex Logo"
           className="object-contain drop-shadow-2xl absolute -translate-x-1/2 -translate-y-1/2"
           style={{
-            width: "var(--logo-width, clamp(200px, 45vw, 800px))",
+            width: "var(--logo-width, clamp(160px, 35vw, 300px))",
             height: "auto",
             left: "calc(50% + var(--logo-offset-x, 0px))",
-            top: "calc(50% + var(--logo-offset-y, -10dvh))"
+            top: "calc(50% + var(--logo-offset-y, -15dvh))",
+            filter: "hue-rotate(15deg) saturate(0.8) brightness(0.9)"
           }}
         />
       </div>

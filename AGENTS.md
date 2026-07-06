@@ -8,3 +8,4 @@ This version has breaking changes - APIs, conventions, and file structure may al
 
 
 - always use pnpm to install packages
+- Do not start the development server without first verifying whether port 3000 is already in use. If a server is already running on port 3000, use the existing server instead of starting a new one.
