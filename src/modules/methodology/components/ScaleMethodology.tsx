@@ -79,6 +79,34 @@ export function ScaleMethodology() {
         gsap.set('.scale-annotation-dot', { scale: 0, opacity: 0 });
         gsap.set('.scale-annotation-text', { opacity: 0, y: 8 });
 
+        // Flatten border radius as it reaches top
+        gsap.to(sectionRef.current, {
+          borderTopLeftRadius: '0px',
+          borderTopRightRadius: '0px',
+          scrollTrigger: {
+            trigger: sectionRef.current,
+            start: 'top bottom',
+            end: 'top top',
+            scrub: true,
+          }
+        });
+
+        // Move hero text up ONLY when the methodology section hits its bottom edge
+        const hhPushUp = document.querySelector('.hh-push-up');
+        if (hhPushUp) {
+          gsap.to(hhPushUp, {
+            y: () => -hhPushUp.getBoundingClientRect().bottom,
+            ease: 'none',
+            scrollTrigger: {
+              trigger: sectionRef.current,
+              start: () => `top ${hhPushUp.getBoundingClientRect().bottom}px`,
+              end: 'top top',
+              scrub: true,
+              invalidateOnRefresh: true,
+            }
+          });
+        }
+
         // Initial buffer
         tl.to({}, { duration: 1.5 });
 
@@ -204,8 +232,14 @@ export function ScaleMethodology() {
     <section
       id="methodology"
       ref={sectionRef}
-      className="scale-sticky-viewport relative w-full showcase-feed-pinned-container"
-      style={{ fontFamily: 'var(--font-manrope, sans-serif)', backgroundColor: 'transparent' }}
+      className="scale-sticky-viewport relative w-full showcase-feed-pinned-container z-10"
+      style={{ 
+        fontFamily: 'var(--font-manrope, sans-serif)', 
+        backgroundColor: 'var(--bg-primary)',
+        borderTopLeftRadius: '40px',
+        borderTopRightRadius: '40px',
+        overflow: 'hidden'
+      }}
     >
       {/* LAYER 0: ShowcaseFeed Background (Restored to correct flow height layout) */}
       <div className="w-full relative z-0">

@@ -20,14 +20,16 @@ export function HomeHero() {
       <div className="home-hero">
         {/* ── HERO CONTENT ── */}
         <div className="hh-content">
-          <div>
-            <p className="hh-eyebrow hh-animate">SCALING INFRASTRUCTURE COMPANY</p>
-          </div>
-          <div className="hh-top-content">
-            <h1 className="hh-heading">
-              <span className="hh-heading-line hh-animate">Scale is not luck.</span>
-              <span className="hh-heading-accent hh-animate">It&apos;s structure.</span>
-            </h1>
+          <div className="hh-push-up flex flex-col items-center">
+            <div>
+              <p className="hh-eyebrow hh-animate">SCALING INFRASTRUCTURE COMPANY</p>
+            </div>
+            <div className="hh-top-content">
+              <h1 className="hh-heading">
+                <span className="hh-heading-line hh-animate">Scale is not luck.</span>
+                <span className="hh-heading-accent hh-animate">It&apos;s structure.</span>
+              </h1>
+            </div>
           </div>
 
           <div className="hh-bottom-content">
