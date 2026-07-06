@@ -460,8 +460,7 @@ const ExpandedPortalCard = ({
                   rel="noopener noreferrer"
                   className="flex items-center justify-center shrink-0 rounded-full bg-[#FAF9F6] text-black px-3 py-1.5 md:px-8 md:py-3 font-semibold text-[10px] sm:text-xs md:text-sm transition-transform hover:scale-105 shadow-lg whitespace-nowrap"
                 >
-                  <span className="hidden sm:inline">Visit right now</span>
-                  <span className="sm:hidden">Visit site</span>
+                  <span>Visit site</span>
                 </a>
               )}
             </div>

@@ -32,6 +32,7 @@ export const worksData: Project[] = [
       "Business Verification",
       "CMS Integration",
     ],
+    liveUrl: "https://cedarelevator.com",
   },
   {
     id: "02",
@@ -48,6 +49,7 @@ export const worksData: Project[] = [
       "Animation & Motion",
       "SEO Optimisation",
     ],
+    liveUrl: "https://cinnastratech.com",
   },
   {
     id: "03",
@@ -81,6 +83,7 @@ export const worksData: Project[] = [
       "UI/UX Design",
       "Performance Optimisation",
     ],
+    liveUrl: "https://micandmacstores.com",
   },
   {
     id: "05",
