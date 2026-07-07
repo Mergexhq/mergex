@@ -188,7 +188,7 @@ export default function Footer() {
 
                     {/* Partnership column */}
                     <motion.div
-                        className="md:col-span-4 lg:col-span-4 order-first md:order-none flex flex-col items-start"
+                        className="hidden md:flex md:col-span-4 lg:col-span-4 flex-col items-start"
                         initial="hidden"
                         whileInView="visible"
                         viewport={{ once: true }}
