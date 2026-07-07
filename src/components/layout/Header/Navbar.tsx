@@ -50,16 +50,23 @@ export function Navbar() {
         }
     });
 
+    // --- NAVBAR THEME ROUTING ---
+    // If a new page has a white/light hero section, add its pathname to LIGHT_HERO_ROUTES
+    // to ensure the navbar text defaults to black instead of white.
+    const LIGHT_HERO_ROUTES = [
+        '/about',
+        '/pricing',
+        '/careers',
+        '/sitemap',
+    ];
+
     const isLightPage =
+        LIGHT_HERO_ROUTES.includes(pathname || '') ||
         (pathname === '/' && isPastHero) ||
         pathname?.startsWith('/systems') ||
         pathname?.startsWith('/legal') ||
         pathname?.startsWith('/partner') ||
-        pathname === '/pricing' ||
         pathname?.startsWith('/contact') ||
-        (pathname === '/about' && isScrolled) ||
-        pathname === '/careers' ||
-        pathname === '/sitemap' ||
         (pathname?.startsWith('/brands') && pathname !== '/brands/ovrn-studios') ||
         pathname?.startsWith('/methodology');
 

@@ -16,5 +16,6 @@ This version has breaking changes - APIs, conventions, and file structure may al
 <!-- BEGIN:past-agent-finding-and-notes -->
 
 - pnpm commands can fail with ERR_PNPM_IGNORED_BUILDS in this repo; if that happens, check `/home/runner/work/the-mergex-company/the-mergex-company/pnpm-workspace.yaml` allowBuilds values before retrying lint/build.
+- **Navbar Theme Routing:** If a new page has a white/light hero section and the navbar text needs to be dark (black), add its pathname to the `LIGHT_HERO_ROUTES` array in `src/components/layout/Header/Navbar.tsx`.
 
 <!-- END:past-agent-finding-and-notes -->
