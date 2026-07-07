@@ -62,7 +62,7 @@ export const ShowcaseFeed = () => {
       </div>
 
       {/* Rails follow the hero directly. */}
-      <section className="relative z-10 bg-[var(--bg-primary)] w-full pt-16 md:pt-24 pb-12 md:pb-16 flex flex-col gap-12 md:gap-20 rounded-t-2xl md:rounded-t-[1.5rem] -mt-8 md:-mt-16 shadow-[0_-10px_40px_rgba(0,0,0,0.05)]">
+      <section className="relative z-10 bg-[var(--bg-primary)] w-full pt-16 md:pt-24 pb-12 md:pb-16 flex flex-col gap-6 md:gap-8 rounded-t-2xl md:rounded-t-[1.5rem] -mt-8 md:-mt-16 shadow-[0_-10px_40px_rgba(0,0,0,0.05)]">
         {rails.map((rail) => (
           <WorkRail key={rail.title} title={rail.title} data={rail.data} />
         ))}
@@ -109,7 +109,7 @@ const WorkRail = ({ title, data }: { title: string; data: Project[] }) => {
     <div className="work-rail group/rail relative w-full">
       {/* Title */}
       <div className={`mb-4 flex items-center justify-between md:mb-6 ${padding}`}>
-        <h2 className="inline-flex w-fit cursor-pointer items-center gap-1.5 font-clash text-2xl font-semibold text-[var(--text-primary)] transition-colors hover:text-[var(--primary)] md:text-3xl">
+        <h2 className="inline-flex w-fit cursor-pointer items-center gap-1.5 font-serif text-2xl font-medium tracking-tight text-[var(--text-primary)] transition-colors hover:text-[var(--primary)] md:text-3xl">
           {title}
           <ChevronRight
             size={22}
@@ -229,7 +229,7 @@ const WorkCard = ({
             />
           </div>
           <div className="absolute inset-x-0 bottom-0 z-10 flex items-center justify-between bg-gradient-to-t from-black/60 via-black/10 to-transparent pt-8 pb-4 px-4 md:pb-6 md:px-6 lg:pb-8 lg:px-8">
-            <h3 className="font-clash text-2xl sm:text-3xl lg:text-4xl 2xl:text-5xl text-white drop-shadow-md">
+            <h3 className="font-serif text-2xl sm:text-3xl lg:text-4xl 2xl:text-5xl text-white drop-shadow-md font-medium tracking-tight">
               {project.title}
             </h3>
             <div className="flex shrink-0 items-center gap-1.5 text-sm font-semibold uppercase tracking-wider text-white/90 transition-colors group-hover:text-white">
@@ -439,7 +439,7 @@ const ExpandedPortalCard = ({
             <div className="flex flex-row items-end justify-between gap-3 md:gap-8">
               <div className="flex flex-col gap-1 md:gap-2 max-w-[65%] md:max-w-2xl">
                 <div>
-                  <h3 className="font-clash text-lg sm:text-3xl lg:text-4xl 2xl:text-5xl font-bold text-white drop-shadow-md leading-tight line-clamp-2 md:line-clamp-1">
+                  <h3 className="font-serif text-lg sm:text-3xl lg:text-4xl 2xl:text-5xl font-medium tracking-tight text-white drop-shadow-md leading-tight line-clamp-2 md:line-clamp-1">
                     {project.title}
                   </h3>
                   {project.category && (

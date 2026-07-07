@@ -296,8 +296,8 @@ export function ScaleMethodology() {
       <div className="w-full relative z-0">
         <div ref={feedInnerRef} className="w-full relative">
           <div className="absolute w-full flex justify-center pointer-events-none z-10" style={{ bottom: "100%", paddingBottom: "clamp(2rem, 5dvh, 4rem)" }}>
-            <h1 className="text-[12vw] sm:text-[14vw] lg:text-[11vw] font-clash font-bold uppercase text-white drop-shadow-[0_10px_30px_rgba(0,0,0,0.8)] leading-none">
-              OUR WORKS
+            <h1 className="text-[12vw] sm:text-[14vw] lg:text-[11vw] font-serif font-medium tracking-tight text-white drop-shadow-[0_10px_30px_rgba(0,0,0,0.8)] leading-none">
+              Our Works
             </h1>
           </div>
           <ShowcaseFeed />
@@ -318,10 +318,10 @@ export function ScaleMethodology() {
               Our Framework
             </span>
             <h2
-              className="font-clash font-bold text-3xl sm:text-4xl md:text-5xl lg:text-6xl uppercase tracking-wider text-left"
+              className="font-serif font-medium text-3xl sm:text-4xl md:text-5xl lg:text-6xl tracking-tight text-left"
               style={{ color: 'var(--color-foreground)', lineHeight: 1.1 }}
             >
-              THE S.C.A.L.E. METHODOLOGY
+              The S.C.A.L.E. Methodology
             </h2>
           </div>
         </div>
