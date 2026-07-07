@@ -15,5 +15,6 @@ This version has breaking changes - APIs, conventions, and file structure may al
 
 <!-- BEGIN:past-agent-finding-and-notes -->
 
-<!-- END:past-agent-finding-and-notes -->
+- pnpm commands can fail with ERR_PNPM_IGNORED_BUILDS in this repo; if that happens, check `/home/runner/work/the-mergex-company/the-mergex-company/pnpm-workspace.yaml` allowBuilds values before retrying lint/build.
 
+<!-- END:past-agent-finding-and-notes -->
