@@ -312,7 +312,7 @@ export function ScaleMethodology() {
         <div className="scale-overlay-bg absolute inset-0 bg-background pointer-events-none z-0"></div>
 
         {/* Top Header - Relative on mobile to push content down, Absolute on desktop to center content in full screen */}
-        <div className="scale-header-container w-full px-4 xl:px-6 pb-6 pt-24 sm:pt-28 z-50 shrink-0 max-md:relative md:absolute md:top-0 md:left-0 md:right-0">
+        <div className="scale-header-container w-full px-4 xl:px-6 pb-6 pt-6 sm:pt-10 md:pt-24 z-50 shrink-0 max-md:relative md:absolute md:top-0 md:left-0 md:right-0">
           <div className="flex flex-col items-start w-full">
             <span className="text-[10px] font-bold uppercase tracking-[0.25em] text-primary mb-4 block">
               Our Framework

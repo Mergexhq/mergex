@@ -149,6 +149,7 @@ const WorkRail = ({ title, data }: { title: string; data: Project[] }) => {
             return (
               <WorkCard
                 key={uid}
+                uid={uid}
                 project={project}
               />
             );
@@ -197,8 +198,10 @@ const RailButton = ({
 
 const WorkCard = ({
   project,
+  uid,
 }: {
   project: Project;
+  uid: string;
 }) => {
   const [expanded, setExpanded] = useState(false);
   const cardRef = useRef<HTMLDivElement>(null);
@@ -220,8 +223,8 @@ const WorkCard = ({
         className="relative flex-none cursor-pointer snap-start rounded-xl bg-[var(--bg-secondary)] shadow-md ring-1 ring-black/5 w-[85vw] sm:w-[460px] md:w-[540px] lg:w-[620px] 2xl:w-[720px] group transition-transform duration-300 hover:scale-[1.02]"
         onClick={handleExpand}
       >
-        <div id={`thumbnail-video-container-${project.id}`} className="relative aspect-video w-full flex-none self-start overflow-hidden rounded-xl">
-          <div id={`video-wrapper-${project.id}`} className="absolute inset-0 z-0 pointer-events-none">
+        <div id={`thumbnail-video-container-${uid}`} className="relative aspect-video w-full flex-none self-start overflow-hidden rounded-xl">
+          <div id={`video-wrapper-${uid}`} className="absolute inset-0 z-0 pointer-events-none">
             <PosterVideo
               videoUrl={project.videoUrl}
               posterUrl={project.posterUrl}
@@ -255,6 +258,7 @@ const WorkCard = ({
         {expanded && rect && typeof document !== "undefined" && (
           <ExpandedPortalCard
             project={project}
+            uid={uid}
             rect={rect}
             onClose={() => setExpanded(false)}
           />
@@ -266,10 +270,12 @@ const WorkCard = ({
 
 const ExpandedPortalCard = ({
   project,
+  uid,
   rect,
   onClose,
 }: {
   project: Project;
+  uid: string;
   rect: DOMRect;
   onClose: () => void;
 }) => {
@@ -279,15 +285,15 @@ const ExpandedPortalCard = ({
   const isTouchOnly = inputType.hasTouch && !inputType.hasCursor;
 
   useEffect(() => {
-    const videoNode = document.getElementById(`video-wrapper-${project.id}`);
-    const expandedContainer = document.getElementById(`expanded-video-container-${project.id}`);
+    const videoNode = document.getElementById(`video-wrapper-${uid}`);
+    const expandedContainer = document.getElementById(`expanded-video-container-${uid}`);
     
     if (videoNode && expandedContainer) {
       expandedContainer.appendChild(videoNode);
     }
 
     return () => {
-      const thumbnailContainer = document.getElementById(`thumbnail-video-container-${project.id}`);
+      const thumbnailContainer = document.getElementById(`thumbnail-video-container-${uid}`);
       if (videoNode && thumbnailContainer) {
         thumbnailContainer.appendChild(videoNode);
       }
@@ -369,26 +375,20 @@ const ExpandedPortalCard = ({
   let targetX = 0;
   let targetY = -10; // Default subtle upward movement
 
-  if (isMobile) {
-    // Force exactly to screen edges
-    targetX = -baseLeft;
-    targetY = -baseTop;
-  } else {
-    // X-axis bounds check
-    if (baseLeft + targetWidth + targetX > window.innerWidth - screenPadding) {
-      targetX = (window.innerWidth - screenPadding) - (baseLeft + targetWidth);
-    }
-    if (baseLeft + targetX < screenPadding) {
-      targetX = screenPadding - baseLeft;
-    }
+  // X-axis bounds check
+  if (baseLeft + targetWidth + targetX > window.innerWidth - screenPadding) {
+    targetX = (window.innerWidth - screenPadding) - (baseLeft + targetWidth);
+  }
+  if (baseLeft + targetX < screenPadding) {
+    targetX = screenPadding - baseLeft;
+  }
 
-    // Y-axis bounds check
-    if (baseTop + targetHeight + targetY > window.innerHeight - screenPadding) {
-      targetY = (window.innerHeight - screenPadding) - (baseTop + targetHeight);
-    }
-    if (baseTop + targetY < screenPadding) {
-      targetY = screenPadding - baseTop;
-    }
+  // Y-axis bounds check
+  if (baseTop + targetHeight + targetY > window.innerHeight - screenPadding) {
+    targetY = (window.innerHeight - screenPadding) - (baseTop + targetHeight);
+  }
+  if (baseTop + targetY < screenPadding) {
+    targetY = screenPadding - baseTop;
   }
 
   return createPortal(
@@ -424,7 +424,7 @@ const ExpandedPortalCard = ({
         className="absolute shadow-2xl ring-1 ring-black/20 rounded-[1.5rem] pointer-events-auto flex flex-col overflow-hidden bg-black"
       >
         <div className="relative aspect-video w-full flex-none self-start">
-          <div id={`expanded-video-container-${project.id}`} className="absolute inset-0 z-0 pointer-events-none" />
+          <div id={`expanded-video-container-${uid}`} className="absolute inset-0 z-0 pointer-events-none" />
           
           <div className="absolute inset-0 bg-black/20 pointer-events-none" />
 
