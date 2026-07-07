@@ -16,30 +16,40 @@ const LETTERS = [
     name: 'Scan',
     desc: 'Map the full business system - revenue, sales motion, operations, and leadership capacity.',
     direction: 'bottom' as const,
+    mobileHeight: '3vh',
+    desktopHeight: '3vw',
   },
   {
     id: 'C',
     name: 'Compress',
     desc: 'Identify the single root constraint holding everything else back.',
     direction: 'top' as const,
+    mobileHeight: '3vh',
+    desktopHeight: '3vw',
   },
   {
     id: 'A',
     name: 'Architect',
     desc: 'Design the precise operational system needed to resolve the constraint.',
     direction: 'bottom' as const,
+    mobileHeight: '20vh', 
+    desktopHeight: '3vw',
   },
   {
     id: 'L',
     name: 'Launch',
     desc: 'Execute against the blueprint - sequenced, intentional, and measured.',
     direction: 'top' as const,
+    mobileHeight: '18vh', 
+    desktopHeight: '3vw',
   },
   {
     id: 'E',
     name: 'Embed',
     desc: 'Transfer full system ownership to the founder and their team.',
     direction: 'bottom' as const,
+    mobileHeight: '3vh',
+    desktopHeight: '3vw',
   },
 ];
 
@@ -61,7 +71,7 @@ export function ScaleMethodology() {
           scrollTrigger: {
             trigger: sectionRef.current,
             start: 'top top',
-            end: '+=800%',
+            end: '+=400%',
             scrub: 1,
             pin: true,
             anticipatePin: 1,
@@ -143,7 +153,7 @@ export function ScaleMethodology() {
           tl.to(textEl, { opacity: 1, y: 0, duration: 0.8, ease: 'power2.out' }, `activate${i}+=0.3`);
 
           // Hold
-          tl.to({}, { duration: 1.5 });
+          tl.to({}, { duration: 0.8 });
 
           // Deactivate (except last)
           if (i < LETTERS.length - 1) {
@@ -158,8 +168,8 @@ export function ScaleMethodology() {
         tl.to('.scale-annotation-line', { opacity: 0.35, duration: 1, ease: 'power2.inOut' }, 'final');
 
         // Hold so the user can read all the abbreviations before the next scroll triggers the zoom fade-out
-        // Increased duration to require one full extra scroll
-        tl.to({}, { duration: 3.5 });
+        // Reduced duration to require less scrolling
+        tl.to({}, { duration: 1.5 });
 
         // ZOOM TRANSITION
         const preZoom = 'pre_zoom';
@@ -327,6 +337,10 @@ export function ScaleMethodology() {
                     {/* TOP annotation (C and L) */}
                     {item.direction === 'top' && (
                       <div className={`absolute bottom-full flex flex-col items-center scale-annotation-${item.id}`} style={{ marginBottom: '8px' }}>
+                        <style>{`
+                          .scale-annotation-line-${item.id} { height: ${item.mobileHeight}; }
+                          @media (min-width: 768px) { .scale-annotation-line-${item.id} { height: ${item.desktopHeight}; } }
+                        `}</style>
                         <div className="scale-annotation-text text-center" style={{ marginBottom: '8px', width: 'clamp(150px, 20vw, 240px)' }}>
                           <p style={{ fontSize: 'clamp(13px, 1.5vw, 20px)', fontWeight: 700, letterSpacing: '0.12em', textTransform: 'uppercase', color: 'var(--color-foreground)', fontFamily: 'var(--font-manrope, sans-serif)', marginBottom: '4px' }}>
                             {item.name}
@@ -337,7 +351,7 @@ export function ScaleMethodology() {
                         </div>
                         <div className="flex flex-col items-center">
                           <div className="scale-annotation-dot rounded-full" style={{ width: 'clamp(4px, 0.5vw, 8px)', height: 'clamp(4px, 0.5vw, 8px)', background: 'var(--color-foreground)' }} />
-                          <div className="scale-annotation-line origin-top" style={{ width: '1px', height: 'clamp(16px, 3vw, 48px)', background: 'var(--color-foreground)', marginTop: '4px' }} />
+                          <div className={`scale-annotation-line scale-annotation-line-${item.id} origin-top`} style={{ width: '1px', background: 'var(--color-foreground)', marginTop: '4px' }} />
                         </div>
                       </div>
                     )}
@@ -353,8 +367,12 @@ export function ScaleMethodology() {
                     {/* BOTTOM annotation (S, A, E) */}
                     {item.direction === 'bottom' && (
                       <div className={`absolute top-full flex flex-col items-center scale-annotation-${item.id}`} style={{ marginTop: '8px' }}>
+                        <style>{`
+                          .scale-annotation-line-${item.id} { height: ${item.mobileHeight}; }
+                          @media (min-width: 768px) { .scale-annotation-line-${item.id} { height: ${item.desktopHeight}; } }
+                        `}</style>
                         <div className="flex flex-col items-center">
-                          <div className="scale-annotation-line origin-top" style={{ width: '1px', height: 'clamp(16px, 3vw, 48px)', background: 'var(--color-foreground)', marginBottom: '4px' }} />
+                          <div className={`scale-annotation-line scale-annotation-line-${item.id} origin-top`} style={{ width: '1px', background: 'var(--color-foreground)', marginBottom: '4px' }} />
                           <div className="scale-annotation-dot rounded-full" style={{ width: 'clamp(4px, 0.5vw, 8px)', height: 'clamp(4px, 0.5vw, 8px)', background: 'var(--color-foreground)' }} />
                         </div>
                         <div className="scale-annotation-text text-center" style={{ marginTop: '8px', width: 'clamp(150px, 20vw, 240px)' }}>

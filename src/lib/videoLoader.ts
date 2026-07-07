@@ -50,8 +50,22 @@ const getEntry = (url: string): Entry => {
   return entry;
 };
 
+let isPageLoaded = false;
+if (typeof window !== "undefined") {
+  if (document.readyState === "complete") {
+    isPageLoaded = true;
+  } else {
+    window.addEventListener("load", () => {
+      isPageLoaded = true;
+      pump();
+    });
+  }
+}
+
 const pump = () => {
   if (typeof window === "undefined") return;
+  if (!isPageLoaded) return;
+  
   while (active < MAX_CONCURRENT) {
     // Highest priority first, then FIFO.
     queue.sort((a, b) => b.priority - a.priority);
