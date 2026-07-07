@@ -139,6 +139,23 @@ function UnifiedForm() {
     const [submitted, setSubmitted] = useState(false);
     const [isSubmitting, setIsSubmitting] = useState(false);
 
+    useEffect(() => {
+        const handleHashChange = () => {
+            const hash = window.location.hash.replace('#', '').toLowerCase();
+            if (hash === 'careers') {
+                setForm(p => ({ ...p, inquiryType: 'Careers' }));
+            } else if (hash === 'partnership' || hash === 'partnership-inquiry') {
+                setForm(p => ({ ...p, inquiryType: 'Partnership Inquiry' }));
+            } else if (hash === 'general' || hash === 'general-inquiry') {
+                setForm(p => ({ ...p, inquiryType: 'General Inquiry' }));
+            }
+        };
+
+        handleHashChange();
+        window.addEventListener('hashchange', handleHashChange);
+        return () => window.removeEventListener('hashchange', handleHashChange);
+    }, []);
+
     const handle = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) =>
         setForm(p => ({ ...p, [e.target.name]: e.target.value }));
 
@@ -163,7 +180,6 @@ function UnifiedForm() {
 
     const getCtaText = () => {
         switch (form.inquiryType) {
-            case 'Request a Diagnostic': return 'Submit Request';
             case 'Partnership Inquiry': return 'Submit Inquiry';
             case 'Careers': return 'Submit Application';
             case 'General Inquiry': return 'Send Inquiry';
@@ -188,13 +204,13 @@ function UnifiedForm() {
                         {/* Header */}
                         <div>
                             <p className="mb-4 text-[14px] font-bold tracking-[0.2em] uppercase bg-linear-to-b from-violet-400 to-violet-900 bg-clip-text text-transparent">
-                                {UNIFIED_FORM.eyebrow}
+                                {form.inquiryType && UNIFIED_FORM.typeHeaders[form.inquiryType] ? UNIFIED_FORM.typeHeaders[form.inquiryType].eyebrow : UNIFIED_FORM.eyebrow}
                             </p>
                             <h2 className="text-3xl font-bold text-gray-900">
-                                {UNIFIED_FORM.heading}
+                                {form.inquiryType && UNIFIED_FORM.typeHeaders[form.inquiryType] ? UNIFIED_FORM.typeHeaders[form.inquiryType].heading : UNIFIED_FORM.heading}
                             </h2>
                             <p className="mt-5 max-w-xl text-[15px] leading-relaxed text-gray-900 whitespace-pre-line">
-                                {UNIFIED_FORM.subtext}
+                                {form.inquiryType && UNIFIED_FORM.typeHeaders[form.inquiryType] ? UNIFIED_FORM.typeHeaders[form.inquiryType].subtext : UNIFIED_FORM.subtext}
                             </p>
                         </div>
 
@@ -233,7 +249,17 @@ function UnifiedForm() {
                                 placeholder="Select inquiry type..."
                                 options={UNIFIED_FORM.inquiryTypes}
                                 value={form.inquiryType}
-                                onChange={(v) => setForm(p => ({ ...p, inquiryType: v }))}
+                                onChange={(v) => {
+                                    setForm(p => ({ ...p, inquiryType: v }));
+                                    let newHash = '';
+                                    if (v === 'Careers') newHash = 'careers';
+                                    else if (v === 'Partnership Inquiry') newHash = 'partnership';
+                                    else if (v === 'General Inquiry') newHash = 'general';
+                                    
+                                    if (newHash) {
+                                        window.history.replaceState(null, '', `#${newHash}`);
+                                    }
+                                }}
                             />
                         </div>
 
@@ -247,59 +273,6 @@ function UnifiedForm() {
                                     transition={{ duration: 0.4 }}
                                     className="flex flex-col gap-12 pt-4 border-t border-gray-200"
                                 >
-                                    {/* 01 - Request a Diagnostic */}
-                                    {form.inquiryType === 'Request a Diagnostic' && (
-                                        <>
-                                            <div>
-                                                <p className={sectionLabel}>Additional Fields</p>
-                                                <div className="grid gap-8 md:grid-cols-2">
-                                                    <div className="md:col-span-2">
-                                                        <label className={labelClass} htmlFor="uf-diag-industry">Industry</label>
-                                                        <CustomSelect
-                                                            id="uf-diag-industry" placeholder="Select industry..."
-                                                            options={UNIFIED_FORM.industries} value={form.industry}
-                                                            onChange={(v) => setForm(p => ({ ...p, industry: v }))}
-                                                        />
-                                                    </div>
-                                                    <div>
-                                                        <label className={labelClass} htmlFor="uf-diag-size">Company Size</label>
-                                                        <CustomSelect
-                                                            id="uf-diag-size" placeholder="Select size..."
-                                                            options={UNIFIED_FORM.companySizes} value={form.companySize}
-                                                            onChange={(v) => setForm(p => ({ ...p, companySize: v }))}
-                                                        />
-                                                    </div>
-                                                    <div>
-                                                        <label className={labelClass} htmlFor="uf-diag-revenue">Revenue Range</label>
-                                                        <CustomSelect
-                                                            id="uf-diag-revenue" placeholder="Select range..."
-                                                            options={UNIFIED_FORM.revenueRanges} value={form.revenueRange}
-                                                            onChange={(v) => setForm(p => ({ ...p, revenueRange: v }))}
-                                                        />
-                                                    </div>
-                                                    <div className="md:col-span-2">
-                                                        <label className={labelClass}>Area of Interest</label>
-                                                        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mt-3">
-                                                            {UNIFIED_FORM.areasOfInterest.map((area) => (
-                                                                <CustomCheckbox
-                                                                    key={`uf-diag-area-${area}`}
-                                                                    id={`uf-diag-area-${area}`}
-                                                                    label={area}
-                                                                    checked={form.diagnosticAreas.includes(area)}
-                                                                    onChange={() => handleCheckbox(area)}
-                                                                />
-                                                            ))}
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div>
-                                                <label className={labelClass} htmlFor="uf-diag-slowing">What is currently slowing your business growth?</label>
-                                                <textarea id="uf-diag-slowing" name="slowingGrowth" rows={4} value={form.slowingGrowth} onChange={handle} className={`${inputClass} resize-none`} placeholder="Briefly describe your main challenges..." />
-                                            </div>
-                                        </>
-                                    )}
-
                                     {/* 02 - Partnership Inquiry */}
                                     {form.inquiryType === 'Partnership Inquiry' && (
                                         <>

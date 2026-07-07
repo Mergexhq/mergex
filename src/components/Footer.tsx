@@ -201,7 +201,7 @@ export default function Footer() {
                             We help businesses scale, and we're always open to collaborating with like-minded businesses and partners. Let's grow together.
                         </p>
                         <Link
-                            href="/contact"
+                            href="/contact#partnership"
                             className="btn-accent whitespace-nowrap group"
                         >
                             Collaborate with us

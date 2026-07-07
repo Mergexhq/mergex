@@ -69,7 +69,7 @@ export default function LayoutShell({ children }: { children: ReactNode }) {
                     </FooterRevealWrapper>
                 )}
                 {/* Global AI widget - visible on every page */}
-                {!isDetailPage && <AskMergeXWidget />}
+                {/* {!isDetailPage && <AskMergeXWidget />} */}
             </LenisProvider>
         </InputTypeContext.Provider>
     );

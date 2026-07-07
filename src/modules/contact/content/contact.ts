@@ -11,11 +11,27 @@ export const UNIFIED_FORM = {
     heading: 'Tell us about your business.',
     subtext: 'Submit your inquiry below for a professional assessment. We prioritize high-intent submissions and respond within 48 hours.',
     inquiryTypes: [
-        'Request a Diagnostic',
         'Partnership Inquiry',
         'Careers',
         'General Inquiry',
     ],
+    typeHeaders: {
+        'Partnership Inquiry': {
+            eyebrow: 'Partnership Inquiry',
+            heading: 'Explore a Partnership.',
+            subtext: 'Submit your partnership inquiry below. We review all opportunities for strategic alignment.',
+        },
+        'Careers': {
+            eyebrow: 'Careers',
+            heading: 'Join our team.',
+            subtext: 'We are always looking for exceptional talent. Tell us about yourself and what you want to do.',
+        },
+        'General Inquiry': {
+            eyebrow: 'General Inquiry',
+            heading: 'Tell us about your business.',
+            subtext: 'Submit your inquiry below for a professional assessment. We prioritize high-intent submissions and respond within 48 hours.',
+        }
+    } as Record<string, { eyebrow: string; heading: string; subtext: string }>,
     // - Diagnostic fields
     industries: [
         'Technology & Software',
@@ -123,7 +139,6 @@ export const DIAGNOSTIC_FORM = {
 export const CONTACT_FORM = {
     ctaText: 'Submit Inquiry',
     inquiryTypes: [
-        'Request a Diagnostic',
         'Partnership Inquiry',
         'Careers',
         'General Inquiry',
