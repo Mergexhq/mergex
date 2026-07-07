@@ -1,8 +1,7 @@
 'use client';
 
 import { useCallback, useEffect, useRef, useState } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
-import { Play, X } from 'lucide-react';
+import { motion } from 'framer-motion';
 import Image from 'next/image';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import type { Swiper as SwiperType } from 'swiper';
@@ -29,6 +28,49 @@ const CAROUSEL_MEDIA = [
     { src: '/mockups/labs/Gallery/Sara_5.jpg', alt: 'Sara AI Model 5', type: 'image' },
 ] as const;
 
+type CarouselMediaItem = (typeof CAROUSEL_MEDIA)[number];
+
+const VIDEO_CHECK_TIMEOUT_MS = 6000;
+const MIN_MEDIA_LINKS_TO_RENDER = 3;
+
+function canLoadVideo(src: string): Promise<boolean> {
+    return new Promise((resolve) => {
+        const video = document.createElement('video');
+        let resolved = false;
+
+        const cleanup = () => {
+            video.removeAttribute('src');
+            video.load();
+            video.oncanplay = null;
+            video.onloadedmetadata = null;
+            video.onerror = null;
+        };
+
+        const finish = (value: boolean) => {
+            if (resolved) return;
+            resolved = true;
+            cleanup();
+            resolve(value);
+        };
+
+        const timeoutId = window.setTimeout(() => {
+            finish(false);
+        }, VIDEO_CHECK_TIMEOUT_MS);
+
+        const clearAndFinish = (value: boolean) => {
+            window.clearTimeout(timeoutId);
+            finish(value);
+        };
+
+        video.preload = 'metadata';
+        video.oncanplay = () => clearAndFinish(true);
+        video.onloadedmetadata = () => clearAndFinish(true);
+        video.onerror = () => clearAndFinish(false);
+        video.src = src;
+        video.load();
+    });
+}
+
 function CarouselVideo({ src, shouldPlay }: { src: string, shouldPlay: boolean }) {
     const videoRef = useRef<HTMLVideoElement>(null);
     useGlobalVideoObserver(videoRef, shouldPlay);
@@ -51,11 +93,41 @@ export function ExperimentsGallery() {
     const sectionRef = useRef<HTMLElement>(null);
     const swiperRef = useRef<SwiperType | null>(null);
     const [activeIndex, setActiveIndex] = useState(0);
+    const [validatedMedia, setValidatedMedia] = useState<CarouselMediaItem[] | null>(null);
 
     const handleSwiper = useCallback((swiper: SwiperType) => {
         swiperRef.current = swiper;
     }, []);
 
+    useEffect(() => {
+        let isCancelled = false;
+
+        const validateMedia = async () => {
+            const media = await Promise.all(
+                CAROUSEL_MEDIA.map(async (item) => {
+                    if (item.type !== 'video') return item;
+                    const isValidVideo = await canLoadVideo(item.src);
+                    return isValidVideo ? item : null;
+                })
+            );
+
+            if (!isCancelled) {
+                const filteredMedia = media.filter((item): item is CarouselMediaItem => item !== null);
+                setValidatedMedia(filteredMedia);
+                setActiveIndex(0);
+            }
+        };
+
+        validateMedia();
+
+        return () => {
+            isCancelled = true;
+        };
+    }, []);
+
+    if (!validatedMedia || validatedMedia.length < MIN_MEDIA_LINKS_TO_RENDER) {
+        return null;
+    }
 
     const swiperStyles = `
         .experiments-swiper {
@@ -167,10 +239,10 @@ export function ExperimentsGallery() {
                     onSlideChange={(swiper) => setActiveIndex(swiper.realIndex)}
                 >
                     {/* Swiper slides mapping... */}
-                    {CAROUSEL_MEDIA.map((item, index) => {
+                    {validatedMedia.map((item, index) => {
                         const distance = Math.min(
                             Math.abs(index - activeIndex),
-                            CAROUSEL_MEDIA.length - Math.abs(index - activeIndex)
+                            validatedMedia.length - Math.abs(index - activeIndex)
                         );
                         const isWithin5 = distance <= 2;
                         return (
@@ -193,10 +265,10 @@ export function ExperimentsGallery() {
                         );
                     })}
                     {/* Duplicate Slides for Looping */}
-                    {CAROUSEL_MEDIA.map((item, index) => {
+                    {validatedMedia.map((item, index) => {
                         const distance = Math.min(
                             Math.abs(index - activeIndex),
-                            CAROUSEL_MEDIA.length - Math.abs(index - activeIndex)
+                            validatedMedia.length - Math.abs(index - activeIndex)
                         );
                         const isWithin5 = distance <= 2;
                         return (
