@@ -10,7 +10,17 @@ if (typeof window !== 'undefined') {
   gsap.registerPlugin(ScrollTrigger);
 }
 
-const LETTERS = [
+type ScaleLetter = {
+  id: string;
+  name: string;
+  desc: string;
+  direction: 'top' | 'bottom';
+  mobileHeight: string;
+  mobileTallHeight?: string;
+  desktopHeight: string;
+};
+
+const LETTERS: ScaleLetter[] = [
   {
     id: 'S',
     name: 'Scan',
@@ -32,7 +42,8 @@ const LETTERS = [
     name: 'Architect',
     desc: 'Design the precise operational system needed to resolve the constraint.',
     direction: 'bottom' as const,
-    mobileHeight: '20vh', 
+    mobileHeight: '20vh',
+    mobileTallHeight: '16vh',
     desktopHeight: '3vw',
   },
   {
@@ -339,6 +350,7 @@ export function ScaleMethodology() {
                       <div className={`absolute bottom-full flex flex-col items-center scale-annotation-${item.id}`} style={{ marginBottom: '8px' }}>
                         <style>{`
                           .scale-annotation-line-${item.id} { height: ${item.mobileHeight}; }
+                          @media (max-width: 767px) and (max-aspect-ratio: 3/4) { .scale-annotation-line-${item.id} { height: ${item.mobileTallHeight ?? item.mobileHeight}; } }
                           @media (min-width: 768px) { .scale-annotation-line-${item.id} { height: ${item.desktopHeight}; } }
                         `}</style>
                         <div className="scale-annotation-text text-center" style={{ marginBottom: '8px', width: 'clamp(150px, 20vw, 240px)' }}>
@@ -369,6 +381,7 @@ export function ScaleMethodology() {
                       <div className={`absolute top-full flex flex-col items-center scale-annotation-${item.id}`} style={{ marginTop: '8px' }}>
                         <style>{`
                           .scale-annotation-line-${item.id} { height: ${item.mobileHeight}; }
+                          @media (max-width: 767px) and (max-aspect-ratio: 3/4) { .scale-annotation-line-${item.id} { height: ${item.mobileTallHeight ?? item.mobileHeight}; } }
                           @media (min-width: 768px) { .scale-annotation-line-${item.id} { height: ${item.desktopHeight}; } }
                         `}</style>
                         <div className="flex flex-col items-center">
