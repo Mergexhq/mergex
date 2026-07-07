@@ -82,8 +82,8 @@ export function ScaleMethodology() {
           scrollTrigger: {
             trigger: sectionRef.current,
             start: 'top top',
-            end: '+=400%',
-            scrub: 1,
+            end: '+=450%',
+            scrub: 1.5,
             pin: true,
             anticipatePin: 1,
             onLeave: () => {
@@ -100,6 +100,9 @@ export function ScaleMethodology() {
 
         // Initial state for annotations
         gsap.set('.scale-annotation-line', { scaleY: 0, opacity: 0 });
+        if (isMobile) {
+          gsap.set('.scale-annotation-line', { height: '3vh' });
+        }
         gsap.set('.scale-annotation-dot', { scale: 0, opacity: 0 });
         gsap.set('.scale-annotation-text', { opacity: 0, y: 8 });
 
@@ -141,15 +144,24 @@ export function ScaleMethodology() {
           });
         }
 
-        // Initial buffer
-        tl.to({}, { duration: 1.5 });
+        // ─── NORMALIZED PACING ───
+        // Each letter gets a uniform cycle: activate(1.0) → hold(1.0) → deactivate(0.6) = 2.6 units
+        // This ensures every letter consumes the same scroll distance, eliminating uneven pacing.
+        
+        // Shortened initial buffer — just enough to let the section settle
+        tl.to({}, { duration: 0.5 });
 
-        // Hide header instantly when the first letter 'S' starts animating (desktop only)
+        // Hide header when the first letter 'S' starts animating (desktop only)
         if (isDesktop) {
-            tl.to('.scale-header-container', { opacity: 0, duration: 0.1 }, 'activate0');
+            tl.to('.scale-header-container', { opacity: 0, duration: 0.3 }, 'activate0');
         }
 
-        // Step through each letter
+        // Uniform duration constants for each letter cycle
+        const ACTIVATE_DUR = 1.0;   // How long the activate animation plays
+        const HOLD_DUR = 1.0;       // Pause while the letter is visible (reading time)
+        const DEACTIVATE_DUR = 0.6; // How long the deactivate animation plays
+
+        // Step through each letter with uniform pacing
         LETTERS.forEach((letter, i) => {
           const wrapperEl = `.scale-annotation-${letter.id}`;
           const lineEl = `${wrapperEl} .scale-annotation-line`;
@@ -157,69 +169,77 @@ export function ScaleMethodology() {
           const textEl = `${wrapperEl} .scale-annotation-text`;
           const letterEls = `.scale-big-letter-${letter.id}`;
 
-          // Activate letter + annotation
-          tl.to(letterEls, { opacity: 1, duration: 0.5, ease: 'power2.out' }, `activate${i}`);
-          tl.to(lineEl, { scaleY: 1, opacity: 0.35, duration: 0.8, ease: 'expo.out' }, `activate${i}`);
-          tl.to(dotEl, { scale: 1, opacity: 1, duration: 0.5, ease: 'back.out(1.5)' }, `activate${i}+=0.2`);
-          tl.to(textEl, { opacity: 1, y: 0, duration: 0.8, ease: 'power2.out' }, `activate${i}+=0.3`);
+          // Activate letter + annotation — all sub-animations fit within ACTIVATE_DUR
+          tl.to(letterEls, { opacity: 1, duration: ACTIVATE_DUR * 0.6, ease: 'power2.out' }, `activate${i}`);
+          tl.to(lineEl, { scaleY: 1, opacity: 0.35, duration: ACTIVATE_DUR * 0.85, ease: 'expo.out' }, `activate${i}`);
+          tl.to(dotEl, { scale: 1, opacity: 1, duration: ACTIVATE_DUR * 0.5, ease: 'back.out(1.5)' }, `activate${i}+=${ACTIVATE_DUR * 0.2}`);
+          tl.to(textEl, { opacity: 1, y: 0, duration: ACTIVATE_DUR * 0.7, ease: 'power2.out' }, `activate${i}+=${ACTIVATE_DUR * 0.3}`);
 
-          // Hold
-          tl.to({}, { duration: 0.8 });
+          // Hold — uniform reading pause
+          tl.to({}, { duration: HOLD_DUR });
 
-          // Deactivate (except last)
+          // Deactivate (except last letter — it stays active for the "final reveal")
           if (i < LETTERS.length - 1) {
-            tl.to(letterEls, { opacity: 0.15, duration: 0.5, ease: 'power2.inOut' }, `deactivate${i}`);
-            tl.to([lineEl, dotEl, textEl], { opacity: 0, duration: 0.5, ease: 'power2.inOut' }, `deactivate${i}`);
+            tl.to(letterEls, { opacity: 0.15, duration: DEACTIVATE_DUR, ease: 'power2.inOut' }, `deactivate${i}`);
+            tl.to([lineEl, dotEl, textEl], { opacity: 0, duration: DEACTIVATE_DUR, ease: 'power2.inOut' }, `deactivate${i}`);
           }
         });
 
-        // Final - all letters full opacity and all annotations visible
-        tl.to('.scale-big-letter', { opacity: 1, duration: 1, ease: 'power2.inOut' }, 'final');
-        tl.to('.scale-annotation-text, .scale-annotation-dot', { opacity: 1, duration: 1, ease: 'power2.inOut' }, 'final');
-        tl.to('.scale-annotation-line', { opacity: 0.35, duration: 1, ease: 'power2.inOut' }, 'final');
+        // ─── FINAL REVEAL — all letters and annotations come back together ───
+        tl.to('.scale-big-letter', { opacity: 1, duration: 1.2, ease: 'power2.inOut' }, 'final');
+        tl.to('.scale-annotation-text, .scale-annotation-dot', { opacity: 1, duration: 1.2, ease: 'power2.inOut' }, 'final');
+        tl.to('.scale-annotation-line', { opacity: 0.35, duration: 1.2, ease: 'power2.inOut' }, 'final');
 
-        // Hold so the user can read all the abbreviations before the next scroll triggers the zoom fade-out
-        // Reduced duration to require less scrolling
-        tl.to({}, { duration: 1.5 });
+        // On mobile, expand line heights of A and L at the end to prevent text overlaps
+        if (isMobile) {
+          const isShortMobile = window.matchMedia("(max-width: 767px) and (max-aspect-ratio: 3/4)").matches;
+          const letterA = LETTERS.find(l => l.id === 'A')!;
+          const letterL = LETTERS.find(l => l.id === 'L')!;
+          const targetAHeight = isShortMobile ? (letterA.mobileTallHeight ?? letterA.mobileHeight) : letterA.mobileHeight;
+          const targetLHeight = letterL.mobileHeight;
+          tl.to('.scale-annotation-line-A', { height: targetAHeight, duration: 1.2, ease: 'power2.inOut' }, 'final');
+          tl.to('.scale-annotation-line-L', { height: targetLHeight, duration: 1.2, ease: 'power2.inOut' }, 'final');
+        }
 
-        // ZOOM TRANSITION
+        // ─── TRANSITION TO ZOOM — streamlined, no dead gaps ───
+        // Short hold so the user can read the complete abbreviation set
+        tl.to({}, { duration: 0.8 });
+
+        // Pre-zoom: fade out text UI and simultaneously show scroll indicator
         const preZoom = 'pre_zoom';
-
-        // 1. First, quickly fade out the text UI (header, annotations, dots) to unclutter the screen BEFORE zooming
         tl.to('.scale-header-container, .scale-annotation-text, .scale-annotation-dot, .scale-annotation-line, .scale-dot', { 
-            opacity: 0, duration: 0.5, ease: 'power2.inOut' 
+            opacity: 0, duration: 0.6, ease: 'power2.inOut' 
         }, preZoom);
+        tl.to('.scale-scroll-indicator', { opacity: 1, duration: 0.4, ease: 'power2.inOut' }, preZoom);
 
-        // Also fade IN the scroll indicator to prompt the user to keep scrolling
-        tl.to('.scale-scroll-indicator', { opacity: 1, duration: 0.5, ease: 'power2.inOut' }, preZoom);
-
-        tl.to({}, { duration: 1.0 }); // short buffer (increased slightly to allow the indicator to be seen)
+        // Minimal buffer — just enough to glimpse the scroll indicator
+        tl.to({}, { duration: 0.3 });
         
+        // ─── ZOOM TRANSITION ───
         const zoomStart = 'zoom_start';
 
         // Fade OUT the scroll indicator as soon as the zoom begins
         tl.to('.scale-scroll-indicator', { opacity: 0, duration: 0.5, ease: 'power2.inOut' }, zoomStart);
 
-        // 2. Fade out the global overlay background to reveal ShowcaseFeed
-        tl.to('.scale-overlay-bg', { opacity: 0, duration: 1.5, ease: 'power2.inOut' }, zoomStart);
+        // Fade out the global overlay background to reveal ShowcaseFeed
+        tl.to('.scale-overlay-bg', { opacity: 0, duration: 2.0, ease: 'power2.inOut' }, zoomStart);
 
-        // 3. Zoom the text wrapper directly from the center of the screen
+        // Zoom the text wrapper directly from the center of the screen
         tl.to('.scale-text-wrapper', {
             scale: 150, 
             ease: 'power2.in', 
             duration: 3,
-            transformOrigin: "center center" // Zoom uniformly outwards
+            transformOrigin: "center center"
         }, zoomStart);
 
-        // 3b. Fade out the text wrapper smoothly during the zoom
-        // Faster fade out ensures the black strokes vanish before they can block the screen!
+        // Fade out the text wrapper smoothly during the zoom
         tl.to('.scale-text-wrapper', {
             opacity: 0,
             duration: 0.8,
             ease: 'power1.inOut'
         }, zoomStart + "+=0.2");
 
-        // 4. Parallax ShowcaseFeed into place behind the transparent window
+        // Parallax ShowcaseFeed into place
         tl.fromTo(
             feedInnerRef.current,
             {
@@ -243,7 +263,7 @@ export function ScaleMethodology() {
             zoomStart
         );
 
-        // Clean up: Fade out the ENTIRE Layer 1 overlay so ShowcaseFeed is completely interactive and uncovered
+        // Clean up: Fade out the ENTIRE Layer 1 overlay
         tl.to('.layer-1-overlay', { autoAlpha: 0, duration: 0.5 }, "-=0.5");
       });
 
@@ -312,7 +332,7 @@ export function ScaleMethodology() {
         <div className="scale-overlay-bg absolute inset-0 bg-background pointer-events-none z-0"></div>
 
         {/* Top Header - Relative on mobile to push content down, Absolute on desktop to center content in full screen */}
-        <div className="scale-header-container w-full px-4 xl:px-6 pb-6 pt-6 sm:pt-10 md:pt-24 z-50 shrink-0 max-md:relative md:absolute md:top-0 md:left-0 md:right-0">
+        <div className="scale-header-container w-full px-4 xl:px-6 pb-6 pt-20 sm:pt-24 md:pt-24 z-50 shrink-0 max-md:relative md:absolute md:top-0 md:left-0 md:right-0">
           <div className="flex flex-col items-start w-full">
             <span className="text-[10px] font-bold uppercase tracking-[0.25em] text-primary mb-4 block">
               Our Framework
@@ -349,8 +369,7 @@ export function ScaleMethodology() {
                     {item.direction === 'top' && (
                       <div className={`absolute bottom-full flex flex-col items-center scale-annotation-${item.id}`} style={{ marginBottom: '8px' }}>
                         <style>{`
-                          .scale-annotation-line-${item.id} { height: ${item.mobileHeight}; }
-                          @media (max-width: 767px) and (max-aspect-ratio: 3/4) { .scale-annotation-line-${item.id} { height: ${item.mobileTallHeight ?? item.mobileHeight}; } }
+                          .scale-annotation-line-${item.id} { height: 3vh; }
                           @media (min-width: 768px) { .scale-annotation-line-${item.id} { height: ${item.desktopHeight}; } }
                         `}</style>
                         <div className="scale-annotation-text text-center" style={{ marginBottom: '8px', width: 'clamp(150px, 20vw, 240px)' }}>
@@ -380,8 +399,7 @@ export function ScaleMethodology() {
                     {item.direction === 'bottom' && (
                       <div className={`absolute top-full flex flex-col items-center scale-annotation-${item.id}`} style={{ marginTop: '8px' }}>
                         <style>{`
-                          .scale-annotation-line-${item.id} { height: ${item.mobileHeight}; }
-                          @media (max-width: 767px) and (max-aspect-ratio: 3/4) { .scale-annotation-line-${item.id} { height: ${item.mobileTallHeight ?? item.mobileHeight}; } }
+                          .scale-annotation-line-${item.id} { height: 3vh; }
                           @media (min-width: 768px) { .scale-annotation-line-${item.id} { height: ${item.desktopHeight}; } }
                         `}</style>
                         <div className="flex flex-col items-center">
