@@ -25,7 +25,7 @@ export function ProblemStatement() {
           <p
             style={{
               margin: 0,
-              fontFamily: 'var(--font-manrope), sans-serif',
+              fontFamily: 'var(--font-inter, Inter, sans-serif)',
               fontSize: '10px',
               fontWeight: 600,
               letterSpacing: '0.22em',
@@ -40,7 +40,7 @@ export function ProblemStatement() {
           <h2
             style={{
               margin: 0,
-              fontFamily: 'var(--font-playfair-display, Georgia, serif)',
+              fontFamily: 'var(--font-inter, Inter, sans-serif)',
               fontSize: 'clamp(28px, 3.2vw, 42px)',
               fontWeight: 400,
               lineHeight: 1.22,
@@ -69,7 +69,7 @@ export function ProblemStatement() {
           <p
             style={{
               margin: 0,
-              fontFamily: 'var(--font-manrope), sans-serif',
+              fontFamily: 'var(--font-inter, Inter, sans-serif)',
               fontSize: '15px',
               lineHeight: 1.75,
               color: 'var(--foreground-muted)',

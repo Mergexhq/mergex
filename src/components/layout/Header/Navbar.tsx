@@ -21,6 +21,9 @@ export function Navbar() {
 
     const isDetailPage = false;
     const isDropdownOpen = false;
+    const isHome = pathname === '/';
+    const launchesUrl = isHome ? '/#works' : '/launches';
+    const studioUrl = isHome ? '/brands/mergex' : '/studio';
 
     useMotionValueEvent(scrollY, "change", (latest) => {
         if (latest > 50) {
@@ -58,11 +61,12 @@ export function Navbar() {
         '/pricing',
         '/careers',
         '/sitemap',
+        '/terms-of-use',
+        '/privacy-policy',
     ];
 
-    const isLightPage =
+    const isLightPageRaw =
         LIGHT_HERO_ROUTES.includes(pathname || '') ||
-        (pathname === '/' && isPastHero) ||
         pathname?.startsWith('/systems') ||
         pathname?.startsWith('/legal') ||
         pathname?.startsWith('/partner') ||
@@ -70,28 +74,36 @@ export function Navbar() {
         (pathname?.startsWith('/brands') && pathname !== '/brands/ovrn-studios') ||
         pathname?.startsWith('/methodology');
 
-    const textColorClass = (isLightPage || isScrolled) ? 'text-black' : 'text-white';
+    const hasDarkHero = pathname === '/terms-of-use' || pathname === '/privacy-policy';
+    const isLightPage = isLightPageRaw && (isScrolled || !hasDarkHero);
+
+    const textColorClass = isLightPage ? 'text-black' : 'text-white';
     const navItemColorClass = isLightPage
         ? 'text-black/80 hover:text-violet-600'
         : 'text-white/80 hover:text-white';
     
     const cardBgClass = 'bg-transparent rounded-none shadow-none';
 
-    const pillBgClass = (!isScrolled && !isDetailPage)
+    const pillBgClass = (isHome || (!isScrolled && !isDetailPage))
         ? 'bg-transparent shadow-none border-transparent'
-        : 'bg-[#ebebea] border-[#d8d8d6] shadow-[0_1px_4px_rgba(0,0,0,0.06)]';
+        : (isLightPage
+            ? 'bg-white/60 backdrop-blur-md border border-black/10 shadow-[0_2px_12px_rgba(0,0,0,0.03)]'
+            : 'bg-white/10 backdrop-blur-md border border-white/15 shadow-[0_4px_24px_rgba(0,0,0,0.15)]');
 
-    const pillTextClass = (!isScrolled && !isLightPage
+    const pillTextClass = (!isScrolled && !isDetailPage)
         ? 'text-white/70 hover:text-white'
-        : 'text-black/70 hover:text-black'
-      );
+        : (isLightPage
+            ? 'text-black/70 hover:text-black'
+            : 'text-white/70 hover:text-white');
 
     const getActiveLinkClass = (isActive: boolean) => {
         if (!isActive) return pillTextClass;
-        if (!isScrolled) {
-            return isLightPage ? 'bg-[#110326] text-white' : 'bg-white/20 text-white';
+        if (!isScrolled && !isDetailPage) {
+            return 'bg-white/20 text-white';
         }
-        return 'bg-[#110326] text-white';
+        return isLightPage 
+            ? 'bg-black text-white' 
+            : 'bg-white text-black';
     };
 
     useEffect(() => {
@@ -155,11 +167,11 @@ export function Navbar() {
                         <nav className="w-full h-20 xl:h-24 flex items-center justify-between relative pointer-events-auto bg-transparent z-10 px-4 xl:px-6">
                             {/* Logo - Left */}
                             <div className="flex items-center">
-                                <div className={`flex items-center gap-1 xl:gap-1.5 py-1 xl:py-1.5 px-3 xl:px-4 rounded-token-md xl:rounded-token-lg border transition-all duration-500 ease-in-out ${pillBgClass} ${isDetailPage && !isDropdownOpen ? 'opacity-0 pointer-events-none' : 'opacity-100'}`}>
+                                <div className={`flex items-center gap-1 xl:gap-1.5 py-1 px-3.5 rounded-token-sm xl:rounded-token-md transition-all duration-500 ease-in-out ${pillBgClass} ${isDetailPage && !isDropdownOpen ? 'opacity-0 pointer-events-none' : 'opacity-100'}`}>
                                     {pathname === '/brands/ovrn-studios' ? (
-                                        <Link href="/brands/ovrn-studios" className="flex items-center gap-0 py-1.5 px-1">
+                                        <Link href="/brands/ovrn-studios" className="flex items-center gap-0 py-1 px-1">
                                             <span
-                                                className={`font-clash font-bold text-xl xl:text-2xl 2xl:text-3xl tracking-wider flex items-center ${textColorClass} transition-colors duration-300`}
+                                                className={`font-clash font-bold text-lg xl:text-xl 2xl:text-2xl tracking-wider flex items-center ${textColorClass} transition-colors duration-300`}
                                             >
                                                 OVRN STUDIOS
                                             </span>
@@ -168,44 +180,18 @@ export function Navbar() {
                                         <Link
                                             href="/"
                                             className="flex items-center gap-0"
-                                            onMouseEnter={() => setIsLogoHovered(true)}
-                                            onMouseLeave={() => setIsLogoHovered(false)}
                                         >
                                             <Image
-                                                src="/logo/mergex-logo.png"
+                                                src="/logo/mergex logo black.png"
                                                 alt="MergeX Logo"
-                                                width={52}
-                                                height={52}
-                                                className={`object-contain transition-all duration-300 w-11 h-11 xl:w-12 xl:h-12 2xl:w-[52px] 2xl:h-[52px] ${isDropdownOpen ? 'brightness-0 invert' : ((isLightPage || isScrolled) ? '' : 'brightness-0 invert')}`}
+                                                width={40}
+                                                height={40}
+                                                className={`object-contain transition-all duration-300 w-6 h-6 xl:w-[26px] xl:h-[26px] 2xl:w-7 2xl:h-7 ${isDropdownOpen ? 'brightness-0 invert' : (isLightPage ? '' : 'brightness-0 invert')}`}
                                             />
                                             <span
-                                                className={`font-clash font-bold text-xl xl:text-2xl 2xl:text-3xl tracking-wide ml-1.5 xl:ml-2 flex items-center ${textColorClass} transition-colors duration-300`}
+                                                className={`font-questrial font-bold text-[21px] xl:text-[24px] 2xl:text-[27px] tracking-[0.12em] ml-2.5 xl:ml-3 flex items-center ${textColorClass} transition-colors duration-300`}
                                             >
-                                                <motion.span
-                                                    initial={{ width: 0, opacity: 0, marginRight: 0 }}
-                                                    animate={{
-                                                        width: isLogoHovered ? 'auto' : 0,
-                                                        opacity: isLogoHovered ? 1 : 0,
-                                                        marginRight: isLogoHovered ? 6 : 0,
-                                                    }}
-                                                    transition={{ duration: 0.3, ease: 'easeInOut' }}
-                                                    className="font-serif italic font-normal text-sm xl:text-base 2xl:text-lg whitespace-nowrap overflow-hidden inline-block"
-                                                >
-                                                    The
-                                                </motion.span>
-                                                <span>MERGEX</span>
-                                                <motion.span
-                                                    initial={{ width: 0, opacity: 0, marginLeft: 0 }}
-                                                    animate={{
-                                                        width: isLogoHovered ? 'auto' : 0,
-                                                        opacity: isLogoHovered ? 1 : 0,
-                                                        marginLeft: isLogoHovered ? 6 : 0,
-                                                    }}
-                                                    transition={{ duration: 0.3, ease: 'easeInOut' }}
-                                                    className="font-serif italic font-normal text-sm xl:text-base 2xl:text-lg whitespace-nowrap overflow-hidden inline-block"
-                                                >
-                                                    Company
-                                                </motion.span>
+                                                MERGEX
                                             </span>
                                         </Link>
                                     )}
@@ -222,10 +208,10 @@ export function Navbar() {
                                          transition={{ type: 'spring', stiffness: 350, damping: 30 }}
                                          className={`flex items-center pointer-events-auto cursor-default transition-[background-color,border-color,box-shadow,border-radius,padding] duration-300 ease-in-out ${
                                              isDetailMenuOpen
-                                                 ? `gap-1 xl:gap-1.5 p-2 xl:p-2.5 rounded-token-md xl:rounded-token-lg border ${pillBgClass}`
+                                                 ? `gap-1 xl:gap-1.5 p-2 xl:p-2.5 rounded-token-sm xl:rounded-token-md ${pillBgClass}`
                                                  : (isDropdownOpen
-                                                     ? 'bg-transparent border-transparent shadow-none h-12 xl:h-14 p-1 rounded-token-lg xl:rounded-token-xl'
-                                                     : 'bg-white border border-[#d8d8d6] shadow-[0_4px_25px_rgba(0,0,0,0.06)] rounded-token-lg xl:rounded-token-xl h-12 xl:h-14 p-1')
+                                                     ? 'bg-transparent border-transparent shadow-none h-10 xl:h-12 p-1 rounded-token-sm xl:rounded-token-md'
+                                                     : `${pillBgClass} h-9 xl:h-10 p-1 rounded-token-sm xl:rounded-token-md`)
                                          }`}
                                      >
                                          {/* Inner links & Button with smooth AnimatePresence transition */}
@@ -240,45 +226,37 @@ export function Navbar() {
                                                      className="flex items-center"
                                                  >
                                                      {/* Standard capsule links */}
-                                                     <Link
-                                                         href="/about"
-                                                         className={`font-roboto text-[11px] xl:text-[12px] 2xl:text-[13px] font-bold tracking-[0.18em] uppercase transition-all duration-200 px-4 xl:px-5 py-2.5 xl:py-3 rounded-token-sm xl:rounded-token-md ${getActiveLinkClass(pathname === '/about')}`}
-                                                         onClick={() => setIsDetailMenuOpen(false)}
-                                                     >
-                                                         Who We Are
-                                                     </Link>
+                                                      <Link
+                                                          href="/about"
+                                                          className={`font-roboto text-[10px] xl:text-[11px] 2xl:text-[11px] font-bold tracking-[0.18em] uppercase transition-all duration-200 px-3.5 xl:px-4 py-1.5 xl:py-1.5 rounded-token-sm xl:rounded-token-md ${getActiveLinkClass(pathname === '/about')}`}
+                                                          onClick={() => setIsDetailMenuOpen(false)}
+                                                      >
+                                                          About
+                                                      </Link>
 
-                                                     <Link
-                                                         href="/#works"
-                                                         className={`font-roboto text-[11px] xl:text-[12px] 2xl:text-[13px] font-bold tracking-[0.18em] uppercase transition-all duration-200 px-4 xl:px-5 py-2.5 xl:py-3 rounded-token-sm xl:rounded-token-md ${getActiveLinkClass(pathname === '/#works')}`}
-                                                         onClick={() => setIsDetailMenuOpen(false)}
-                                                     >
-                                                         Works
-                                                     </Link>
+                                                      <Link
+                                                          href={launchesUrl}
+                                                          className={`font-roboto text-[10px] xl:text-[11px] 2xl:text-[11px] font-bold tracking-[0.18em] uppercase transition-all duration-200 px-3.5 xl:px-4 py-1.5 xl:py-1.5 rounded-token-sm xl:rounded-token-md ${getActiveLinkClass(isHome ? false : pathname === '/launches')}`}
+                                                          onClick={() => setIsDetailMenuOpen(false)}
+                                                      >
+                                                          Launches
+                                                      </Link>
 
-                                                     <Link
-                                                         href="/#methodology"
-                                                         className={`font-roboto text-[11px] xl:text-[12px] 2xl:text-[13px] font-bold tracking-[0.18em] uppercase transition-all duration-200 px-4 xl:px-5 py-2.5 xl:py-3 rounded-token-sm xl:rounded-token-md ${getActiveLinkClass(pathname === '/#methodology')}`}
-                                                         onClick={() => setIsDetailMenuOpen(false)}
-                                                     >
-                                                         Methodology
-                                                     </Link>
+                                                      <Link
+                                                          href={studioUrl}
+                                                          className={`font-roboto text-[10px] xl:text-[11px] 2xl:text-[11px] font-bold tracking-[0.18em] uppercase transition-all duration-200 px-3.5 xl:px-4 py-1.5 xl:py-1.5 rounded-token-sm xl:rounded-token-md ${getActiveLinkClass(isHome ? false : pathname === '/studio')}`}
+                                                          onClick={() => setIsDetailMenuOpen(false)}
+                                                      >
+                                                          studio
+                                                      </Link>
 
-                                                     <Link
-                                                         href="/contact/diagnostic"
-                                                         className={`font-roboto text-[11px] xl:text-[12px] 2xl:text-[13px] font-bold tracking-[0.18em] uppercase transition-all duration-200 px-4 xl:px-5 py-2.5 xl:py-3 rounded-token-sm xl:rounded-token-md ${getActiveLinkClass(pathname === '/contact/diagnostic')}`}
-                                                         onClick={() => setIsDetailMenuOpen(false)}
-                                                     >
-                                                         Diagnostic
-                                                     </Link>
-
-                                                     <Link
-                                                         href="/contact"
-                                                         className={`font-roboto text-[11px] xl:text-[12px] 2xl:text-[13px] font-bold tracking-[0.18em] uppercase transition-all duration-200 px-4 xl:px-5 py-2.5 xl:py-3 rounded-token-sm xl:rounded-token-md ${getActiveLinkClass(pathname?.startsWith('/contact') && pathname !== '/contact/diagnostic')}`}
-                                                         onClick={() => setIsDetailMenuOpen(false)}
-                                                     >
-                                                         Contact
-                                                     </Link>
+                                                      <Link
+                                                          href="/contact"
+                                                          className={`font-roboto text-[10px] xl:text-[11px] 2xl:text-[11px] font-bold tracking-[0.18em] uppercase transition-all duration-200 px-3.5 xl:px-4 py-1.5 xl:py-1.5 rounded-token-sm xl:rounded-token-md ${getActiveLinkClass(pathname?.startsWith('/contact'))}`}
+                                                          onClick={() => setIsDetailMenuOpen(false)}
+                                                      >
+                                                          contact
+                                                      </Link>
                                                  </motion.div>
                                              ) : (
                                                  <motion.button
@@ -288,20 +266,20 @@ export function Navbar() {
                                                      animate={{ opacity: 1, scale: 1 }}
                                                      exit={{ opacity: 0, scale: 0.85 }}
                                                      transition={{ duration: 0.15 }}
-                                                     className={`w-10 xl:w-12 h-10 xl:h-12 rounded-token-md xl:rounded-token-lg flex items-center justify-center transition-colors duration-200 focus:outline-none ${
-                                                         isDropdownOpen ? 'hover:bg-white/10' : 'hover:bg-gray-100/85'
+                                                     className={`w-8 xl:w-9 h-8 xl:h-9 rounded-token-sm xl:rounded-token-md flex items-center justify-center transition-colors duration-200 focus:outline-none ${
+                                                         isDropdownOpen ? 'hover:bg-white/10' : (isLightPage ? 'hover:bg-black/5' : 'hover:bg-white/10')
                                                      }`}
                                                      aria-label="Open menu"
                                                  >
                                                      <div className="w-5 h-[12px] flex flex-col justify-between relative">
                                                          <span
                                                              className={`w-full h-[3px] rounded-full origin-center transition-colors duration-200 ${
-                                                                 isDropdownOpen ? 'bg-white' : 'bg-black'
+                                                                 isDropdownOpen ? 'bg-white' : (isLightPage ? 'bg-black' : 'bg-white')
                                                              }`}
                                                          />
                                                          <span
                                                              className={`w-full h-[3px] rounded-full origin-center transition-colors duration-200 ${
-                                                                 isDropdownOpen ? 'bg-white' : 'bg-black'
+                                                                 isDropdownOpen ? 'bg-white' : (isLightPage ? 'bg-black' : 'bg-white')
                                                              }`}
                                                          />
                                                      </div>
@@ -311,40 +289,33 @@ export function Navbar() {
                                      </motion.div>
                                 ) : (
                                      /* DEFAULT Menu Capsule */
-                                     <div className={`flex items-center gap-1 xl:gap-1.5 p-2 xl:p-2.5 rounded-token-md xl:rounded-token-lg border transition-all duration-500 ease-in-out ${pillBgClass}`}>
+                                     <div className={`flex items-center gap-1 xl:gap-1.5 p-1 xl:p-1 px-1.5 rounded-token-sm xl:rounded-token-md transition-all duration-500 ease-in-out ${pillBgClass}`}>
                                          <Link
                                              href="/about"
-                                             className={`font-roboto text-[11px] xl:text-[12px] 2xl:text-[13px] font-bold tracking-[0.18em] uppercase transition-all duration-200 px-4 xl:px-5 py-2.5 xl:py-3 rounded-token-sm xl:rounded-token-md ${getActiveLinkClass(pathname === '/about')}`}
+                                             className={`font-roboto text-[10px] xl:text-[11px] 2xl:text-[11px] font-bold tracking-[0.18em] uppercase transition-all duration-200 px-3.5 xl:px-4 py-1.5 xl:py-1.5 rounded-token-sm xl:rounded-token-md ${getActiveLinkClass(pathname === '/about')}`}
                                          >
-                                             Who We Are
+                                             About
                                          </Link>
 
                                          <Link
-                                             href="/#works"
-                                             className={`font-roboto text-[11px] xl:text-[12px] 2xl:text-[13px] font-bold tracking-[0.18em] uppercase transition-all duration-200 px-4 xl:px-5 py-2.5 xl:py-3 rounded-token-sm xl:rounded-token-md ${getActiveLinkClass(pathname === '/#works')}`}
+                                             href={launchesUrl}
+                                             className={`font-roboto text-[10px] xl:text-[11px] 2xl:text-[11px] font-bold tracking-[0.18em] uppercase transition-all duration-200 px-3.5 xl:px-4 py-1.5 xl:py-1.5 rounded-token-sm xl:rounded-token-md ${getActiveLinkClass(isHome ? false : pathname === '/launches')}`}
                                          >
-                                             Works
+                                             Launches
                                          </Link>
 
                                          <Link
-                                             href="/#methodology"
-                                             className={`font-roboto text-[11px] xl:text-[12px] 2xl:text-[13px] font-bold tracking-[0.18em] uppercase transition-all duration-200 px-4 xl:px-5 py-2.5 xl:py-3 rounded-token-sm xl:rounded-token-md ${getActiveLinkClass(pathname === '/#methodology')}`}
+                                             href={studioUrl}
+                                             className={`font-roboto text-[10px] xl:text-[11px] 2xl:text-[11px] font-bold tracking-[0.18em] uppercase transition-all duration-200 px-3.5 xl:px-4 py-1.5 xl:py-1.5 rounded-token-sm xl:rounded-token-md ${getActiveLinkClass(isHome ? false : pathname === '/studio')}`}
                                          >
-                                             Methodology
-                                         </Link>
-
-                                         <Link
-                                             href="/contact/diagnostic"
-                                             className={`font-roboto text-[11px] xl:text-[12px] 2xl:text-[13px] font-bold tracking-[0.18em] uppercase transition-all duration-200 px-4 xl:px-5 py-2.5 xl:py-3 rounded-token-sm xl:rounded-token-md ${getActiveLinkClass(pathname === '/contact/diagnostic')}`}
-                                         >
-                                             Diagnostic
+                                             studio
                                          </Link>
 
                                          <Link
                                              href="/contact"
-                                             className={`font-roboto text-[11px] xl:text-[12px] 2xl:text-[13px] font-bold tracking-[0.18em] uppercase transition-all duration-200 px-4 xl:px-5 py-2.5 xl:py-3 rounded-token-sm xl:rounded-token-md ${getActiveLinkClass(pathname?.startsWith('/contact') && pathname !== '/contact/diagnostic')}`}
+                                             className={`font-roboto text-[10px] xl:text-[11px] 2xl:text-[11px] font-bold tracking-[0.18em] uppercase transition-all duration-200 px-3.5 xl:px-4 py-1.5 xl:py-1.5 rounded-token-sm xl:rounded-token-md ${getActiveLinkClass(pathname?.startsWith('/contact'))}`}
                                          >
-                                             Contact
+                                             contact
                                          </Link>
                                      </div>
                                 )}
@@ -363,16 +334,12 @@ export function Navbar() {
             >
                 <div className="w-full px-4 pt-3">
                     <div
-                        className={`w-full transition-all duration-300 ease-in-out pointer-events-auto rounded-[16px] border backdrop-blur-md ${
+                        className={`w-full transition-all duration-300 ease-in-out pointer-events-auto rounded-[16px] border ${
                             isMobileMenuOpen
-                                ? 'bg-[#F3F3F3] border-gray-200/50 shadow-[0_8px_30px_rgba(0,0,0,0.08)]'
-                                : (isScrolled 
-                                    ? (isLightPage 
-                                        ? 'bg-[#ebebea]/95 border-[#d8d8d6] shadow-[0_4px_20px_rgba(0,0,0,0.06)]' 
-                                        : 'bg-black/85 border-white/10 shadow-[0_8px_30px_rgba(0,0,0,0.2)]')
-                                    : (isLightPage 
-                                        ? 'bg-transparent border-transparent shadow-none' 
-                                        : 'bg-transparent border-transparent shadow-none')
+                                ? 'bg-white/85 border-black/5 shadow-[0_8px_30px_rgba(0,0,0,0.04)] backdrop-blur-md'
+                                : ((isScrolled && !isHome)
+                                    ? 'bg-white/85 border-black/5 shadow-[0_4px_20px_rgba(0,0,0,0.03)] backdrop-blur-md'
+                                    : 'bg-transparent border-transparent shadow-none'
                                   )
                         } px-5 h-14 flex items-center justify-between relative`}
                     >
@@ -394,24 +361,14 @@ export function Navbar() {
                                     />
                                 ) : (
                                     <>
-                                        <path
-                                            strokeLinecap="round"
-                                            strokeLinejoin="round"
-                                            strokeWidth={2.5}
-                                            d="M4 8h16"
-                                        />
-                                        <path
-                                            strokeLinecap="round"
-                                            strokeLinejoin="round"
-                                            strokeWidth={2.5}
-                                            d="M4 16h16"
-                                        />
+                                        <line x1="4" y1="6" x2="20" y2="6" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
+                                        <line x1="4" y1="12" x2="20" y2="12" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
                                     </>
                                 )}
                             </svg>
                         </button>
 
-                        {/* Centered Wordmark — path-aware */}
+                        {/* Centered Wordmark – path-aware */}
                         {(() => {
                           // OVRN Studios brand page
                           if (pathname === '/brands/ovrn-studios') {
@@ -432,26 +389,26 @@ export function Navbar() {
                             return (
                               <Link href="/brands/academy" className="absolute left-1/2 -translate-x-1/2 flex items-center justify-center z-10">
                                 <span className={`text-[14px] leading-none whitespace-nowrap ${isMobileMenuOpen || isLightPage ? 'text-black' : 'text-white'}`}>
-                                  <span className="font-clash font-bold tracking-wide">MergeX</span>
+                                  <span className="font-questrial font-bold tracking-wide">MergeX</span>
                                   {' '}
-                                  <span className="font-clash font-thin tracking-wide">Academy</span>
+                                  <span className="font-questrial font-thin tracking-wide">Academy</span>
                                 </span>
                               </Link>
                             );
                           }
-                          // MergeX brand page — logo + MERGEX (keep as-is)
+                          // MergeX brand page – logo + MERGEX (keep as-is)
                           if (pathname === '/brands/mergex') {
                             return (
-                              <Link href="/brands/mergex" className={`absolute left-1/2 -translate-x-1/2 flex items-center justify-center gap-1 z-10 ${isDetailPage ? 'opacity-0 pointer-events-none' : ''}`}>
+                              <Link href="/brands/mergex" className={`absolute left-1/2 -translate-x-1/2 flex items-center justify-center gap-1.5 z-10 ${isDetailPage ? 'opacity-0 pointer-events-none' : ''}`}>
                                 <Image
-                                  src="/logo/mergex-logo.png"
+                                  src="/logo/mergex logo black.png"
                                   alt="MergeX Logo"
                                   width={40}
                                   height={40}
-                                  className={`object-contain transition-all duration-300 ${isMobileMenuOpen || isLightPage ? '' : 'brightness-0 invert'}`}
+                                  className={`object-contain transition-all duration-300 w-5 h-5 ${isMobileMenuOpen || isLightPage ? '' : 'brightness-0 invert'}`}
                                 />
                                 <span
-                                  className={`font-clash font-bold text-2xl tracking-wide ${isMobileMenuOpen || isLightPage ? 'text-black' : 'text-white'}`}
+                                  className={`font-questrial font-bold text-2xl tracking-[0.12em] ml-1 flex items-center ${isMobileMenuOpen || isLightPage ? 'text-black' : 'text-white'}`}
                                 >
                                   MERGEX
                                 </span>
@@ -459,12 +416,16 @@ export function Navbar() {
                             );
                           }
                           return (
-                            <Link href="/" className={`absolute left-1/2 -translate-x-1/2 flex items-center justify-center z-10 ${isDetailPage ? 'opacity-0 pointer-events-none' : ''}`}>
-                              <span className={`text-[13px] leading-none tracking-tight select-none whitespace-nowrap ${isMobileMenuOpen || isLightPage ? 'text-black' : 'text-white'}`}>
-                                <span className="font-serif italic font-normal mr-0.5">The</span>
-                                {' '}
-                                <span className="font-clash font-bold tracking-wide">MERGEX</span>
-                                <span className="font-serif italic font-normal"> Company</span>
+                            <Link href="/" className={`absolute left-1/2 -translate-x-1/2 flex items-center justify-center gap-1.5 z-10 ${isDetailPage ? 'opacity-0 pointer-events-none' : ''}`}>
+                              <Image
+                                src="/logo/mergex logo black.png"
+                                alt="MergeX Logo"
+                                width={40}
+                                height={40}
+                                className={`object-contain transition-all duration-300 w-5 h-5 ${isMobileMenuOpen || isLightPage ? '' : 'brightness-0 invert'}`}
+                              />
+                              <span className={`font-questrial font-bold text-xl tracking-[0.12em] ml-1 flex items-center ${isMobileMenuOpen || isLightPage ? 'text-black' : 'text-white'}`}>
+                                MERGEX
                               </span>
                             </Link>
                           );

@@ -4,7 +4,7 @@ import React, { useEffect, useState, useRef } from 'react';
 import { motion, useScroll, useSpring, useTransform } from 'framer-motion';
 import Image from 'next/image';
 
-export interface LegalSection {
+export interface LegalSectionItem {
     id: string;
     title: string;
 }
@@ -15,7 +15,7 @@ interface LegalPageLayoutProps {
     effectiveDate: string;
     lastUpdated: string;
     readingTime: string;
-    sections: LegalSection[];
+    sections: LegalSectionItem[];
     children: React.ReactNode;
 }
 
@@ -88,7 +88,7 @@ export function LegalPageLayout({
                 const linkBottom = linkTop + activeLink.offsetHeight;
                 const containerTop = container.scrollTop;
                 const containerBottom = containerTop + container.clientHeight;
-
+ 
                 if (linkTop < containerTop) {
                     container.scrollTo({ top: linkTop - 20, behavior: 'smooth' });
                 } else if (linkBottom > containerBottom) {
@@ -216,18 +216,7 @@ export function LegalPageLayout({
 
                     {/* Right Column: Reading Content */}
                     <main className="w-full max-w-[760px] pb-12">
-                        <div className="
-                            prose prose-neutral max-w-none
-                            prose-headings:font-medium prose-headings:text-[#111111] prose-headings:tracking-tight
-                            prose-h2:text-2xl prose-h2:mt-16 prose-h2:mb-6
-                            prose-h3:text-lg prose-h3:mt-10 prose-h3:mb-4
-                            prose-p:text-[#2C2C2C] prose-p:leading-loose prose-p:mb-8
-                            prose-a:text-violet-600 prose-a:font-medium prose-a:underline-offset-4 hover:prose-a:text-violet-700
-                            prose-ul:text-[#2C2C2C] prose-ul:my-6 prose-ul:space-y-3 prose-li:leading-relaxed prose-li:pl-2 prose-li:marker:text-violet-600
-                            prose-ol:text-[#2C2C2C] prose-ol:my-6 prose-ol:space-y-3
-                            prose-strong:text-[#111111] prose-strong:font-bold
-                            prose-hr:border-black/10 prose-hr:my-16
-                        ">
+                        <div className="flex flex-col gap-1 text-[#2C2C2C] text-[15.5px] leading-relaxed">
                             {children}
                         </div>
                     </main>
@@ -249,4 +238,57 @@ export function LegalPageLayout({
             </motion.button>
         </div>
     );
+}
+
+// Reusable Legal Content Components for Clean Layouts
+
+interface LegalSectionProps {
+    id: string;
+    title: string;
+    children: React.ReactNode;
+}
+
+export function LegalSection({ id, title, children }: LegalSectionProps) {
+    return (
+        <section id={id} className="scroll-mt-32 mb-12">
+            <h2 className="text-2xl font-bold text-black mb-5 font-questrial tracking-tight border-b border-black/5 pb-2">
+                {title}
+            </h2>
+            <div className="flex flex-col gap-4">
+                {children}
+            </div>
+        </section>
+    );
+}
+
+export function Paragraph({ children }: { children: React.ReactNode }) {
+    return (
+        <p className="text-[#2C2C2C] text-[15.5px] leading-[1.8] font-light">
+            {children}
+        </p>
+    );
+}
+
+export function BulletList({ items }: { items: string[] }) {
+    return (
+        <ul className="list-disc pl-6 space-y-3 text-[#2C2C2C] text-[15.5px] font-light">
+            {items.map((item, index) => (
+                <li key={index} className="marker:text-violet-600 pl-1 leading-relaxed">
+                    {item}
+                </li>
+            ))}
+        </ul>
+    );
+}
+
+export function SubHeading({ children }: { children: React.ReactNode }) {
+    return (
+        <h3 className="text-lg font-semibold text-black mt-6 mb-1 font-questrial tracking-tight">
+            {children}
+        </h3>
+    );
+}
+
+export function Divider() {
+    return <hr className="border-black/10 my-8" />;
 }

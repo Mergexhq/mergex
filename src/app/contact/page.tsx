@@ -5,16 +5,16 @@ import {
 } from '@/modules/contact';
 
 export const metadata: Metadata = {
-    title: 'Contact | The MergeX Company',
+    title: 'Contact',
     description:
-        'Get in touch with MergeX for general inquiries. We build selective partnerships for businesses serious about scaling.',
+        'Get in touch with MergeX. We specialize in software development, AI solutions, and AI creative production.',
     alternates: {
         canonical: 'https://mergex.in/contact',
     },
     openGraph: {
-        title: 'Contact | The MergeX Company',
+        title: 'Contact - MergeX',
         description:
-            'Get in touch with MergeX for general inquiries. We build selective partnerships for businesses serious about scaling.',
+            'Get in touch with MergeX. We specialize in software development, AI solutions, and AI creative production.',
     },
 };
 

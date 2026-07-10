@@ -1,432 +1,351 @@
-import { LegalPageLayout } from "@/components/layout/LegalPageLayout";
+import { LegalPageLayout, LegalSection, Paragraph, BulletList, SubHeading, Divider } from "@/components/layout/LegalPageLayout";
 import Image from "next/image";
 
-const termsSections = [
-    { id: "about", title: "1. About The MergeX Company" },
-    { id: "eligibility", title: "2. Eligibility" },
-    { id: "scope-of-services", title: "3. Scope of Services" },
-    { id: "no-guaranteed-results", title: "4. No Guaranteed Results" },
-    { id: "diagnosis-and-recommendations", title: "5. Diagnosis and Recommendations" },
-    { id: "intellectual-property", title: "6. Intellectual Property" },
-    { id: "website-usage-rules", title: "7. Website Usage Rules" },
-    { id: "selective-engagement", title: "8. Selective Engagement" },
-    { id: "payments", title: "9. Payments and Terms" },
-    { id: "third-party-services", title: "10. Third-Party Platforms" },
-    { id: "confidentiality", title: "11. Confidentiality" },
-    { id: "limitation-of-liability", title: "12. Limitation of Liability" },
-    { id: "independent-business", title: "13. Independent Business" },
-    { id: "educational-content", title: "14. Educational Content" },
-    { id: "user-submissions", title: "15. User Submissions" },
-    { id: "future-products", title: "16. Future Products" },
-    { id: "termination", title: "17. Termination" },
-    { id: "changes-to-terms", title: "18. Changes to These Terms" },
-    { id: "governing-law", title: "19. Governing Law" },
-    { id: "contact-information", title: "20. Contact Information" },
-    { id: "acceptance", title: "21. Acceptance" }
+const sections = [
+    {
+        id: "about-mergex",
+        title: "1. About MergeX"
+    },
+    {
+        id: "eligibility",
+        title: "2. Eligibility"
+    },
+    {
+        id: "scope-of-services",
+        title: "3. Scope of Services"
+    },
+    {
+        id: "no-guarantee-of-results",
+        title: "4. No Guarantee of Results"
+    },
+    {
+        id: "client-responsibilities",
+        title: "5. Client Responsibilities"
+    },
+    {
+        id: "intellectual-property",
+        title: "6. Intellectual Property"
+    },
+    {
+        id: "acceptable-use",
+        title: "7. Acceptable Use"
+    },
+    {
+        id: "project-acceptance",
+        title: "8. Project Acceptance"
+    },
+    {
+        id: "payments",
+        title: "9. Payments"
+    },
+    {
+        id: "third-party-services",
+        title: "10. Third-Party Services"
+    },
+    {
+        id: "confidentiality",
+        title: "11. Confidentiality"
+    },
+    {
+        id: "limitation-of-liability",
+        title: "12. Limitation of Liability"
+    },
+    {
+        id: "independent-relationship",
+        title: "13. Independent Relationship"
+    },
+    {
+        id: "educational-content",
+        title: "14. Educational Content"
+    },
+    {
+        id: "user-content",
+        title: "15. User Content"
+    },
+    {
+        id: "experimental-features",
+        title: "16. Experimental Features"
+    },
+    {
+        id: "termination",
+        title: "17. Termination"
+    },
+    {
+        id: "changes-to-these-terms",
+        title: "18. Changes to These Terms"
+    },
+    {
+        id: "governing-law",
+        title: "19. Governing Law"
+    },
+    {
+        id: "contact",
+        title: "20. Contact"
+    },
+    {
+        id: "acceptance",
+        title: "21. Acceptance"
+    }
 ];
 
-export default function TermsOfUsePage() {
+export const metadata = {
+    title: "Terms of Use",
+    description: "Terms of Use for MergeX.",
+};
+
+export default function TermsofUsePage() {
     return (
         <LegalPageLayout
             title="Terms of Use"
-            description="Welcome to The MergeX Company."
+            description="Terms of Use for MergeX."
             effectiveDate="15 May 2026"
-            lastUpdated="15 May 2026"
+            lastUpdated="10 July 2026"
             readingTime="8 min read"
-            sections={termsSections}
+            sections={sections}
         >
-            <p className="text-xl italic font-medium text-[#2C2C2C] mb-8 leading-relaxed">
-                These Terms of Use (“Terms”) govern your access to and use of the websites, platforms, services, content, systems, communications, and digital properties operated by The MergeX Company and its associated brands, including MergeX (“Company”, “The MergeX Company”, “MergeX”, “we”, “our”, or “us”).
-            </p>
-            <p>
-                By accessing or using our website, services, or platforms, you agree to comply with these Terms.
-            </p>
-            <p>
-                If you do not agree with these Terms, you must not use our website or services.
-            </p>
+            <Paragraph>These Terms of Use ("Terms") govern your access to and use of the websites, services, communications, software, content, and digital platforms operated by <strong className="font-semibold text-black">MergeX</strong> ("MergeX", "we", "our", or "us").</Paragraph>
+            <Paragraph>By accessing our website or engaging our services, you agree to these Terms. If you do not agree, please do not use our website or services.</Paragraph>
 
-            <hr />
+            <Divider />
 
-            <section id="about" className="scroll-mt-32">
-                <h2>1. About The MergeX Company</h2>
-                <p>
-                    The MergeX Company is a parent company operating multiple brands and business divisions focused on scaling businesses through unified systems, technology, branding, marketing, sales, research, products, talent, and education.
-                </p>
-                <p>Current and future brands under The MergeX Company may include:</p>
-                <ul>
-                    <li>MergeX</li>
-                    <li>MergeX Systems</li>
-                    <li>OVRN Studios</li>
-                    <li>MergeX Academy</li>
-                </ul>
-                <p>
-                    The MergeX Company reserves the right to add, remove, modify, restructure, or discontinue any brand, service, platform, or offering at any time.
-                </p>
-            </section>
+            <LegalSection id="about-mergex" title="1. About MergeX">
+                <Paragraph>MergeX is an independent software and AI company focused on:</Paragraph>
+                <BulletList items={[
+                    "Software Development",
+                    "AI Solutions & Automation",
+                    "AI Creative Production"
+                ]} />
+                <Paragraph>We may introduce, modify, suspend, or discontinue services or features at any time without prior notice.</Paragraph>
+            </LegalSection>
 
-            <hr />
+            <Divider />
 
-            <section id="eligibility" className="scroll-mt-32">
-                <h2>2. Eligibility</h2>
-                <p>By using our website or services, you confirm that:</p>
-                <ul>
-                    <li>You are at least 18 years old</li>
-                    <li>You have the legal authority to enter into agreements</li>
-                    <li>You are using the platform lawfully</li>
-                    <li>The information you provide is accurate and truthful</li>
-                </ul>
-                <p>
-                    The MergeX Company reserves the right to deny access or service to any individual or organization at its discretion.
-                </p>
-            </section>
+            <LegalSection id="eligibility" title="2. Eligibility">
+                <Paragraph>By using MergeX you confirm that:</Paragraph>
+                <BulletList items={[
+                    "You are at least 18 years old.",
+                    "You have the legal authority to enter into binding agreements.",
+                    "You will use our services lawfully.",
+                    "Information you provide is accurate and complete."
+                ]} />
+                <Paragraph>We reserve the right to refuse service where appropriate.</Paragraph>
+            </LegalSection>
 
-            <hr />
+            <Divider />
 
-            <section id="scope-of-services" className="scroll-mt-32">
-                <h2>3. Scope of Services</h2>
-                <p>The MergeX Company may provide services including, but not limited to:</p>
-                <ul>
-                    <li>Business diagnosis and scaling systems</li>
-                    <li>Technology solutions</li>
-                    <li>Software development</li>
-                    <li>AI automations</li>
-                    <li>Branding and strategy</li>
-                    <li>Marketing systems</li>
-                    <li>Sales systems</li>
-                    <li>Operational systems</li>
-                    <li>Talent and workforce solutions</li>
-                    <li>Educational and consulting services</li>
-                    <li>Research and development initiatives</li>
-                </ul>
-                <p>
-                    All services are subject to separate proposals, agreements, Statements of Work (SOW), contracts, or engagement documents where applicable.
-                </p>
-            </section>
+            <LegalSection id="scope-of-services" title="3. Scope of Services">
+                <Paragraph>Our work may include:</Paragraph>
+                <BulletList items={[
+                    "Software Development",
+                    "AI Solutions & Automation",
+                    "AI Creative Production",
+                    "Digital Platforms",
+                    "Internal Business Systems",
+                    "Motion Graphics & Visual Production"
+                ]} />
+                <Paragraph>Project-specific deliverables, timelines, ownership, and commercial terms are governed by proposals, Statements of Work (SOW), quotations, or signed agreements.</Paragraph>
+            </LegalSection>
 
-            <hr />
+            <Divider />
 
-            <section id="no-guaranteed-results" className="scroll-mt-32">
-                <h2>4. No Guaranteed Results</h2>
-                <p>While The MergeX Company aims to improve business performance, growth, operations, and scalability, we do not guarantee:</p>
-                <ul>
-                    <li>Revenue growth</li>
-                    <li>Profitability</li>
-                    <li>Business success</li>
-                    <li>Lead generation outcomes</li>
-                    <li>Marketing performance</li>
-                    <li>Sales conversion results</li>
-                    <li>Investment returns</li>
-                    <li>Operational outcomes</li>
-                </ul>
-                <p>
-                    Business performance depends on multiple external and internal factors beyond our control, including execution quality, market conditions, leadership decisions, competition, economic conditions, and client participation.
-                </p>
-                <p>
-                    Any case studies, projections, examples, estimates, or forecasts shared by The MergeX Company are illustrative only and should not be interpreted as guarantees.
-                </p>
-            </section>
+            <LegalSection id="no-guarantee-of-results" title="4. No Guarantee of Results">
+                <Paragraph>MergeX provides professional services and technical expertise.</Paragraph>
+                <Paragraph>We do <strong className="font-semibold text-black">not</strong> guarantee specific commercial outcomes including:</Paragraph>
+                <BulletList items={[
+                    "Revenue growth",
+                    "Profitability",
+                    "Sales performance",
+                    "Marketing performance",
+                    "Business success",
+                    "Operational improvements"
+                ]} />
+                <Paragraph>Results depend on many factors outside our control, including client decisions, implementation, market conditions, and external circumstances.</Paragraph>
+            </LegalSection>
 
-            <hr />
+            <Divider />
 
-            <section id="diagnosis-and-recommendations" className="scroll-mt-32">
-                <h2>5. Diagnosis and Recommendations</h2>
-                <p>The MergeX Company operates using a diagnosis-first methodology, including frameworks such as the S.C.A.L.E Method™.</p>
-                <p>Recommendations, strategies, and systems provided are based on:</p>
-                <ul>
-                    <li>Information shared by the client</li>
-                    <li>Observed operational conditions</li>
-                    <li>Strategic analysis</li>
-                    <li>Industry assumptions</li>
-                    <li>Available data at the time of engagement</li>
-                </ul>
-                <p>
-                    Clients remain fully responsible for final business decisions and implementation outcomes.
-                </p>
-            </section>
+            <LegalSection id="client-responsibilities" title="5. Client Responsibilities">
+                <Paragraph>Clients agree to:</Paragraph>
+                <BulletList items={[
+                    "Provide accurate information.",
+                    "Supply required assets and approvals on time.",
+                    "Cooperate throughout the engagement.",
+                    "Review deliverables promptly."
+                ]} />
+                <Paragraph>Delays in communication or approvals may affect timelines.</Paragraph>
+            </LegalSection>
 
-            <hr />
+            <Divider />
 
-            <section id="intellectual-property" className="scroll-mt-32">
-                <h2>6. Intellectual Property</h2>
-                <p>
-                    All intellectual property owned, developed, created, published, or used by The MergeX Company remains the exclusive property of The MergeX Company unless otherwise agreed in writing.
-                </p>
-                <p>This includes but is not limited to:</p>
-                <ul>
-                    <li>Frameworks</li>
-                    <li>Methodologies</li>
-                    <li>Systems</li>
-                    <li>Branding assets</li>
-                    <li>Designs</li>
-                    <li>Documents</li>
-                    <li>Processes</li>
-                    <li>Strategies</li>
-                    <li>Templates</li>
-                    <li>Research</li>
-                    <li>Educational materials</li>
-                    <li>S.C.A.L.E Method™</li>
-                    <li>Website content</li>
-                    <li>Visual assets</li>
-                    <li>Written content</li>
-                    <li>Internal tools</li>
-                    <li>Operational structures</li>
-                </ul>
-                <p>Users may not:</p>
-                <ul>
-                    <li>Copy</li>
-                    <li>Reproduce</li>
-                    <li>Resell</li>
-                    <li>Redistribute</li>
-                    <li>Modify</li>
-                    <li>Reverse engineer</li>
-                    <li>Republish</li>
-                    <li>Train AI systems using</li>
-                    <li>Commercially exploit</li>
-                </ul>
-                <p>…any MergeX intellectual property without written permission.</p>
-                <p>Client-owned materials remain the property of the respective client.</p>
-            </section>
+            <LegalSection id="intellectual-property" title="6. Intellectual Property">
+                <Paragraph>Unless otherwise agreed in writing:</Paragraph>
+                <BulletList items={[
+                    "MergeX retains ownership of its proprietary software components,",
+                    "frameworks, documentation, templates, creative methods, research,",
+                    "internal tools, and intellectual property.",
+                    "Client-owned assets remain the property of the client.",
+                    "Ownership of project deliverables is determined by the applicable",
+                    "project agreement."
+                ]} />
+                <Paragraph>No MergeX intellectual property may be copied, redistributed, reverse engineered, or commercially reused without written permission.</Paragraph>
+            </LegalSection>
 
-            <hr />
+            <Divider />
 
-            <section id="website-usage-rules" className="scroll-mt-32">
-                <h2>7. Website Usage Rules</h2>
-                <p>Users agree not to:</p>
-                <ul>
-                    <li>Use the website unlawfully</li>
-                    <li>Attempt unauthorized access</li>
-                    <li>Disrupt website operations</li>
-                    <li>Introduce malware or malicious code</li>
-                    <li>Scrape or harvest website data</li>
-                    <li>Misrepresent identity or affiliation</li>
-                    <li>Violate intellectual property rights</li>
-                    <li>Use content for unauthorized commercial purposes</li>
-                    <li>Attempt to replicate MergeX systems or methodologies</li>
-                </ul>
-                <p>The MergeX Company reserves the right to restrict or terminate access for violations.</p>
-            </section>
+            <LegalSection id="acceptable-use" title="7. Acceptable Use">
+                <Paragraph>You agree not to:</Paragraph>
+                <BulletList items={[
+                    "Use the website unlawfully.",
+                    "Attempt unauthorized access.",
+                    "Introduce malicious software.",
+                    "Scrape or harvest website content.",
+                    "Infringe intellectual property rights.",
+                    "Misrepresent your identity."
+                ]} />
+                <Paragraph>We may suspend or terminate access for violations.</Paragraph>
+            </LegalSection>
 
-            <hr />
+            <Divider />
 
-            <section id="selective-engagement" className="scroll-mt-32">
-                <h2>8. Selective Engagement</h2>
-                <p>The MergeX Company is selective about the businesses and clients it works with.</p>
-                <p>Submitting an inquiry, application, form, or request does not guarantee acceptance as a client.</p>
-                <p>We reserve the right to:</p>
-                <ul>
-                    <li>Reject projects</li>
-                    <li>Decline inquiries</li>
-                    <li>Refuse engagements</li>
-                    <li>Discontinue discussions</li>
-                    <li>End partnerships</li>
-                </ul>
-                <p>…without obligation to provide detailed reasoning.</p>
-            </section>
+            <LegalSection id="project-acceptance" title="8. Project Acceptance">
+                <Paragraph>Submitting an enquiry does not create a business relationship.</Paragraph>
+                <Paragraph>MergeX reserves the right to decline projects, discontinue discussions, or refuse engagements at its discretion.</Paragraph>
+            </LegalSection>
 
-            <hr />
+            <Divider />
 
-            <section id="payments" className="scroll-mt-32">
-                <h2>9. Payments and Terms</h2>
-                <p>All pricing, payments, retainers, invoices, deposits, and commercial structures are governed by separate agreements or proposals.</p>
-                <p>Unless otherwise stated:</p>
-                <ul>
-                    <li>Payments are non-refundable once work begins</li>
-                    <li>Delayed payments may pause work</li>
-                    <li>Deliverables may be withheld for unpaid invoices</li>
-                    <li>Late fees may apply where legally permitted</li>
-                </ul>
-                <p>The MergeX Company reserves the right to revise pricing structures at any time for future engagements.</p>
-            </section>
+            <LegalSection id="payments" title="9. Payments">
+                <Paragraph>Commercial terms are governed by project agreements.</Paragraph>
+                <Paragraph>Unless otherwise agreed:</Paragraph>
+                <BulletList items={[
+                    "Payments are due according to invoices.",
+                    "Work may pause for overdue payments.",
+                    "Deliverables may be withheld until outstanding balances are cleared.",
+                    "Fees already earned for completed work are generally non-refundable."
+                ]} />
+            </LegalSection>
 
-            <hr />
+            <Divider />
 
-            <section id="third-party-services" className="scroll-mt-32">
-                <h2>10. Third-Party Platforms</h2>
-                <p>The MergeX Company may use or recommend third-party platforms, software, tools, APIs, hosting providers, payment gateways, automation systems, or integrations.</p>
-                <p>We are not responsible for:</p>
-                <ul>
-                    <li>Third-party outages</li>
-                    <li>Platform limitations</li>
-                    <li>Security breaches on external systems</li>
-                    <li>Third-party pricing changes</li>
-                    <li>Data loss caused by external providers</li>
-                    <li>Third-party policy changes</li>
-                </ul>
-                <p>Users remain subject to the terms and policies of those third-party services.</p>
-            </section>
+            <LegalSection id="third-party-services" title="10. Third-Party Services">
+                <Paragraph>Projects may involve third-party software, APIs, hosting providers, AI platforms, payment processors, or cloud services.</Paragraph>
+                <Paragraph>MergeX is not responsible for outages, policy changes, pricing changes, or failures of third-party providers.</Paragraph>
+            </LegalSection>
 
-            <hr />
+            <Divider />
 
-            <section id="confidentiality" className="scroll-mt-32">
-                <h2>11. Confidentiality</h2>
-                <p>The MergeX Company respects client confidentiality and handles shared business information responsibly.</p>
-                <p>However, unless protected by a separate signed NDA or agreement:</p>
-                <ul>
-                    <li>Information shared voluntarily may not automatically be considered confidential</li>
-                    <li>Users should avoid sharing highly sensitive information unnecessarily through unsecured channels</li>
-                </ul>
-                <p>Both parties agree not to misuse confidential information obtained during engagements.</p>
-            </section>
+            <LegalSection id="confidentiality" title="11. Confidentiality">
+                <Paragraph>We treat client information responsibly.</Paragraph>
+                <Paragraph>Where required, confidentiality obligations may be reinforced through a separate Non-Disclosure Agreement (NDA).</Paragraph>
+                <Paragraph>Both parties agree not to misuse confidential information shared during an engagement.</Paragraph>
+            </LegalSection>
 
-            <hr />
+            <Divider />
 
-            <section id="limitation-of-liability" className="scroll-mt-32">
-                <h2>12. Limitation of Liability</h2>
-                <p>To the maximum extent permitted by law, The MergeX Company shall not be liable for:</p>
-                <ul>
-                    <li>Indirect damages</li>
-                    <li>Consequential losses</li>
-                    <li>Business interruption</li>
-                    <li>Revenue loss</li>
-                    <li>Profit loss</li>
-                    <li>Reputation damage</li>
-                    <li>Data loss</li>
-                    <li>Operational disruptions</li>
-                    <li>Missed opportunities</li>
-                    <li>Third-party failures</li>
-                </ul>
-                <p>
-                    Total liability, if any, shall not exceed the amount paid by the client to The MergeX Company for the specific service directly related to the claim.
-                </p>
-            </section>
+            <LegalSection id="limitation-of-liability" title="12. Limitation of Liability">
+                <Paragraph>To the fullest extent permitted by law, MergeX is not liable for indirect, incidental, consequential, or special damages arising from the use of our services.</Paragraph>
+                <Paragraph>Where liability cannot be excluded, our total liability shall not exceed the fees paid for the specific engagement giving rise to the claim.</Paragraph>
+            </LegalSection>
 
-            <hr />
+            <Divider />
 
-            <section id="independent-business" className="scroll-mt-32">
-                <h2>13. Independent Business</h2>
-                <p>Nothing in these Terms creates:</p>
-                <ul>
-                    <li>Employment relationships</li>
-                    <li>Joint ventures</li>
-                    <li>Partnerships</li>
-                    <li>Agency relationships</li>
-                    <li>Equity ownership</li>
-                    <li>Fiduciary obligations</li>
-                </ul>
-                <p>Clients and The MergeX Company remain independent entities.</p>
-            </section>
+            <LegalSection id="independent-relationship" title="13. Independent Relationship">
+                <Paragraph>Nothing in these Terms creates:</Paragraph>
+                <BulletList items={[
+                    "Employment",
+                    "Partnership",
+                    "Joint venture",
+                    "Agency",
+                    "Equity ownership"
+                ]} />
+                <Paragraph>MergeX and its clients remain independent parties.</Paragraph>
+            </LegalSection>
 
-            <hr />
+            <Divider />
 
-            <section id="educational-content" className="scroll-mt-32">
-                <h2>14. Educational Content</h2>
-                <p>Any content published by The MergeX Company, including:</p>
-                <ul>
-                    <li>Blogs</li>
-                    <li>Insights</li>
-                    <li>Videos</li>
-                    <li>Case studies</li>
-                    <li>Educational materials</li>
-                    <li>Social media content</li>
-                    <li>Workshops</li>
-                    <li>Frameworks</li>
-                    <li>Public resources</li>
-                </ul>
-                <p>…is intended for informational and educational purposes only and should not be considered legal, financial, investment, tax, or professional advice.</p>
-                <p>Users should consult appropriate professionals before making business or financial decisions.</p>
-            </section>
+            <LegalSection id="educational-content" title="14. Educational Content">
+                <Paragraph>Articles, case studies, videos, demonstrations, presentations, and other public content are provided for general informational purposes only and should not be considered legal, financial, investment, or professional advice.</Paragraph>
+            </LegalSection>
 
-            <hr />
+            <Divider />
 
-            <section id="user-submissions" className="scroll-mt-32">
-                <h2>15. User Submissions</h2>
-                <p>By submitting forms, files, feedback, ideas, suggestions, or communications to The MergeX Company, you confirm that:</p>
-                <ul>
-                    <li>You have the right to share such information</li>
-                    <li>The content does not violate laws or third-party rights</li>
-                    <li>The information is accurate to your knowledge</li>
-                </ul>
-                <p>Unless otherwise agreed, feedback and suggestions may be used internally to improve services and systems.</p>
-            </section>
+            <LegalSection id="user-content" title="15. User Content">
+                <Paragraph>By submitting files, feedback, ideas, or other materials, you confirm that:</Paragraph>
+                <BulletList items={[
+                    "You have the right to provide them.",
+                    "They do not infringe third-party rights.",
+                    "They comply with applicable laws."
+                ]} />
+                <Paragraph>Feedback may be used internally to improve our services unless otherwise agreed.</Paragraph>
+            </LegalSection>
 
-            <hr />
+            <Divider />
 
-            <section id="future-products" className="scroll-mt-32">
-                <h2>16. Future Products</h2>
-                <p>The MergeX Company may launch experimental products, beta systems, AI tools, research initiatives, educational platforms, or pilot programs under any of its brands.</p>
-                <p>Such offerings may:</p>
-                <ul>
-                    <li>Change without notice</li>
-                    <li>Contain limitations</li>
-                    <li>Be discontinued</li>
-                    <li>Operate in testing environments</li>
-                </ul>
-                <p>Users participate in such programs at their own discretion.</p>
-            </section>
+            <LegalSection id="experimental-features" title="16. Experimental Features">
+                <Paragraph>MergeX may release beta features, research projects, AI experiments, prototypes, or preview functionality.</Paragraph>
+                <Paragraph>These offerings may change, be limited, or be discontinued without notice.</Paragraph>
+            </LegalSection>
 
-            <hr />
+            <Divider />
 
-            <section id="termination" className="scroll-mt-32">
-                <h2>17. Termination</h2>
-                <p>The MergeX Company reserves the right to suspend or terminate access to any platform, service, or engagement if:</p>
-                <ul>
-                    <li>Terms are violated</li>
-                    <li>Payments are not completed</li>
-                    <li>Misconduct occurs</li>
-                    <li>Abuse or harassment occurs</li>
-                    <li>Fraudulent behavior is identified</li>
-                    <li>Cooperation becomes impossible</li>
-                </ul>
-                <p>Termination does not remove outstanding payment obligations.</p>
-            </section>
+            <LegalSection id="termination" title="17. Termination">
+                <Paragraph>We may suspend or terminate services where:</Paragraph>
+                <BulletList items={[
+                    "These Terms are violated.",
+                    "Required payments are not made.",
+                    "Fraud, abuse, or unlawful activity is identified.",
+                    "Continued engagement becomes impractical."
+                ]} />
+                <Paragraph>Termination does not remove outstanding payment obligations.</Paragraph>
+            </LegalSection>
 
-            <hr />
+            <Divider />
 
-            <section id="changes-to-terms" className="scroll-mt-32">
-                <h2>18. Changes to These Terms</h2>
-                <p>The MergeX Company may update these Terms periodically.</p>
-                <p>Updated versions will be posted on this page with a revised “Last Updated” date.</p>
-                <p>Continued use of our website or services after changes constitutes acceptance of the revised Terms.</p>
-            </section>
+            <LegalSection id="changes-to-these-terms" title="18. Changes to These Terms">
+                <Paragraph>We may update these Terms periodically.</Paragraph>
+                <Paragraph>The latest version will always be published on this page with an updated revision date.</Paragraph>
+                <Paragraph>Continued use of our website or services constitutes acceptance of the updated Terms.</Paragraph>
+            </LegalSection>
 
-            <hr />
+            <Divider />
 
-            <section id="governing-law" className="scroll-mt-32">
-                <h2>19. Governing Law</h2>
-                <p>These Terms shall be governed by and interpreted under the laws of India.</p>
-                <p>Any disputes arising from these Terms shall be subject to the jurisdiction of the appropriate courts in Chennai, Tamil Nadu, India.</p>
-            </section>
+            <LegalSection id="governing-law" title="19. Governing Law">
+                <Paragraph>These Terms are governed by the laws of India.</Paragraph>
+                <Paragraph>Any disputes shall be subject to the exclusive jurisdiction of the courts located in Chennai, Tamil Nadu, India.</Paragraph>
+            </LegalSection>
 
-            <hr />
+            <Divider />
 
-            <section id="contact-information" className="scroll-mt-32">
-                <h2>20. Contact Information</h2>
-                <p>For questions regarding these Terms, please contact:</p>
-                <p>
-                    <strong>The MergeX Company</strong><br />
-                    Email: <a href="mailto:hello@mergex.in">hello@mergex.in</a><br />
-                    Website: <a href="https://www.mergex.in">https://www.mergex.in</a>
-                </p>
-            </section>
+            <LegalSection id="contact" title="20. Contact">
+                <Paragraph><strong className="font-semibold text-black">MergeX</strong></Paragraph>
+                <Paragraph>Email: <a href="mailto:hello@mergex.in" className="text-violet-600 hover:text-violet-700 underline underline-offset-4 font-medium">hello@mergex.in</a></Paragraph>
+                <Paragraph>Website: <a href="https://www.mergex.in" target="_blank" rel="noopener noreferrer" className="text-violet-600 hover:text-violet-700 underline underline-offset-4 font-medium">https://www.mergex.in</a></Paragraph>
+            </LegalSection>
 
-            <hr />
+            <Divider />
 
-            <section id="acceptance" className="scroll-mt-32">
-                <h2>21. Acceptance</h2>
-                <p>By accessing or using The MergeX Company websites, brands, services, systems, or platforms, you acknowledge that you have read, understood, and agreed to these Terms of Use.</p>
-                <div className="mt-2 flex flex-col items-start">
-                    <div className="-ml-8 -mb-6 md:-mb-10">
+            <LegalSection id="acceptance" title="21. Acceptance">
+                <Paragraph>By accessing our website or using our services, you acknowledge that you have read, understood, and agreed to these Terms of Use.</Paragraph>
+                
+                <div className="mt-8 flex flex-col items-start gap-4">
+                    <div>
                         <Image
-                            src="/logo/mergex-logo.png"
+                            src="/logo/mergex logo black.png"
                             alt="MergeX Logo"
-                            width={200}
-                            height={200}
-                            className="object-contain w-auto h-24 md:h-36"
+                            width={120}
+                            height={120}
+                            className="object-contain w-10 h-10"
                         />
                     </div>
-                    <p className="mt-0 font-medium italic text-[#2C2C2C]">
-                        The MergeX Company<br />
-                        <strong className="text-[#111111]">One System, Zero Friction.</strong>
-                    </p>
-                    
-                    <div className="flex flex-col gap-2 mt-4">
-                        <h3 className="text-xl font-bold text-[#111111] tracking-tight m-0">Copyright</h3>
-                        <p className="text-[#2C2C2C] text-[15px] m-0">
-                            Copyright © 2025-2026 The MergeX Company. All rights reserved.
-                        </p>
+                    <div>
+                        <p className="font-semibold text-black text-lg font-questrial">MergeX</p>
+                        <p className="text-violet-600 text-xs tracking-widest uppercase font-semibold">One System, Zero Friction.</p>
+                    </div>
+                    <div className="text-[13px] text-gray-400 mt-2">
+                        Copyright © 2025-2026 MergeX. All rights reserved.
                     </div>
                 </div>
-            </section>
+            </LegalSection>
         </LegalPageLayout>
     );
 }

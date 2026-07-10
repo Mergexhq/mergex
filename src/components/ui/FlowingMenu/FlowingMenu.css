@@ -32,8 +32,8 @@
   text-transform: uppercase;
   text-decoration: none;
   white-space: nowrap;
-  font-family: 'Clash Display', var(--font-manrope), system-ui, sans-serif;
-  font-weight: 600;
+  font-family: var(--font-inter, 'Inter'), sans-serif;
+  font-weight: 500;
   font-size: clamp(1.1rem, 2.6vw, 1.8rem);
   letter-spacing: 0.05em;
   transition: opacity 0.3s ease;
@@ -86,8 +86,8 @@
 .marquee span {
   white-space: nowrap;
   text-transform: uppercase;
-  font-family: 'Clash Display', var(--font-manrope), system-ui, sans-serif;
-  font-weight: 600;
+  font-family: var(--font-inter, 'Inter'), sans-serif;
+  font-weight: 500;
   font-size: clamp(1.1rem, 2.6vw, 1.8rem);
   letter-spacing: 0.05em;
   line-height: 1;

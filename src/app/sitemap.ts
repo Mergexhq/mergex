@@ -20,57 +20,25 @@ export default function sitemap(): MetadataRoute.Sitemap {
       priority: 0.9,
     },
     {
+      url: `${siteUrl}/launches`,
+      lastModified: now,
+      changeFrequency: 'monthly',
+      priority: 0.8,
+    },
+    {
+      url: `${siteUrl}/studio`,
+      lastModified: now,
+      changeFrequency: 'monthly',
+      priority: 0.8,
+    },
+    {
       url: `${siteUrl}/contact`,
       lastModified: now,
       changeFrequency: 'monthly',
       priority: 0.8,
     },
-    {
-      url: `${siteUrl}/contact/diagnostic`,
-      lastModified: now,
-      changeFrequency: 'monthly',
-      priority: 0.8,
-    },
-    {
-      url: `${siteUrl}/methodology`,
-      lastModified: now,
-      changeFrequency: 'monthly',
-      priority: 0.8,
-    },
-    {
-      url: `${siteUrl}/careers`,
-      lastModified: now,
-      changeFrequency: 'weekly',
-      priority: 0.6,
-    },
-
-    /* ── Brands ──────────────────────────────────────────── */
-    {
-      url: `${siteUrl}/brands`,
-      lastModified: now,
-      changeFrequency: 'monthly',
-      priority: 0.8,
-    },
-    {
-      url: `${siteUrl}/brands/academy`,
-      lastModified: now,
-      changeFrequency: 'monthly',
-      priority: 0.7,
-    },
-    {
-      url: `${siteUrl}/brands/ovrn-studios`,
-      lastModified: now,
-      changeFrequency: 'monthly',
-      priority: 0.7,
-    },
 
     /* ── Legal & Utility ─────────────────────────────────── */
-    {
-      url: `${siteUrl}/sitemap`,
-      lastModified: now,
-      changeFrequency: 'yearly',
-      priority: 0.3,
-    },
     {
       url: `${siteUrl}/privacy-policy`,
       lastModified: now,

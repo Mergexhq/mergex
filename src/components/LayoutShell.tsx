@@ -7,8 +7,9 @@ import { LenisProvider } from '@/lib/lenis-provider';
 import MainRevealWrapper from '@/components/MainRevealWrapper';
 import FooterRevealWrapper from '@/components/FooterRevealWrapper';
 import { Navbar } from '@/components/layout/Header/Navbar';
+import GradualBlur from '@/components/GradualBlur';
 
-const Footer = dynamic(() => import('@/components/Footer'), {
+const FAQ = dynamic(() => import('@/components/FAQ'), {
     ssr: true,
 });
 
@@ -16,17 +17,12 @@ const FooterCurtain = dynamic(() => import('@/components/FooterCurtain'), {
     ssr: true,
 });
 
-// Loaded client-side only - uses localStorage, SpeechSynthesis, and window events
-const AskMergeXWidget = dynamic(() => import('@/components/ask-mergex'), {
-    ssr: false,
-});
-
 export const InputTypeContext = createContext<{ hasCursor: boolean, hasTouch: boolean }>({ hasCursor: false, hasTouch: false });
 export const useInputType = () => useContext(InputTypeContext);
 
 /**
  * LayoutShell - wraps every page with Navbar, Footer curtain reveal,
- * and the global AskMergeXWidget floating button.
+ * and the global GradualBlur indicator.
  */
 export default function LayoutShell({ children }: { children: ReactNode }) {
     const pathname = usePathname() || '';
@@ -50,7 +46,23 @@ export default function LayoutShell({ children }: { children: ReactNode }) {
         };
     }, []);
 
-    // Check if the current route is a detail page (disabled as insights pages are removed)
+    const [isAtBottom, setIsAtBottom] = useState(false);
+
+    useEffect(() => {
+        const handleScroll = () => {
+            // Check if we are near the bottom of the page
+            const threshold = 250; // pixels from the bottom
+            const isNearBottom = window.innerHeight + window.scrollY >= document.documentElement.scrollHeight - threshold;
+            setIsAtBottom(isNearBottom);
+        };
+
+        window.addEventListener('scroll', handleScroll);
+        // Run once on mount and on path change to set initial state
+        handleScroll();
+
+        return () => window.removeEventListener('scroll', handleScroll);
+    }, [pathname]);
+
     const isDetailPage = false;
 
     return (
@@ -60,7 +72,7 @@ export default function LayoutShell({ children }: { children: ReactNode }) {
                 {/* Main content + Footer */}
                 <MainRevealWrapper>
                     {children}
-                    {!isDetailPage && <Footer />}
+                    {pathname === '/' && <FAQ />}
                 </MainRevealWrapper>
                 {/* Footer curtain pinned behind main content */}
                 {!isDetailPage && (
@@ -68,10 +80,22 @@ export default function LayoutShell({ children }: { children: ReactNode }) {
                         <FooterCurtain />
                     </FooterRevealWrapper>
                 )}
-                {/* Global AI widget - visible on every page */}
-                {/* {!isDetailPage && <AskMergeXWidget />} */}
+                <GradualBlur
+                    target="page"
+                    position="bottom"
+                    height="6rem"
+                    strength={2}
+                    divCount={5}
+                    curve="bezier"
+                    exponential={true}
+                    opacity={1}
+                    style={{
+                        opacity: isAtBottom ? 0 : 1,
+                        pointerEvents: 'none',
+                        transition: 'opacity 0.3s ease-out'
+                    }}
+                />
             </LenisProvider>
         </InputTypeContext.Provider>
     );
 }
-

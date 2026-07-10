@@ -1,111 +1,79 @@
 import type { Metadata } from "next";
-import {
-  Manrope,
-  Playfair_Display,
-  Roboto,
-} from "next/font/google";
+import { Inter, Questrial } from "next/font/google";
 
 import "./globals.css";
 import LayoutShell from "@/components/LayoutShell";
 
-/* ─────────────────────────────────────────────────────────────────────
-   Fonts
-   Note: Great Vibes is decorative - keep here only if used globally.
-   If only used in one component, move it there to avoid loading it
-   on every page unnecessarily.
-───────────────────────────────────────────────────────────────────── */
-const manrope = Manrope({
+const inter = Inter({
   subsets: ["latin"],
-  variable: "--font-manrope",
+  weight: ["300", "400", "500", "600"],
+  variable: "--font-inter",
   display: "swap",
 });
 
-const playfair = Playfair_Display({
+const questrial = Questrial({
+  weight: "400",
   subsets: ["latin"],
-  variable: "--font-playfair-display",
+  variable: "--font-questrial",
   display: "swap",
 });
 
-const roboto = Roboto({
-  weight: ["300", "400", "500", "700"],
-  subsets: ["latin"],
-  variable: "--font-roboto",
-  display: "swap",
-});
-
-/* ─────────────────────────────────────────────────────────────────────
-   Site URL
-   Uses env variable in staging/preview - falls back to production.
-   Set NEXT_PUBLIC_SITE_URL in your .env.local for local dev if needed.
-───────────────────────────────────────────────────────────────────── */
 const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? "https://mergex.in";
 
-/* ─────────────────────────────────────────────────────────────────────
-   Metadata
-   OG image must be a public URL path - never a local disk path.
-   Place og-cover.jpg inside /public/ and reference as "/og-cover.jpg".
-───────────────────────────────────────────────────────────────────── */
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
 
   title: {
-    default: "The MergeX Company",
-    template: "%s - The MergeX Company",
+    default: "MergeX",
+    template: "%s - MergeX",
   },
 
   description:
-    "MergeX identifies and fixes the exact factor stopping business growth. A consulting-first scaling company.",
+    "MergeX is an independent software and AI company specializing in software development, AI solutions, and AI creative production.",
 
   keywords: [
     "MergeX",
-    "The MergeX Company",
-    "Business Scaling",
-    "Diagnostic Consulting",
-    "Scaling Systems",
-    "Business Infrastructure",
-    "Operational Clarity",
-    "S.C.A.L.E Methodology",
-    "Brand Systems",
-    "Technology Systems",
-    "Sales Systems",
+    "Software Development",
+    "AI Solutions",
+    "AI Creative Production",
+    "AI Commercials",
+    "AI Brand Films",
+    "AI Product Videos",
+    "AI Photography",
+    "Motion Graphics",
+    "Creative Experiments"
   ],
 
-  authors: [{ name: "The MergeX Company", url: siteUrl }],
-  creator: "The MergeX Company",
-  publisher: "The MergeX Company",
+  authors: [{ name: "MergeX", url: siteUrl }],
+  creator: "MergeX",
+  publisher: "MergeX",
 
-  /* ── Open Graph ──────────────────────────────────────────────────
-     Used by LinkedIn, WhatsApp, Facebook, Slack previews.
-     og-cover.jpg must be in /public/og-cover.jpg - 1200×630px.
-  ─────────────────────────────────────────────────────────────── */
   openGraph: {
-    title: "The MergeX Company",
+    title: "MergeX",
     description:
-      "Most businesses don't fail from lack of effort. They fail because they're solving the wrong problem.",
+      "MergeX specializes in software development, AI solutions, and AI creative production.",
     url: siteUrl,
-    siteName: "The MergeX Company",
+    siteName: "MergeX",
     locale: "en_US",
     type: "website",
     images: [
       {
-        url: "/og-cover.jpg",       // → resolves to https://mergex.in/og-cover.jpg
+        url: "/og-cover.jpg",
         width: 1200,
         height: 630,
-        alt: "The MergeX Company | Diagnosis before everything.",
+        alt: "MergeX | Software, AI, and Creative Production.",
       },
     ],
   },
 
-  /* ── Twitter / X Card ────────────────────────────────────────── */
   twitter: {
     card: "summary_large_image",
-    title: "The MergeX Company",
+    title: "MergeX",
     description:
-      "Most businesses don't fail from lack of effort. They fail because they're solving the wrong problem.",
+      "MergeX specializes in software development, AI solutions, and AI creative production.",
     images: ["/og-cover.jpg"],
   },
 
-  /* ── Robots ─────────────────────────────────────────────────── */
   robots: {
     index: true,
     follow: true,
@@ -117,58 +85,45 @@ export const metadata: Metadata = {
     },
   },
 
-  /* ── Canonical ───────────────────────────────────────────────── */
   alternates: {
     canonical: siteUrl,
   },
 
-  /* ── Favicons ────────────────────────────────────────────────── */
   icons: {
     icon: [
-      { url: "/favicon/favicon-16x16.png", sizes: "16x16", type: "image/png" },
-      { url: "/favicon/favicon-32x32.png", sizes: "32x32", type: "image/png" },
       { url: "/favicon/favicon.ico", sizes: "any" },
+      { url: "/favicon/icon0.svg", type: "image/svg+xml" },
+      { url: "/favicon/icon1.png", sizes: "32x32", type: "image/png" },
     ],
     apple: [
-      { url: "/favicon/apple-touch-icon.png", sizes: "180x180", type: "image/png" },
+      { url: "/favicon/apple-icon.png", sizes: "180x180", type: "image/png" },
     ],
-    other: [
-      { rel: "manifest", url: "/favicon/site.webmanifest" },
-    ],
+  },
+  manifest: "/favicon/manifest.json",
+  appleWebApp: {
+    title: "MergeX",
   },
 };
 
-/* ─────────────────────────────────────────────────────────────────────
-   Root Layout
-───────────────────────────────────────────────────────────────────── */
 export default function RootLayout({
   children,
 }: Readonly<{ children: React.ReactNode }>) {
   return (
     <html
       lang="en"
-      suppressHydrationWarning            // ← prevents hydration mismatch from theme systems
+      suppressHydrationWarning
       data-scroll-behavior="smooth"
       className={`
-        ${manrope.variable}
-        ${playfair.variable}
-        ${roboto.variable}
+        ${inter.variable}
+        ${questrial.variable}
         h-full
         scroll-smooth
         antialiased
       `}
     >
       <head>
-        {/* Clash Display - not on Google Fonts, loaded via Fontshare CDN */}
-        <link rel="preconnect" href="https://api.fontshare.com" crossOrigin="anonymous" />
-        <link rel="dns-prefetch" href="https://api.fontshare.com" />
-        <link
-          rel="stylesheet"
-          href="https://api.fontshare.com/v2/css?f[]=clash-display@400,500,600,700&display=swap"
-        />
-
-        {/* Theme color - matches your background token for mobile browser chrome */}
         <meta name="theme-color" content="#080808" />
+        <meta name="apple-mobile-web-app-title" content="MergeX" />
       </head>
 
       <body
