@@ -47,6 +47,7 @@ export default function LayoutShell({ children }: { children: ReactNode }) {
     }, []);
 
     const [isAtBottom, setIsAtBottom] = useState(false);
+    const [isInWorks, setIsInWorks] = useState(false);
 
     useEffect(() => {
         const handleScroll = () => {
@@ -54,6 +55,17 @@ export default function LayoutShell({ children }: { children: ReactNode }) {
             const threshold = 250; // pixels from the bottom
             const isNearBottom = window.innerHeight + window.scrollY >= document.documentElement.scrollHeight - threshold;
             setIsAtBottom(isNearBottom);
+
+            // Check if we are in the Works pinned section
+            const worksEl = document.getElementById("works-pinned");
+            if (worksEl) {
+                const rect = worksEl.getBoundingClientRect();
+                // Active when pinned (top has reached top of viewport and container is still visible)
+                const active = rect.top <= 10 && rect.bottom > 10;
+                setIsInWorks(active);
+            } else {
+                setIsInWorks(false);
+            }
         };
 
         window.addEventListener('scroll', handleScroll);
@@ -82,7 +94,7 @@ export default function LayoutShell({ children }: { children: ReactNode }) {
                 )}
                 <GradualBlur
                     target="page"
-                    position="bottom"
+                    position={isInWorks ? "right" : "bottom"}
                     height="6rem"
                     strength={2}
                     divCount={5}
@@ -90,7 +102,7 @@ export default function LayoutShell({ children }: { children: ReactNode }) {
                     exponential={true}
                     opacity={1}
                     style={{
-                        opacity: isAtBottom ? 0 : 1,
+                        opacity: isInWorks ? (isAtBottom ? 0 : 1) : 0,
                         pointerEvents: 'none',
                         transition: 'opacity 0.3s ease-out'
                     }}

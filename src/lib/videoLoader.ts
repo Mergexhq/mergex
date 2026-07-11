@@ -4,16 +4,16 @@ import { useEffect, useState } from "react";
  * Background video loader.
  *
  * Goal: load every clip as FAST as the network allows, poster only bridging the
- * gap so there's never a black box — while not firing a stampede of parallel
+ * gap so there's never a black box - while not firing a stampede of parallel
  * requests that starves each other on a slow link.
  *
  * Two lanes:
  *  - Priority lane (on-screen / hero clips): load IMMEDIATELY, no queue, no cap.
- *    These are what the user is looking at — they must not wait behind anything.
+ *    These are what the user is looking at - they must not wait behind anything.
  *  - Background lane (off-screen clips): concurrency-capped queue so the long tail
  *    of rail cards warms up without choking the priority clips.
  *
- * "Ready" fires at `canplaythrough` — enough buffered to play the WHOLE clip
+ * "Ready" fires at `canplaythrough` - enough buffered to play the WHOLE clip
  * without stalling. The poster covers the full load, so when the video finally
  * swaps in it runs start-to-end with no mid-playback rebuffering (which reads as
  * "broken"). The priority lane is uncapped, so that full load is still fast.
@@ -65,7 +65,7 @@ if (typeof window !== "undefined") {
 const pump = () => {
   if (typeof window === "undefined") return;
   if (!isPageLoaded) return;
-  
+
   while (active < MAX_CONCURRENT) {
     // Highest priority first, then FIFO.
     queue.sort((a, b) => b.priority - a.priority);
@@ -129,7 +129,7 @@ const load = (entry: Entry, immediate: boolean) => {
 
 /**
  * Queue a video URL for background loading. `priority` >= PRIORITY_THRESHOLD loads
- * immediately (uncapped) — use it for on-screen / hero clips. Lower priorities go
+ * immediately (uncapped) - use it for on-screen / hero clips. Lower priorities go
  * through the capped background lane. Safe to call repeatedly for the same URL.
  */
 export const preloadVideo = (url: string, priority = 0) => {

@@ -1,7 +1,6 @@
 import type { Metadata } from 'next';
 import {
     HomeHero,
-    FinalCTA,
 } from '@/modules/home/components';
 import { ShowcaseFeed, ExperimentsGallery } from '@/modules/work';
 
@@ -61,9 +60,6 @@ export default function HomePage() {
 
             {/* Labs Portfolio Gallery */}
             <ExperimentsGallery />
-
-            {/* 06 - CTA */}
-            <FinalCTA />
         </main>
     );
 }

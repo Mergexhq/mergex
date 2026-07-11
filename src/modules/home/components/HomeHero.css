@@ -7,7 +7,7 @@
    ═══════════════════════════════════════════════ */
 
 /* ── SCROLL WRAPPER ──
-   Height is NOT set here — GSAP ScrollTrigger's
+   Height is NOT set here - GSAP ScrollTrigger's
    `end: "+=200%"` handles the scroll distance.
    The wrapper is just a positioning context.       */
 .home-hero-scroll-wrapper {
@@ -49,8 +49,7 @@
 }
 
 /* ── BACKGROUND IMAGE LAYER ── */
-.home-hero::before {
-  content: '';
+.home-hero-bg {
   position: absolute;
   top: 0;
   left: 0;
@@ -61,15 +60,14 @@
   background-size: cover;
   background-position: 42% 40%;
   background-repeat: no-repeat;
-  animation: hh-drift 24s ease-in-out infinite alternate;
   will-change: transform;
-  transform: scale(1);
 }
 
 @keyframes hh-drift {
   from {
     transform: scale(1);
   }
+
   to {
     transform: scale(1.045);
   }
@@ -235,9 +233,9 @@
   z-index: 3;
   min-height: 100dvh;
   display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 80px clamp(24px, 5vw, 72px);
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 80px clamp(24px, 5vw, 72px) 40px;
   box-sizing: border-box;
 
   /* GSAP sets initial y / opacity */
@@ -359,9 +357,8 @@
     --hh-bg-image: url('/background/hero/heromobile1.webp');
   }
 
-  .home-hero::before {
+  .home-hero-bg {
     background-position: 42% center;
-    animation: none;
     transform: scale(1);
   }
 
@@ -399,7 +396,10 @@
   }
 
   .about-section {
-    padding: 60px 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 80px 20px 40px;
   }
 }
 
@@ -491,4 +491,24 @@
 
 .hh-cta-button:hover .hh-cta-icon svg {
   transform: translateX(3px);
+}
+
+/* ── Infinite Marquee Animation ── */
+@keyframes marquee {
+  0% {
+    transform: translateX(0);
+  }
+
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+.animate-marquee {
+  animation: marquee 25s linear infinite;
+}
+
+.marquee-track {
+  display: flex;
+  width: max-content;
 }

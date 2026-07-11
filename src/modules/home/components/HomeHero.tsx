@@ -14,6 +14,7 @@ if (typeof window !== 'undefined') {
 export function HomeHero() {
   const wrapperRef = useRef<HTMLElement>(null);
   const heroRef = useRef<HTMLDivElement>(null);
+  const bgRef = useRef<HTMLDivElement>(null);
   const contentRef = useRef<HTMLDivElement>(null);
   const subRef = useRef<HTMLDivElement>(null);
   const overlayRef = useRef<HTMLDivElement>(null);
@@ -95,6 +96,9 @@ export function HomeHero() {
     <section ref={wrapperRef} className="home-hero-scroll-wrapper">
       {/* ── HERO LAYER ── */}
       <div ref={heroRef} className="home-hero">
+        {/* Real background image layer for GSAP scaling */}
+        <div ref={bgRef} className="home-hero-bg" />
+
         {/* Noise grain overlay */}
         <div className="hh-noise" />
 
@@ -131,29 +135,27 @@ export function HomeHero() {
 
         {/* ── ABOUT GLIMPSE SECTION (inside pinned layer) ── */}
         <section ref={aboutRef} className="about-section opacity-0 pointer-events-none">
-          <div className="about-inner">
-            {/* Left Column */}
-            <div className="about-left">
-              <p className="about-eyebrow">Who We Are</p>
-              <h2 className="about-statement">
-                Intelligent software.<br />
-                Thoughtful engineering.
-              </h2>
-            </div>
-            {/* Right Column */}
-            <div className="about-right">
-              <p className="about-body">
-                We design and build custom software, AI integrations, and high-impact creative productions that solve real problems. No templates, no packages—just high-quality engineering tailored to your objectives.
-              </p>
-              <Link
-                href="/about"
-                className="about-cta"
-              >
-                <span>How We Think</span>
-                <span className="about-cta-arrow">→</span>
-              </Link>
+
+          {/* Vertical alignment wrapper to center details */}
+          <div className="flex-1 flex items-center justify-center w-full -translate-y-8">
+            <div className="about-inner">
+              {/* Left Column */}
+              <div className="about-left">
+                <p className="about-eyebrow">Who We Are</p>
+                <h2 className="about-statement">
+                  Intelligent software.<br />
+                  Thoughtful engineering.
+                </h2>
+              </div>
+              {/* Right Column */}
+              <div className="about-right">
+                <p className="about-body">
+                  We design and build custom software, AI integrations, and high-impact creative productions that solve real problems. No templates, no packages-just high-quality engineering tailored to your objectives.
+                </p>
+              </div>
             </div>
           </div>
+
         </section>
       </div>
     </section>

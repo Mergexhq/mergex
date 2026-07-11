@@ -1,5 +1,5 @@
 /* ==========================================================
-   ABOUT PAGE — EDITORIAL MAGAZINE LAYOUT
+   ABOUT PAGE - EDITORIAL MAGAZINE LAYOUT
    Three-column: Left (statement + capabilities) | Right (intro)
    ========================================================== */
 
@@ -8,6 +8,7 @@
   color: var(--text-primary);
   min-height: 100vh;
   font-family: var(--font-inter, 'Inter', sans-serif);
+  padding-bottom: 6rem;
 }
 
 /* ── Top Label ─────────────────────────────────────── */
@@ -59,11 +60,11 @@
 
 .about-cap-item {
   padding: 1.1rem 0;
-  border-top: 1px solid var(--border-primary, rgba(0,0,0,0.08));
+  border-top: 1px solid var(--border-primary, rgba(0, 0, 0, 0.08));
 }
 
 .about-cap-item:last-child {
-  border-bottom: 1px solid var(--border-primary, rgba(0,0,0,0.08));
+  border-bottom: 1px solid var(--border-primary, rgba(0, 0, 0, 0.08));
 }
 
 .about-cap-label {
@@ -96,9 +97,8 @@
   color: var(--text-primary);
   font-weight: 400;
   font-style: italic;
-  margin-top: 1.5rem;
-  padding-top: 2rem;
-  border-top: 1px solid var(--border-primary, rgba(0,0,0,0.08));
+  margin-top: auto;
+  padding-top: 2.5rem;
 }
 
 /* ── Responsive ─────────────────────────────────────── */
@@ -129,5 +129,379 @@
 
   .about-headline {
     font-size: 2.2rem;
+  }
+}
+
+/* ==========================================================
+   WHAT WE'VE BUILT – full-bleed section at end of About page
+   ========================================================== */
+
+:root {
+  --wwb-wm-size: clamp(0.9rem, 1.5vw, 1.15rem);
+}
+
+.wwb-section {
+  position: relative;
+  overflow: hidden;
+  margin: 0 2.5rem 0;
+  border-radius: 1rem;
+  padding: 0;
+  box-shadow: 0 32px 80px rgba(0, 0, 0, 0.35), 0 8px 24px rgba(60, 0, 120, 0.18);
+}
+
+/* ── Background image layer ── */
+.wwb-bg {
+  position: absolute;
+  inset: 0;
+  background-image: url('/background/works bg .jpg');
+  background-size: cover;
+  background-position: center top;
+  background-repeat: no-repeat;
+  z-index: 0;
+}
+
+/* ── SVG noise grain overlay ── */
+.wwb-noise {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  opacity: 0.35;
+  pointer-events: none;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  background-repeat: repeat;
+  background-size: 200px 200px;
+}
+
+/* ── Dark gradient scrim for readability ── */
+.wwb-scrim {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  pointer-events: none;
+  background: linear-gradient(to bottom,
+      rgba(4, 0, 20, 0.72) 0%,
+      rgba(4, 0, 20, 0.50) 40%,
+      rgba(4, 0, 20, 0.80) 100%);
+}
+
+/* ── Inner content wrapper ── */
+.wwb-inner {
+  position: relative;
+  z-index: 3;
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 6rem 3.5rem 8rem;
+}
+
+/* ── Section header ── */
+.wwb-header {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 3rem 5rem;
+  align-items: start;
+  padding-bottom: 5rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.12);
+  margin-bottom: 5rem;
+}
+
+.wwb-title {
+  font-size: clamp(2.8rem, 5vw, 4.5rem);
+  font-weight: 400;
+  line-height: 1.05;
+  letter-spacing: -0.03em;
+  color: #ffffff;
+  font-family: var(--font-questrial, 'Questrial', sans-serif);
+}
+
+.wwb-desc {
+  font-size: clamp(0.92rem, 1.1vw, 1rem);
+  line-height: 1.82;
+  color: rgba(255, 255, 255, 0.58);
+  font-weight: 400;
+  align-self: end;
+}
+
+/* ── Wordmark / logo grid ── */
+.wwb-grid {
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  gap: 0;
+}
+
+/* ── Individual grid cell ── */
+.wwb-item {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem 1.25rem;
+  border-right: 1px solid rgba(255, 255, 255, 0.08);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  text-decoration: none;
+  transition: background 0.25s ease, border-color 0.25s ease;
+  cursor: pointer;
+  min-height: 90px;
+}
+
+.wwb-item:hover {
+  background: rgba(255, 255, 255, 0.06);
+  border-color: rgba(255, 255, 255, 0.18);
+}
+
+/* Remove right border on every 6th item */
+.wwb-item:nth-child(6n) {
+  border-right: none;
+}
+
+/* ── Typographic wordmarks ── */
+.wwb-wordmark {
+  font-size: var(--wwb-wm-size);
+  color: rgba(255, 255, 255, 0.72);
+  text-align: center;
+  line-height: 1.2;
+  user-select: none;
+  transition: color 0.25s ease;
+  font-family: var(--font-inter, 'Inter', sans-serif);
+}
+
+.wwb-item:hover .wwb-wordmark {
+  color: #ffffff;
+}
+
+/* ── Grape Master logo image ── */
+.wwb-logo-img {
+  width: auto;
+  height: 52px;
+  max-width: 120px;
+  object-fit: contain;
+  filter: grayscale(1) brightness(2);
+  opacity: 0.7;
+  transition: filter 0.3s ease, opacity 0.3s ease;
+  user-select: none;
+  draggable: false;
+}
+
+.wwb-item:hover .wwb-logo-img {
+  filter: grayscale(0) brightness(1);
+  opacity: 1;
+}
+
+/* ── Responsive ── */
+@media (max-width: 1100px) {
+  .wwb-grid {
+    grid-template-columns: repeat(4, 1fr);
+  }
+
+  .wwb-item:nth-child(6n) {
+    border-right: 1px solid rgba(255, 255, 255, 0.08);
+  }
+
+  .wwb-item:nth-child(4n) {
+    border-right: none;
+  }
+}
+
+@media (max-width: 900px) {
+  .wwb-section {
+    margin: 0 1.5rem 4rem;
+    border-radius: 1.5rem;
+  }
+
+  .wwb-header {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+
+  .wwb-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  .wwb-inner {
+    padding: 4rem 2rem 4rem;
+  }
+
+  .wwb-item:nth-child(4n) {
+    border-right: 1px solid rgba(255, 255, 255, 0.08);
+  }
+
+  .wwb-item:nth-child(3n) {
+    border-right: none;
+  }
+}
+
+@media (max-width: 580px) {
+  .wwb-section {
+    margin: 0 1rem 3.5rem;
+    border-radius: 1.25rem;
+  }
+
+  .wwb-inner {
+    padding: 3rem 1.5rem 3.5rem;
+  }
+
+  .wwb-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .wwb-item:nth-child(3n) {
+    border-right: 1px solid rgba(255, 255, 255, 0.08);
+  }
+
+  .wwb-item:nth-child(2n) {
+    border-right: none;
+  }
+
+  .wwb-wordmark {
+    font-size: 0.78rem;
+  }
+}
+
+/* ==========================================================
+   FOUNDER NOTE SECTION
+   ========================================================== */
+
+.founder-section {
+  padding: 6rem 2.5rem 0;
+}
+
+.founder-inner {
+  max-width: 1400px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 2fr 3fr;
+  gap: 5rem;
+  align-items: start;
+}
+
+/* ── Left: Photo card ── */
+.founder-photo-col {
+  /* intentionally not sticky - avoids scroll sync misalignment */
+}
+
+.founder-photo-card {
+  position: relative;
+  overflow: hidden;
+  border-radius: 1.25rem;
+  background: var(--bg-secondary, #f2f0ed);
+  aspect-ratio: 4 / 5;
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.10);
+}
+
+/* Noise layer over the photo */
+.founder-photo-noise {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  pointer-events: none;
+  opacity: 0.20;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  background-repeat: repeat;
+  background-size: 180px 180px;
+  mix-blend-mode: multiply;
+}
+
+.founder-photo-img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: top center;
+  display: block;
+}
+
+/* Caption bar at bottom of photo card */
+.founder-photo-caption {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 3;
+  padding: 3rem 1.5rem 1.5rem;
+  background: linear-gradient(to top, rgba(0, 0, 0, 0.55) 0%, transparent 100%);
+}
+
+.founder-caption-name {
+  font-size: 0.88rem;
+  font-weight: 600;
+  color: #fff;
+  letter-spacing: 0.04em;
+}
+
+.founder-caption-role {
+  font-size: 0.75rem;
+  font-weight: 400;
+  color: rgba(255, 255, 255, 0.65);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  margin-top: 0.2rem;
+}
+
+/* ── Right: Content ── */
+.founder-content-col {
+  display: flex;
+  flex-direction: column;
+  gap: 2.5rem;
+  padding-top: 0.5rem;
+}
+
+.founder-eyebrow {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--text-tertiary);
+}
+
+.founder-body {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.founder-body p {
+  font-size: clamp(0.95rem, 1.1vw, 1.05rem);
+  line-height: 1.82;
+  color: var(--text-secondary);
+  font-weight: 400;
+}
+
+/* Signature area */
+.founder-signature {
+  padding-top: 0.5rem;
+}
+
+.founder-sig-svg {
+  color: var(--text-primary);
+  opacity: 0.85;
+  max-width: 280px;
+}
+
+/* ── Responsive ── */
+@media (max-width: 900px) {
+  .founder-section {
+    padding: 5rem 1.5rem 0;
+  }
+
+  .founder-inner {
+    grid-template-columns: 1fr;
+    gap: 3rem;
+  }
+
+  .founder-photo-col {
+    max-width: 320px;
+  }
+}
+
+@media (max-width: 580px) {
+  .founder-section {
+    padding: 4rem 1.25rem 0;
+  }
+
+  .founder-photo-col {
+    max-width: 100%;
+  }
+
+  .founder-photo-card {
+    aspect-ratio: 3 / 4;
   }
 }

@@ -16,7 +16,7 @@ interface PosterVideoProps {
 
 /**
  * Poster shows instantly; the real video is warmed into the browser cache in the
- * background and only mounted on the visible element once it's buffered — so slow
+ * background and only mounted on the visible element once it's buffered - so slow
  * connections see a crisp frame immediately instead of a black box, and the swap
  * is seamless (plays straight from cache).
  */
@@ -28,13 +28,16 @@ export const PosterVideo = ({
   className = "absolute inset-0 h-full w-full object-cover",
 }: PosterVideoProps) => {
   const buildId = process.env.NEXT_PUBLIC_BUILD_ID || '1';
-  const getVersionedUrl = (url: string) => url.includes('?') ? `${url}&v=${buildId}` : `${url}?v=${buildId}`;
-  
+  const getVersionedUrl = (url: string) => {
+    if (!url) return "";
+    return url.includes('?') ? `${url}&v=${buildId}` : `${url}?v=${buildId}`;
+  };
+
   const versionedVideoUrl = getVersionedUrl(videoUrl);
   const versionedPosterUrl = getVersionedUrl(posterUrl);
 
   const videoRef = useRef<HTMLVideoElement>(null);
-  const ready = useBackgroundVideo(versionedVideoUrl, priority);
+  const ready = useBackgroundVideo(versionedVideoUrl || undefined, priority);
   const [playing, setPlaying] = useState(false);
 
   // Only drive play/pause once the source is actually attached.
@@ -42,7 +45,7 @@ export const PosterVideo = ({
 
   return (
     <>
-      {/* Poster — underneath, painted over by the video once it's playing. */}
+      {/* Poster - underneath, painted over by the video once it's playing. */}
       <img
         src={versionedPosterUrl}
         alt=""

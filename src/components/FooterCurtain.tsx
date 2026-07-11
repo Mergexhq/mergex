@@ -136,7 +136,7 @@ export default function FooterCurtain() {
                     <span>X</span>
 
                     {/* Suffix for /labs or /systems if needed (only relevant on legacy paths) */}
-                    {isHome && (pathname === '/labs' || pathname === '/systems') && (
+                    {(pathname === '/labs' || pathname === '/systems') && (
                         <div className="flex flex-row items-baseline" style={{ marginLeft: '0.3em' }}>
                             <span className="text-[15.5vw] md:text-[17.5vw] lg:text-[18vw] leading-none font-normal text-white select-none font-serif italic" style={{ overflow: 'visible', padding: '0 0.1em' }}>
                                 {pathname === '/labs' ? 'L' : 'S'}

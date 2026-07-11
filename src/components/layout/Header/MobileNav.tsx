@@ -60,7 +60,7 @@ export function MobileNav({ isOpen, onClose, pathname }: MobileNavProps) {
                             }
                         }}
                         initial={{ y: '100%', height: '62dvh' }}
-                        animate={{ 
+                        animate={{
                             y: 0,
                             height: isExpanded ? '92dvh' : '62dvh'
                         }}
@@ -69,7 +69,7 @@ export function MobileNav({ isOpen, onClose, pathname }: MobileNavProps) {
                         className="fixed bottom-0 left-0 right-0 w-full bg-white/85 backdrop-blur-xl z-[61] flex flex-col shadow-[0_-20px_50px_rgba(0,0,0,0.06)] border-t border-black/5 rounded-t-3xl overflow-hidden"
                     >
                         {/* Drag Handle Indicator */}
-                        <div 
+                        <div
                             className="w-full flex justify-center py-3 cursor-pointer shrink-0 z-10"
                             onClick={() => setIsExpanded(!isExpanded)}
                         >
@@ -78,86 +78,86 @@ export function MobileNav({ isOpen, onClose, pathname }: MobileNavProps) {
 
                         {/* Contextual wordmark */}
                         <div className="flex items-center justify-center px-6 pb-4 border-b border-black/5 shrink-0">
-                          {pathname === '/brands/ovrn-studios' ? (
-                            <Link href="/brands/ovrn-studios" onClick={onClose}
-                              className="font-clash font-bold text-2xl tracking-wider text-black"
-                            >OVRN Studio</Link>
-                          ) : pathname === '/brands/academy' ? (
-                            <Link href="/brands/academy" onClick={onClose} className="text-[17px] leading-none whitespace-nowrap text-black">
-                              <span className="font-questrial font-bold tracking-wide">MergeX</span>{' '}
-                              <span className="font-questrial font-thin tracking-wide">Academy</span>
-                            </Link>
-                          ) : pathname === '/brands/mergex' ? (
-                            <Link href="/brands/mergex" onClick={onClose} className="flex items-center gap-1.5">
-                              <Image src="/logo/mergex logo black.png" alt="MergeX Logo" width={40} height={40} className="object-contain w-5 h-5" />
-                              <span className="font-questrial font-bold text-2xl tracking-[0.12em] text-black">MERGEX</span>
-                            </Link>
-                          ) : (
-                            <Link href="/" onClick={onClose} className="flex items-center">
-                              <span className="font-questrial font-bold text-2xl tracking-[0.12em] text-black">
-                                MERGEX
-                              </span>
-                            </Link>
-                          )}
+                            {pathname === '/brands/ovrn-studios' ? (
+                                <Link href="/brands/ovrn-studios" onClick={onClose}
+                                    className="font-clash font-bold text-2xl tracking-wider text-black"
+                                >OVRN Studio</Link>
+                            ) : pathname === '/brands/academy' ? (
+                                <Link href="/brands/academy" onClick={onClose} className="text-[17px] leading-none whitespace-nowrap text-black">
+                                    <span className="font-questrial font-bold tracking-wide">MergeX</span>{' '}
+                                    <span className="font-questrial font-thin tracking-wide">Academy</span>
+                                </Link>
+                            ) : pathname === '/brands/mergex' ? (
+                                <Link href="/brands/mergex" onClick={onClose} className="flex items-center gap-1.5">
+                                    <Image src="/logo/mergex logo black.png" alt="MergeX Logo" width={40} height={40} className="object-contain w-5 h-5" />
+                                    <span className="font-questrial font-bold text-2xl tracking-[0.12em] text-black">MERGEX</span>
+                                </Link>
+                            ) : (
+                                <Link href="/" onClick={onClose} className="flex items-center">
+                                    <span className="font-questrial font-bold text-2xl tracking-[0.12em] text-black">
+                                        MERGEX
+                                    </span>
+                                </Link>
+                            )}
                         </div>
 
                         {/* Scrollable Menu Content Area */}
                         <div className="flex-1 overflow-y-auto overscroll-contain px-6 py-4">
                             <div className="flex flex-col">
-                                 {/* About */}
-                                 <Link
-                                     href="/about"
-                                     onClick={onClose}
-                                     className="group flex items-center justify-between py-5 border-b border-black/5"
-                                 >
-                                     <span className="text-xl font-medium text-black tracking-[0.05em] group-hover:text-violet-600 transition-colors">
-                                         About
-                                     </span>
-                                     <ArrowUpRight size={20} className="text-black/30 group-hover:text-violet-600 transition-colors" />
-                                 </Link>
+                                {/* About */}
+                                <Link
+                                    href="/about"
+                                    onClick={onClose}
+                                    className="group flex items-center justify-between py-5 border-b border-black/5"
+                                >
+                                    <span className="text-xl font-medium text-black tracking-[0.05em] group-hover:text-violet-600 transition-colors">
+                                        About
+                                    </span>
+                                    <ArrowUpRight size={20} className="text-black/30 group-hover:text-violet-600 transition-colors" />
+                                </Link>
 
-                                 {/* Launches */}
-                                 <Link
-                                     href={isHome ? "/#works" : "/launches"}
-                                     onClick={onClose}
-                                     className="group flex items-center justify-between py-5 border-b border-black/5"
-                                 >
-                                     <span className="text-xl font-medium text-black tracking-[0.05em] group-hover:text-violet-600 transition-colors">
-                                         Launches
-                                     </span>
-                                     <ArrowUpRight size={20} className="text-black/30 group-hover:text-violet-600 transition-colors" />
-                                 </Link>
+                                {/* Launches */}
+                                <Link
+                                    href={isHome ? "/#works" : "/launches"}
+                                    onClick={onClose}
+                                    className="group flex items-center justify-between py-5 border-b border-black/5"
+                                >
+                                    <span className="text-xl font-medium text-black tracking-[0.05em] group-hover:text-violet-600 transition-colors">
+                                        Launches
+                                    </span>
+                                    <ArrowUpRight size={20} className="text-black/30 group-hover:text-violet-600 transition-colors" />
+                                </Link>
 
-                                 {/* studio */}
-                                 <Link
-                                     href={isHome ? "/brands/mergex" : "/studio"}
-                                     onClick={onClose}
-                                     className="group flex items-center justify-between py-5 border-b border-black/5"
-                                 >
-                                     <span className="text-xl font-medium text-black tracking-[0.05em] group-hover:text-violet-600 transition-colors">
-                                         studio
-                                     </span>
-                                     <ArrowUpRight size={20} className="text-black/30 group-hover:text-violet-600 transition-colors" />
-                                 </Link>
+                                {/* studio */}
+                                <Link
+                                    href={isHome ? "/brands/mergex" : "/studio"}
+                                    onClick={onClose}
+                                    className="group flex items-center justify-between py-5 border-b border-black/5"
+                                >
+                                    <span className="text-xl font-medium text-black tracking-[0.05em] group-hover:text-violet-600 transition-colors">
+                                        studio
+                                    </span>
+                                    <ArrowUpRight size={20} className="text-black/30 group-hover:text-violet-600 transition-colors" />
+                                </Link>
 
-                                 {/* contact */}
-                                 <Link
-                                     href="/contact"
-                                     onClick={onClose}
-                                     className="group flex items-center justify-between py-5"
-                                 >
-                                     <span className="text-xl font-medium text-black tracking-[0.05em] group-hover:text-violet-600 transition-colors">
-                                         contact
-                                     </span>
-                                     <ArrowUpRight size={20} className="text-black/30 group-hover:text-violet-600 transition-colors" />
-                                 </Link>
+                                {/* contact */}
+                                <Link
+                                    href="/contact"
+                                    onClick={onClose}
+                                    className="group flex items-center justify-between py-5"
+                                >
+                                    <span className="text-xl font-medium text-black tracking-[0.05em] group-hover:text-violet-600 transition-colors">
+                                        contact
+                                    </span>
+                                    <ArrowUpRight size={20} className="text-black/30 group-hover:text-violet-600 transition-colors" />
+                                </Link>
                             </div>
                         </div>
 
                         {/* Fixed Footer Tagline (Always Visible at the Bottom) */}
                         <div className="w-full py-5 border-t border-black/5 bg-transparent shrink-0 text-center">
                             <p className="text-black/45 text-[10px] sm:text-xs font-semibold tracking-[0.22em] uppercase font-roboto">
-                                {isHome ? "one system, zero friction." : "MergeX — Software & AI"}
+                                {isHome ? "one system, zero friction." : "MergeX - Software & AI"}
                             </p>
                         </div>
                     </motion.div>
