@@ -15,7 +15,7 @@ export const metadata: Metadata = {
 
 export default function LaunchesPage() {
   return (
-    <main className="min-h-screen bg-[var(--bg-primary)] text-[var(--text-primary)] font-body">
+    <main className="min-h-screen bg-white text-[var(--text-primary)] font-body">
       {/* Hero */}
       <section className="max-w-[1400px] mx-auto px-6 md:px-12 pt-40 pb-16">
         <h1 className="text-4xl md:text-6xl font-questrial font-bold tracking-tight max-w-2xl leading-[1.1] mb-6">
