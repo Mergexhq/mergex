@@ -158,16 +158,16 @@ export function Navbar() {
                                     <Image
                                         src="/logo/mergex logo black.png"
                                         alt="MergeX Logo"
-                                        width={40}
-                                        height={40}
-                                        className={`object-contain transition-all duration-300 w-6 h-6 xl:w-[26px] xl:h-[26px] 2xl:w-7 2xl:h-7 ${isLightPage ? '' : 'brightness-0 invert'}`}
+                                        width={32}
+                                        height={32}
+                                        className={`object-contain transition-all duration-300 w-5 h-5 xl:w-[20px] xl:h-[20px] 2xl:w-[22px] 2xl:h-[22px] ${isLightPage ? '' : 'brightness-0 invert'}`}
                                     />
                                     <span
-                                        className={`font-questrial text-[21px] xl:text-[24px] 2xl:text-[27px] tracking-[0.12em] ml-2.5 xl:ml-3 flex items-center ${textColorClass} transition-colors duration-300`}
+                                        className={`font-questrial text-[17px] xl:text-[19px] 2xl:text-[21px] tracking-[0.12em] ml-2.5 xl:ml-3 flex items-center ${textColorClass} transition-colors duration-300`}
                                     >
                                         <span className="font-bold">MERGEX</span>
                                         {pathname === '/studio' && (
-                                            <span className="font-light tracking-[0.2em] ml-2.5 opacity-65">
+                                            <span className="font-light tracking-[0.2em] ml-2 opacity-65">
                                                 STUDIO
                                             </span>
                                         )}
@@ -220,11 +220,11 @@ export function Navbar() {
                                   <Image
                                     src="/logo/mergex logo black.png"
                                     alt="MergeX Logo"
-                                    width={40}
-                                    height={40}
-                                    className={`object-contain transition-all duration-300 w-5 h-5 ${isLightPage ? '' : 'brightness-0 invert'}`}
+                                    width={32}
+                                    height={32}
+                                    className={`object-contain transition-all duration-300 w-4 h-4 ${isLightPage ? '' : 'brightness-0 invert'}`}
                                   />
-                                  <span className={`font-questrial text-xl tracking-[0.12em] ml-1 flex items-center ${isLightPage ? 'text-black' : 'text-white'}`}>
+                                  <span className={`font-questrial text-[16px] tracking-[0.12em] ml-1 flex items-center ${isLightPage ? 'text-black' : 'text-white'}`}>
                                     <span className="font-bold">MERGEX</span>
                                     {pathname === '/studio' && (
                                         <span className="font-light tracking-[0.18em] ml-1.5 opacity-65">
