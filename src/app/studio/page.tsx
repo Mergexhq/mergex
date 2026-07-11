@@ -1,4 +1,5 @@
 import type { Metadata } from 'next';
+import { ExperimentsGallery } from '@/modules/work';
 
 export const metadata: Metadata = {
   title: 'Studio',
@@ -132,6 +133,9 @@ export default function StudioPage() {
           })}
         </div>
       </section>
+
+      {/* Labs Portfolio Gallery / Explorations */}
+      <ExperimentsGallery />
     </main>
   );
 }

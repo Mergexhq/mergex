@@ -2,7 +2,7 @@ import type { Metadata } from 'next';
 import {
     HomeHero,
 } from '@/modules/home/components';
-import { ShowcaseFeed, ExperimentsGallery } from '@/modules/work';
+import { ShowcaseFeed } from '@/modules/work';
 
 export const metadata: Metadata = {
   title: 'The MergeX Company',
@@ -57,9 +57,6 @@ export default function HomePage() {
 
             {/* Showcase/Works Feed */}
             <ShowcaseFeed />
-
-            {/* Labs Portfolio Gallery */}
-            <ExperimentsGallery />
         </main>
     );
 }
