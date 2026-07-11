@@ -2,7 +2,6 @@
 
 import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { ChevronDown } from 'lucide-react';
 
 interface FAQItem {
     question: string;
@@ -52,41 +51,52 @@ export default function FAQ() {
     };
 
     return (
-        <section className="bg-background py-16 md:py-24 border-t border-black/5 relative overflow-hidden z-20">
-            <div className="max-w-4xl mx-auto px-6 md:px-8">
-                {/* FAQ Header */}
-                <div className="text-center mb-16">
-                    <span className="text-xs font-semibold tracking-[0.25em] text-[#8B5CF6] uppercase block mb-3 font-clash">
-                        Got Questions?
-                    </span>
-                    <h2 className="text-3xl md:text-5xl font-clash font-bold text-black tracking-tight leading-tight">
+        <section className="bg-white py-20 border-t border-black/5 relative overflow-hidden z-20">
+            <div className="container mx-auto max-w-[1400px] px-6 md:px-8">
+                
+                {/* FAQ Header (Left-aligned, massive clamp size title) */}
+                <div className="mb-16">
+                    <h2 
+                        className="font-questrial font-semibold tracking-wide text-black"
+                        style={{ fontSize: "clamp(2.5rem, 5.5vw, 4.5rem)", lineHeight: 1.1, letterSpacing: "0.02em" }}
+                    >
                         Frequently Asked Questions
                     </h2>
                 </div>
 
-                {/* FAQ Accordions */}
-                <div className="space-y-4">
+                {/* FAQ Rows List with bottom borders and plus/minus icons */}
+                <div className="border-t border-black/10 w-full">
                     {FAQ_ITEMS.map((item, index) => {
                         const isOpen = activeIndex === index;
                         return (
                             <div 
                                 key={index} 
-                                className="border border-black/5 rounded-2xl bg-white/40 backdrop-blur-sm overflow-hidden transition-all duration-300 hover:border-black/10 hover:shadow-[0_4px_20px_rgba(0,0,0,0.02)]"
+                                className="border-b border-black/10 w-full"
                             >
                                 <button
                                     onClick={() => toggleIndex(index)}
-                                    className="w-full py-5 px-6 md:py-6 md:px-8 flex items-center justify-between gap-4 text-left font-clash focus:outline-none"
+                                    className="w-full py-8 flex items-center justify-between gap-8 text-left focus:outline-none group"
                                 >
-                                    <span className="text-lg md:text-xl font-medium text-black/90 tracking-wide">
+                                    <span 
+                                        className="text-xl md:text-2xl lg:text-3xl font-questrial font-medium text-black/90 tracking-wide leading-tight transition-colors duration-300 group-hover:text-black/60"
+                                        style={{ letterSpacing: "0.015em" }}
+                                    >
                                         {item.question}
                                     </span>
-                                    <motion.div
-                                        animate={{ rotate: isOpen ? 180 : 0 }}
-                                        transition={{ duration: 0.3, ease: [0.16, 1, 0.3, 1] }}
-                                        className="text-black/40 shrink-0 w-8 h-8 rounded-full bg-black/5 flex items-center justify-center"
-                                    >
-                                        <ChevronDown size={18} />
-                                    </motion.div>
+                                    
+                                    {/* Animated Plus to Minus symbol */}
+                                    <div className="relative flex items-center justify-center w-6 h-6 shrink-0 text-black">
+                                        <motion.span
+                                            animate={{ rotate: isOpen ? 90 : 0 }}
+                                            className="absolute w-5 h-0.5 bg-current"
+                                            transition={{ duration: 0.3, ease: [0.16, 1, 0.3, 1] }}
+                                        />
+                                        <motion.span
+                                            animate={{ rotate: isOpen ? 0 : 90 }}
+                                            className="absolute w-5 h-0.5 bg-current"
+                                            transition={{ duration: 0.3, ease: [0.16, 1, 0.3, 1] }}
+                                        />
+                                    </div>
                                 </button>
 
                                 <AnimatePresence initial={false}>
@@ -97,7 +107,7 @@ export default function FAQ() {
                                             exit={{ height: 0, opacity: 0 }}
                                             transition={{ duration: 0.35, ease: [0.16, 1, 0.3, 1] }}
                                         >
-                                            <div className="pb-6 px-6 md:pb-8 md:px-8 pt-0 text-sm md:text-base leading-relaxed text-black/70 font-light font-body whitespace-pre-line">
+                                            <div className="pb-8 pr-12 text-base md:text-lg leading-relaxed text-black/70 font-light font-body whitespace-pre-line max-w-4xl">
                                                 {item.answer}
                                             </div>
                                         </motion.div>
@@ -107,6 +117,7 @@ export default function FAQ() {
                         );
                     })}
                 </div>
+
             </div>
         </section>
     );
