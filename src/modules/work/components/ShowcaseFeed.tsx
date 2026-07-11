@@ -21,13 +21,13 @@ const PARALLAX = 100;
 
 export const ShowcaseFeed = () => {
   const sectionRef = useRef<HTMLDivElement>(null);
-  const pinnedRef  = useRef<HTMLDivElement>(null);
-  const trackRef   = useRef<HTMLDivElement>(null);
+  const pinnedRef = useRef<HTMLDivElement>(null);
+  const trackRef = useRef<HTMLDivElement>(null);
 
   useGSAP(() => {
-    const track   = trackRef.current;
+    const track = trackRef.current;
     const section = sectionRef.current;
-    const pinned  = pinnedRef.current;
+    const pinned = pinnedRef.current;
     if (!track || !section || !pinned) return;
 
     /** Distance the track must travel so the last card ends with matching gap on the right. */
@@ -153,7 +153,7 @@ export const ShowcaseFeed = () => {
 };
 
 /* ────────────────────────────────────────────────────────────────
-   MobileWorkCard — simplified vertical card for mobile
+   MobileWorkCard - simplified vertical card for mobile
    ──────────────────────────────────────────────────────────────── */
 const MobileWorkCard = ({ project, index }: { project: (typeof worksData)[number]; index: number }) => {
   const [showInfo, setShowInfo] = useState(false);
@@ -223,9 +223,8 @@ const MobileWorkCard = ({ project, index }: { project: (typeof worksData)[number
 
       {/* Info Overlay */}
       <div
-        className={`absolute inset-0 bg-black/75 backdrop-blur-xl flex flex-col justify-between p-6 transition-all duration-500 z-20 rounded-2xl pointer-events-auto ${
-          showInfo ? "opacity-100" : "opacity-0 pointer-events-none"
-        }`}
+        className={`absolute inset-0 bg-black/75 backdrop-blur-xl flex flex-col justify-between p-6 transition-all duration-500 z-20 rounded-2xl pointer-events-auto ${showInfo ? "opacity-100" : "opacity-0 pointer-events-none"
+          }`}
       >
         <p className="text-white text-sm font-normal leading-relaxed mt-4">
           {project.summary}
@@ -248,7 +247,7 @@ const MobileWorkCard = ({ project, index }: { project: (typeof worksData)[number
 
 
 /* ────────────────────────────────────────────────────────────────
-   WorkCard — desktop horizontal scroll card
+   WorkCard - desktop horizontal scroll card
    ──────────────────────────────────────────────────────────────── */
 type CardProps = {
   project: (typeof worksData)[number];
@@ -278,10 +277,10 @@ const WorkCard = ({ project, index, total, isTwin = false }: CardProps) => {
         <img
           className="works-card-img absolute object-cover will-change-transform select-none"
           style={{
-            width:  "120%",
+            width: "120%",
             height: "120%",
-            top:    "-10%",
-            left:   "-10%",
+            top: "-10%",
+            left: "-10%",
             maxWidth: "none",
             maxHeight: "none",
           }}
@@ -301,7 +300,7 @@ const WorkCard = ({ project, index, total, isTwin = false }: CardProps) => {
 
       {/* ── Overlaid Minimal Details (Title at top left, Category at bottom left) ── */}
       <div className="absolute inset-0 flex flex-col justify-between p-8 md:p-12 z-10 pointer-events-none">
-        
+
         {/* Top-Left: Title Only (Even bigger + letter spacing) */}
         <div className="max-w-[85%] text-left mt-2">
           <h3 className="text-white font-questrial font-bold tracking-[0.04em] leading-tight text-3xl sm:text-4xl lg:text-5xl">
@@ -337,9 +336,8 @@ const WorkCard = ({ project, index, total, isTwin = false }: CardProps) => {
 
       {/* ── Hover Info Overlay (Blurs bg and shows project info, Image 4 style) ── */}
       <div
-        className={`absolute inset-0 bg-black/75 backdrop-blur-xl flex flex-col justify-between p-8 md:p-12 transition-all duration-500 z-20 rounded-2xl md:rounded-[1.5rem] pointer-events-auto ${
-          showInfo ? "opacity-100 scale-100" : "opacity-0 scale-98 pointer-events-none"
-        }`}
+        className={`absolute inset-0 bg-black/75 backdrop-blur-xl flex flex-col justify-between p-8 md:p-12 transition-all duration-500 z-20 rounded-2xl md:rounded-[1.5rem] pointer-events-auto ${showInfo ? "opacity-100 scale-100" : "opacity-0 scale-98 pointer-events-none"
+          }`}
       >
         <div className="flex flex-col gap-6 max-w-xl text-left mt-8 md:mt-12">
           <p className="text-white text-base sm:text-lg md:text-xl font-normal leading-relaxed">

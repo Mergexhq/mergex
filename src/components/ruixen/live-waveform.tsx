@@ -15,7 +15,7 @@ export interface LiveWaveformProps {
   barGap?: number;
   /** Bar corner radius */
   barRadius?: number;
-  /** Bar color — inherits currentColor when unset */
+  /** Bar color - inherits currentColor when unset */
   barColor?: string;
   /** Waveform height in pixels */
   height?: number;

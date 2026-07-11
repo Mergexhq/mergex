@@ -28,7 +28,7 @@ export default function FooterRevealWrapper({ children }: FooterRevealWrapperPro
             // so the main content scrolls by exactly the footer's natural height.
             const contentHeight = contentEl.offsetHeight;
             document.documentElement.style.setProperty('--footer-height', `${contentHeight}px`);
-            
+
             // Re-trigger scroll calculation to position correctly on mount/resize
             handleScroll();
         };
@@ -51,10 +51,10 @@ export default function FooterRevealWrapper({ children }: FooterRevealWrapperPro
                 // Start parallax slightly earlier for a more organic transition
                 const startThreshold = maxScroll - contentHeight * 1.3;
                 const totalRange = contentHeight * 1.3;
-                
+
                 // Progress from 0 (starts slide) to 1 (reaches final resting place)
                 const progress = Math.max(0, Math.min(1, (scrollY - startThreshold) / totalRange));
-                
+
                 // Slide content upward: starts pushed down by PARALLAX_OFFSET, ends at 0
                 const translateY = (1 - progress) * PARALLAX_OFFSET;
                 contentEl.style.transform = `translate3d(0, ${translateY}px, 0)`;
@@ -96,7 +96,7 @@ export default function FooterRevealWrapper({ children }: FooterRevealWrapperPro
                 overflow: 'hidden',
             }}
         >
-            {/* Full-viewport black backdrop — fixed behind everything, never translates.
+            {/* Full-viewport black backdrop - fixed behind everything, never translates.
                 This guarantees solid black covers the entire screen beneath the main content,
                 regardless of parallax offset or mobile screen height. */}
             <div
@@ -109,7 +109,7 @@ export default function FooterRevealWrapper({ children }: FooterRevealWrapperPro
                 }}
             />
 
-            <div 
+            <div
                 ref={contentRef}
                 style={{
                     willChange: 'transform',

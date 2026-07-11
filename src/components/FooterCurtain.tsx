@@ -116,7 +116,7 @@ export default function FooterCurtain() {
                 </div>
             </div>
 
-            {/* Middle: Huge Centered MERGEX Wordmark — Particle Typography Canvas */}
+            {/* Middle: Huge Centered MERGEX Wordmark - Particle Typography Canvas */}
             <div className="w-[calc(100%+3rem)] md:w-[calc(100%+6rem)] lg:w-[calc(100%+10rem)] -mx-6 md:-mx-12 lg:-mx-20 relative z-10 mb-1 md:mb-2" style={{ height: 'clamp(160px, 26vw, 420px)' }}>
                 <ParticleTypography
                     text="MERGEX"

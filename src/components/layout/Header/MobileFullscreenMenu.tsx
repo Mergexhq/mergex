@@ -82,7 +82,7 @@ export function MobileFullscreenMenu() {
                 </div>
             </motion.button>
 
-            {/* Full-Screen Menu Overlay — circle clip-path expand from button */}
+            {/* Full-Screen Menu Overlay - circle clip-path expand from button */}
             <AnimatePresence>
                 {isOpen && (
                     <motion.div
@@ -93,7 +93,7 @@ export function MobileFullscreenMenu() {
                         transition={{ duration: 0.55, ease: [0.16, 1, 0.3, 1] }}
                         className="lg:hidden fixed inset-0 z-[1300] bg-black flex flex-col items-start justify-end pb-24 px-8"
                     >
-                        {/* Nav Links — stagger in from bottom */}
+                        {/* Nav Links - stagger in from bottom */}
                         <nav className="flex flex-col items-start gap-1 w-full">
                             {links.map((link, i) => {
                                 const isActive = link.href === '/'

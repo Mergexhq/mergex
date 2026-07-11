@@ -105,11 +105,10 @@ function VoiceCard() {
             >
               <button
                 onClick={() => setIsMuted(m => !m)}
-                className={`flex items-center gap-2 text-xs font-bold tracking-[0.12em] uppercase px-5 py-3 rounded-full border transition-all ${
-                  isMuted
+                className={`flex items-center gap-2 text-xs font-bold tracking-[0.12em] uppercase px-5 py-3 rounded-full border transition-all ${isMuted
                     ? 'bg-black/5 text-black/40 border-black/5'
                     : 'bg-black/5 text-black border-black/10 hover:bg-black/10'
-                }`}
+                  }`}
               >
                 {isMuted ? <MicOff size={13} /> : <Mic size={13} />}
                 {isMuted ? 'Unmute' : 'Mute'}
@@ -192,9 +191,8 @@ function ChatCard() {
                   key={i}
                   className={`flex ${b.user ? 'justify-end' : 'justify-start'}`}
                 >
-                  <div className={`text-[11px] leading-snug rounded-xl px-3 py-1.5 max-w-[85%] ${
-                    b.user ? 'bg-black text-white font-medium' : 'bg-black/10 text-black/70'
-                  }`}>
+                  <div className={`text-[11px] leading-snug rounded-xl px-3 py-1.5 max-w-[85%] ${b.user ? 'bg-black text-white font-medium' : 'bg-black/10 text-black/70'
+                    }`}>
                     {b.text}
                   </div>
                 </div>
@@ -246,17 +244,16 @@ function ChatCard() {
             </div>
 
             {/* Messages */}
-            <div 
+            <div
               ref={messageListRef}
               className="flex-1 overflow-y-auto px-6 py-4 flex flex-col gap-3 min-h-0 bg-neutral-50/50 h-[300px]"
             >
               {messages.map((msg, i) => (
                 <div key={i} className={`flex ${msg.role === 'user' ? 'justify-end' : 'justify-start'}`}>
-                  <div className={`max-w-[80%] text-xs md:text-sm leading-relaxed rounded-2xl px-4 py-2.5 ${
-                    msg.role === 'user'
+                  <div className={`max-w-[80%] text-xs md:text-sm leading-relaxed rounded-2xl px-4 py-2.5 ${msg.role === 'user'
                       ? 'bg-black text-white font-medium shadow-sm'
                       : 'bg-white text-black/80 border border-black/10 shadow-sm'
-                  }`}>
+                    }`}>
                     {msg.text}
                   </div>
                 </div>
@@ -318,7 +315,7 @@ export default function InteractiveExperiences() {
             This is what makes MergeX different.
           </h2>
           <p className="text-[var(--text-secondary)] text-base md:text-lg font-light leading-relaxed">
-            Instead of telling you what we build — experience it.
+            Instead of telling you what we build - experience it.
           </p>
         </div>
 
