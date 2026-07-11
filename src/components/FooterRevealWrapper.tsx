@@ -91,19 +91,31 @@ export default function FooterRevealWrapper({ children }: FooterRevealWrapperPro
                 left: 0,
                 width: '100%',
                 zIndex: 1,
-                // Extend the wrapper upward by PARALLAX_OFFSET so the solid black
-                // backdrop fills the full curtain area even when content is translated down.
                 paddingTop: PARALLAX_OFFSET,
                 backgroundColor: '#000000',
                 overflow: 'hidden',
             }}
         >
+            {/* Full-viewport black backdrop — fixed behind everything, never translates.
+                This guarantees solid black covers the entire screen beneath the main content,
+                regardless of parallax offset or mobile screen height. */}
+            <div
+                style={{
+                    position: 'fixed',
+                    inset: 0,
+                    backgroundColor: '#000000',
+                    zIndex: -1,
+                    pointerEvents: 'none',
+                }}
+            />
+
             <div 
                 ref={contentRef}
                 style={{
                     willChange: 'transform',
-                    // Start translated down by the full offset; JS scroll handler drives it to 0
                     transform: `translate3d(0, ${PARALLAX_OFFSET}px, 0)`,
+                    position: 'relative',
+                    zIndex: 1,
                 }}
             >
                 {children}

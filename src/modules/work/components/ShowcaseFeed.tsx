@@ -1,6 +1,8 @@
 "use client";
 
 import React, { useRef, useState } from "react";
+import { motion, useScroll, useTransform } from "framer-motion";
+
 import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
@@ -72,8 +74,7 @@ export const ShowcaseFeed = () => {
   return (
     <div id="works" ref={sectionRef} className="relative bg-white w-full">
 
-      {/* ── Section header ──
-          Scrolls up naturally in normal document flow. */}
+      {/* ── Section header ── */}
       <header className="flex items-end justify-between px-8 md:px-[4vw] pt-24 pb-12 select-none bg-white">
         <h2
           className="font-questrial font-bold uppercase leading-none text-black"
@@ -86,11 +87,18 @@ export const ShowcaseFeed = () => {
         </span>
       </header>
 
-      {/* ── Pinned viewport container ── */}
+      {/* ── MOBILE: Vertical card stack (below md) ── */}
+      <div className="md:hidden flex flex-col gap-5 px-4 pb-16">
+        {worksData.map((project, index) => (
+          <MobileWorkCard key={project.title} project={project} index={index} />
+        ))}
+      </div>
+
+      {/* ── DESKTOP: Pinned horizontal scroll (md and above) ── */}
       <div
         ref={pinnedRef}
         id="works-pinned"
-        className="h-screen w-full overflow-hidden flex items-center bg-white"
+        className="hidden md:flex h-screen w-full overflow-hidden items-center bg-white"
       >
         {/* ── Horizontal card track ── */}
         <div
@@ -109,7 +117,7 @@ export const ShowcaseFeed = () => {
             total={worksData.length}
           />
 
-          {/* Column 2: Twin Cards side-by-side (Image 5 reference layout) */}
+          {/* Column 2: Twin Cards side-by-side */}
           <div className="flex items-center gap-[4vw]" style={{ width: "85vw" }}>
             <WorkCard
               project={worksData[1]}
@@ -145,9 +153,102 @@ export const ShowcaseFeed = () => {
 };
 
 /* ────────────────────────────────────────────────────────────────
-   WorkCard
-   Interactive card with direct image view, minimal overlay texts,
-   and hover-trigger backdrop blur info panel.
+   MobileWorkCard — simplified vertical card for mobile
+   ──────────────────────────────────────────────────────────────── */
+const MobileWorkCard = ({ project, index }: { project: (typeof worksData)[number]; index: number }) => {
+  const [showInfo, setShowInfo] = useState(false);
+  const hasLink = Boolean(project.liveUrl && project.liveUrl.trim() !== "" && project.liveUrl !== "#");
+
+  // Parallax: track card scroll position within the viewport
+  const cardRef = useRef<HTMLAnchorElement>(null);
+  const { scrollYProgress } = useScroll({
+    target: cardRef,
+    offset: ["start end", "end start"],
+  });
+  // Image shifts from -60px (card entering from bottom) to +60px (card leaving at top)
+  const imageY = useTransform(scrollYProgress, [0, 1], ["-60px", "60px"]);
+
+  return (
+    <a
+      ref={cardRef}
+      href={project.liveUrl}
+      target="_blank"
+      rel="noopener noreferrer"
+      className="group relative w-full overflow-hidden rounded-2xl bg-neutral-900 text-white block cursor-pointer"
+      style={{ height: '70vw', minHeight: '220px', maxHeight: '420px' }}
+      onMouseLeave={() => setShowInfo(false)}
+    >
+      {/* Background Image with scroll-driven parallax */}
+      <div className="absolute inset-0 overflow-hidden rounded-2xl">
+        <motion.img
+          className="absolute object-cover will-change-transform select-none"
+          style={{
+            width: '100%',
+            height: '130%',
+            top: '-15%',
+            y: imageY,
+          }}
+          src={project.posterUrl}
+          alt={project.title}
+          loading={index < 2 ? "eager" : "lazy"}
+          draggable={false}
+        />
+      </div>
+
+      {/* Overlays */}
+      <div className="absolute inset-0 bg-black/30 rounded-2xl" />
+      <div className="absolute inset-x-0 top-0 h-32 bg-gradient-to-b from-black/50 to-transparent rounded-t-2xl" />
+      <div className="absolute inset-x-0 bottom-0 h-36 bg-gradient-to-t from-black/70 to-transparent rounded-b-2xl" />
+
+      {/* Content */}
+      <div className="absolute inset-0 flex flex-col justify-between p-6 z-10 pointer-events-none">
+        <div className="max-w-[85%]">
+          <h3 className="text-white font-questrial font-bold tracking-[0.04em] leading-tight text-2xl">
+            {project.title}
+          </h3>
+        </div>
+        <div className="flex items-end justify-between w-full pointer-events-auto">
+          <p className="font-questrial text-sm font-bold tracking-[0.06em] text-white/95 select-none max-w-[70%]">
+            {project.category}
+          </p>
+          <button
+            type="button"
+            className="w-10 h-10 rounded-full bg-[#FAF9F6] text-black flex items-center justify-center shadow-lg z-30"
+            onClick={(e) => { e.stopPropagation(); e.preventDefault(); setShowInfo(!showInfo); }}
+          >
+            <span className="font-semibold text-xl leading-none select-none">+</span>
+          </button>
+        </div>
+      </div>
+
+      {/* Info Overlay */}
+      <div
+        className={`absolute inset-0 bg-black/75 backdrop-blur-xl flex flex-col justify-between p-6 transition-all duration-500 z-20 rounded-2xl pointer-events-auto ${
+          showInfo ? "opacity-100" : "opacity-0 pointer-events-none"
+        }`}
+      >
+        <p className="text-white text-sm font-normal leading-relaxed mt-4">
+          {project.summary}
+        </p>
+        <div className="flex items-end justify-between w-full">
+          <p className="font-questrial text-sm font-bold tracking-[0.06em] text-white/95 max-w-[65%]">
+            {project.category}
+          </p>
+          {hasLink && (
+            <div className="flex items-center gap-2 rounded-full bg-[#FAF9F6] text-black px-5 py-2 font-semibold text-xs shadow-lg">
+              <span>View Project</span>
+              <ArrowUpRight size={12} />
+            </div>
+          )}
+        </div>
+      </div>
+    </a>
+  );
+};
+
+
+/* ────────────────────────────────────────────────────────────────
+   WorkCard — desktop horizontal scroll card
    ──────────────────────────────────────────────────────────────── */
 type CardProps = {
   project: (typeof worksData)[number];

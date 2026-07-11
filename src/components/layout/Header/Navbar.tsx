@@ -5,7 +5,7 @@ import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import Image from 'next/image';
 import { motion, AnimatePresence, useScroll, useMotionValueEvent } from 'framer-motion';
-import { MobileBottomDock } from '@/components/layout/Header/MobileBottomDock';
+import { MobileFullscreenMenu } from '@/components/layout/Header/MobileFullscreenMenu';
 
 export function Navbar() {
     const [forceHidden, setForceHidden] = useState(false);
@@ -383,8 +383,8 @@ export function Navbar() {
                 </div>
             </motion.div>
 
-            {/* Mobile Bottom Dock (replaces hamburger drawer on mobile) */}
-            <MobileBottomDock />
+            {/* Mobile Fullscreen Circle-Reveal Menu */}
+            <MobileFullscreenMenu />
         </>
     );
 }
