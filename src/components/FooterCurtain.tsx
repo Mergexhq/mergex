@@ -32,14 +32,17 @@ function SocialIcon({ icon }: { icon: string }) {
 export default function FooterCurtain() {
     const pathname = usePathname();
     const isHome = pathname === '/';
+    const isStudio = pathname === '/studio';
 
     return (
         <div
-            className="bg-black pt-10 md:pt-12 pb-6 md:pb-8 relative w-full flex flex-col justify-end min-h-[24vh] lg:min-h-[30vh] px-6 md:px-12 lg:px-20"
+            className={`pt-10 md:pt-12 pb-6 md:pb-8 relative w-full flex flex-col justify-end min-h-[24vh] lg:min-h-[30vh] px-6 md:px-12 lg:px-20 transition-colors duration-500 ${
+                isStudio ? 'bg-white' : 'bg-black'
+            }`}
             style={{ isolation: 'isolate', overflow: 'visible' }}
         >
-            {/* Full-viewport black backdrop so scaling main card never reveals body bg */}
-            <div className="fixed inset-0 bg-black pointer-events-none" style={{ zIndex: -1 }} />
+            {/* Full-viewport black/white backdrop so scaling main card never reveals body bg */}
+            <div className={`fixed inset-0 pointer-events-none transition-colors duration-500 ${isStudio ? 'bg-white' : 'bg-black'}`} style={{ zIndex: -1 }} />
 
             {/* Top Bar: Nav Menu (left) + Social Icons & Scroll to Top (right) */}
             <div className="w-full max-w-[1800px] mx-auto flex flex-col md:flex-row justify-between items-center gap-6 mb-6 relative z-20">
@@ -47,31 +50,41 @@ export default function FooterCurtain() {
                 <div className="flex flex-wrap items-center justify-start gap-x-8 gap-y-3">
                     <Link
                         href="/"
-                        className="font-clash text-sm xl:text-base font-normal tracking-wide text-white/70 hover:text-white transition-colors"
+                        className={`font-clash text-sm xl:text-base font-normal tracking-wide transition-colors ${
+                            isStudio ? 'text-black/60 hover:text-black' : 'text-white/70 hover:text-white'
+                        }`}
                     >
                         Home
                     </Link>
                     <Link
                         href="/about"
-                        className="font-clash text-sm xl:text-base font-normal tracking-wide text-white/70 hover:text-white transition-colors"
+                        className={`font-clash text-sm xl:text-base font-normal tracking-wide transition-colors ${
+                            isStudio ? 'text-black/60 hover:text-black' : 'text-white/70 hover:text-white'
+                        }`}
                     >
                         About
                     </Link>
                     <Link
                         href={isHome ? "/#works" : "/launches"}
-                        className="font-clash text-sm xl:text-base font-normal tracking-wide text-white/70 hover:text-white transition-colors"
+                        className={`font-clash text-sm xl:text-base font-normal tracking-wide transition-colors ${
+                            isStudio ? 'text-black/60 hover:text-black' : 'text-white/70 hover:text-white'
+                        }`}
                     >
                         Launches
                     </Link>
                     <Link
                         href={isHome ? "/brands/mergex" : "/studio"}
-                        className="font-clash text-sm xl:text-base font-normal tracking-wide text-white/70 hover:text-white transition-colors"
+                        className={`font-clash text-sm xl:text-base font-normal tracking-wide transition-colors ${
+                            isStudio ? 'text-black/60 hover:text-black' : 'text-white/70 hover:text-white'
+                        }`}
                     >
                         Studio
                     </Link>
                     <Link
                         href="/contact"
-                        className="font-clash text-sm xl:text-base font-normal tracking-wide text-white/70 hover:text-white transition-colors"
+                        className={`font-clash text-sm xl:text-base font-normal tracking-wide transition-colors ${
+                            isStudio ? 'text-black/60 hover:text-black' : 'text-white/70 hover:text-white'
+                        }`}
                     >
                         Contact
                     </Link>
@@ -83,7 +96,9 @@ export default function FooterCurtain() {
                         href="https://linkedin.com/company/mergex.co"
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="text-white/60 hover:text-white hover:scale-105 transition-all flex items-center justify-center"
+                        className={`hover:scale-105 transition-all flex items-center justify-center ${
+                            isStudio ? 'text-black/60 hover:text-black' : 'text-white/60 hover:text-white'
+                        }`}
                         aria-label="LinkedIn"
                     >
                         <SocialIcon icon="linkedin" />
@@ -92,7 +107,9 @@ export default function FooterCurtain() {
                         href="https://www.instagram.com/mergex.co"
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="text-white/60 hover:text-white hover:scale-105 transition-all flex items-center justify-center"
+                        className={`hover:scale-105 transition-all flex items-center justify-center ${
+                            isStudio ? 'text-black/60 hover:text-black' : 'text-white/60 hover:text-white'
+                        }`}
                         aria-label="Instagram"
                     >
                         <SocialIcon icon="instagram" />
@@ -101,14 +118,20 @@ export default function FooterCurtain() {
                         href="https://x.com/mergex.co"
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="text-white/60 hover:text-white hover:scale-105 transition-all flex items-center justify-center"
+                        className={`hover:scale-105 transition-all flex items-center justify-center ${
+                            isStudio ? 'text-black/60 hover:text-black' : 'text-white/60 hover:text-white'
+                        }`}
                         aria-label="X"
                     >
                         <SocialIcon icon="x" />
                     </a>
                     <button
                         onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
-                        className="w-9 h-9 rounded-full bg-white/5 border border-white/10 hover:bg-white hover:text-black transition-all flex items-center justify-center text-white shrink-0"
+                        className={`w-9 h-9 rounded-full transition-all flex items-center justify-center shrink-0 ${
+                            isStudio
+                                ? 'bg-black/5 border border-black/10 hover:bg-black hover:text-white text-black'
+                                : 'bg-white/5 border border-white/10 hover:bg-white hover:text-black text-white'
+                        }`}
                         aria-label="Back to Top"
                     >
                         <ArrowUp size={18} />
@@ -126,28 +149,34 @@ export default function FooterCurtain() {
                     particleDensity={4}
                     dispersionStrength={20}
                     returnSpeed={0.06}
-                    color="#ffffff"
+                    color={isStudio ? "#000000" : "#ffffff"}
                     className="absolute inset-0"
                 />
             </div>
 
             {/* Bottom Bar: Copyright (left) + Legal Links (right) */}
-            <div className="w-full max-w-[1800px] mx-auto pt-2 flex flex-col md:flex-row justify-between items-center gap-4 text-xs md:text-sm text-white/50 relative z-10 font-body">
+            <div className={`w-full max-w-[1800px] mx-auto pt-2 flex flex-col md:flex-row justify-between items-center gap-4 text-xs md:text-sm relative z-10 font-body ${
+                isStudio ? 'text-black/50' : 'text-white/50'
+            }`}>
                 {/* Bottom Left Info */}
                 <div className="flex flex-col md:flex-row gap-2 md:gap-4 items-center text-center md:text-left">
                     <p>© 2025-2026 MergeX. All rights reserved.</p>
-                    <span className="hidden md:block text-white/20">|</span>
-                    <p className="font-light text-white/40">
+                    <span className={`hidden md:block ${isStudio ? 'text-black/20' : 'text-white/20'}`}>|</span>
+                    <p className={`font-light ${isStudio ? 'text-black/40' : 'text-white/40'}`}>
                         We believe good systems outlast trends.
                     </p>
                 </div>
 
                 {/* Bottom Right Info */}
                 <div className="flex gap-6 items-center">
-                    <Link className="opacity-60 hover:text-white hover:opacity-100 transition-all font-light" href="/privacy-policy">
+                    <Link className={`opacity-60 transition-all font-light ${
+                        isStudio ? 'hover:text-black' : 'hover:text-white'
+                    }`} href="/privacy-policy">
                         Privacy Policy
                     </Link>
-                    <Link className="opacity-60 hover:text-white hover:opacity-100 transition-all font-light" href="/terms-of-use">
+                    <Link className={`opacity-60 transition-all font-light ${
+                        isStudio ? 'hover:text-black' : 'hover:text-white'
+                    }`} href="/terms-of-use">
                         Terms &amp; Use
                     </Link>
                 </div>

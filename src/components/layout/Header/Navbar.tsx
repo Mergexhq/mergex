@@ -60,7 +60,6 @@ export function Navbar() {
         '/terms-of-use',
         '/privacy-policy',
         '/launches',
-        '/studio',
     ];
 
     const isLightPageRaw =
@@ -164,9 +163,14 @@ export function Navbar() {
                                         className={`object-contain transition-all duration-300 w-6 h-6 xl:w-[26px] xl:h-[26px] 2xl:w-7 2xl:h-7 ${isLightPage ? '' : 'brightness-0 invert'}`}
                                     />
                                     <span
-                                        className={`font-questrial font-bold text-[21px] xl:text-[24px] 2xl:text-[27px] tracking-[0.12em] ml-2.5 xl:ml-3 flex items-center ${textColorClass} transition-colors duration-300`}
+                                        className={`font-questrial text-[21px] xl:text-[24px] 2xl:text-[27px] tracking-[0.12em] ml-2.5 xl:ml-3 flex items-center ${textColorClass} transition-colors duration-300`}
                                     >
-                                        MERGEX
+                                        <span className="font-bold">MERGEX</span>
+                                        {pathname === '/studio' && (
+                                            <span className="font-light tracking-[0.2em] ml-2.5 opacity-65">
+                                                STUDIO
+                                            </span>
+                                        )}
                                     </span>
                                 </Link>
                             </div>
@@ -220,8 +224,13 @@ export function Navbar() {
                                     height={40}
                                     className={`object-contain transition-all duration-300 w-5 h-5 ${isLightPage ? '' : 'brightness-0 invert'}`}
                                   />
-                                  <span className={`font-questrial font-bold text-xl tracking-[0.12em] ml-1 flex items-center ${isLightPage ? 'text-black' : 'text-white'}`}>
-                                    MERGEX
+                                  <span className={`font-questrial text-xl tracking-[0.12em] ml-1 flex items-center ${isLightPage ? 'text-black' : 'text-white'}`}>
+                                    <span className="font-bold">MERGEX</span>
+                                    {pathname === '/studio' && (
+                                        <span className="font-light tracking-[0.18em] ml-1.5 opacity-65">
+                                            STUDIO
+                                        </span>
+                                    )}
                                   </span>
                                 </Link>
                               );
