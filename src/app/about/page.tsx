@@ -57,6 +57,13 @@ export default function AboutPage() {
   return (
     <main className="about-page">
 
+      {/* Background Gaussian Blur Orbs */}
+      <div className="about-blur-bg" aria-hidden="true">
+        <div className="about-blur-orb orb-1" />
+        <div className="about-blur-orb orb-2" />
+        <div className="about-blur-orb orb-3" />
+      </div>
+
       {/* Top label */}
       <p className="about-label">About</p>
 

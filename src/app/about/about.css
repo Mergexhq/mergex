@@ -9,6 +9,8 @@
   min-height: 100vh;
   font-family: var(--font-inter, 'Inter', sans-serif);
   padding-bottom: 6rem;
+  position: relative;
+  overflow: hidden;
 }
 
 /* ── Top Label ─────────────────────────────────────── */
@@ -21,6 +23,8 @@
   letter-spacing: 0.22em;
   text-transform: uppercase;
   color: var(--text-tertiary);
+  position: relative;
+  z-index: 2;
 }
 
 /* ── Main Content Grid ──────────────────────────────── */
@@ -32,6 +36,8 @@
   grid-template-columns: 1fr 1fr;
   gap: 5rem;
   align-items: start;
+  position: relative;
+  z-index: 2;
 }
 
 /* ── Left Column ────────────────────────────────────── */
@@ -224,7 +230,7 @@
 /* ── Wordmark / logo grid ── */
 .wwb-grid {
   display: grid;
-  grid-template-columns: repeat(6, 1fr);
+  grid-template-columns: repeat(5, 1fr);
   gap: 0;
 }
 
@@ -247,8 +253,8 @@
   border-color: rgba(255, 255, 255, 0.18);
 }
 
-/* Remove right border on every 6th item */
-.wwb-item:nth-child(6n) {
+/* Remove right border on every 5th item */
+.wwb-item:nth-child(5n) {
   border-right: none;
 }
 
@@ -291,7 +297,7 @@
     grid-template-columns: repeat(4, 1fr);
   }
 
-  .wwb-item:nth-child(6n) {
+  .wwb-item:nth-child(5n) {
     border-right: 1px solid rgba(255, 255, 255, 0.08);
   }
 
@@ -361,6 +367,8 @@
 
 .founder-section {
   padding: 6rem 2.5rem 0;
+  position: relative;
+  z-index: 2;
 }
 
 .founder-inner {
@@ -502,5 +510,104 @@
 
   .founder-photo-card {
     aspect-ratio: 3 / 4;
+  }
+}
+
+/* ==========================================================
+   BACKGROUND GAUSSIAN BLUR ORBS
+   ========================================================== */
+
+.about-blur-bg {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  pointer-events: none;
+  z-index: 1;
+}
+
+.about-blur-orb {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(120px);
+  opacity: 0.12; /* Subtle contrast on light bg */
+  mix-blend-mode: multiply;
+  transition: opacity 0.5s ease, filter 0.5s ease;
+  pointer-events: none;
+  will-change: transform;
+}
+
+/* Enhanced visibility and glowing effect in dark mode */
+.dark .about-blur-orb {
+  opacity: 0.16;
+  mix-blend-mode: plus-lighter;
+  filter: blur(150px);
+}
+
+.orb-1 {
+  width: 50vw;
+  height: 50vw;
+  max-width: 650px;
+  max-height: 650px;
+  top: -10%;
+  right: -10%;
+  background: radial-gradient(circle, var(--color-primary-400, #A78BFA) 0%, rgba(139, 92, 246, 0.15) 60%, transparent 100%);
+  animation: float-blur-1 25s infinite alternate ease-in-out;
+}
+
+.orb-2 {
+  width: 55vw;
+  height: 55vw;
+  max-width: 750px;
+  max-height: 750px;
+  top: 35%;
+  left: -15%;
+  background: radial-gradient(circle, #f472b6 0%, rgba(244, 114, 182, 0.1) 60%, transparent 100%);
+  animation: float-blur-2 32s infinite alternate ease-in-out;
+}
+
+.orb-3 {
+  width: 45vw;
+  height: 45vw;
+  max-width: 600px;
+  max-height: 600px;
+  bottom: 5%;
+  right: -5%;
+  background: radial-gradient(circle, var(--color-primary-600, #7C3AED) 0%, rgba(167, 139, 250, 0.1) 60%, transparent 100%);
+  animation: float-blur-3 28s infinite alternate ease-in-out;
+}
+
+@keyframes float-blur-1 {
+  0% {
+    transform: translate(0, 0) scale(1);
+  }
+  50% {
+    transform: translate(8%, 10%) scale(1.05);
+  }
+  100% {
+    transform: translate(-5%, 5%) scale(0.95);
+  }
+}
+
+@keyframes float-blur-2 {
+  0% {
+    transform: translate(0, 0) scale(1);
+  }
+  50% {
+    transform: translate(-10%, -6%) scale(1.08);
+  }
+  100% {
+    transform: translate(6%, 8%) scale(0.92);
+  }
+}
+
+@keyframes float-blur-3 {
+  0% {
+    transform: translate(0, 0) scale(1);
+  }
+  50% {
+    transform: translate(5%, -8%) scale(0.95);
+  }
+  100% {
+    transform: translate(-7%, 6%) scale(1.06);
   }
 }

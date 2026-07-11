@@ -45,10 +45,10 @@ export function MobileNav({ isOpen, onClose, pathname }: MobileNavProps) {
                         animate={{ opacity: 1 }}
                         exit={{ opacity: 0 }}
                         transition={{ duration: 0.3 }}
-                        className="fixed inset-0 backdrop-blur-[4px] z-[60]"
+                        className="fixed inset-0 backdrop-blur-[4px] z-[1210]"
                         onClick={onClose}
                     />
-
+ 
                     {/* Menu Container with Drag-to-Dismiss and Dynamic Animated Height */}
                     <motion.div
                         drag="y"
@@ -66,7 +66,7 @@ export function MobileNav({ isOpen, onClose, pathname }: MobileNavProps) {
                         }}
                         exit={{ y: '100%' }}
                         transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
-                        className="fixed bottom-0 left-0 right-0 w-full bg-white/85 backdrop-blur-xl z-[61] flex flex-col shadow-[0_-20px_50px_rgba(0,0,0,0.06)] border-t border-black/5 rounded-t-3xl overflow-hidden"
+                        className="fixed bottom-0 left-0 right-0 w-full bg-white/85 backdrop-blur-xl z-[1220] flex flex-col shadow-[0_-20px_50px_rgba(0,0,0,0.06)] border-t border-black/5 rounded-t-3xl overflow-hidden"
                     >
                         {/* Drag Handle Indicator */}
                         <div

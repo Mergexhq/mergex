@@ -1,7 +1,8 @@
 // Contact Module Exports
 
 export { ContactHero } from './components/ContactHero';
-export { GeneralInquirySection, DiagnosticSection } from './components/ContactSection';
+export { BookingSection } from './components/BookingSection';
+export { WaysToConnect } from './components/WaysToConnect';
 
 // Content
 export * from './content/contact';

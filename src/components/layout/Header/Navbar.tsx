@@ -46,11 +46,8 @@ export function Navbar() {
         }
 
         // Hide on scroll down after 150px, show on scroll up
-        if (latest > previous && latest > 150) {
-            setHidden(true);
-        } else {
-            setHidden(false);
-        }
+        // Disabled by user request: do not hide the hamburger menu while scroll
+        setHidden(false);
     });
 
     // --- NAVBAR THEME ROUTING ---
@@ -63,6 +60,8 @@ export function Navbar() {
         '/sitemap',
         '/terms-of-use',
         '/privacy-policy',
+        '/launches',
+        '/studio',
     ];
 
     const isLightPageRaw =
@@ -75,7 +74,7 @@ export function Navbar() {
         pathname?.startsWith('/methodology');
 
     const hasDarkHero = pathname === '/terms-of-use' || pathname === '/privacy-policy';
-    const isLightPage = isLightPageRaw && (isScrolled || !hasDarkHero);
+    const isLightPage = (isLightPageRaw && (isScrolled || !hasDarkHero)) || (isHome && isPastHero);
 
     const textColorClass = isLightPage ? 'text-black' : 'text-white';
     const navItemColorClass = isLightPage
@@ -84,19 +83,19 @@ export function Navbar() {
     
     const cardBgClass = 'bg-transparent rounded-none shadow-none';
 
-    const pillBgClass = (isHome || (!isScrolled && !isDetailPage))
+    const pillBgClass = (!isScrolled && !isDetailPage)
         ? 'bg-transparent shadow-none border-transparent'
-        : (isLightPage
+        : (isLightPage || (isHome && isScrolled)
             ? 'bg-white/60 backdrop-blur-md border border-black/10 shadow-[0_2px_12px_rgba(0,0,0,0.03)]'
             : 'bg-white/10 backdrop-blur-md border border-white/15 shadow-[0_4px_24px_rgba(0,0,0,0.15)]');
 
-    const pillTextClass = isLightPage
+    const pillTextClass = (isLightPage || (isHome && isScrolled))
         ? 'text-black/70 hover:text-black'
         : 'text-white/70 hover:text-white';
 
     const getActiveLinkClass = (isActive: boolean) => {
         if (!isActive) return pillTextClass;
-        if (isLightPage) {
+        if (isLightPage || (isHome && isScrolled)) {
             return 'bg-black text-white';
         }
         return (!isScrolled && !isDetailPage)
@@ -238,16 +237,16 @@ export function Navbar() {
 
             {/* Desktop Navbar */}
             <motion.div
-                className="hidden lg:block w-full fixed top-0 left-0 right-0 z-50 pointer-events-none mergex-navbar"
+                className="hidden lg:block w-full fixed top-0 left-0 right-0 z-[1200] pointer-events-none mergex-navbar"
                 initial={{ y: -100 }}
                 animate={{ y: forceHidden || hidden ? '-100%' : 0 }}
                 transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
             >
                 <div className="w-full max-w-[1400px] xl:max-w-[1600px] 2xl:max-w-[1800px] mx-auto px-4 mt-4">
                     <div className={`w-full relative transition-all duration-500 ease-in-out ${isDropdownOpen ? cardBgClass + ' overflow-hidden' : 'bg-transparent'}`} style={{ border: 'none' }}>
-                        <nav className="w-full h-20 xl:h-24 flex items-center justify-between relative pointer-events-auto bg-transparent z-10 px-4 xl:px-6">
+                        <nav className="w-full h-20 xl:h-24 flex items-center justify-between relative pointer-events-none bg-transparent z-10 px-4 xl:px-6">
                             {/* Logo - Left */}
-                            <div className="flex items-center">
+                            <div className="flex items-center pointer-events-auto">
                                 {pathname === '/brands/ovrn-studios' && (
                                     <div className={`flex items-center gap-1 xl:gap-1.5 py-1 px-3.5 rounded-token-sm xl:rounded-token-md transition-all duration-500 ease-in-out ${pillBgClass} ${isDetailPage && !isDropdownOpen ? 'opacity-0 pointer-events-none' : 'opacity-100'}`}>
                                         <Link href="/brands/ovrn-studios" className="flex items-center gap-0 py-1 px-1">
@@ -262,7 +261,7 @@ export function Navbar() {
                             </div>
 
                             {/* Menu Capsule - Right */}
-                            <div className="flex items-center">
+                            <div className="flex items-center pointer-events-auto">
                                 {(isDetailPage || isScrolled) ? (
                                      /* Expanding Hamburger Menu Card */
                                      <motion.div
@@ -330,19 +329,19 @@ export function Navbar() {
                                                      exit={{ opacity: 0, scale: 0.85 }}
                                                      transition={{ duration: 0.15 }}
                                                      className={`w-8 xl:w-9 h-8 xl:h-9 rounded-token-sm xl:rounded-token-md flex items-center justify-center transition-colors duration-200 focus:outline-none ${
-                                                         isDropdownOpen ? 'hover:bg-white/10' : (isLightPage ? 'hover:bg-black/5' : 'hover:bg-white/10')
+                                                         isDropdownOpen ? 'hover:bg-white/10' : ((isLightPage || (isHome && isScrolled)) ? 'hover:bg-black/5' : 'hover:bg-white/10')
                                                      }`}
                                                      aria-label="Open menu"
                                                  >
                                                      <div className="w-5 h-[12px] flex flex-col justify-between relative">
                                                          <span
                                                              className={`w-full h-[3px] rounded-full origin-center transition-colors duration-200 ${
-                                                                 isDropdownOpen ? 'bg-white' : (isLightPage ? 'bg-black' : 'bg-white')
+                                                                 isDropdownOpen ? 'bg-white' : ((isLightPage || (isHome && isScrolled)) ? 'bg-black' : 'bg-white')
                                                              }`}
                                                          />
                                                          <span
                                                              className={`w-full h-[3px] rounded-full origin-center transition-colors duration-200 ${
-                                                                 isDropdownOpen ? 'bg-white' : (isLightPage ? 'bg-black' : 'bg-white')
+                                                                 isDropdownOpen ? 'bg-white' : ((isLightPage || (isHome && isScrolled)) ? 'bg-black' : 'bg-white')
                                                              }`}
                                                          />
                                                      </div>
@@ -393,11 +392,11 @@ export function Navbar() {
                 initial={{ y: 0 }}
                 animate={{ y: isMobileMenuOpen ? 0 : (forceHidden || hidden ? -100 : 0) }}
                 transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
-                className="lg:hidden fixed top-0 left-0 right-0 z-50 pointer-events-none mergex-navbar"
+                className="lg:hidden fixed top-0 left-0 right-0 z-[1200] pointer-events-none mergex-navbar"
             >
                 <div className="w-full px-4 pt-3">
                     <div
-                        className={`w-full transition-all duration-300 ease-in-out pointer-events-auto rounded-[16px] border ${
+                        className={`w-full transition-all duration-300 ease-in-out pointer-events-none rounded-[16px] border ${
                             isMobileMenuOpen
                                 ? 'bg-white/85 border-black/5 shadow-[0_8px_30px_rgba(0,0,0,0.04)] backdrop-blur-md'
                                 : ((isScrolled && !isHome)
@@ -409,12 +408,19 @@ export function Navbar() {
                         {/* Left: Hamburger */}
                         <button
                             onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-                            className={`p-2 -ml-2 focus:outline-none z-10 ${
-                                isMobileMenuOpen || isLightPage ? 'text-black' : 'text-white'
+                            className={`focus:outline-none z-10 pointer-events-auto transition-all duration-300 ${
+                                isMobileMenuOpen
+                                    ? 'p-2 -ml-2 text-black'
+                                    : (isHome && !isScrolled)
+                                        /* Hero: frosted glass pill matching About Glimpse style */
+                                        ? 'w-10 h-10 flex items-center justify-center rounded-[12px] bg-white/10 backdrop-blur-md border border-white/20 shadow-[0_4px_24px_rgba(0,0,0,0.2)] text-white'
+                                        : isLightPage
+                                            ? 'p-2 -ml-2 text-black'
+                                            : 'p-2 -ml-2 text-white'
                             }`}
                             aria-label="Toggle menu"
                         >
-                            <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 {isMobileMenuOpen ? (
                                     <path
                                         strokeLinecap="round"

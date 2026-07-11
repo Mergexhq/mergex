@@ -1,7 +1,8 @@
 import type { Metadata } from 'next';
 import {
     ContactHero,
-    GeneralInquirySection,
+    BookingSection,
+    WaysToConnect,
 } from '@/modules/contact';
 
 export const metadata: Metadata = {
@@ -20,9 +21,10 @@ export const metadata: Metadata = {
 
 export default function ContactPage() {
     return (
-        <main className="bg-[#F3F3F3]">
+        <main className="bg-[var(--bg-primary)] min-h-screen text-[var(--text-primary)] font-body">
             <ContactHero />
-            <GeneralInquirySection />
+            <BookingSection />
+            <WaysToConnect />
         </main>
     );
 }
