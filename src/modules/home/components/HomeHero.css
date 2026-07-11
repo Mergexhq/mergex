@@ -11,7 +11,7 @@
    `end: "+=200%"` handles the scroll distance.
    The wrapper is just a positioning context.       */
 .home-hero-scroll-wrapper {
-  --hh-bg-image: url('/background/hero/hero.png');
+  --hh-bg-image: url('/background/hero/hero.webp');
   --hh-text-primary: #FFFFFF;
   --hh-text-secondary: rgba(255, 255, 255, 0.52);
   --hh-text-eyebrow: rgba(255, 255, 255, 0.32);
@@ -356,7 +356,7 @@
 
 @media (max-width: 768px) {
   .home-hero-scroll-wrapper {
-    --hh-bg-image: url('/background/hero/hero.png');
+    --hh-bg-image: url('/background/hero/heromobile1.webp');
   }
 
   .home-hero::before {

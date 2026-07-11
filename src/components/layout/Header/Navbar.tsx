@@ -90,19 +90,17 @@ export function Navbar() {
             ? 'bg-white/60 backdrop-blur-md border border-black/10 shadow-[0_2px_12px_rgba(0,0,0,0.03)]'
             : 'bg-white/10 backdrop-blur-md border border-white/15 shadow-[0_4px_24px_rgba(0,0,0,0.15)]');
 
-    const pillTextClass = (!isScrolled && !isDetailPage)
-        ? 'text-white/70 hover:text-white'
-        : (isLightPage
-            ? 'text-black/70 hover:text-black'
-            : 'text-white/70 hover:text-white');
+    const pillTextClass = isLightPage
+        ? 'text-black/70 hover:text-black'
+        : 'text-white/70 hover:text-white';
 
     const getActiveLinkClass = (isActive: boolean) => {
         if (!isActive) return pillTextClass;
-        if (!isScrolled && !isDetailPage) {
-            return 'bg-white/20 text-white';
+        if (isLightPage) {
+            return 'bg-black text-white';
         }
-        return isLightPage 
-            ? 'bg-black text-white' 
+        return (!isScrolled && !isDetailPage)
+            ? 'bg-white/20 text-white'
             : 'bg-white text-black';
     };
 
@@ -155,6 +153,89 @@ export function Navbar() {
 
     return (
         <>
+            {/* Absolute Logo Header (scrolls with page) */}
+            {pathname !== '/brands/ovrn-studios' && (
+                <div className="hidden lg:block w-full absolute top-0 left-0 right-0 z-40 pointer-events-none mergex-logo-header">
+                    <div className="w-full max-w-[1400px] xl:max-w-[1600px] 2xl:max-w-[1800px] mx-auto px-4 mt-4">
+                        <div className="w-full h-20 xl:h-24 flex items-center justify-between px-4 xl:px-6">
+                            {/* Logo - Left */}
+                            <div className="flex items-center pointer-events-auto">
+                                <Link href="/" className="flex items-center gap-0">
+                                    <Image
+                                        src="/logo/mergex logo black.png"
+                                        alt="MergeX Logo"
+                                        width={40}
+                                        height={40}
+                                        className={`object-contain transition-all duration-300 w-6 h-6 xl:w-[26px] xl:h-[26px] 2xl:w-7 2xl:h-7 ${isLightPage ? '' : 'brightness-0 invert'}`}
+                                    />
+                                    <span
+                                        className={`font-questrial font-bold text-[21px] xl:text-[24px] 2xl:text-[27px] tracking-[0.12em] ml-2.5 xl:ml-3 flex items-center ${textColorClass} transition-colors duration-300`}
+                                    >
+                                        MERGEX
+                                    </span>
+                                </Link>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            )}
+
+            {/* Absolute Mobile Logo Header (scrolls with page) */}
+            {pathname !== '/brands/ovrn-studios' && (
+                <div className="lg:hidden w-full absolute top-0 left-0 right-0 z-40 pointer-events-none mergex-logo-header">
+                    <div className="w-full px-4 pt-3">
+                        <div className="w-full px-5 h-14 flex items-center justify-center relative">
+                            {/* Centered Wordmark */}
+                            {(() => {
+                              if (pathname === '/brands/academy') {
+                                return (
+                                  <Link href="/brands/academy" className="flex items-center justify-center pointer-events-auto">
+                                    <span className={`text-[14px] leading-none whitespace-nowrap ${isLightPage ? 'text-black' : 'text-white'}`}>
+                                      <span className="font-questrial font-bold tracking-wide">MergeX</span>
+                                      {' '}
+                                      <span className="font-questrial font-thin tracking-wide">Academy</span>
+                                    </span>
+                                  </Link>
+                                );
+                              }
+                              if (pathname === '/brands/mergex') {
+                                return (
+                                  <Link href="/brands/mergex" className="flex items-center justify-center gap-1.5 pointer-events-auto">
+                                    <Image
+                                      src="/logo/mergex logo black.png"
+                                      alt="MergeX Logo"
+                                      width={40}
+                                      height={40}
+                                      className={`object-contain transition-all duration-300 w-5 h-5 ${isLightPage ? '' : 'brightness-0 invert'}`}
+                                    />
+                                    <span
+                                      className={`font-questrial font-bold text-2xl tracking-[0.12em] ml-1 flex items-center ${isLightPage ? 'text-black' : 'text-white'}`}
+                                    >
+                                      MERGEX
+                                    </span>
+                                  </Link>
+                                );
+                              }
+                              return (
+                                <Link href="/" className="flex items-center justify-center gap-1.5 pointer-events-auto">
+                                  <Image
+                                    src="/logo/mergex logo black.png"
+                                    alt="MergeX Logo"
+                                    width={40}
+                                    height={40}
+                                    className={`object-contain transition-all duration-300 w-5 h-5 ${isLightPage ? '' : 'brightness-0 invert'}`}
+                                  />
+                                  <span className={`font-questrial font-bold text-xl tracking-[0.12em] ml-1 flex items-center ${isLightPage ? 'text-black' : 'text-white'}`}>
+                                    MERGEX
+                                  </span>
+                                </Link>
+                              );
+                            })()}
+                        </div>
+                    </div>
+                </div>
+            )}
+
             {/* Desktop Navbar */}
             <motion.div
                 className="hidden lg:block w-full fixed top-0 left-0 right-0 z-50 pointer-events-none mergex-navbar"
@@ -167,8 +248,8 @@ export function Navbar() {
                         <nav className="w-full h-20 xl:h-24 flex items-center justify-between relative pointer-events-auto bg-transparent z-10 px-4 xl:px-6">
                             {/* Logo - Left */}
                             <div className="flex items-center">
-                                <div className={`flex items-center gap-1 xl:gap-1.5 py-1 px-3.5 rounded-token-sm xl:rounded-token-md transition-all duration-500 ease-in-out ${pillBgClass} ${isDetailPage && !isDropdownOpen ? 'opacity-0 pointer-events-none' : 'opacity-100'}`}>
-                                    {pathname === '/brands/ovrn-studios' ? (
+                                {pathname === '/brands/ovrn-studios' && (
+                                    <div className={`flex items-center gap-1 xl:gap-1.5 py-1 px-3.5 rounded-token-sm xl:rounded-token-md transition-all duration-500 ease-in-out ${pillBgClass} ${isDetailPage && !isDropdownOpen ? 'opacity-0 pointer-events-none' : 'opacity-100'}`}>
                                         <Link href="/brands/ovrn-studios" className="flex items-center gap-0 py-1 px-1">
                                             <span
                                                 className={`font-clash font-bold text-lg xl:text-xl 2xl:text-2xl tracking-wider flex items-center ${textColorClass} transition-colors duration-300`}
@@ -176,26 +257,8 @@ export function Navbar() {
                                                 OVRN STUDIOS
                                             </span>
                                         </Link>
-                                    ) : (
-                                        <Link
-                                            href="/"
-                                            className="flex items-center gap-0"
-                                        >
-                                            <Image
-                                                src="/logo/mergex logo black.png"
-                                                alt="MergeX Logo"
-                                                width={40}
-                                                height={40}
-                                                className={`object-contain transition-all duration-300 w-6 h-6 xl:w-[26px] xl:h-[26px] 2xl:w-7 2xl:h-7 ${isDropdownOpen ? 'brightness-0 invert' : (isLightPage ? '' : 'brightness-0 invert')}`}
-                                            />
-                                            <span
-                                                className={`font-questrial font-bold text-[21px] xl:text-[24px] 2xl:text-[27px] tracking-[0.12em] ml-2.5 xl:ml-3 flex items-center ${textColorClass} transition-colors duration-300`}
-                                            >
-                                                MERGEX
-                                            </span>
-                                        </Link>
-                                    )}
-                                </div>
+                                    </div>
+                                )}
                             </div>
 
                             {/* Menu Capsule - Right */}
@@ -369,67 +432,17 @@ export function Navbar() {
                         </button>
 
                         {/* Centered Wordmark – path-aware */}
-                        {(() => {
-                          // OVRN Studios brand page
-                          if (pathname === '/brands/ovrn-studios') {
-                            return (
-                              <Link href="/brands/ovrn-studios" className="absolute left-1/2 -translate-x-1/2 flex items-center justify-center gap-1 z-10">
-                                <span
-                                   className={`font-clash font-bold text-xl tracking-wider ${
-                                     isMobileMenuOpen || isLightPage ? 'text-black' : 'text-white'
-                                   }`}
-                                 >
-                                  OVRN Studio
-                                </span>
-                              </Link>
-                            );
-                          }
-                          // MergeX Academy brand page
-                          if (pathname === '/brands/academy') {
-                            return (
-                              <Link href="/brands/academy" className="absolute left-1/2 -translate-x-1/2 flex items-center justify-center z-10">
-                                <span className={`text-[14px] leading-none whitespace-nowrap ${isMobileMenuOpen || isLightPage ? 'text-black' : 'text-white'}`}>
-                                  <span className="font-questrial font-bold tracking-wide">MergeX</span>
-                                  {' '}
-                                  <span className="font-questrial font-thin tracking-wide">Academy</span>
-                                </span>
-                              </Link>
-                            );
-                          }
-                          // MergeX brand page – logo + MERGEX (keep as-is)
-                          if (pathname === '/brands/mergex') {
-                            return (
-                              <Link href="/brands/mergex" className={`absolute left-1/2 -translate-x-1/2 flex items-center justify-center gap-1.5 z-10 ${isDetailPage ? 'opacity-0 pointer-events-none' : ''}`}>
-                                <Image
-                                  src="/logo/mergex logo black.png"
-                                  alt="MergeX Logo"
-                                  width={40}
-                                  height={40}
-                                  className={`object-contain transition-all duration-300 w-5 h-5 ${isMobileMenuOpen || isLightPage ? '' : 'brightness-0 invert'}`}
-                                />
-                                <span
-                                  className={`font-questrial font-bold text-2xl tracking-[0.12em] ml-1 flex items-center ${isMobileMenuOpen || isLightPage ? 'text-black' : 'text-white'}`}
-                                >
-                                  MERGEX
-                                </span>
-                              </Link>
-                            );
-                          }
-                          return (
-                            <Link href="/" className={`absolute left-1/2 -translate-x-1/2 flex items-center justify-center gap-1.5 z-10 ${isDetailPage ? 'opacity-0 pointer-events-none' : ''}`}>
-                              <Image
-                                src="/logo/mergex logo black.png"
-                                alt="MergeX Logo"
-                                width={40}
-                                height={40}
-                                className={`object-contain transition-all duration-300 w-5 h-5 ${isMobileMenuOpen || isLightPage ? '' : 'brightness-0 invert'}`}
-                              />
-                              <span className={`font-questrial font-bold text-xl tracking-[0.12em] ml-1 flex items-center ${isMobileMenuOpen || isLightPage ? 'text-black' : 'text-white'}`}>
-                                MERGEX
-                              </span>
-                            </Link>
-                          );
-                        })()}
+                        {pathname === '/brands/ovrn-studios' && (
+                          <Link href="/brands/ovrn-studios" className="absolute left-1/2 -translate-x-1/2 flex items-center justify-center gap-1 z-10 pointer-events-auto">
+                            <span
+                               className={`font-clash font-bold text-xl tracking-wider ${
+                                 isMobileMenuOpen || isLightPage ? 'text-black' : 'text-white'
+                               }`}
+                             >
+                              OVRN Studio
+                            </span>
+                          </Link>
+                        )}
 
                         {/* Right Placeholder to balance Hamburger */}
                         <div className="w-10 h-10 pointer-events-none shrink-0" />

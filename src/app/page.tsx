@@ -3,7 +3,7 @@ import {
     HomeHero,
     FinalCTA,
 } from '@/modules/home/components';
-import { ExperimentsGallery } from '@/modules/labsPortfolio/components';
+import { ShowcaseFeed, ExperimentsGallery } from '@/modules/work';
 
 export const metadata: Metadata = {
   title: 'The MergeX Company',
@@ -53,8 +53,11 @@ export const metadata: Metadata = {
 
 export default function HomePage() {
     return (
-        <main className="relative bg-[var(--bg-primary)]">
+        <main className="relative bg-[#080808]">
             <HomeHero />
+
+            {/* Showcase/Works Feed */}
+            <ShowcaseFeed />
 
             {/* Labs Portfolio Gallery */}
             <ExperimentsGallery />

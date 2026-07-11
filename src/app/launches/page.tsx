@@ -1,5 +1,5 @@
 import type { Metadata } from 'next';
-import { worksData } from '@/modules/new-home/data/works';
+import { worksData } from '@/modules/work';
 import { PosterVideo } from '@/components/PosterVideo';
 
 export const metadata: Metadata = {

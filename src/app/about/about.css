@@ -1,182 +1,133 @@
 /* ==========================================================
-   ABOUT PAGE - EDITORIAL MINIMAL STYLE
+   ABOUT PAGE — EDITORIAL MAGAZINE LAYOUT
+   Three-column: Left (statement + capabilities) | Right (intro)
    ========================================================== */
 
-.about-container {
+.about-page {
   background: var(--bg-primary);
   color: var(--text-primary);
   min-height: 100vh;
-  padding-bottom: var(--space-20);
   font-family: var(--font-inter, 'Inter', sans-serif);
 }
 
-/* --- Hero Section --- */
-.about-hero {
+/* ── Top Label ─────────────────────────────────────── */
+.about-label {
   max-width: 1400px;
   margin: 0 auto;
-  padding: 12rem 2rem 6rem 2rem;
-}
-
-@media (max-width: 768px) {
-  .about-hero {
-    padding: 8rem 1.5rem 4rem 1.5rem;
-  }
-}
-
-.about-display {
-  font-size: clamp(2.5rem, 5vw, 4.5rem);
-  line-height: 1.1;
-  font-weight: 400;
-  letter-spacing: -0.02em;
-  color: var(--text-primary);
-  max-width: 900px;
-  margin-bottom: 2.5rem;
-}
-
-.about-hero-text {
-  font-size: clamp(1.2rem, 2vw, 1.6rem);
-  line-height: 1.5;
-  color: var(--text-secondary);
-  max-width: 800px;
-  font-weight: 300;
-}
-
-/* --- Grid & Layout Sections --- */
-.about-section {
-  max-width: 1400px;
-  margin: 0 auto;
-  padding: 6rem 2rem;
-}
-
-@media (max-width: 768px) {
-  .about-section {
-    padding: 4rem 1.5rem;
-  }
-}
-
-.about-grid {
-  display: grid;
-  grid-template-columns: 1fr 2fr;
-  gap: 4rem;
-}
-
-@media (max-width: 992px) {
-  .about-grid {
-    grid-template-columns: 1fr;
-    gap: 2rem;
-  }
-}
-
-.about-eyebrow {
+  padding: 9rem 2.5rem 0;
   font-size: 11px;
   font-weight: 600;
+  letter-spacing: 0.22em;
   text-transform: uppercase;
-  letter-spacing: 0.2em;
   color: var(--text-tertiary);
-  display: inline-block;
 }
 
-.about-large-prose {
-  font-size: clamp(1.4rem, 2.5vw, 1.8rem);
-  line-height: 1.45;
+/* ── Main Content Grid ──────────────────────────────── */
+.about-grid {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 3.5rem 2.5rem 8rem;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 5rem;
+  align-items: start;
+}
+
+/* ── Left Column ────────────────────────────────────── */
+.about-left {
+  display: flex;
+  flex-direction: column;
+  gap: 5rem;
+}
+
+.about-headline {
+  font-size: clamp(2.6rem, 4.5vw, 4rem);
+  font-weight: 400;
+  line-height: 1.08;
+  letter-spacing: -0.03em;
   color: var(--text-primary);
-  font-weight: 300;
-  margin-bottom: 2.5rem;
+  font-family: var(--font-questrial, 'Questrial', sans-serif);
+  max-width: 22ch;
 }
 
-.about-body-prose {
-  font-size: 1rem;
-  line-height: 1.75;
+/* ── Capabilities Stacked List ──────────────────────── */
+.about-capabilities {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+
+.about-cap-item {
+  padding: 1.1rem 0;
+  border-top: 1px solid var(--border-primary, rgba(0,0,0,0.08));
+}
+
+.about-cap-item:last-child {
+  border-bottom: 1px solid var(--border-primary, rgba(0,0,0,0.08));
+}
+
+.about-cap-label {
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--text-tertiary);
+  line-height: 1.5;
+}
+
+/* ── Right Column ───────────────────────────────────── */
+.about-right {
+  padding-top: 0.4rem;
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+.about-body-p {
+  font-size: clamp(0.95rem, 1.1vw, 1.05rem);
+  line-height: 1.82;
   color: var(--text-secondary);
-  max-width: 750px;
   font-weight: 400;
 }
 
-/* --- Capabilities Section --- */
-.capabilities-list {
-  display: flex;
-  flex-direction: column;
-  gap: 3rem;
-  max-width: 800px;
-}
-
-.capability-item {
-  border-bottom: 1px solid var(--border-primary);
-  padding-bottom: 2rem;
-}
-
-.capability-item:last-child {
-  border-bottom: none;
-  padding-bottom: 0;
-}
-
-.capability-title {
-  font-size: 1.5rem;
-  font-weight: 500;
+.about-closing {
+  font-size: clamp(1.1rem, 1.6vw, 1.35rem);
+  line-height: 1.45;
   color: var(--text-primary);
-  margin-bottom: 0.75rem;
+  font-weight: 400;
+  font-style: italic;
+  margin-top: 1.5rem;
+  padding-top: 2rem;
+  border-top: 1px solid var(--border-primary, rgba(0,0,0,0.08));
 }
 
-.capability-desc {
-  font-size: 1rem;
-  line-height: 1.7;
-  color: var(--text-secondary);
-}
+/* ── Responsive ─────────────────────────────────────── */
+@media (max-width: 900px) {
+  .about-label {
+    padding: 7rem 1.5rem 0;
+  }
 
-/* --- Team Section --- */
-.team-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-  gap: 3rem;
+  .about-grid {
+    grid-template-columns: 1fr;
+    padding: 3rem 1.5rem 6rem;
+    gap: 4rem;
+  }
+
+  .about-headline {
+    max-width: 100%;
+  }
 }
 
 @media (max-width: 480px) {
-  .team-grid {
-    grid-template-columns: 1fr;
-    gap: 2rem;
+  .about-label {
+    padding: 6rem 1.25rem 0;
   }
-}
 
-.team-card {
-  display: flex;
-  flex-direction: column;
-}
+  .about-grid {
+    padding: 2.5rem 1.25rem 5rem;
+  }
 
-.team-img-wrapper {
-  position: relative;
-  width: 100%;
-  aspect-ratio: 4/5;
-  background: var(--bg-secondary);
-  border-radius: 8px;
-  overflow: hidden;
-  margin-bottom: 1.25rem;
-}
-
-.team-img {
-  width: 100%;
-  height: 100%;
-  object-cover: cover;
-  object-fit: cover;
-  transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
-}
-
-.team-card:hover .team-img {
-  transform: scale(1.03);
-}
-
-.team-info {
-  display: flex;
-  flex-direction: column;
-  gap: 0.25rem;
-}
-
-.team-name {
-  font-size: 1.25rem;
-  font-weight: 500;
-  color: var(--text-primary);
-}
-
-.team-role {
-  font-size: 0.875rem;
-  color: var(--text-secondary);
+  .about-headline {
+    font-size: 2.2rem;
+  }
 }
