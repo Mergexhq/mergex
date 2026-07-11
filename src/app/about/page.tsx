@@ -174,7 +174,7 @@ export default function AboutPage() {
               {/* Noise overlay on image */}
               <div className="founder-photo-noise" aria-hidden="true" />
               <img
-                src="/manikandan.png"
+                src="/manikandan siting.png"
                 alt="Manikandan S - Founder & CEO of MergeX"
                 className="founder-photo-img"
                 draggable={false}

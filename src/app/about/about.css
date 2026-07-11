@@ -383,7 +383,6 @@
   border-radius: 1.25rem;
   background: var(--bg-secondary, #f2f0ed);
   aspect-ratio: 4 / 5;
-  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.10);
 }
 
 /* Noise layer over the photo */
