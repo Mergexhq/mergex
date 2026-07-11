@@ -5,10 +5,9 @@ import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import Image from 'next/image';
 import { motion, AnimatePresence, useScroll, useMotionValueEvent } from 'framer-motion';
-import { MobileNav } from '@/components/layout/Header/MobileNav';
+import { MobileBottomDock } from '@/components/layout/Header/MobileBottomDock';
 
 export function Navbar() {
-    const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
     const [forceHidden, setForceHidden] = useState(false);
     const [isDetailMenuOpen, setIsDetailMenuOpen] = useState(false);
     const [hidden, setHidden] = useState(false);
@@ -142,13 +141,10 @@ export function Navbar() {
         };
     }, [isDetailMenuOpen]);
 
-    // Notify AskMergeXWidget when mobile menu state changes
+    // Notify when pathname changes (kept for detail menu close)
     useEffect(() => {
-        const event = new CustomEvent('mergex:mobile-menu', {
-            detail: { open: isMobileMenuOpen }
-        });
-        window.dispatchEvent(event);
-    }, [isMobileMenuOpen]);
+        setIsDetailMenuOpen(false);
+    }, [pathname]);
 
     return (
         <>
@@ -387,76 +383,8 @@ export function Navbar() {
                 </div>
             </motion.div>
 
-            {/* Mobile Navbar Header */}
-            <motion.div
-                initial={{ y: 0 }}
-                animate={{ y: isMobileMenuOpen ? 0 : (forceHidden || hidden ? -100 : 0) }}
-                transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
-                className="lg:hidden fixed top-0 left-0 right-0 z-[1200] pointer-events-none mergex-navbar"
-            >
-                <div className="w-full px-4 pt-3">
-                    <div
-                        className={`w-full transition-all duration-300 ease-in-out pointer-events-none rounded-[16px] border ${
-                            isMobileMenuOpen
-                                ? 'bg-white/85 border-black/5 shadow-[0_8px_30px_rgba(0,0,0,0.04)] backdrop-blur-md'
-                                : ((isScrolled && !isHome)
-                                    ? 'bg-white/85 border-black/5 shadow-[0_4px_20px_rgba(0,0,0,0.03)] backdrop-blur-md'
-                                    : 'bg-transparent border-transparent shadow-none'
-                                  )
-                        } px-5 h-14 flex items-center justify-between relative`}
-                    >
-                        {/* Left: Hamburger */}
-                        <button
-                            onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-                            className={`focus:outline-none z-10 pointer-events-auto transition-all duration-300 ${
-                                isMobileMenuOpen
-                                    ? 'p-2 -ml-2 text-black'
-                                    : (isHome && !isScrolled)
-                                        /* Hero: frosted glass pill matching About Glimpse style */
-                                        ? 'w-10 h-10 flex items-center justify-center rounded-[12px] bg-white/10 backdrop-blur-md border border-white/20 shadow-[0_4px_24px_rgba(0,0,0,0.2)] text-white'
-                                        : isLightPage
-                                            ? 'p-2 -ml-2 text-black'
-                                            : 'p-2 -ml-2 text-white'
-                            }`}
-                            aria-label="Toggle menu"
-                        >
-                            <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                {isMobileMenuOpen ? (
-                                    <path
-                                        strokeLinecap="round"
-                                        strokeLinejoin="round"
-                                        strokeWidth={2}
-                                        d="M6 18L18 6M6 6l12 12"
-                                    />
-                                ) : (
-                                    <>
-                                        <line x1="4" y1="6" x2="20" y2="6" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
-                                        <line x1="4" y1="12" x2="20" y2="12" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
-                                    </>
-                                )}
-                            </svg>
-                        </button>
-
-                        {/* Centered Wordmark – path-aware */}
-                        {pathname === '/brands/ovrn-studios' && (
-                          <Link href="/brands/ovrn-studios" className="absolute left-1/2 -translate-x-1/2 flex items-center justify-center gap-1 z-10 pointer-events-auto">
-                            <span
-                               className={`font-clash font-bold text-xl tracking-wider ${
-                                 isMobileMenuOpen || isLightPage ? 'text-black' : 'text-white'
-                               }`}
-                             >
-                              OVRN Studio
-                            </span>
-                          </Link>
-                        )}
-
-                        {/* Right Placeholder to balance Hamburger */}
-                        <div className="w-10 h-10 pointer-events-none shrink-0" />
-                    </div>
-                </div>
-            </motion.div>
-
-            <MobileNav isOpen={isMobileMenuOpen} onClose={() => setIsMobileMenuOpen(false)} pathname={pathname} />
+            {/* Mobile Bottom Dock (replaces hamburger drawer on mobile) */}
+            <MobileBottomDock />
         </>
     );
 }

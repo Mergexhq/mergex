@@ -4,6 +4,7 @@ import { usePathname } from 'next/navigation';
 import Link from 'next/link';
 import Image from 'next/image';
 import { ArrowUp } from 'lucide-react';
+import { ParticleTypography } from '@/components/ParticleTypography';
 
 /* ─── Social icon renderer ─────────────────────────────────────────── */
 function SocialIcon({ icon }: { icon: string }) {
@@ -115,41 +116,19 @@ export default function FooterCurtain() {
                 </div>
             </div>
 
-            {/* Middle: Huge Centered MERGEX Wordmark */}
-            <div className="w-[calc(100%+3rem)] md:w-[calc(100%+6rem)] lg:w-[calc(100%+10rem)] -mx-6 md:-mx-12 lg:-mx-20 text-center relative z-10 mb-1 md:mb-2 overflow-visible">
-                <div 
-                    className="flex flex-row items-center justify-center w-full relative gap-[1.2vw] px-[1.2vw] font-questrial font-bold text-white uppercase text-[15.5vw] md:text-[17.5vw] lg:text-[18vw] md:gap-[1.5vw] md:px-[1.5vw] leading-none select-none" 
-                    style={{ overflow: 'visible', WebkitTextStroke: '0.012em currentColor' }}
-                >
-                    <Image
-                        src="/logo/mergex logo black.png"
-                        alt="MergeX Logo"
-                        width={250}
-                        height={250}
-                        className="object-contain w-[13vw] h-[14vw] md:w-[15vw] md:h-[16.5vw] lg:w-[15.5vw] lg:h-[17vw] brightness-0 invert select-none pointer-events-none"
-                    />
-                    <span>M</span>
-                    <span>E</span>
-                    <span>R</span>
-                    <span>G</span>
-                    <span>E</span>
-                    <span>X</span>
-
-                    {/* Suffix for /labs or /systems if needed (only relevant on legacy paths) */}
-                    {(pathname === '/labs' || pathname === '/systems') && (
-                        <div className="flex flex-row items-baseline" style={{ marginLeft: '0.3em' }}>
-                            <span className="text-[15.5vw] md:text-[17.5vw] lg:text-[18vw] leading-none font-normal text-white select-none font-serif italic" style={{ overflow: 'visible', padding: '0 0.1em' }}>
-                                {pathname === '/labs' ? 'L' : 'S'}
-                            </span>
-                            <span 
-                                className="text-[11vw] md:text-[12.5vw] lg:text-[13vw] leading-none font-bold text-white tracking-[0.06em] select-none font-questrial uppercase" 
-                                style={{ marginLeft: '-0.05em', overflow: 'visible', WebkitTextStroke: '0.012em currentColor' }}
-                            >
-                                {pathname === '/labs' ? 'ABS' : 'YSTEMS'}
-                            </span>
-                        </div>
-                    )}
-                </div>
+            {/* Middle: Huge Centered MERGEX Wordmark — Particle Typography Canvas */}
+            <div className="w-[calc(100%+3rem)] md:w-[calc(100%+6rem)] lg:w-[calc(100%+10rem)] -mx-6 md:-mx-12 lg:-mx-20 relative z-10 mb-1 md:mb-2" style={{ height: 'clamp(160px, 26vw, 420px)' }}>
+                <ParticleTypography
+                    text="MERGEX"
+                    fontSize={9999}
+                    fontFamily="Questrial, sans-serif"
+                    particleSize={1.8}
+                    particleDensity={4}
+                    dispersionStrength={20}
+                    returnSpeed={0.06}
+                    color="#ffffff"
+                    className="absolute inset-0"
+                />
             </div>
 
             {/* Bottom Bar: Copyright (left) + Legal Links (right) */}
