@@ -21,8 +21,8 @@ export function Navbar() {
     const isDetailPage = false;
     const isDropdownOpen = false;
     const isHome = pathname === '/';
-    const launchesUrl = isHome ? '/#works' : '/launches';
-    const studioUrl = isHome ? '/brands/mergex' : '/studio';
+    const launchesUrl = '/launches';
+    const studioUrl = '/studio';
 
     useMotionValueEvent(scrollY, "change", (latest) => {
         if (latest > 50) {

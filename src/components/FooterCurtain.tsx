@@ -58,13 +58,13 @@ export default function FooterCurtain() {
                         About
                     </Link>
                     <Link
-                        href={isHome ? "/#works" : "/launches"}
+                        href="/launches"
                         className="font-clash text-sm xl:text-base font-normal tracking-wide text-white/70 hover:text-white transition-colors"
                     >
                         Launches
                     </Link>
                     <Link
-                        href={isHome ? "/brands/mergex" : "/studio"}
+                        href="/studio"
                         className="font-clash text-sm xl:text-base font-normal tracking-wide text-white/70 hover:text-white transition-colors"
                     >
                         Studio

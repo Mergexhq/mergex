@@ -118,7 +118,7 @@ export function MobileNav({ isOpen, onClose, pathname }: MobileNavProps) {
 
                                 {/* Launches */}
                                 <Link
-                                    href={isHome ? "/#works" : "/launches"}
+                                    href="/launches"
                                     onClick={onClose}
                                     className="group flex items-center justify-between py-5 border-b border-black/5"
                                 >
@@ -130,7 +130,7 @@ export function MobileNav({ isOpen, onClose, pathname }: MobileNavProps) {
 
                                 {/* studio */}
                                 <Link
-                                    href={isHome ? "/brands/mergex" : "/studio"}
+                                    href="/studio"
                                     onClick={onClose}
                                     className="group flex items-center justify-between py-5 border-b border-black/5"
                                 >

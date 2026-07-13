@@ -16,14 +16,45 @@ export const metadata: Metadata = {
 export default function LaunchesPage() {
   return (
     <main className="min-h-screen bg-white text-[var(--text-primary)] font-body">
-      {/* Hero */}
-      <section className="max-w-[1400px] mx-auto px-6 md:px-12 pt-40 pb-16">
-        <h1 className="text-4xl md:text-6xl font-questrial font-bold tracking-tight max-w-2xl leading-[1.1] mb-6">
-          Real work, launched in production.
+      {/* Hero Section */}
+      <section className="max-w-[1400px] mx-auto px-6 md:px-12 pt-32 pb-16 flex flex-col items-center">
+        {/* Top Copy */}
+        <h1 className="text-4xl sm:text-6xl md:text-7xl font-clash font-bold tracking-tight text-center uppercase mb-2 text-[var(--text-primary)] relative z-20">
+          Built <span className="lowercase text-transparent [-webkit-text-stroke:1.5px_var(--text-primary)]">to</span> launch.
         </h1>
-        <p className="text-lg md:text-xl text-[var(--text-secondary)] font-light max-w-xl leading-relaxed">
-          We construct and deploy robust digital platforms, custom AI systems, and visual productions. Here is a curated selection of our work in active use.
-        </p>
+
+        {/* Hero Image */}
+        <div className="w-full max-w-[1000px] mx-auto mt-[-12px] md:mt-[-28px] mb-4 md:mb-6 flex justify-center relative z-0">
+          {/* Ambient Purple Blur Overlay under/behind the image */}
+          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[80%] h-[75%] bg-purple-500/15 blur-[60px] md:blur-[100px] rounded-full pointer-events-none -z-20" />
+
+          {/* White fade overlay between bg/glow and image */}
+          <div className="absolute inset-x-0 top-0 h-24 bg-gradient-to-b from-white to-transparent pointer-events-none -z-10" />
+          <div className="absolute inset-x-0 bottom-0 h-24 bg-gradient-to-t from-white to-transparent pointer-events-none -z-10" />
+
+          {/* Top white fade smudge overlay on top of the image */}
+          <div className="absolute top-0 inset-x-0 h-16 bg-gradient-to-b from-white via-white/30 to-transparent pointer-events-none z-20" />
+
+          <img
+            src="/background/launch hero.png"
+            alt="Built to launch hero"
+            className="w-full h-auto object-contain max-h-[500px] relative z-10"
+          />
+
+          {/* Bottom white fade smudge overlay on top of the image */}
+          <div className="absolute bottom-0 inset-x-0 h-16 bg-gradient-to-t from-white via-white/30 to-transparent pointer-events-none z-20" />
+        </div>
+
+        {/* Bottom Copy (Title and Description) */}
+        <div className="text-center max-w-3xl mt-8">
+          <h2 className="text-xl md:text-2xl text-[var(--text-primary)] font-semibold font-questrial leading-snug">
+            <span className="text-purple-600 dark:text-purple-400 font-bold uppercase tracking-wider mr-2 font-mono">Explore</span> 
+            the products, brands, and digital experiences
+          </h2>
+          <p className="text-base text-[var(--text-secondary)] font-light mt-3 max-w-xl mx-auto leading-relaxed">
+            we&apos;ve brought to life across different industries.
+          </p>
+        </div>
       </section>
 
       {/* Launches Feed */}
