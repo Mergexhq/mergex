@@ -30,3 +30,19 @@ export { SERVICES } from './services';
 
 export type { GlossaryTerm } from './glossary';
 export { GLOSSARY } from './glossary';
+
+export {
+    getOrganizationSchema,
+    getWebsiteSchema,
+    getFAQSchema,
+    getBreadcrumbSchema,
+    getServiceSchema,
+} from './schema';
+export type {
+    OrganizationSchema,
+    WebsiteSchema,
+    FAQSchema,
+    BreadcrumbSchema,
+    ServiceSchema,
+    BreadcrumbItem,
+} from './schema';

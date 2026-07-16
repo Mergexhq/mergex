@@ -47,8 +47,8 @@
 
 | # | Task | Priority | Status | Notes |
 |---|---|---|---|---|
-| 3.1 | Add `Organization` structured data to root layout | critical | not started | Minimum: `name`, `url`, `logo`, `contactPoint`, `sameAs` (social profiles), `foundingDate`, `address` |
-| 3.2 | Add `WebSite` schema with `SearchAction` potential | high | not started | Enables sitelinks search box in Google; signals site authority to crawlers |
+| 3.1 | Add `Organization` structured data to root layout | critical | complete | Generated server-side from `src/knowledge/schema.ts` (derives from company.ts + services.ts) and injected into root `<head>` so every page carries the same entity identity |
+| 3.2 | Add `WebSite` schema with `SearchAction` potential | high | complete | `getWebsiteSchema()` injected into root layout; links to Organization via `@id` publisher. SearchAction intentionally deferred (documented TODO) until a real search endpoint exists |
 | 3.3 | Add `Service` schema for each core capability | high | not started | Software Development, AI Solutions, AI Creative Production — each should have structured data |
 | 3.4 | Create an `/about/company` or plain-text company description page | high | not started | LLMs need a simple, direct, factual page about MergeX. Avoid animations, carousels, or GSAP on this page |
 | 3.5 | Reconsider AI scraper blocking in `robots.ts` | high | not started | Currently blocking GPTBot, ClaudeBot, PerplexityBot, Google-Extended — this prevents LLMs from ever indexing the site. For GEO, you likely want to **allow** most of these |

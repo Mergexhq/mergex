@@ -3,6 +3,10 @@ import { Inter, Questrial } from "next/font/google";
 
 import "./globals.css";
 import LayoutShell from "@/components/LayoutShell";
+import {
+  getOrganizationSchema,
+  getWebsiteSchema,
+} from "@/knowledge/schema";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -125,6 +129,22 @@ export default function RootLayout({
       <head>
         <meta name="theme-color" content="#080808" />
         <meta name="apple-mobile-web-app-title" content="MergeX" />
+        {/* Organization + WebSite structured data — injected into <head>
+            server-side. Both are derived from the knowledge layer via the
+            schema builders, and share a single entity graph through stable
+            `@id` references (WebSite.publisher → Organization). */}
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify(getOrganizationSchema()),
+          }}
+        />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify(getWebsiteSchema()),
+          }}
+        />
       </head>
 
       <body

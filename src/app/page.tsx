@@ -4,6 +4,7 @@ import {
 } from '@/modules/home/components';
 import { ShowcaseFeed } from '@/modules/work';
 import { FAQ_ITEMS } from '@/knowledge/faq';
+import { getFAQSchema } from '@/knowledge/schema';
 
 const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? 'https://mergex.in';
 
@@ -70,18 +71,7 @@ export const metadata: Metadata = {
  * Generated server-side from the same FAQ_ITEMS used by the FAQ UI component.
  * Editing src/knowledge/faq.ts updates both the UI and the structured data automatically.
  */
-const faqJsonLd = {
-  '@context': 'https://schema.org',
-  '@type': 'FAQPage',
-  mainEntity: FAQ_ITEMS.map((item) => ({
-    '@type': 'Question',
-    name: item.question,
-    acceptedAnswer: {
-      '@type': 'Answer',
-      text: item.answer,
-    },
-  })),
-};
+const faqJsonLd = getFAQSchema(FAQ_ITEMS);
 
 export default function HomePage() {
     return (
