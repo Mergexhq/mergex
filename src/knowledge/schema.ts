@@ -177,14 +177,23 @@ export function getBreadcrumbSchema(items: BreadcrumbItem[]) {
 /**
  * Service structured data for a single MergeX capability.
  *
- * The provider references the Organization by `@id` so Google can connect each
- * service back to the MergeX entity. Use one schema per service on the future
- * /services pages, or emit a graph of all services.
+ * Each Service carries a stable `@id` (derived from `service.id`) so it can be
+ * referenced independently within the entity graph, and its `provider` links
+ * back to the Organization by `@id` — Google and LLM crawlers can therefore
+ * resolve "this service is offered by MergeX" without duplicating company data.
+ *
+ * Usage:
+ *   - Homepage / root: emit one schema per entry in SERVICES via map()
+ *   - Future /services/[id] pages: pass a single ServiceItem for that route
+ *
+ * `service.pageUrl` is optional today; it resolves to the dedicated service
+ * page when one exists (Milestone 10.2), otherwise to the site root.
  */
 export function getServiceSchema(service: ServiceItem) {
     return {
         '@context': 'https://schema.org',
         '@type': 'Service',
+        '@id': `${siteUrl}/#service-${service.id}`,
         name: service.name,
         description: service.shortDescription,
         serviceType: service.name,

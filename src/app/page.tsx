@@ -4,7 +4,8 @@ import {
 } from '@/modules/home/components';
 import { ShowcaseFeed } from '@/modules/work';
 import { FAQ_ITEMS } from '@/knowledge/faq';
-import { getFAQSchema } from '@/knowledge/schema';
+import { SERVICES } from '@/knowledge/services';
+import { getFAQSchema, getServiceSchema } from '@/knowledge/schema';
 
 const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? 'https://mergex.in';
 
@@ -73,6 +74,15 @@ export const metadata: Metadata = {
  */
 const faqJsonLd = getFAQSchema(FAQ_ITEMS);
 
+/**
+ * Service JSON-LD structured data.
+ * One schema per entry in SERVICES, derived from src/knowledge/services.ts.
+ * Each Service links back to the Organization via a stable @id provider
+ * reference, so editing services.ts updates the schema, the AI assistant
+ * knowledge, and (future) the /services pages together.
+ */
+const serviceJsonLd = SERVICES.map((service) => getServiceSchema(service));
+
 export default function HomePage() {
     return (
         <>
@@ -81,6 +91,18 @@ export default function HomePage() {
                 type="application/ld+json"
                 dangerouslySetInnerHTML={{ __html: JSON.stringify(faqJsonLd) }}
             />
+
+            {/* Service structured data — one block per MergeX capability.
+                Each references the Organization by @id, forming a single
+                entity graph alongside the Organization + WebSite schemas
+                emitted in the root layout. */}
+            {serviceJsonLd.map((schema) => (
+                <script
+                    key={schema['@id']}
+                    type="application/ld+json"
+                    dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }}
+                />
+            ))}
 
             <main className="relative bg-[#080808]">
                 <HomeHero />
