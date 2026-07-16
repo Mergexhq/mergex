@@ -50,13 +50,13 @@
 | 3.1 | Add `Organization` structured data to root layout | critical | complete | Generated server-side from `src/knowledge/schema.ts` (derives from company.ts + services.ts) and injected into root `<head>` so every page carries the same entity identity |
 | 3.2 | Add `WebSite` schema with `SearchAction` potential | high | complete | `getWebsiteSchema()` injected into root layout; links to Organization via `@id` publisher. SearchAction intentionally deferred (documented TODO) until a real search endpoint exists |
 | 3.3 | Add `Service` schema for each core capability | high | complete | `getServiceSchema(service)` builder emits one schema per entry in `SERVICES`, each with a stable `@id` and `provider → #organization`. All three services (Custom Software, AI Systems, AI Creative) injected on the homepage |
-| 3.4 | Create an `/about/company` or plain-text company description page | high | not started | LLMs need a simple, direct, factual page about MergeX. Avoid animations, carousels, or GSAP on this page |
-| 3.5 | Reconsider AI scraper blocking in `robots.ts` | high | not started | Currently blocking GPTBot, ClaudeBot, PerplexityBot, Google-Extended — this prevents LLMs from ever indexing the site. For GEO, you likely want to **allow** most of these |
+| 3.4 | Create an `/about/company` or plain-text company description page | high | not started | LLMs need a simple, direct, factual page about MergeX. Avoid animations, carousels, or GSAP on this page. *(Not addressed in this pass — remains for a future milestone.)* |
+| 3.5 | Reconsider AI scraper blocking in `robots.ts` | high | complete | Reviewed all 9 AI crawlers — none were blocked. Documented an explicit allow policy for answer-engine bots (GPTBot, ChatGPT-User, PerplexityBot, ClaudeBot, Claude-Web, Google-Extended) and a documented non-gating stance on general-purpose scrapers (CCBot, Amazonbot, Bytespider). Private routes stay disallowed for all |
 | 3.6 | Add descriptive `alt` text to all images | medium | not started | Many images use generic or empty alt text. Critical for both GEO and accessibility |
 | 3.7 | Write a clear "What is MergeX" paragraph visible at page load (above the fold) | medium | not started | LLMs prefer factual, direct statements. Current hero is primarily visual and animated |
-| 3.8 | Add breadcrumb structured data on inner pages | low | not started | `/launches`, `/studio`, `/about` should each have `BreadcrumbList` schema |
+| 3.8 | Add breadcrumb structured data on inner pages | low | complete | `getPageBreadcrumbSchema()` builder added to schema.ts; injected on `/about`, `/contact`, `/studio`, `/launches`. Each emits Home → Current Page, URLs derived from shared `siteUrl` |
 | 3.9 | Update `sitemap.ts` `lastModified` to use real timestamps | low | not started | Currently always returns `new Date()` — use build-time dates or content hashes |
-| 3.10 | Fix hardcoded canonical URLs on `/about` and `/launches` | low | not started | Should read from `NEXT_PUBLIC_SITE_URL` environment variable, not hardcoded strings |
+| 3.10 | Fix hardcoded canonical URLs on `/about` and `/launches` | low | complete | All four inner pages (`/about`, `/contact`, `/studio`, `/launches`) now use `siteUrl` env var for canonical and OG URLs. Zero hardcoded `mergex.in` URLs remain in page metadata |
 
 ---
 

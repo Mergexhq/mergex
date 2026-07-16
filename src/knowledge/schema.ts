@@ -175,6 +175,22 @@ export function getBreadcrumbSchema(items: BreadcrumbItem[]) {
 }
 
 /**
+ * Standard "Home → {Page}" breadcrumb for an inner page.
+ *
+ * Most MergeX pages sit one level below the homepage, so this convenience
+ * builder covers the common case without each page re-declaring the Home node.
+ * For deeper trails (e.g. /services/ai-systems), call getBreadcrumbSchema()
+ * directly with the full list. All URLs derive from the shared siteUrl so
+ * the breadcrumb stays in sync with the page's canonical URL.
+ */
+export function getPageBreadcrumbSchema(name: string, path: string) {
+    return getBreadcrumbSchema([
+        { name: 'Home', url: siteUrl },
+        { name, url: `${siteUrl}${path}` },
+    ]);
+}
+
+/**
  * Service structured data for a single MergeX capability.
  *
  * Each Service carries a stable `@id` (derived from `service.id`) so it can be

@@ -1,15 +1,31 @@
 import type { Metadata } from 'next';
 import './about.css';
 import { Signature } from '@/components/Signature';
+import { getPageBreadcrumbSchema } from '@/knowledge/schema';
+
+const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? 'https://mergex.in';
 
 export const metadata: Metadata = {
   title: 'About - The MergeX Company',
   description:
     'MergeX is a software and AI company focused on creating technology that helps businesses operate more effectively in an increasingly digital world.',
   alternates: {
-    canonical: 'https://mergex.in/about',
+    canonical: `${siteUrl}/about`,
+  },
+  openGraph: {
+    title: 'About - The MergeX Company',
+    description:
+      'MergeX is a software and AI company focused on creating technology that helps businesses operate more effectively in an increasingly digital world.',
+    url: `${siteUrl}/about`,
   },
 };
+
+/**
+ * BreadcrumbList JSON-LD — Home → About.
+ * Generated server-side via the schema builder; the About URL derives from
+ * the same siteUrl as the canonical so the breadcrumb never drifts.
+ */
+const breadcrumbJsonLd = getPageBreadcrumbSchema('About', '/about');
 
 const CAPABILITIES = [
   { label: 'SOFTWARE\nDEVELOPMENT' },
@@ -55,7 +71,14 @@ const BUILT_PROJECTS: {
 
 export default function AboutPage() {
   return (
-    <main className="about-page">
+    <>
+      {/* BreadcrumbList structured data — injected server-side */}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbJsonLd) }}
+      />
+
+      <main className="about-page">
 
       {/* Background Gaussian Blur Orbs */}
       <div className="about-blur-bg" aria-hidden="true">
@@ -238,5 +261,6 @@ export default function AboutPage() {
       </section>
 
     </main>
+    </>
   );
 }

@@ -36,6 +36,7 @@ export {
     getWebsiteSchema,
     getFAQSchema,
     getBreadcrumbSchema,
+    getPageBreadcrumbSchema,
     getServiceSchema,
 } from './schema';
 export type {

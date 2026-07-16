@@ -3,19 +3,42 @@ import LaunchesFeed from './LaunchesFeed';
 import InteractiveExperiences from './InteractiveExperiences';
 import ClientVoices from './ClientVoices';
 import LaunchesCTA from './LaunchesCTA';
+import { getPageBreadcrumbSchema } from '@/knowledge/schema';
+
+const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? 'https://mergex.in';
 
 export const metadata: Metadata = {
   title: 'Launches',
   description:
     'Real-world system launches, platforms, and AI integrations built and deployed by MergeX.',
   alternates: {
-    canonical: 'https://mergex.in/launches',
+    canonical: `${siteUrl}/launches`,
+  },
+  openGraph: {
+    title: 'Launches - MergeX',
+    description:
+      'Real-world system launches, platforms, and AI integrations built and deployed by MergeX.',
+    url: `${siteUrl}/launches`,
   },
 };
 
+/**
+ * BreadcrumbList JSON-LD — Home → Launches.
+ * Generated server-side via the schema builder; the Launches URL derives from
+ * the same siteUrl as the canonical so the breadcrumb never drifts.
+ */
+const breadcrumbJsonLd = getPageBreadcrumbSchema('Launches', '/launches');
+
 export default function LaunchesPage() {
   return (
-    <main className="min-h-screen bg-white text-[var(--text-primary)] font-body">
+    <>
+      {/* BreadcrumbList structured data — injected server-side */}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbJsonLd) }}
+      />
+
+      <main className="min-h-screen bg-white text-[var(--text-primary)] font-body">
       {/* Hero Section */}
       <section className="w-full pt-32 pb-16 flex flex-col items-center overflow-x-hidden">
         {/* Top Copy */}
@@ -73,5 +96,6 @@ export default function LaunchesPage() {
       {/* Final Call to Action */}
       <LaunchesCTA />
     </main>
+    </>
   );
 }

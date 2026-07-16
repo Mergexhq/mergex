@@ -33,7 +33,7 @@ export const metadata: Metadata = {
   },
 
   description:
-    "MergeX is an independent software and AI company specializing in software development, AI solutions, and AI creative production.",
+    "MergeX is a software and AI engineering company. We design and build custom software, AI systems, automation workflows, and digital products that help businesses operate smarter and move faster.",
 
   keywords: [
     "MergeX",
@@ -55,7 +55,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: "MergeX",
     description:
-      "MergeX specializes in software development, AI solutions, and AI creative production.",
+      "MergeX is a software and AI engineering company. We design and build custom software, AI systems, and automation workflows.",
     url: siteUrl,
     siteName: "MergeX",
     locale: "en_US",
@@ -74,7 +74,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "MergeX",
     description:
-      "MergeX specializes in software development, AI solutions, and AI creative production.",
+      "MergeX is a software and AI engineering company. We design and build custom software, AI systems, and automation workflows.",
     images: ["/og-cover.jpg"],
   },
 
