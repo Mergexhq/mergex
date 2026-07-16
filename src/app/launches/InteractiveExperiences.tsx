@@ -153,12 +153,26 @@ function ChatCard() {
     setInput('');
     setMessages(m => [...m, { role: 'user', text }]);
     setLoading(true);
-    await new Promise(r => setTimeout(r, 1200));
-    setMessages(m => [...m, {
-      role: 'assistant',
-      text: "Thanks for reaching out! Our team will be able to help you with that. In the meantime, feel free to explore our work at /launches or contact us at hello@mergex.in."
-    }]);
-    setLoading(false);
+
+    try {
+      const res = await fetch('/api/chat', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ message: text }),
+      });
+
+      const data = await res.json() as { content?: string; error?: string };
+      const replyText = data.content ?? data.error ?? 'Something went wrong. Please try again.';
+
+      setMessages(m => [...m, { role: 'assistant', text: replyText }]);
+    } catch {
+      setMessages(m => [...m, {
+        role: 'assistant',
+        text: 'Unable to reach the assistant right now. Please try again in a moment.',
+      }]);
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (

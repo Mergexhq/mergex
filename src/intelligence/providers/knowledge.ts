@@ -79,6 +79,26 @@ export function getGlossaryTerm(term: string): GlossaryTerm | undefined {
 // ─────────────────────────────────────────────────────────────────────────────
 
 /**
+ * Common English stopwords. These contribute no signal to topic matching —
+ * they appear in virtually every sentence and inflate overlap scores on
+ * irrelevant chunks. Filtered out before any overlap computation.
+ */
+const STOPWORDS = new Set([
+    'a', 'an', 'the', 'is', 'are', 'was', 'were', 'be', 'been', 'being',
+    'have', 'has', 'had', 'do', 'does', 'did', 'will', 'would', 'could',
+    'should', 'may', 'might', 'shall', 'can', 'need', 'dare', 'ought',
+    'of', 'in', 'on', 'at', 'to', 'for', 'with', 'by', 'from', 'up',
+    'about', 'into', 'through', 'during', 'before', 'after', 'above',
+    'below', 'between', 'each', 'other',
+    'i', 'me', 'my', 'we', 'our', 'you', 'your', 'he', 'she', 'it',
+    'they', 'them', 'their', 'this', 'that', 'these', 'those',
+    'who', 'what', 'which', 'when', 'where', 'why', 'how',
+    'and', 'but', 'or', 'nor', 'so', 'yet', 'both', 'either', 'not',
+    'no', 'any', 'all', 'more', 'most', 'also', 'just', 'than', 'then',
+    'if', 'as', 'such',
+]);
+
+/**
  * Normalise a string for matching: lowercase, collapse whitespace.
  */
 function normalise(value: string): string {
@@ -86,13 +106,29 @@ function normalise(value: string): string {
 }
 
 /**
+ * Extract meaningful tokens from a string, filtering out stopwords and
+ * single-character tokens. Returns an empty Set if nothing meaningful remains.
+ */
+function meaningfulTokens(text: string): Set<string> {
+    return new Set(
+        normalise(text)
+            .split(/[\s,.\-–—:;!?'"()[\]]+/)
+            .filter((t) => t.length > 1 && !STOPWORDS.has(t)),
+    );
+}
+
+/**
  * Score how strongly a query relates to a piece of text, in [0, 1].
- * Simple token-overlap heuristic — good enough for deterministic intent-style
- * matching and deliberately explainable. No embeddings required.
+ *
+ * Uses token overlap on *meaningful* tokens only (stopwords excluded).
+ * Score = |query_tokens ∩ text_tokens| / |query_tokens|.
+ *
+ * This prevents common words like "is", "the", "do" from producing false
+ * positives against long prose chunks that happen to contain them.
  */
 function tokenOverlapScore(query: string, text: string): number {
-    const queryTokens = new Set(normalise(query).split(' ').filter(Boolean));
-    const textTokens = new Set(normalise(text).split(' ').filter(Boolean));
+    const queryTokens = meaningfulTokens(query);
+    const textTokens = meaningfulTokens(text);
     if (queryTokens.size === 0 || textTokens.size === 0) return 0;
 
     let hits = 0;
@@ -105,19 +141,34 @@ function tokenOverlapScore(query: string, text: string): number {
 /**
  * Retrieve the knowledge chunks most relevant to a query, ranked by relevance.
  *
- * Returns structured KnowledgeChunk[] — the engine can decide whether the top
- * score is confident enough to answer directly, or whether to hand off to a
- * generative provider.
+ * Scoring strategy per source:
+ *
+ *   company — score against name, description, tagline, and per-field haystacks
+ *             that include domain-specific synonyms (e.g. "founder founded ceo").
+ *
+ *   services — score against service name and haystack of capabilities.
+ *              The combined haystack is deliberately richer than just the name.
+ *
+ *   faq — question text carries 2× weight vs answer text. A query that
+ *         semantically matches the question wins over incidental word
+ *         overlap in the long answer paragraph.
+ *
+ *   glossary — score against term and definition separately; take the max.
+ *
+ * Returns structured KnowledgeChunk[] sorted by score descending, score > 0
+ * entries only.
  */
 export function retrieveKnowledge(query: string): KnowledgeChunk[] {
     const chunks: Array<{ chunk: KnowledgeChunk; score: number }> = [];
 
-    // Company-level chunks.
+    // ── Company-level chunks ─────────────────────────────────────────────────
+
     chunks.push({
         score: Math.max(
             tokenOverlapScore(query, COMPANY.name),
             tokenOverlapScore(query, COMPANY.description),
             tokenOverlapScore(query, COMPANY.tagline),
+            tokenOverlapScore(query, `${COMPANY.name} company software ai engineering technology`),
         ),
         chunk: {
             id: 'company:overview',
@@ -126,19 +177,33 @@ export function retrieveKnowledge(query: string): KnowledgeChunk[] {
         },
     });
 
+    // Founder chunk — richer haystack with all name variants and role synonyms.
+    const founderNames = COMPANY.founders.map((f) => f.name).join(' ');
+    const founderRoles = COMPANY.founders.map((f) => f.role).join(' ');
+    const founderHaystack = `founder founders founded ceo cio co-founder leadership team ${founderNames} ${founderRoles} ${COMPANY.name}`;
+
     chunks.push({
-        score: tokenOverlapScore(query, `${COMPANY.name} founders founder founded ${COMPANY.founders.map((f) => f.name).join(' ')}`),
+        score: Math.max(
+            tokenOverlapScore(query, founderHaystack),
+            // Direct name matching — if a founder's name appears in the query, score highly.
+            ...COMPANY.founders.map((f) =>
+                normalise(query).includes(normalise(f.name.split(' ')[0])) ? 0.9 : 0,
+            ),
+        ),
         chunk: {
             id: 'company:founders',
             source: 'company',
-            content: COMPANY.founders
-                .map((f) => `${f.name} — ${f.role} (${f.email})`)
-                .join('\n'),
+            content:
+                `${COMPANY.name} was founded by:\n` +
+                COMPANY.founders.map((f) => `• ${f.name} — ${f.role}`).join('\n'),
         },
     });
 
     chunks.push({
-        score: tokenOverlapScore(query, `based located headquarters ${COMPANY.location.city} ${COMPANY.location.state} ${COMPANY.location.country}`),
+        score: Math.max(
+            tokenOverlapScore(query, `based located headquarters office ${COMPANY.location.city} ${COMPANY.location.state} ${COMPANY.location.country} india`),
+            tokenOverlapScore(query, COMPANY.location.city),
+        ),
         chunk: {
             id: 'company:location',
             source: 'company',
@@ -146,9 +211,10 @@ export function retrieveKnowledge(query: string): KnowledgeChunk[] {
         },
     });
 
-    // Service-level chunks.
+    // ── Service-level chunks ─────────────────────────────────────────────────
+
     for (const service of SERVICES) {
-        const haystack = [service.name, service.shortDescription, service.capabilities.join(' ')].join(' ');
+        const haystack = [service.name, service.shortDescription, ...service.capabilities].join(' ');
         chunks.push({
             score: Math.max(
                 tokenOverlapScore(query, service.name),
@@ -162,13 +228,19 @@ export function retrieveKnowledge(query: string): KnowledgeChunk[] {
         });
     }
 
-    // FAQ chunks.
+    // ── FAQ chunks ───────────────────────────────────────────────────────────
+
     for (const item of FAQ_ITEMS) {
+        // Question text is a stronger signal than answer prose.
+        // Weighting: question = 2×, answer = 1×, combined max.
+        const questionScore = tokenOverlapScore(query, item.question);
+        const answerScore = tokenOverlapScore(query, item.answer);
+        // Weighted blend: question match worth 2×, answer match worth 1×.
+        // Cap at 1.0 to stay in [0,1].
+        const score = Math.min(1, (questionScore * 2 + answerScore) / 2);
+
         chunks.push({
-            score: Math.max(
-                tokenOverlapScore(query, item.question),
-                tokenOverlapScore(query, item.answer),
-            ),
+            score,
             chunk: {
                 id: `faq:${item.question}`,
                 source: 'faq',
@@ -177,7 +249,8 @@ export function retrieveKnowledge(query: string): KnowledgeChunk[] {
         });
     }
 
-    // Glossary chunks.
+    // ── Glossary chunks ──────────────────────────────────────────────────────
+
     for (const entry of GLOSSARY) {
         chunks.push({
             score: Math.max(
@@ -197,6 +270,7 @@ export function retrieveKnowledge(query: string): KnowledgeChunk[] {
         .sort((a, b) => b.score - a.score)
         .map((entry) => ({ ...entry.chunk, score: entry.score }));
 }
+
 
 // ─────────────────────────────────────────────────────────────────────────────
 // The IntelligenceProvider contract
