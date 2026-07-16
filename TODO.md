@@ -66,8 +66,8 @@
 
 | # | Task | Priority | Status | Notes |
 |---|---|---|---|---|
-| 4.1 | Create `/api/chat` route | critical | not started | Currently `ChatCard` uses `setTimeout` fake response. Build a real API route using OpenAI / Gemini API |
-| 4.2 | Write a MergeX system prompt / knowledge document | critical | not started | The AI needs a comprehensive briefing on services, positioning, FAQs, pricing philosophy, and how to route visitors |
+| 4.1 | Create `/api/chat` route | critical | complete | Architecture-only foundation laid in `src/intelligence/`: typed contracts (`types.ts`), engine pipeline (`engine/router`, `context`, `formatter`, `confidence`, `index`), provider registry (`providers/`), prompt + guardrail builders (`prompts/`), and reserved session memory (`memory/`). No implementation logic, no API calls, no UI/route changes, no vendor coupling. The `/api/chat` route handler and real provider wiring land in 4.2+ |
+| 4.2 | Knowledge Provider + system prompt + intent + Gemini + prompt builder | critical | complete | Backend intelligence engine fully functional: `providers/knowledge.ts` (retrieval from knowledge layer), `providers/gemini.ts` (Google AI Studio REST, env-var auth), `intent/index.ts` (deterministic intent detection), `prompts/system.ts` + `prompts/guardrails.ts` + `prompts/knowledge-context.ts` (all dynamically generated from src/knowledge/). Engine pipeline: intent → retrieval → confidence → route → generate → format. Knowledge-first routing: Gemini only when deterministic knowledge is insufficient. Test harness at `__test-harness__.ts`. No UI or route changes |
 | 4.3 | Replace fake `send()` function in `ChatCard` with real API call | high | not started | Wire `InteractiveExperiences.tsx` ChatCard to the real `/api/chat` endpoint |
 | 4.4 | Add streaming response support | high | not started | Token-by-token streaming dramatically improves perceived performance |
 | 4.5 | Rate limiting on `/api/chat` | high | not started | Required before going live — without it the endpoint is open to abuse |
