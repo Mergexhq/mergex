@@ -3,33 +3,48 @@ import {
     HomeHero,
 } from '@/modules/home/components';
 import { ShowcaseFeed } from '@/modules/work';
+import { FAQ_ITEMS } from '@/knowledge/faq';
+
+const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? 'https://mergex.in';
 
 export const metadata: Metadata = {
-  title: 'The MergeX Company',
+  title: 'MergeX — Custom Software & AI Systems',
   description:
-    'MergeX identifies and fixes the exact factor stopping business growth. A consulting-first scaling company.',
+    'MergeX is a software and AI engineering company. We design and build custom software, AI systems, automation workflows, and digital products that help businesses operate smarter and move faster.',
   keywords: [
     'MergeX',
-    'The MergeX Company',
-    'Business Scaling',
-    'Diagnostic Consulting',
-    'Scaling Systems',
-    'Business Infrastructure',
-    'Operational Clarity',
-    'S.C.A.L.E Methodology',
-    'Brand Systems',
-    'Technology Systems',
-    'Sales Systems',
+    'Custom Software Development',
+    'AI Systems',
+    'AI Software Development',
+    'AI Automation',
+    'AI Integration',
+    'AI Agents',
+    'Generative AI',
+    'AI Voice Receptionist',
+    'AI Chat Assistant',
+    'Workflow Automation',
+    'Business Automation',
+    'Business Software',
+    'Enterprise Software',
+    'SaaS Development',
+    'Web Application Development',
+    'Digital Product Engineering',
+    'Product Development',
+    'AI Creative Production',
+    'Technology Partner',
+    'Software Development Company India',
+    'Software Development Company Chennai',
+    'AI Company India',
   ],
-  authors: [{ name: 'The MergeX Company', url: 'https://mergex.in' }],
-  creator: 'The MergeX Company',
-  publisher: 'The MergeX Company',
+  authors: [{ name: 'MergeX', url: siteUrl }],
+  creator: 'MergeX',
+  publisher: 'MergeX',
   openGraph: {
-    title: 'The MergeX Company',
+    title: 'MergeX — Custom Software & AI Systems',
     description:
-      "Most businesses don't fail from lack of effort. They fail because they're solving the wrong problem.",
-    url: 'https://mergex.in',
-    siteName: 'The MergeX Company',
+      'MergeX designs and builds custom software, AI systems, and automation workflows. Precise engineering for businesses that want to operate smarter and solve real problems.',
+    url: siteUrl,
+    siteName: 'MergeX',
     locale: 'en_US',
     type: 'website',
     images: [
@@ -37,27 +52,54 @@ export const metadata: Metadata = {
         url: '/og-cover.jpg',
         width: 1200,
         height: 630,
-        alt: 'The MergeX Company | Diagnosis before everything.',
+        alt: 'MergeX — Custom Software & AI Systems.',
       },
     ],
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'The MergeX Company',
+    title: 'MergeX — Custom Software & AI Systems',
     description:
-      "Most businesses don't fail from lack of effort. They fail because they're solving the wrong problem.",
+      'MergeX designs and builds custom software, AI systems, and automation workflows. Precise engineering for businesses that want to operate smarter and solve real problems.',
     images: ['/og-cover.jpg'],
   },
 };
 
+/**
+ * FAQPage JSON-LD structured data.
+ * Generated server-side from the same FAQ_ITEMS used by the FAQ UI component.
+ * Editing src/knowledge/faq.ts updates both the UI and the structured data automatically.
+ */
+const faqJsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: FAQ_ITEMS.map((item) => ({
+    '@type': 'Question',
+    name: item.question,
+    acceptedAnswer: {
+      '@type': 'Answer',
+      text: item.answer,
+    },
+  })),
+};
+
 export default function HomePage() {
     return (
-        <main className="relative bg-[#080808]">
-            <HomeHero />
+        <>
+            {/* FAQPage structured data — injected into <head> server-side */}
+            <script
+                type="application/ld+json"
+                dangerouslySetInnerHTML={{ __html: JSON.stringify(faqJsonLd) }}
+            />
 
-            {/* Showcase/Works Feed */}
-            <ShowcaseFeed />
-        </main>
+            <main className="relative bg-[#080808]">
+                <HomeHero />
+
+                {/* Showcase/Works Feed */}
+                <ShowcaseFeed />
+            </main>
+        </>
     );
 }
+
 
