@@ -33,41 +33,22 @@ const CAPABILITIES = [
   { label: 'AI CREATIVE\nPRODUCTION' },
 ];
 
-/** All 23 projects with their wordmark style config and launch anchor slug */
-const BUILT_PROJECTS: {
-  name: string;
-  slug: string;
-  hasLogo?: boolean;
-  weight?: number;
-  tracking?: number;
-  casing?: 'uppercase' | 'lowercase' | 'capitalize' | 'none';
-  italic?: boolean;
-  sizeMultiplier?: number;
-}[] = [
-    { name: 'Mic & Mac', slug: 'mic-and-mac', weight: 800, tracking: 0.05, casing: 'uppercase' },
-    { name: 'Grape Master', slug: '', hasLogo: true },
-    { name: 'Dude Mens Wear', slug: 'dude-mens-wears', weight: 900, tracking: 0.14, casing: 'uppercase' },
-    { name: 'Tharus Motors', slug: '', weight: 700, tracking: 0.10, casing: 'uppercase' },
-    { name: 'Neidhal FC', slug: '', weight: 900, tracking: 0.02, casing: 'uppercase', italic: true },
-    { name: 'Motor Factory', slug: '', weight: 800, tracking: 0.12, casing: 'uppercase' },
-    { name: 'Space Furnia', slug: '', weight: 300, tracking: 0.22, casing: 'uppercase' },
-    { name: 'Kuthakai', slug: '', weight: 700, tracking: 0.06, casing: 'capitalize' },
-    { name: 'Unisynk', slug: '', weight: 800, tracking: 0.08, casing: 'lowercase' },
-    { name: 'Pirandai', slug: '', weight: 400, tracking: 0.18, casing: 'uppercase', italic: true },
-    { name: 'Cedar Elevators', slug: 'cedar-elevators', weight: 600, tracking: 0.10, casing: 'uppercase' },
-    { name: 'Jackson Elevators', slug: '', weight: 700, tracking: 0.08, casing: 'uppercase' },
-    { name: 'Voice Model AI', slug: '', weight: 900, tracking: 0.00, casing: 'lowercase', sizeMultiplier: 0.9 },
-    { name: 'Chat Bot AI', slug: '', weight: 300, tracking: 0.25, casing: 'uppercase' },
-    { name: 'Dgard', slug: '', weight: 800, tracking: 0.15, casing: 'uppercase' },
-    { name: 'Thai Chips', slug: '', weight: 900, tracking: 0.03, casing: 'capitalize', italic: true },
-    { name: 'Sara Vega', slug: '', weight: 300, tracking: 0.30, casing: 'uppercase', italic: true },
-    { name: 'HeyProData', slug: 'heyprodata', weight: 700, tracking: 0.02, casing: 'lowercase' },
-    { name: 'MKS Agencies', slug: '', weight: 800, tracking: 0.12, casing: 'uppercase' },
-    { name: 'Vydy', slug: '', weight: 900, tracking: 0.20, casing: 'uppercase' },
-    { name: 'Dhivana Collections', slug: '', weight: 300, tracking: 0.22, casing: 'uppercase' },
-    { name: 'Zeko', slug: '', weight: 900, tracking: 0.05, casing: 'lowercase' },
-    { name: 'ExaminerPro', slug: '', weight: 700, tracking: 0.06, casing: 'capitalize' },
-  ];
+/**
+ * Client logo list — add new entries here as logos are placed in
+ * public/brand logos/.  Each `src` is a root-relative URL.
+ */
+const CLIENT_LOGOS: { src: string; alt: string }[] = [
+  { src: '/brand logos/micandmac.png',           alt: 'Mic & Mac' },
+  { src: '/brand logos/grapemaster.png',          alt: 'Grape Master' },
+  { src: "/brand logos/Dude Men's Wear.png", alt: "Dude Men's Wear" },
+  { src: '/brand logos/neidhal_logo.png',         alt: 'Neidhal FC' },
+  { src: '/brand logos/motofactory.png',          alt: 'Motor Factory' },
+  { src: '/brand logos/Kuthakai.png',             alt: 'Kuthakai' },
+  { src: '/brand logos/cedarelevators.png',       alt: 'Cedar Elevators' },
+  { src: '/brand logos/grace and grow.png',       alt: 'Grace and Grow' },
+  { src: '/brand logos/CinnAstra Tech.png',       alt: 'CinnAstra Tech' },
+  { src: '/brand logos/Pixel_draft_Logo.png',     alt: 'Pixel Draft' },
+];
 
 export default function AboutPage() {
   return (
@@ -135,8 +116,8 @@ export default function AboutPage() {
 
       </div>
 
-      {/* ── What We've Built ── */}
-      <section className="wwb-section">
+      {/* ── Trusted by Growing Businesses ── */}
+      <section className="wwb-section" aria-labelledby="wwb-heading">
         {/* BG image layer */}
         <div className="wwb-bg" aria-hidden="true" />
         {/* Noise grain overlay */}
@@ -145,52 +126,61 @@ export default function AboutPage() {
         <div className="wwb-scrim" aria-hidden="true" />
 
         <div className="wwb-inner">
-          {/* Header */}
+
+          {/* ── Section header ── */}
           <div className="wwb-header">
-            <h2 className="wwb-title font-questrial">What We&apos;ve Built</h2>
+            <h2 id="wwb-heading" className="wwb-title font-questrial">
+              Trusted by Growing Businesses
+            </h2>
             <p className="wwb-desc">
-              Every launch represents a different challenge, industry, and objective. From business software and AI systems to creative productions and digital platforms, each project reflects our approach to building thoughtful technology.
+              From AI systems and business software to automation, digital platforms, and custom solutions, we&apos;ve partnered with businesses across multiple industries.
             </p>
           </div>
 
-          {/* Logo/wordmark grid */}
-          <div className="wwb-grid">
-            {BUILT_PROJECTS.map((project) => {
-              const href = project.slug ? `/launches#${project.slug}` : '/launches';
-              return (
-                <a
-                  key={project.name}
-                  href={href}
-                  className="wwb-item"
-                  title={project.name}
-                >
-                  {project.hasLogo ? (
-                    <img
-                      src="/brand logos/grapemaster.png"
-                      alt="Grape Master"
-                      className="wwb-logo-img"
-                      draggable={false}
-                    />
-                  ) : (
-                    <span
-                      className="wwb-wordmark"
-                      style={{
-                        fontWeight: project.weight ?? 700,
-                        letterSpacing: `${project.tracking ?? 0.08}em`,
-                        textTransform: project.casing === 'none' ? undefined : project.casing,
-                        fontStyle: project.italic ? 'italic' : 'normal',
-                        fontSize: project.sizeMultiplier
-                          ? `calc(var(--wwb-wm-size) * ${project.sizeMultiplier})`
-                          : undefined,
-                      }}
-                    >
-                      {project.name}
-                    </span>
-                  )}
-                </a>
-              );
-            })}
+          {/* ── Stats bar ── */}
+          <div className="wwb-stats" aria-label="Portfolio statistics">
+            <div className="wwb-stat">
+              <span className="wwb-stat-num">40+</span>
+              <span className="wwb-stat-lbl">Projects Delivered</span>
+            </div>
+            <div className="wwb-stat-divider" aria-hidden="true" />
+            <div className="wwb-stat">
+              <span className="wwb-stat-num">10+</span>
+              <span className="wwb-stat-lbl">Industries Served</span>
+            </div>
+            <div className="wwb-stat-divider wwb-stat-divider--hide-sm" aria-hidden="true" />
+            <p className="wwb-stat-tags">
+              AI&nbsp;&bull;&nbsp;Automation&nbsp;&bull;&nbsp;Business Software&nbsp;&bull;&nbsp;Digital Platforms
+            </p>
           </div>
+
+          {/* ── Logo grid ── */}
+          <ul className="wwb-logo-grid" role="list" aria-label="Client logos">
+            {CLIENT_LOGOS.map(({ src, alt }) => (
+              <li key={src} className="wwb-logo-card" role="listitem">
+                <div className="wwb-logo-card-inner">
+                  <img
+                    src={src}
+                    alt={alt}
+                    className="wwb-logo-img"
+                    loading="lazy"
+                    draggable={false}
+                    width={160}
+                    height={80}
+                  />
+                </div>
+              </li>
+            ))}
+
+            {/* ── "30+ More Projects" card ── */}
+            <li className="wwb-logo-card wwb-logo-card--more" role="listitem" aria-label="30 or more additional projects">
+              <div className="wwb-logo-card-inner wwb-more-inner">
+                <span className="wwb-more-num">30+</span>
+                <span className="wwb-more-lbl">More Projects</span>
+              </div>
+            </li>
+          </ul>
+
         </div>
       </section>
 

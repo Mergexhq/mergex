@@ -227,82 +227,148 @@
   align-self: end;
 }
 
-/* ── Wordmark / logo grid ── */
-.wwb-grid {
-  display: grid;
-  grid-template-columns: repeat(5, 1fr);
-  gap: 0;
+/* ── Stats bar ────────────────────────────────────────────────────── */
+.wwb-stats {
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+  margin-bottom: 4rem;
+  flex-wrap: wrap;
 }
 
-/* ── Individual grid cell ── */
-.wwb-item {
+.wwb-stat {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.wwb-stat-num {
+  font-size: clamp(1.6rem, 2.5vw, 2.2rem);
+  font-weight: 700;
+  color: #ffffff;
+  line-height: 1;
+  letter-spacing: -0.02em;
+  font-family: var(--font-questrial, 'Questrial', sans-serif);
+}
+
+.wwb-stat-lbl {
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.45);
+}
+
+.wwb-stat-divider {
+  width: 1px;
+  height: 36px;
+  background: rgba(255, 255, 255, 0.15);
+  flex-shrink: 0;
+}
+
+.wwb-stat-tags {
+  font-size: 12px;
+  font-weight: 400;
+  color: rgba(255, 255, 255, 0.38);
+  letter-spacing: 0.06em;
+}
+
+/* ── Logo grid ────────────────────────────────────────────────────── */
+.wwb-logo-grid {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 1rem;
+}
+
+/* ── Individual logo card ── */
+.wwb-logo-card {
+  display: flex;
+}
+
+.wwb-logo-card-inner {
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 2rem 1.25rem;
-  border-right: 1px solid rgba(255, 255, 255, 0.08);
-  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
-  text-decoration: none;
-  transition: background 0.25s ease, border-color 0.25s ease;
-  cursor: pointer;
-  min-height: 90px;
+  width: 100%;
+  padding: 2rem 1.5rem;
+  border-radius: 0.75rem;
+  border: 1px solid rgba(255, 255, 255, 0.10);
+  background: rgba(255, 255, 255, 0.04);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease, background 0.3s ease;
+  cursor: default;
+  min-height: 110px;
 }
 
-.wwb-item:hover {
-  background: rgba(255, 255, 255, 0.06);
-  border-color: rgba(255, 255, 255, 0.18);
+.wwb-logo-card-inner:hover {
+  transform: scale(1.03);
+  background: rgba(255, 255, 255, 0.08);
+  border-color: rgba(167, 139, 250, 0.40);
+  box-shadow: 0 0 0 1px rgba(167, 139, 250, 0.15), 0 8px 32px rgba(0, 0, 0, 0.30);
 }
 
-/* Remove right border on every 5th item */
-.wwb-item:nth-child(5n) {
-  border-right: none;
-}
-
-/* ── Typographic wordmarks ── */
-.wwb-wordmark {
-  font-size: var(--wwb-wm-size);
-  color: rgba(255, 255, 255, 0.72);
-  text-align: center;
-  line-height: 1.2;
-  user-select: none;
-  transition: color 0.25s ease;
-  font-family: var(--font-inter, 'Inter', sans-serif);
-}
-
-.wwb-item:hover .wwb-wordmark {
-  color: #ffffff;
-}
-
-/* ── Grape Master logo image ── */
+/* ── Logo image inside card ── */
 .wwb-logo-img {
-  width: auto;
-  height: 52px;
-  max-width: 120px;
+  width: 100%;
+  max-width: 140px;
+  height: 64px;
   object-fit: contain;
-  filter: grayscale(1) brightness(2);
-  opacity: 0.7;
+  object-position: center;
+  filter: grayscale(1) brightness(1.8);
+  opacity: 0.70;
   transition: filter 0.3s ease, opacity 0.3s ease;
   user-select: none;
-  draggable: false;
 }
 
-.wwb-item:hover .wwb-logo-img {
-  filter: grayscale(0) brightness(1);
+.wwb-logo-card-inner:hover .wwb-logo-img {
+  filter: grayscale(0) brightness(1.1);
   opacity: 1;
+}
+
+/* ── "30+ More Projects" card ── */
+.wwb-logo-card--more .wwb-logo-card-inner {
+  cursor: default;
+  border-style: dashed;
+  border-color: rgba(255, 255, 255, 0.14);
+  background: rgba(255, 255, 255, 0.02);
+}
+
+.wwb-logo-card--more .wwb-logo-card-inner:hover {
+  border-color: rgba(167, 139, 250, 0.35);
+  background: rgba(167, 139, 250, 0.06);
+  box-shadow: 0 0 0 1px rgba(167, 139, 250, 0.12), 0 8px 24px rgba(0, 0, 0, 0.25);
+}
+
+.wwb-more-inner {
+  flex-direction: column;
+  gap: 0.3rem;
+}
+
+.wwb-more-num {
+  font-size: clamp(1.8rem, 2.8vw, 2.4rem);
+  font-weight: 700;
+  color: #ffffff;
+  line-height: 1;
+  letter-spacing: -0.02em;
+  font-family: var(--font-questrial, 'Questrial', sans-serif);
+}
+
+.wwb-more-lbl {
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.45);
 }
 
 /* ── Responsive ── */
 @media (max-width: 1100px) {
-  .wwb-grid {
+  .wwb-logo-grid {
     grid-template-columns: repeat(4, 1fr);
-  }
-
-  .wwb-item:nth-child(5n) {
-    border-right: 1px solid rgba(255, 255, 255, 0.08);
-  }
-
-  .wwb-item:nth-child(4n) {
-    border-right: none;
   }
 }
 
@@ -317,7 +383,7 @@
     gap: 2rem;
   }
 
-  .wwb-grid {
+  .wwb-logo-grid {
     grid-template-columns: repeat(3, 1fr);
   }
 
@@ -325,12 +391,12 @@
     padding: 4rem 2rem 4rem;
   }
 
-  .wwb-item:nth-child(4n) {
-    border-right: 1px solid rgba(255, 255, 255, 0.08);
+  .wwb-stat-divider--hide-sm {
+    display: none;
   }
 
-  .wwb-item:nth-child(3n) {
-    border-right: none;
+  .wwb-stat-tags {
+    width: 100%;
   }
 }
 
@@ -344,20 +410,13 @@
     padding: 3rem 1.5rem 3.5rem;
   }
 
-  .wwb-grid {
+  .wwb-logo-grid {
     grid-template-columns: repeat(2, 1fr);
   }
 
-  .wwb-item:nth-child(3n) {
-    border-right: 1px solid rgba(255, 255, 255, 0.08);
-  }
-
-  .wwb-item:nth-child(2n) {
-    border-right: none;
-  }
-
-  .wwb-wordmark {
-    font-size: 0.78rem;
+  .wwb-logo-img {
+    max-width: 110px;
+    height: 52px;
   }
 }
 
