@@ -24,7 +24,7 @@ export const worksData: Project[] = [
     summary:
       "Phone calls and manual quotes were costing them scale. We built a B2B e-commerce platform with automated quotes, live inventory, and verified purchasing. Orders that took days now take minutes.",
     videoUrl: "",
-    posterUrl: versioned("/mockups/common/Cedar Elevators.png"),
+    posterUrl: versioned("/mockups/common/cedar-elevators.webp"),
     tags: ["B2B", "E-Commerce", "Enterprise", "Industrial Equipment"],
     services: [
       "Full-Stack Development",
@@ -41,7 +41,7 @@ export const worksData: Project[] = [
     summary:
       "Great technology, underwhelming web presence. We rebuilt it with performance-first architecture, SEO structure, and UI that earns trust on first scroll. Now the website works as hard as the product.",
     videoUrl: "",
-    posterUrl: versioned("/mockups/common/Cinnastratech.png"),
+    posterUrl: versioned("/mockups/common/cinnastratech.webp"),
     tags: ["Corporate", "Branding", "Motion", "AI & Digital Engineering"],
     services: [
       "Web Development",
@@ -58,7 +58,7 @@ export const worksData: Project[] = [
     summary:
       "WhatsApp orders were the ceiling. We built a premium e-commerce store that matched the quality of the collections. Monthly revenue went from ₹1–2 lakh to nearly ₹10 lakh.",
     videoUrl: "",
-    posterUrl: versioned("/mockups/common/Dude Men Wear.png"),
+    posterUrl: versioned("/mockups/common/dude-men-wear.webp"),
     tags: ["E-Commerce", "Full-Stack", "Payments", "Premium Menswear"],
     services: [
       "Web Development",
@@ -75,7 +75,7 @@ export const worksData: Project[] = [
     summary:
       "Competing on ingredients in a market that stopped reading labels. We repositioned the brand around one idea - transit fatigue - and rebuilt everything from there. ₹12 lakh saved in annual marketing spend.",
     videoUrl: "",
-    posterUrl: versioned("/mockups/common/Mic & Mac.png"),
+    posterUrl: versioned("/mockups/common/mic-and-mac.webp"),
     tags: ["D2C", "Shopify", "Brand Identity", "Clean Beauty"],
     services: [
       "Shopify Development",
@@ -92,7 +92,7 @@ export const worksData: Project[] = [
     summary:
       "Film talent was everywhere. Infrastructure to connect them wasn't. We built the platform - portfolios, gigs, hiring, collaboration - in one place.",
     videoUrl: "",
-    posterUrl: versioned("/mockups/common/HeyProData.png"),
+    posterUrl: versioned("/mockups/common/heyprodata.webp"),
     tags: ["Next.js", "Supabase", "Radix UI", "Film Industry Network"],
     services: ["Platform Architecture", "API Development", "Web Development"],
   }

@@ -19,7 +19,7 @@ export function BookingSection({ calUrl = "https://cal.com/mergex/30min" }: Book
                     <div 
                         className="absolute inset-0 z-0 bg-no-repeat bg-bottom md:hidden"
                         style={{
-                            backgroundImage: "url('/background/schedule mobile.png')",
+                            backgroundImage: "url('/background/contact/schedule-mobile.webp')",
                             backgroundSize: 'cover',
                         }}
                     />
@@ -28,7 +28,7 @@ export function BookingSection({ calUrl = "https://cal.com/mergex/30min" }: Book
                     <div 
                         className="absolute inset-0 z-0 bg-no-repeat bg-bottom hidden md:block"
                         style={{
-                            backgroundImage: "url('/background/schedule.png')",
+                            backgroundImage: "url('/background/contact/schedule.webp')",
                             backgroundSize: 'cover',
                         }}
                     />

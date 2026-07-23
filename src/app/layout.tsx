@@ -62,7 +62,7 @@ export const metadata: Metadata = {
     type: "website",
     images: [
       {
-        url: "/og-cover.jpg",
+        url: "/og-cover.webp",
         width: 1200,
         height: 630,
         alt: "MergeX | Software, AI, and Creative Production.",
@@ -75,7 +75,7 @@ export const metadata: Metadata = {
     title: "MergeX",
     description:
       "MergeX is a software and AI engineering company. We design and build custom software, AI systems, and automation workflows.",
-    images: ["/og-cover.jpg"],
+    images: ["/og-cover.webp"],
   },
 
   robots: {

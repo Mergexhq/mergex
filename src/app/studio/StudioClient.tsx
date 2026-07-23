@@ -49,14 +49,14 @@ const HOW_IT_WORKS = [
 
 // Media items for the carousel
 const CAROUSEL_MEDIA = [
-  { id: 'mockups/labs/Portfolio/ad', alt: 'Apple Product Film', type: 'video', poster: '/mockups/labs/Gallery/Sara_10.png' },
-  { id: 'mockups/labs/Gallery/Sara_2', alt: 'AI Model Portrait', type: 'image', poster: '/mockups/labs/Gallery/Sara_2.png' },
-  { id: 'mockups/labs/Portfolio/WhatsApp_Video_2026-02-28_at_2.16.34_PM', alt: 'Neidhal FC Launch', type: 'video', poster: '/mockups/labs/Gallery/Sara_6.png' },
-  { id: 'mockups/labs/Gallery/Sara_4', alt: 'AI Concept Art', type: 'image', poster: '/mockups/labs/Gallery/Sara_4.png' },
-  { id: 'mockups/labs/Portfolio/Mountain_Dew_online-video-cutter.com', alt: 'Thai Chips', type: 'video', poster: '/mockups/labs/Gallery/Sara_1.png' },
-  { id: 'mockups/labs/Gallery/Sara_5', alt: 'Procedural Textures', type: 'image', poster: '/mockups/labs/Gallery/Sara_5.jpg' },
-  { id: 'mockups/labs/Gallery/Sara_8', alt: 'Cinematic Visual', type: 'image', poster: '/mockups/labs/Gallery/Sara_8.jpg' },
-  { id: 'mockups/labs/Gallery/Sara_9', alt: 'AI Concept Render', type: 'image', poster: '/mockups/labs/Gallery/Sara_9.jpg' },
+  { id: 'mockups/labs/portfolio/ad', alt: 'Apple Product Film', type: 'video', poster: '/mockups/labs/gallery/sara-10.webp' },
+  { id: 'mockups/labs/gallery/sara-2', alt: 'AI Model Portrait', type: 'image', poster: '/mockups/labs/gallery/sara-2.webp' },
+  { id: 'mockups/labs/portfolio/whatsapp-campaign', alt: 'Neidhal FC Launch', type: 'video', poster: '/mockups/labs/gallery/sara-6.webp' },
+  { id: 'mockups/labs/gallery/sara-4', alt: 'AI Concept Art', type: 'image', poster: '/mockups/labs/gallery/sara-4.webp' },
+  { id: 'mockups/labs/portfolio/mountain-dew', alt: 'Thai Chips', type: 'video', poster: '/mockups/labs/gallery/sara-1.webp' },
+  { id: 'mockups/labs/gallery/sara-5', alt: 'Procedural Textures', type: 'image', poster: '/mockups/labs/gallery/sara-5.webp' },
+  { id: 'mockups/labs/gallery/sara-8', alt: 'Cinematic Visual', type: 'image', poster: '/mockups/labs/gallery/sara-8.webp' },
+  { id: 'mockups/labs/gallery/sara-9', alt: 'AI Concept Render', type: 'image', poster: '/mockups/labs/gallery/sara-9.webp' },
 ] as const;
 
 interface OptimizedMediaCardProps {
@@ -209,7 +209,7 @@ export default function StudioClient() {
       <div className="fixed inset-0 w-full h-screen overflow-hidden pointer-events-none z-0 bg-[#080808]">
         <video
           ref={videoRef}
-          src="/mockups/labs/Portfolio/Mountain_Dew_online-video-cutter.com.mp4"
+          src="/mockups/labs/portfolio/mountain-dew.mp4"
           muted
           playsInline
           preload="auto"

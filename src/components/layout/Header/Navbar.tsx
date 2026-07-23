@@ -156,7 +156,7 @@ export function Navbar() {
                             <div className="flex items-center pointer-events-auto">
                                 <Link href="/" className="flex items-center gap-0">
                                     <Image
-                                        src="/logo/mergex logo black.png"
+                                        src="/logo/mergex-logo-black.webp"
                                         alt="MergeX Logo"
                                         width={32}
                                         height={32}
@@ -201,7 +201,7 @@ export function Navbar() {
                                 return (
                                   <Link href="/brands/mergex" className="flex items-center justify-center gap-1.5 pointer-events-auto">
                                     <Image
-                                      src="/logo/mergex logo black.png"
+                                      src="/logo/mergex-logo-black.webp"
                                       alt="MergeX Logo"
                                       width={40}
                                       height={40}
@@ -218,7 +218,7 @@ export function Navbar() {
                               return (
                                 <Link href="/" className="flex items-center justify-center gap-1.5 pointer-events-auto">
                                   <Image
-                                    src="/logo/mergex logo black.png"
+                                    src="/logo/mergex-logo-black.webp"
                                     alt="MergeX Logo"
                                     width={32}
                                     height={32}

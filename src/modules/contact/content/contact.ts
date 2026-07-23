@@ -66,14 +66,14 @@ export const BOTTOM_CARDS: EngagementCard[] = [
         title: "Partnerships",
         description: "We work closely with founders, startups, and established businesses to build software, AI solutions, and creative productions that create lasting value.",
         actionLabel: "contact@mergex.in",
-        bgImage: "/background/partner.png",
+        bgImage: "/background/contact/partner.webp",
         target: "mailto:contact@mergex.in"
     },
     {
         title: "We keep our team intentionally small.",
         description: "We're looking for curious builders, thoughtful designers, engineers, and creative problem-solvers who care about quality more than quantity.",
         actionLabel: "careers@mergex.in",
-        bgImage: "/background/Career.png",
+        bgImage: "/background/contact/career.webp",
         target: "mailto:careers@mergex.in"
     }
 ];

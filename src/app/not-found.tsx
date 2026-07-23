@@ -10,7 +10,7 @@ export default function NotFound() {
             {/* Immersive Background Image */}
             <div className="absolute inset-0 z-0">
                 <picture className="absolute inset-0 block">
-                    <source media="(max-width: 768px)" srcSet="/background/404/404_mobile.webp" />
+                    <source media="(max-width: 768px)" srcSet="/background/404/404-mobile.webp" />
                     <Image
                         src="/background/404/404.webp"
                         alt="404 - Lost beyond the known internet"

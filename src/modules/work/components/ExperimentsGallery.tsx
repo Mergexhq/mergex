@@ -18,14 +18,14 @@ import { useGlobalVideoObserver } from '@/lib/videoObserver';
 gsap.registerPlugin(ScrollTrigger);
 
 const CAROUSEL_MEDIA = [
-    { src: '/mockups/labs/Portfolio/Mountain_Dew_online-video-cutter.com.mp4', alt: 'Mountain Dew Dynamic', type: 'video' },
-    { src: '/mockups/labs/Gallery/Sara_1.png', alt: 'Sara AI Model 1', type: 'image' },
-    { src: '/mockups/labs/Portfolio/ad.mp4', alt: 'Promo Ad', type: 'video' },
-    { src: '/mockups/labs/Gallery/Sara_2.png', alt: 'Sara AI Model 2', type: 'image' },
-    { src: '/mockups/labs/Portfolio/WhatsApp_Video_2026-02-28_at_2.16.34_PM.mp4', alt: 'WhatsApp Campaign', type: 'video' },
-    { src: '/mockups/labs/Gallery/Sara_3.jpg', alt: 'Sara AI Model 3', type: 'image' },
-    { src: '/mockups/labs/Gallery/Sara_4.png', alt: 'Sara AI Model 4', type: 'image' },
-    { src: '/mockups/labs/Gallery/Sara_5.jpg', alt: 'Sara AI Model 5', type: 'image' },
+    { src: '/mockups/labs/portfolio/mountain-dew.mp4', alt: 'Mountain Dew Dynamic', type: 'video' },
+    { src: '/mockups/labs/gallery/sara-1.webp', alt: 'Sara AI Model 1', type: 'image' },
+    { src: '/mockups/labs/portfolio/ad.mp4', alt: 'Promo Ad', type: 'video' },
+    { src: '/mockups/labs/gallery/sara-2.webp', alt: 'Sara AI Model 2', type: 'image' },
+    { src: '/mockups/labs/portfolio/whatsapp-campaign.mp4', alt: 'WhatsApp Campaign', type: 'video' },
+    { src: '/mockups/labs/gallery/sara-3.webp', alt: 'Sara AI Model 3', type: 'image' },
+    { src: '/mockups/labs/gallery/sara-4.webp', alt: 'Sara AI Model 4', type: 'image' },
+    { src: '/mockups/labs/gallery/sara-5.webp', alt: 'Sara AI Model 5', type: 'image' },
 ] as const;
 
 type CarouselMediaItem = (typeof CAROUSEL_MEDIA)[number];

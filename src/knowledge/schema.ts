@@ -27,7 +27,7 @@ import type { FAQItem } from './faq';
 const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? COMPANY.url;
 
 /** Canonical logo URL used for Google rich results and knowledge panels. */
-const logoUrl = `${siteUrl}/logo/mergex%20logo%20black.png`;
+const logoUrl = `${siteUrl}/logo/mergex-logo-black.webp`;
 
 /**
  * Stable `@id` nodes so schemas can reference each other within the entity

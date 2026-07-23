@@ -89,7 +89,7 @@ export function MobileNav({ isOpen, onClose, pathname }: MobileNavProps) {
                                 </Link>
                             ) : pathname === '/brands/mergex' ? (
                                 <Link href="/brands/mergex" onClick={onClose} className="flex items-center gap-1.5">
-                                    <Image src="/logo/mergex logo black.png" alt="MergeX Logo" width={40} height={40} className="object-contain w-5 h-5" />
+                                    <Image src="/logo/mergex-logo-black.webp" alt="MergeX Logo" width={40} height={40} className="object-contain w-5 h-5" />
                                     <span className="font-questrial font-bold text-2xl tracking-[0.12em] text-black">MERGEX</span>
                                 </Link>
                             ) : (

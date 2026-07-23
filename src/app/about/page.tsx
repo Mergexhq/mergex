@@ -38,16 +38,16 @@ const CAPABILITIES = [
  * public/brand logos/.  Each `src` is a root-relative URL.
  */
 const CLIENT_LOGOS: { src: string; alt: string }[] = [
-  { src: '/brand logos/micandmac.png',           alt: 'Mic & Mac' },
-  { src: '/brand logos/grapemaster.png',          alt: 'Grape Master' },
-  { src: "/brand logos/Dude Men's Wear.png", alt: "Dude Men's Wear" },
-  { src: '/brand logos/neidhal_logo.png',         alt: 'Neidhal FC' },
-  { src: '/brand logos/motofactory.png',          alt: 'Motor Factory' },
-  { src: '/brand logos/Kuthakai.png',             alt: 'Kuthakai' },
-  { src: '/brand logos/cedarelevators.png',       alt: 'Cedar Elevators' },
-  { src: '/brand logos/grace and grow.png',       alt: 'Grace and Grow' },
-  { src: '/brand logos/CinnAstra Tech.png',       alt: 'CinnAstra Tech' },
-  { src: '/brand logos/Pixel_draft_Logo.png',     alt: 'Pixel Draft' },
+  { src: '/brand-logos/mic-and-mac.webp',           alt: 'Mic & Mac' },
+  { src: '/brand-logos/grapemaster.webp',          alt: 'Grape Master' },
+  { src: "/brand-logos/dude-mens-wear.webp",        alt: "Dude Men's Wear" },
+  { src: '/brand-logos/neidhal-logo.webp',         alt: 'Neidhal FC' },
+  { src: '/brand-logos/motofactory.webp',          alt: 'Motor Factory' },
+  { src: '/brand-logos/kuthakai.webp',             alt: 'Kuthakai' },
+  { src: '/brand-logos/cedar-elevators.webp',       alt: 'Cedar Elevators' },
+  { src: '/brand-logos/grace-and-grow.webp',       alt: 'Grace and Grow' },
+  { src: '/brand-logos/cinnastra-tech.webp',       alt: 'CinnAstra Tech' },
+  { src: '/brand-logos/pixel-draft-logo.webp',     alt: 'Pixel Draft' },
 ];
 
 export default function AboutPage() {
@@ -194,7 +194,7 @@ export default function AboutPage() {
               {/* Noise overlay on image */}
               <div className="founder-photo-noise" aria-hidden="true" />
               <img
-                src="/manikandan siting.png"
+                src="/about/manikandan-sitting.webp"
                 alt="Manikandan S - Founder & CEO of MergeX"
                 className="founder-photo-img"
                 draggable={false}

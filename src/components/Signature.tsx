@@ -53,7 +53,7 @@ export function Signature({
         const fontPaths = fontUrl
           ? [fontUrl]
           : [
-              "/LastoriaBoldRegular.otf",
+              "/fonts/LastoriaBoldRegular.otf",
               "https://www.componentry.fun/LastoriaBoldRegular.otf",
             ];
 

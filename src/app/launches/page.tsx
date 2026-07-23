@@ -59,7 +59,7 @@ export default function LaunchesPage() {
           <div className="absolute top-0 inset-x-0 h-16 bg-gradient-to-b from-white via-white/30 to-transparent pointer-events-none z-20" />
 
           <img
-            src="/background/launch hero.png"
+            src="/background/launches/launch-hero.webp"
             alt="Built to launch hero"
             className="w-full h-auto relative z-10"
           />

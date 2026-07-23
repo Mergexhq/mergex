@@ -354,7 +354,7 @@
 
 @media (max-width: 768px) {
   .home-hero-scroll-wrapper {
-    --hh-bg-image: url('/background/hero/heromobile1.webp');
+    --hh-bg-image: url('/background/hero/hero-mobile.webp');
   }
 
   .home-hero-bg {

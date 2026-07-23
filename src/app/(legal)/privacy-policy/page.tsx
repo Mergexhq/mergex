@@ -337,7 +337,7 @@ export default function PrivacyPolicyPage() {
                 <div className="mt-8 flex flex-col items-start gap-4">
                     <div>
                         <Image
-                            src="/logo/mergex logo black.png"
+                            src="/logo/mergex-logo-black.webp"
                             alt="MergeX Logo"
                             width={120}
                             height={120}
