@@ -1,22 +1,22 @@
 /**
- * Intelligence Prompts — Guardrails
+ * Intelligence Prompts - Guardrails
  * =================================
  *
  * Hard rules the assistant must follow regardless of provider, surface, or
  * retrieved context. Two concerns:
  *
- *   1. SCOPE — what the assistant may/may not discuss. MergeX's assistant
+ *   1. SCOPE - what the assistant may/may not discuss. MergeX's assistant
  *      represents MergeX only; it doesn't opine on competitors or off-topic
  *      matters. Out-of-scope questions get a polite redirect, not a refusal.
  *
- *   2. CONDUCT — how it may behave. No inventing facts (pricing, timelines,
+ *   2. CONDUCT - how it may behave. No inventing facts (pricing, timelines,
  *      client outcomes), no legal/financial advice. When unsure, route to a
  *      human (book a call / email).
  *
  * Separating guardrails from prompt composition keeps them easy to audit,
  * unit-test, and tighten over time without touching prompt assembly logic.
  *
- * NOTE: Guardrails contain NO MergeX facts. They are pure rules — facts come
+ * NOTE: Guardrails contain NO MergeX facts. They are pure rules - facts come
  * from the knowledge layer via prompts/system.ts + prompts/knowledge-context.ts.
  */
 

@@ -1,6 +1,6 @@
 import type { Metadata } from 'next';
 import {
-    HomeHero,
+  HomeHero,
 } from '@/modules/home/components';
 import { ShowcaseFeed } from '@/modules/work';
 import { FAQ_ITEMS } from '@/knowledge/faq';
@@ -10,7 +10,7 @@ import { getFAQSchema, getServiceSchema } from '@/knowledge/schema';
 const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? 'https://mergex.in';
 
 export const metadata: Metadata = {
-  title: 'MergeX — Custom Software & AI Systems',
+  title: 'MergeX - Custom Software & AI Systems',
   description:
     'MergeX is a software and AI engineering company. We design and build custom software, AI systems, automation workflows, and digital products that help businesses operate smarter and move faster.',
   keywords: [
@@ -42,7 +42,7 @@ export const metadata: Metadata = {
   creator: 'MergeX',
   publisher: 'MergeX',
   openGraph: {
-    title: 'MergeX — Custom Software & AI Systems',
+    title: 'MergeX - Custom Software & AI Systems',
     description:
       'MergeX designs and builds custom software, AI systems, and automation workflows. Precise engineering for businesses that want to operate smarter and solve real problems.',
     url: siteUrl,
@@ -54,13 +54,13 @@ export const metadata: Metadata = {
         url: '/og-cover.webp',
         width: 1200,
         height: 630,
-        alt: 'MergeX — Custom Software & AI Systems.',
+        alt: 'MergeX - Custom Software & AI Systems.',
       },
     ],
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'MergeX — Custom Software & AI Systems',
+    title: 'MergeX - Custom Software & AI Systems',
     description:
       'MergeX designs and builds custom software, AI systems, and automation workflows. Precise engineering for businesses that want to operate smarter and solve real problems.',
     images: ['/og-cover.webp'],
@@ -84,34 +84,34 @@ const faqJsonLd = getFAQSchema(FAQ_ITEMS);
 const serviceJsonLd = SERVICES.map((service) => getServiceSchema(service));
 
 export default function HomePage() {
-    return (
-        <>
-            {/* FAQPage structured data — injected into <head> server-side */}
-            <script
-                type="application/ld+json"
-                dangerouslySetInnerHTML={{ __html: JSON.stringify(faqJsonLd) }}
-            />
+  return (
+    <>
+      {/* FAQPage structured data - injected into <head> server-side */}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(faqJsonLd) }}
+      />
 
-            {/* Service structured data — one block per MergeX capability.
+      {/* Service structured data - one block per MergeX capability.
                 Each references the Organization by @id, forming a single
                 entity graph alongside the Organization + WebSite schemas
                 emitted in the root layout. */}
-            {serviceJsonLd.map((schema) => (
-                <script
-                    key={schema['@id']}
-                    type="application/ld+json"
-                    dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }}
-                />
-            ))}
+      {serviceJsonLd.map((schema) => (
+        <script
+          key={schema['@id']}
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }}
+        />
+      ))}
 
-            <main className="relative bg-[#080808]">
-                <HomeHero />
+      <main className="relative bg-[#080808]">
+        <HomeHero />
 
-                {/* Showcase/Works Feed */}
-                <ShowcaseFeed />
-            </main>
-        </>
-    );
+        {/* Showcase/Works Feed */}
+        <ShowcaseFeed />
+      </main>
+    </>
+  );
 }
 
 

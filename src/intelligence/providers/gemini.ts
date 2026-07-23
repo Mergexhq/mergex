@@ -1,5 +1,5 @@
 /**
- * Intelligence Providers — Gemini Provider
+ * Intelligence Providers - Gemini Provider
  * ========================================
  *
  * The Gemini Provider is the generative fallback. It receives a fully prepared
@@ -19,7 +19,7 @@
  *     ✗ format final responses (that's engine/formatter.ts)
  *
  * Implementation note: the Gemini SDK (@google/genai) is intentionally NOT a
- * dependency. We call the Google AI Studio REST API directly via fetch — this
+ * dependency. We call the Google AI Studio REST API directly via fetch - this
  * keeps the provider self-contained, adds no dependency weight, and makes the
  * abstraction boundary crisp. Swapping to the SDK later is a drop-in change
  * inside this file only.

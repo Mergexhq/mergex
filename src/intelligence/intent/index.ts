@@ -1,9 +1,9 @@
 /**
- * Intelligence Layer — Intent Detection
+ * Intelligence Layer - Intent Detection
  * =====================================
  *
  * Deterministic, model-free intent classification. Decides WHAT KIND of
- * question was asked so the engine can route it — without ever calling Gemini.
+ * question was asked so the engine can route it - without ever calling Gemini.
  *
  * Why deterministic?
  *   - Intent detection runs on EVERY request, before any provider is chosen.
@@ -26,7 +26,7 @@
 
 /**
  * All intents the detector can emit. Extend this union (and INTENT_RULES)
- * to add new intents — no other module needs editing.
+ * to add new intents - no other module needs editing.
  */
 export type Intent =
     | 'greeting'
@@ -63,7 +63,7 @@ interface IntentRule {
 /**
  * Ordered, most-specific-first intent rules.
  *
- * NOTE: 'general' and 'unknown' are terminal — they must be last. 'general'
+ * NOTE: 'general' and 'unknown' are terminal - they must be last. 'general'
  * catches recognisable MergeX questions that don't fit a narrower bucket;
  * 'unknown' is the final fallback.
  */

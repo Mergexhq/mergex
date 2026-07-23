@@ -158,7 +158,7 @@ export function getFAQSchema(items: FAQItem[]) {
 /**
  * BreadcrumbList structured data.
  *
- * Generic and reusable — pass one `{ name, url }` entry per trail step,
+ * Generic and reusable - pass one `{ name, url }` entry per trail step,
  * starting with the site root. Position is derived from array order.
  */
 export function getBreadcrumbSchema(items: BreadcrumbItem[]) {
@@ -195,7 +195,7 @@ export function getPageBreadcrumbSchema(name: string, path: string) {
  *
  * Each Service carries a stable `@id` (derived from `service.id`) so it can be
  * referenced independently within the entity graph, and its `provider` links
- * back to the Organization by `@id` — Google and LLM crawlers can therefore
+ * back to the Organization by `@id` - Google and LLM crawlers can therefore
  * resolve "this service is offered by MergeX" without duplicating company data.
  *
  * Usage:
@@ -222,7 +222,7 @@ export function getServiceSchema(service: ServiceItem) {
     };
 }
 
-/** Inferred return types — exported so callers stay strongly typed. */
+/** Inferred return types - exported so callers stay strongly typed. */
 export type OrganizationSchema = ReturnType<typeof getOrganizationSchema>;
 export type WebsiteSchema = ReturnType<typeof getWebsiteSchema>;
 export type FAQSchema = ReturnType<typeof getFAQSchema>;

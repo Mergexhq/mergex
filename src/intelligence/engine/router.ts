@@ -1,10 +1,10 @@
 /**
- * Intelligence Engine — Router
+ * Intelligence Engine - Router
  * ============================
  *
  * Decides WHO answers a given request, based on:
- *   1. Intent  — what kind of question is this? (intent/index.ts)
- *   2. Confidence — can the knowledge layer answer this with certainty?
+ *   1. Intent  - what kind of question is this? (intent/index.ts)
+ *   2. Confidence - can the knowledge layer answer this with certainty?
  *
  * Routing policy (deterministic, explainable):
  *

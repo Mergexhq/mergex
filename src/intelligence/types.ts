@@ -1,20 +1,20 @@
 /**
- * MergeX Intelligence Layer — Core Types
+ * MergeX Intelligence Layer - Core Types
  * =======================================
  *
  * This file defines the foundational contracts for the entire intelligence
  * layer. Everything else (engine, providers, prompts, memory) depends on these
- * abstractions — never on concrete implementations.
+ * abstractions - never on concrete implementations.
  *
  * Design principles:
- *   1. Provider-agnostic     — no types reference Gemini, OpenAI, ElevenLabs,
+ *   1. Provider-agnostic     - no types reference Gemini, OpenAI, ElevenLabs,
  *                              or any specific vendor. Providers adapt to
  *                              these types, not the other way around.
- *   2. UI-agnostic           — nothing here imports React. The intelligence
+ *   2. UI-agnostic           - nothing here imports React. The intelligence
  *                              layer is callable from API routes, server
  *                              actions, voice pipelines, and future internal
  *                              tools alike.
- *   3. Surface-agnostic      — the same engine can power a chat widget, a
+ *   3. Surface-agnostic      - the same engine can power a chat widget, a
  *                              voice receptionist, or the future MergeX OS
  *                              assistant. The `surface` field on a request
  *                              tells the engine where the query came from.
@@ -32,7 +32,7 @@ export type MessageRole = 'user' | 'assistant' | 'system';
 /**
  * A single message in a conversation.
  *
- * Neutral across providers — a provider adapter is responsible for translating
+ * Neutral across providers - a provider adapter is responsible for translating
  * this into its own message format (e.g. OpenAI chat roles, Gemini parts).
  */
 export interface ChatMessage {
@@ -42,7 +42,7 @@ export interface ChatMessage {
 
 /**
  * Where a conversation is happening. The engine uses this to vary tone,
- * length, and allowed actions — e.g. a voice surface needs shorter, spoken
+ * length, and allowed actions - e.g. a voice surface needs shorter, spoken
  * responses than a chat widget.
  */
 export type ConversationSurface =
@@ -68,7 +68,7 @@ export interface EngineRequest {
     history: ChatMessage[];
     /** Where the conversation originated. Drives routing and formatting. */
     surface: ConversationSurface;
-    /** Optional opaque session id — used by the memory layer, not the engine. */
+    /** Optional opaque session id - used by the memory layer, not the engine. */
     sessionId?: string;
 }
 
@@ -97,7 +97,7 @@ export interface SuggestedAction {
     label: string;
     /** A URL to navigate to, or an internal action key the surface understands. */
     target: string;
-    /** Intent classification — helps surfaces decide how to render it. */
+    /** Intent classification - helps surfaces decide how to render it. */
     type: 'link' | 'route' | 'contact';
 }
 
@@ -129,7 +129,7 @@ export interface TokenUsage {
  * Stable identifiers for supported provider kinds.
  *
  * NOTE: `knowledge` is a first-class provider kind. It represents deterministic
- * retrieval from the MergeX knowledge layer (FAQs, services, company facts) —
+ * retrieval from the MergeX knowledge layer (FAQs, services, company facts) -
  * NOT a generative model. The router can route to it without any external API.
  */
 export type ProviderId = 'knowledge' | 'gemini' | 'openai';
@@ -139,7 +139,7 @@ export type ProviderId = 'knowledge' | 'gemini' | 'openai';
  *
  * A provider receives a normalized request and a context window, and returns
  * either a response or an error. Providers never call each other and never
- * decide routing — that's the engine's job.
+ * decide routing - that's the engine's job.
  *
  * Future providers (e.g. an ElevenLabs voice provider) will implement a
  * *different* surface-specific contract; this one is for text generation.
@@ -151,7 +151,7 @@ export interface IntelligenceProvider {
     readonly name: string;
     /**
      * Generate a response for the given request.
-     * Implementations will be added in later milestones — this is architecture only.
+     * Implementations will be added in later milestones - this is architecture only.
      */
     generate(request: ProviderRequest): Promise<ProviderResult>;
     /**
@@ -174,7 +174,7 @@ export interface ProviderRequest {
     systemPrompt: string;
     /** Knowledge retrieved for this turn (see engine/context.ts). */
     context: RetrievedContext;
-    /** Surface — providers may adapt output length/tone accordingly. */
+    /** Surface - providers may adapt output length/tone accordingly. */
     surface: ConversationSurface;
 }
 
@@ -223,7 +223,7 @@ export interface KnowledgeChunk {
 }
 
 /**
- * The assembled context for a single turn — everything the provider needs beyond
+ * The assembled context for a single turn - everything the provider needs beyond
  * the raw conversation history.
  */
 export interface RetrievedContext {
@@ -247,6 +247,6 @@ export interface RetrievedContext {
 export interface RouterDecision {
     /** The provider chosen to answer. */
     provider: ProviderId;
-    /** Human-readable reason — surfaced in ResponseMeta for analytics. */
+    /** Human-readable reason - surfaced in ResponseMeta for analytics. */
     reason: string;
 }

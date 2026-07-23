@@ -1,5 +1,5 @@
 /**
- * Intelligence Layer — Lightweight Test Harness
+ * Intelligence Layer - Lightweight Test Harness
  * =============================================
  *
  * Demonstrates the engine pipeline end-to-end WITHOUT any frontend, UI,
@@ -40,7 +40,7 @@ const TEST_CASES: Array<{ label: string; message: string }> = [
         message: 'Explain workflow automation.',
     },
     {
-        label: 'Comparison query (should fall back — knowledge insufficient)',
+        label: 'Comparison query (should fall back - knowledge insufficient)',
         message: 'Can you compare MergeX with another software company?',
     },
     {
@@ -60,7 +60,7 @@ function separator(title: string) {
 }
 
 async function run() {
-    console.log('\n🧠 MergeX Intelligence Layer — Test Harness\n');
+    console.log('\n🧠 MergeX Intelligence Layer - Test Harness\n');
 
     const providers: ProviderRegistry = createProviderRegistry();
 
@@ -105,7 +105,7 @@ async function run() {
         console.log('Latency:', response.meta.latencyMs, 'ms');
         console.log('Token usage:', response.meta.tokenUsage ?? '(none reported)');
         console.log('\nContent:');
-        console.log(response.content || '(empty — safe fallback)');
+        console.log(response.content || '(empty - safe fallback)');
         if (response.suggestedAction) {
             console.log('Suggested action:', response.suggestedAction.label, '→', response.suggestedAction.target);
         }

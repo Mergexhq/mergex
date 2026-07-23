@@ -1,5 +1,5 @@
 /**
- * Intelligence Engine — Pipeline
+ * Intelligence Engine - Pipeline
  * ==============================
  *
  * The engine is the orchestration layer. For each request it runs a fixed
@@ -103,7 +103,7 @@ export async function runEngine(
         generativeAvailable,
     });
 
-    // ── Stage 4: Shortcut — greeting ───────────────────────────────────────
+    // ── Stage 4: Shortcut - greeting ───────────────────────────────────────
     if (intentResult.intent === 'greeting') {
         return formatGreetingResponse(request.surface);
     }

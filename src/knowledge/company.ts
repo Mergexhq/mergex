@@ -9,7 +9,7 @@
  *   - Internal documentation tooling
  *
  * Keep this file factual, current, and concise.
- * Avoid marketing language — this is a knowledge source, not a landing page.
+ * Avoid marketing language - this is a knowledge source, not a landing page.
  */
 
 export interface FounderProfile {

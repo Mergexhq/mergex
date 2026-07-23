@@ -24,7 +24,7 @@ export const metadata: Metadata = {
 };
 
 /**
- * BreadcrumbList JSON-LD — Home → Contact.
+ * BreadcrumbList JSON-LD - Home → Contact.
  * Generated server-side via the schema builder; the Contact URL derives from
  * the same siteUrl as the canonical so the breadcrumb never drifts.
  */
@@ -33,7 +33,7 @@ const breadcrumbJsonLd = getPageBreadcrumbSchema('Contact', '/contact');
 export default function ContactPage() {
     return (
         <>
-            {/* BreadcrumbList structured data — injected server-side */}
+            {/* BreadcrumbList structured data - injected server-side */}
             <script
                 type="application/ld+json"
                 dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbJsonLd) }}

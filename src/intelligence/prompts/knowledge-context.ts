@@ -1,5 +1,5 @@
 /**
- * Intelligence Prompts — Knowledge Context Section
+ * Intelligence Prompts - Knowledge Context Section
  * ================================================
  *
  * Turns retrieved KnowledgeChunk[] into a single grounding block that is
@@ -11,7 +11,7 @@
  *   - Keeping them separate means retrieval can be swapped without touching
  *     prompt composition, and vice versa.
  *
- * No MergeX facts are hardcoded here — this file only FORMATS chunks that the
+ * No MergeX facts are hardcoded here - this file only FORMATS chunks that the
  * knowledge provider already retrieved from src/knowledge/.
  */
 

@@ -5,7 +5,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { FAQ_ITEMS } from '@/knowledge/faq';
 
 /**
- * FAQ — Frequently Asked Questions accordion.
+ * FAQ - Frequently Asked Questions accordion.
  *
  * Accessibility:
  *   - Each trigger is a <button> with aria-expanded and aria-controls.
@@ -14,7 +14,7 @@ import { FAQ_ITEMS } from '@/knowledge/faq';
  *   - Keyboard: Tab to reach a button, Enter or Space to toggle.
  *
  * Data:
- *   - Content is imported from @/knowledge/faq — do not hardcode items here.
+ *   - Content is imported from @/knowledge/faq - do not hardcode items here.
  *
  * SEO / GEO:
  *   - The FAQPage JSON-LD structured data is rendered in src/app/page.tsx,

@@ -1,5 +1,5 @@
 /**
- * Intelligence Engine — Confidence
+ * Intelligence Engine - Confidence
  * =================================
  *
  * Utilities for scoring how confident the system should be in a given answer

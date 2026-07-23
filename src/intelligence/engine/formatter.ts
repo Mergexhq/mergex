@@ -1,5 +1,5 @@
 /**
- * Intelligence Engine — Formatter
+ * Intelligence Engine - Formatter
  * ===============================
  *
  * Normalises a provider's raw output into the single EngineResponse contract
@@ -33,7 +33,7 @@ import type {
  */
 const FALLBACK_RESPONSE: Record<ConversationSurface, string> = {
     chat:
-        "I'm not entirely sure about that. Let me connect you with the MergeX team — they'll have a better answer. You can reach out through the contact page or email hello@mergex.in.",
+        "I'm not entirely sure about that. Let me connect you with the MergeX team - they'll have a better answer. You can reach out through the contact page or email hello@mergex.in.",
     voice:
         "I'm not sure about that one. Let me connect you with someone from the MergeX team who can help.",
     os:
@@ -101,12 +101,12 @@ function selectContent(
         return result.content;
     }
 
-    // No content from provider — check finish reason for context.
+    // No content from provider - check finish reason for context.
     if (result.finishReason === 'no-confident-match' || result.finishReason === 'no-api-key') {
         return FALLBACK_RESPONSE[surface];
     }
 
-    // Network / API error — safe fallback.
+    // Network / API error - safe fallback.
     return FALLBACK_RESPONSE[surface];
 }
 
@@ -119,7 +119,7 @@ export function formatGreetingResponse(surface: ConversationSurface): EngineResp
         provider: 'knowledge',
         meta: {
             latencyMs: 0,
-            routingReason: 'intent is greeting — handled deterministically',
+            routingReason: 'intent is greeting - handled deterministically',
         },
     };
 }

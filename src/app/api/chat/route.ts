@@ -8,11 +8,11 @@
  *   { message: string }
  *
  * Response:
- *   EngineResponse — { content, provider, suggestedAction?, meta }
+ *   EngineResponse - { content, provider, suggestedAction?, meta }
  *
  * Graceful degradation:
  *   - If GEMINI_API_KEY is absent, the engine answers using the deterministic
- *     knowledge provider (FAQ, services, company facts) — no crash, no fallback
+ *     knowledge provider (FAQ, services, company facts) - no crash, no fallback
  *     to a hardcoded string.
  *   - If the engine itself throws, the handler returns a 500 with a safe error
  *     message so the chat UI can display it without crashing.

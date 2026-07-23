@@ -1,9 +1,9 @@
 /**
- * Intelligence Prompts — System Prompt Builder
+ * Intelligence Prompts - System Prompt Builder
  * ============================================
  *
  * Builds the system prompt that grounds every generative provider (Gemini, and
- * any future provider — Claude, OpenAI, …) in MergeX's identity, services, and
+ * any future provider - Claude, OpenAI, …) in MergeX's identity, services, and
  * voice.
  *
  * CRITICAL: This file contains ZERO hardcoded MergeX facts. Every fact is
@@ -11,9 +11,9 @@
  * JSON-LD (Milestone 3), and any future surface all describe the same company.
  *
  * The prompt is assembled from three composable, reusable sections:
- *   1. Identity + services (this file)        — who MergeX is
- *   2. Guardrails  (guardrails.ts)            — rules of behaviour
- *   3. Knowledge context (knowledge-context.ts) — retrieved facts for THIS turn
+ *   1. Identity + services (this file)        - who MergeX is
+ *   2. Guardrails  (guardrails.ts)            - rules of behaviour
+ *   3. Knowledge context (knowledge-context.ts) - retrieved facts for THIS turn
  *
  * Any future provider reuses this same builder; only the SDK call differs.
  */
@@ -25,7 +25,7 @@ import { buildGuardrailSection } from './guardrails';
 import { buildKnowledgeContextSection } from './knowledge-context';
 
 export interface SystemPromptOptions {
-    /** Where the conversation is happening — varies tone and length. */
+    /** Where the conversation is happening - varies tone and length. */
     surface: ConversationSurface;
     /**
      * Retrieved knowledge chunks for this turn. When provided, the prompt
@@ -35,13 +35,13 @@ export interface SystemPromptOptions {
 }
 
 // ─────────────────────────────────────────────────────────────────────────────
-// Section builders — each pulls from the knowledge layer
+// Section builders - each pulls from the knowledge layer
 // ─────────────────────────────────────────────────────────────────────────────
 
 /** Build the company identity section from COMPANY. */
 function buildIdentitySection(): string {
     const founders = COMPANY.founders
-        .map((f) => `- ${f.name} — ${f.role}`)
+        .map((f) => `- ${f.name} - ${f.role}`)
         .join('\n');
 
     return [
@@ -76,7 +76,7 @@ function buildSurfaceSection(surface: ConversationSurface): string {
             return [
                 '# Voice-surface guidance',
                 'This response will be SPOKEN on a phone or voice call.',
-                '- Keep answers short and conversational — ideally under 60 words.',
+                '- Keep answers short and conversational - ideally under 60 words.',
                 '- Avoid markdown, bullet symbols, and URLs.',
                 '- Use full sentences that read naturally aloud.',
                 '- If the answer is long, summarise and offer to send details by email.',
@@ -99,7 +99,7 @@ function buildSurfaceSection(surface: ConversationSurface): string {
             return [
                 '# Chat-surface guidance',
                 'This response appears in the website chat widget.',
-                '- Keep answers concise but complete — use short paragraphs and bullets.',
+                '- Keep answers concise but complete - use short paragraphs and bullets.',
                 '- Markdown is allowed and encouraged for readability.',
             ].join('\n');
     }

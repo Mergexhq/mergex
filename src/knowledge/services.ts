@@ -15,7 +15,7 @@ export interface ServiceItem {
     name: string;
     shortDescription: string;
     capabilities: string[];
-    /** Optional — link to a dedicated service page when it exists */
+    /** Optional - link to a dedicated service page when it exists */
     pageUrl?: string;
 }
 

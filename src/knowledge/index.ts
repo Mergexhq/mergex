@@ -1,5 +1,5 @@
 /**
- * MergeX Knowledge Base — Public Index
+ * MergeX Knowledge Base - Public Index
  *
  * This file re-exports everything from the knowledge layer.
  * Import from here when you need multiple knowledge sources in one place.
@@ -14,9 +14,9 @@
  *   import { GLOSSARY }  from '@/knowledge/glossary';
  *
  * Future additions:
- *   - case-studies.ts  — client project summaries for RAG and case study pages
- *   - process.ts       — how MergeX engages with clients, step by step
- *   - pricing.ts       — engagement model and pricing philosophy
+ *   - case-studies.ts  - client project summaries for RAG and case study pages
+ *   - process.ts       - how MergeX engages with clients, step by step
+ *   - pricing.ts       - engagement model and pricing philosophy
  */
 
 export type { FAQItem } from './faq';

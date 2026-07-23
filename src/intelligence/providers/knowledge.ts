@@ -1,10 +1,10 @@
 /**
- * Intelligence Providers — Knowledge Provider
+ * Intelligence Providers - Knowledge Provider
  * ===========================================
  *
  * The Knowledge Provider is the deterministic, hallucination-free answer path.
  * It answers questions using ONLY the MergeX knowledge layer
- * (src/knowledge/) — company facts, services, FAQs, and glossary terms.
+ * (src/knowledge/) - company facts, services, FAQs, and glossary terms.
  *
  * It performs NO generation and makes NO external API calls. Every answer is
  * a verbatim or faithfully-quoted fact that already exists in the knowledge
@@ -16,8 +16,8 @@
  *
  * The provider exposes two kinds of functions:
  *   1. Reusable retrieval functions (getCompany, getServices, findFAQ, …)
- *      — structured data, usable by any caller (engine, UI, future APIs).
- *   2. The IntelligenceProvider.generate() contract — turns a request into a
+ *      - structured data, usable by any caller (engine, UI, future APIs).
+ *   2. The IntelligenceProvider.generate() contract - turns a request into a
  *      natural-language answer grounded in retrieved knowledge.
  *
  * IMPORTANT: This file never duplicates MergeX knowledge. It imports and
@@ -79,7 +79,7 @@ export function getGlossaryTerm(term: string): GlossaryTerm | undefined {
 // ─────────────────────────────────────────────────────────────────────────────
 
 /**
- * Common English stopwords. These contribute no signal to topic matching —
+ * Common English stopwords. These contribute no signal to topic matching -
  * they appear in virtually every sentence and inflate overlap scores on
  * irrelevant chunks. Filtered out before any overlap computation.
  */
@@ -112,7 +112,7 @@ function normalise(value: string): string {
 function meaningfulTokens(text: string): Set<string> {
     return new Set(
         normalise(text)
-            .split(/[\s,.\-–—:;!?'"()[\]]+/)
+            .split(/[\s,.\-–-:;!?'"()[\]]+/)
             .filter((t) => t.length > 1 && !STOPWORDS.has(t)),
     );
 }
@@ -143,17 +143,17 @@ function tokenOverlapScore(query: string, text: string): number {
  *
  * Scoring strategy per source:
  *
- *   company — score against name, description, tagline, and per-field haystacks
+ *   company - score against name, description, tagline, and per-field haystacks
  *             that include domain-specific synonyms (e.g. "founder founded ceo").
  *
- *   services — score against service name and haystack of capabilities.
+ *   services - score against service name and haystack of capabilities.
  *              The combined haystack is deliberately richer than just the name.
  *
- *   faq — question text carries 2× weight vs answer text. A query that
+ *   faq - question text carries 2× weight vs answer text. A query that
  *         semantically matches the question wins over incidental word
  *         overlap in the long answer paragraph.
  *
- *   glossary — score against term and definition separately; take the max.
+ *   glossary - score against term and definition separately; take the max.
  *
  * Returns structured KnowledgeChunk[] sorted by score descending, score > 0
  * entries only.
@@ -177,7 +177,7 @@ export function retrieveKnowledge(query: string): KnowledgeChunk[] {
         },
     });
 
-    // Founder chunk — richer haystack with all name variants and role synonyms.
+    // Founder chunk - richer haystack with all name variants and role synonyms.
     const founderNames = COMPANY.founders.map((f) => f.name).join(' ');
     const founderRoles = COMPANY.founders.map((f) => f.role).join(' ');
     const founderHaystack = `founder founders founded ceo cio co-founder leadership team ${founderNames} ${founderRoles} ${COMPANY.name}`;
@@ -185,7 +185,7 @@ export function retrieveKnowledge(query: string): KnowledgeChunk[] {
     chunks.push({
         score: Math.max(
             tokenOverlapScore(query, founderHaystack),
-            // Direct name matching — if a founder's name appears in the query, score highly.
+            // Direct name matching - if a founder's name appears in the query, score highly.
             ...COMPANY.founders.map((f) =>
                 normalise(query).includes(normalise(f.name.split(' ')[0])) ? 0.9 : 0,
             ),
@@ -195,7 +195,7 @@ export function retrieveKnowledge(query: string): KnowledgeChunk[] {
             source: 'company',
             content:
                 `${COMPANY.name} was founded by:\n` +
-                COMPANY.founders.map((f) => `• ${f.name} — ${f.role}`).join('\n'),
+                COMPANY.founders.map((f) => `• ${f.name} - ${f.role}`).join('\n'),
         },
     });
 
@@ -294,11 +294,11 @@ function composeAnswer(request: ProviderRequest): ProviderResult {
     const best = retrieved[0];
 
     if (!best || (best.score ?? 0) < KNOWLEDGE_MIN_SCORE) {
-        // Insufficient deterministic knowledge — signal the engine to escalate.
+        // Insufficient deterministic knowledge - signal the engine to escalate.
         return { content: '', finishReason: 'no-confident-match' };
     }
 
-    // FAQ matches are answered verbatim — already customer-ready prose.
+    // FAQ matches are answered verbatim - already customer-ready prose.
     if (best.source === 'faq') {
         const faq = FAQ_ITEMS.find((item) => `faq:${item.question}` === best.id);
         if (faq) {
@@ -325,7 +325,7 @@ export const KNOWLEDGE_MIN_SCORE = 0.5;
 export const knowledgeProvider: IntelligenceProvider = {
     id: KNOWLEDGE_PROVIDER_ID,
     name: 'MergeX Knowledge Layer',
-    isAvailable: () => true, // always available — pure local data
+    isAvailable: () => true, // always available - pure local data
     generate: (request: ProviderRequest) => Promise.resolve(composeAnswer(request)),
 };
 

@@ -1,5 +1,5 @@
 /**
- * Intelligence Providers — Registry
+ * Intelligence Providers - Registry
  * =================================
  *
  * The registry wires concrete providers (knowledge, gemini, openai, …) into
@@ -53,7 +53,7 @@ export function createProviderRegistry(): ProviderRegistry {
  * Resolve a provider from the registry, with an availability check.
  *
  * Returns undefined when the provider isn't registered or isn't currently
- * available — the router/engine can use this to decide failover.
+ * available - the router/engine can use this to decide failover.
  */
 export function resolveProvider(
     registry: ProviderRegistry,

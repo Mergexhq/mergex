@@ -7,16 +7,16 @@ const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? 'https://mergex.in';
  *
  * GOAL: Maximize GEO discoverability while protecting private routes.
  *
- * AI answer engines — ChatGPT, Perplexity, Claude, Gemini, Google AI
- * Overviews — learn about MergeX by crawling the site. Blocking their
+ * AI answer engines - ChatGPT, Perplexity, Claude, Gemini, Google AI
+ * Overviews - learn about MergeX by crawling the site. Blocking their
  * crawlers is the single most damaging thing you can do to GEO: the site
  * becomes invisible to those systems and can never be cited. They are
  * therefore explicitly ALLOWED below.
  *
  * Disallow policy (applies to EVERY bot, including Googlebot/Bingbot):
- *   - /console/  — Sanity Studio proxy (never public)
- *   - /api/      — API routes (not intended for crawlers)
- *   - /_next/    — Next.js internals
+ *   - /console/  - Sanity Studio proxy (never public)
+ *   - /api/      - API routes (not intended for crawlers)
+ *   - /_next/    - Next.js internals
  *
  * AI crawlers explicitly allowed (named for documentation, not for gating):
  *   - GPTBot, ChatGPT-User   → OpenAI / ChatGPT

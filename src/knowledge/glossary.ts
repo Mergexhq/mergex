@@ -14,7 +14,7 @@
 export interface GlossaryTerm {
     term: string;
     definition: string;
-    /** Optional — related service ID from services.ts */
+    /** Optional - related service ID from services.ts */
     relatedService?: string;
 }
 
@@ -25,7 +25,7 @@ export const GLOSSARY: GlossaryTerm[] = [
     {
         term: 'AI Agent',
         definition:
-            'A software system that uses artificial intelligence to perform tasks autonomously — browsing the web, analysing data, making decisions, or triggering actions — with minimal human input.',
+            'A software system that uses artificial intelligence to perform tasks autonomously - browsing the web, analysing data, making decisions, or triggering actions - with minimal human input.',
         relatedService: 'ai-systems',
     },
     {
@@ -43,7 +43,7 @@ export const GLOSSARY: GlossaryTerm[] = [
     {
         term: 'Workflow Automation',
         definition:
-            'The use of software to automatically execute a sequence of tasks that would otherwise require manual effort — such as processing form submissions, routing emails, syncing data between systems, or triggering notifications.',
+            'The use of software to automatically execute a sequence of tasks that would otherwise require manual effort - such as processing form submissions, routing emails, syncing data between systems, or triggering notifications.',
         relatedService: 'ai-systems',
     },
     {

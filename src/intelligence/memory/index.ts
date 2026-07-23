@@ -1,5 +1,5 @@
 /**
- * Intelligence Memory — Session Memory (Reserved)
+ * Intelligence Memory - Session Memory (Reserved)
  * ===============================================
  *
  * This module is RESERVED for future conversation-memory support. It is
@@ -8,12 +8,12 @@
  * What it will eventually hold:
  *
  *   - Per-session conversation history, so a returning visitor's chat
- *     continues where it left off (Milestone 4.7 — sessionStorage persistence,
+ *     continues where it left off (Milestone 4.7 - sessionStorage persistence,
  *     and later server-side durability).
  *   - Summaries of past turns, so long conversations can stay within a
  *     provider's context window without losing thread.
  *   - Per-visitor lightweight state (e.g. "asked about pricing", "in India"),
- *     used to tailor suggestions — never to profile, and always privacy-first.
+ *     used to tailor suggestions - never to profile, and always privacy-first.
  *
  * Design intent:
  *
@@ -30,7 +30,7 @@
 import type { ChatMessage } from '../types';
 
 /**
- * A stored conversation. The unit of memory is one session, not one user —
+ * A stored conversation. The unit of memory is one session, not one user -
  * there is no user-account concept in the intelligence layer by design.
  */
 export interface SessionRecord {
@@ -61,9 +61,9 @@ export interface MemoryAdapter {
  *   - dev / test: in-memory Map-backed adapter
  *   - production: Redis-backed adapter (when a session store is added)
  *
- * @returns null today — the engine runs stateless until memory is needed.
+ * @returns null today - the engine runs stateless until memory is needed.
  */
 export function createMemoryAdapter(): MemoryAdapter | null {
-    // Placeholder — no memory yet. Engine runs fully stateless.
+    // Placeholder - no memory yet. Engine runs fully stateless.
     return null;
 }

@@ -129,7 +129,7 @@ export default function RootLayout({
       <head>
         <meta name="theme-color" content="#080808" />
         <meta name="apple-mobile-web-app-title" content="MergeX" />
-        {/* Organization + WebSite structured data — injected into <head>
+        {/* Organization + WebSite structured data - injected into <head>
             server-side. Both are derived from the knowledge layer via the
             schema builders, and share a single entity graph through stable
             `@id` references (WebSite.publisher → Organization). */}

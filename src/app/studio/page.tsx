@@ -20,7 +20,7 @@ export const metadata: Metadata = {
 };
 
 /**
- * BreadcrumbList JSON-LD — Home → Studio.
+ * BreadcrumbList JSON-LD - Home → Studio.
  * Generated server-side via the schema builder; the Studio URL derives from
  * the same siteUrl as the canonical so the breadcrumb never drifts.
  */
@@ -29,7 +29,7 @@ const breadcrumbJsonLd = getPageBreadcrumbSchema('Studio', '/studio');
 export default function StudioPage() {
   return (
     <>
-      {/* BreadcrumbList structured data — injected server-side */}
+      {/* BreadcrumbList structured data - injected server-side */}
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbJsonLd) }}

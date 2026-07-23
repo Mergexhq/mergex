@@ -1,10 +1,10 @@
 /**
- * Intelligence Engine — Context Builder
+ * Intelligence Engine - Context Builder
  * ======================================
  *
  * Builds the RetrievedContext that accompanies a request into a provider.
  * Delegates the actual retrieval to the Knowledge Provider (which reads from
- * src/knowledge/) so this module owns NO MergeX facts and no retrieval logic —
+ * src/knowledge/) so this module owns NO MergeX facts and no retrieval logic -
  * it only shapes the output.
  *
  * Separating context-building from the provider is deliberate:

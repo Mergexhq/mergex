@@ -12,9 +12,9 @@
  *
  * Rules for this file:
  *   - Keep answers factual and accurate.
- *   - Use clear, natural language — no marketing fluff.
+ *   - Use clear, natural language - no marketing fluff.
  *   - Each answer should be useful to a real customer asking the question.
- *   - Do not add HTML or JSX — plain text only.
+ *   - Do not add HTML or JSX - plain text only.
  *   - Use "\n\n" for paragraph breaks where needed.
  */
 
@@ -35,13 +35,13 @@ export const FAQ_ITEMS: FAQItem[] = [
         category: 'general',
         question: 'What does MergeX do?',
         answer:
-            'MergeX is a software and AI engineering company based in Chennai, India. We design and build custom software, AI systems, automation workflows, and digital products for businesses across different industries.\n\nOur work spans three core areas: custom software development, AI integration and automation, and AI-powered creative production. We take on projects end-to-end — from architecture and development through to deployment and support.',
+            'MergeX is a software and AI engineering company based in Chennai, India. We design and build custom software, AI systems, automation workflows, and digital products for businesses across different industries.\n\nOur work spans three core areas: custom software development, AI integration and automation, and AI-powered creative production. We take on projects end-to-end - from architecture and development through to deployment and support.',
     },
     {
         category: 'services',
         question: 'What services does MergeX offer?',
         answer:
-            'Our core services are:\n\n• Custom Software Development — web applications, SaaS platforms, internal tools, and business systems built to your exact requirements.\n\n• AI Systems and Automation — AI agents, workflow automation, AI voice receptionists, AI chat assistants, and integrations that connect AI capabilities into your existing operations.\n\n• AI Creative Production — AI-generated commercials, product films, brand content, and visual storytelling for businesses that want high-quality creative output without traditional production costs.\n\nEvery engagement is built around what the project actually needs, not a fixed service package.',
+            'Our core services are:\n\n• Custom Software Development - web applications, SaaS platforms, internal tools, and business systems built to your exact requirements.\n\n• AI Systems and Automation - AI agents, workflow automation, AI voice receptionists, AI chat assistants, and integrations that connect AI capabilities into your existing operations.\n\n• AI Creative Production - AI-generated commercials, product films, brand content, and visual storytelling for businesses that want high-quality creative output without traditional production costs.\n\nEvery engagement is built around what the project actually needs, not a fixed service package.',
     },
     {
         category: 'ai',
@@ -59,19 +59,19 @@ export const FAQ_ITEMS: FAQItem[] = [
         category: 'services',
         question: 'Do you build SaaS products?',
         answer:
-            'Yes. We have experience building SaaS platforms from the ground up — including multi-tenant architecture, subscription and payment integration, user management, analytics, and admin tooling.\n\nWe can also help existing SaaS businesses improve their products, add new features, reduce technical debt, or integrate AI capabilities into their platforms.',
+            'Yes. We have experience building SaaS platforms from the ground up - including multi-tenant architecture, subscription and payment integration, user management, analytics, and admin tooling.\n\nWe can also help existing SaaS businesses improve their products, add new features, reduce technical debt, or integrate AI capabilities into their platforms.',
     },
     {
         category: 'process',
         question: 'How does your development process work?',
         answer:
-            'Every project begins with a discovery phase where we take time to understand the problem, the business context, and the desired outcomes before any development starts.\n\nFrom there, we move into architecture and planning, followed by iterative development with regular checkpoints. We keep communication clear and consistent throughout — you always know what is being built, why decisions are being made, and what comes next.\n\nWe do not use fixed templates or rigid processes. The approach is shaped by the project.',
+            'Every project begins with a discovery phase where we take time to understand the problem, the business context, and the desired outcomes before any development starts.\n\nFrom there, we move into architecture and planning, followed by iterative development with regular checkpoints. We keep communication clear and consistent throughout - you always know what is being built, why decisions are being made, and what comes next.\n\nWe do not use fixed templates or rigid processes. The approach is shaped by the project.',
     },
     {
         category: 'process',
         question: 'How long do projects typically take?',
         answer:
-            'Project timelines depend on scope and complexity. A focused automation workflow or a standalone AI integration can be completed in a few weeks. A full custom software platform or SaaS product typically takes several months of active development.\n\nDuring our initial conversation, we will give you a realistic estimate based on your specific requirements — not a generic range designed to win a sale.',
+            'Project timelines depend on scope and complexity. A focused automation workflow or a standalone AI integration can be completed in a few weeks. A full custom software platform or SaaS product typically takes several months of active development.\n\nDuring our initial conversation, we will give you a realistic estimate based on your specific requirements - not a generic range designed to win a sale.',
     },
     {
         category: 'general',
@@ -83,7 +83,7 @@ export const FAQ_ITEMS: FAQItem[] = [
         category: 'general',
         question: 'Do you work with international clients?',
         answer:
-            'Yes. MergeX works with clients across India and internationally. Our entire workflow is designed for remote collaboration — structured communication, clear documentation, and consistent delivery regardless of time zone.',
+            'Yes. MergeX works with clients across India and internationally. Our entire workflow is designed for remote collaboration - structured communication, clear documentation, and consistent delivery regardless of time zone.',
     },
     {
         category: 'process',
