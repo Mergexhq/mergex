@@ -325,8 +325,8 @@ export default function PrivacyPolicyPage() {
 
             <LegalSection id="contact-us" title="17. Contact Us">
                 <Paragraph><strong className="font-semibold text-black">MergeX</strong></Paragraph>
-                <Paragraph>Email: <a href="mailto:hello@mergex.in" className="text-violet-600 hover:text-violet-700 underline underline-offset-4 font-medium">hello@mergex.in</a></Paragraph>
-                <Paragraph>Website: <a href="https://www.mergex.in" target="_blank" rel="noopener noreferrer" className="text-violet-600 hover:text-violet-700 underline underline-offset-4 font-medium">https://www.mergex.in</a></Paragraph>
+                <Paragraph>Email: <a href="mailto:hello@themergex.in" className="text-violet-600 hover:text-violet-700 underline underline-offset-4 font-medium">hello@themergex.in</a></Paragraph>
+                <Paragraph>Website: <a href="https://www.themergex.in" target="_blank" rel="noopener noreferrer" className="text-violet-600 hover:text-violet-700 underline underline-offset-4 font-medium">https://www.themergex.in</a></Paragraph>
             </LegalSection>
 
             <Divider />

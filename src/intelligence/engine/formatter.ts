@@ -33,7 +33,7 @@ import type {
  */
 const FALLBACK_RESPONSE: Record<ConversationSurface, string> = {
     chat:
-        "I'm not entirely sure about that. Let me connect you with the MergeX team - they'll have a better answer. You can reach out through the contact page or email hello@mergex.in.",
+        "I'm not entirely sure about that. Let me connect you with the MergeX team - they'll have a better answer. You can reach out through the contact page or email hello@themergex.in.",
     voice:
         "I'm not sure about that one. Let me connect you with someone from the MergeX team who can help.",
     os:

@@ -1,7 +1,7 @@
 import type { Metadata } from 'next';
 import CalEmbed from '@/components/ui/CalEmbed';
 
-const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? 'https://mergex.in';
+const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? 'https://themergex.in';
 
 export const metadata: Metadata = {
     title: 'Book a Call - MergeX',

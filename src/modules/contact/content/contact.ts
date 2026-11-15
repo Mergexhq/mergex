@@ -9,7 +9,7 @@ export const CONTACT_HERO = {
     },
     contact: {
         label: "Contact",
-        email: "hello@mergex.in"
+        email: "hello@themergex.in"
     },
     founders: {
         label: "Connect with founders",
@@ -17,12 +17,12 @@ export const CONTACT_HERO = {
             {
                 name: "Manikandan S",
                 role: "Founder & CEO",
-                email: "manikandan@mergex.in"
+                email: "manikandan@themergex.in"
             },
             {
                 name: "Sharukesh P",
                 role: "Co-founder & CIO",
-                email: "sharukesh@mergex.in"
+                email: "sharukesh@themergex.in"
             }
         ]
     }
@@ -65,15 +65,15 @@ export const BOTTOM_CARDS: EngagementCard[] = [
     {
         title: "Partnerships",
         description: "We work closely with founders, startups, and established businesses to build software, AI solutions, and creative productions that create lasting value.",
-        actionLabel: "contact@mergex.in",
+        actionLabel: "contact@themergex.in",
         bgImage: "/background/contact/partner.webp",
-        target: "mailto:contact@mergex.in"
+        target: "mailto:contact@themergex.in"
     },
     {
         title: "We keep our team intentionally small.",
         description: "We're looking for curious builders, thoughtful designers, engineers, and creative problem-solvers who care about quality more than quantity.",
-        actionLabel: "careers@mergex.in",
+        actionLabel: "careers@themergex.in",
         bgImage: "/background/contact/career.webp",
-        target: "mailto:careers@mergex.in"
+        target: "mailto:careers@themergex.in"
     }
 ];

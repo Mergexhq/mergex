@@ -114,35 +114,30 @@ export const ShowcaseFeed = () => {
           <WorkCard
             project={worksData[0]}
             index={0}
-            total={worksData.length}
           />
 
           {/* Column 2: Card 2 */}
           <WorkCard
             project={worksData[1]}
             index={1}
-            total={worksData.length}
           />
 
           {/* Column 3: Card 3 */}
           <WorkCard
             project={worksData[2]}
             index={2}
-            total={worksData.length}
           />
 
           {/* Column 4: Card 4 */}
           <WorkCard
             project={worksData[3]}
             index={3}
-            total={worksData.length}
           />
 
           {/* Column 5: Card 5 */}
           <WorkCard
             project={worksData[4]}
             index={4}
-            total={worksData.length}
           />
         </div>
       </div>
@@ -250,11 +245,10 @@ const MobileWorkCard = ({ project, index }: { project: (typeof worksData)[number
 type CardProps = {
   project: (typeof worksData)[number];
   index: number;
-  total: number;
   isTwin?: boolean;
 };
 
-const WorkCard = ({ project, index, total, isTwin = false }: CardProps) => {
+const WorkCard = ({ project, index, isTwin = false }: CardProps) => {
   const [showInfo, setShowInfo] = useState(false);
   const hasLink = Boolean(project.liveUrl && project.liveUrl.trim() !== "" && project.liveUrl !== "#");
 

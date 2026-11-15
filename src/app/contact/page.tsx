@@ -6,7 +6,7 @@ import {
 } from '@/modules/contact';
 import { getPageBreadcrumbSchema } from '@/knowledge/schema';
 
-const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? 'https://mergex.in';
+const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? 'https://themergex.in';
 
 export const metadata: Metadata = {
     title: 'Contact',

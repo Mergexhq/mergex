@@ -36,7 +36,7 @@ export default function LaunchesFeed() {
 
   return (
     <div ref={containerRef} className="space-y-32 md:space-y-48">
-      {worksData.map((project, index) => {
+      {worksData.map((project) => {
         const slug = project.title
           .toLowerCase()
           .replace(/'/g, "")

@@ -15,8 +15,6 @@ if (typeof window !== 'undefined') {
 
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Autoplay, EffectCoverflow, Pagination } from 'swiper/modules';
-import { useGlobalVideoObserver } from '@/lib/videoObserver';
-import { cloudinaryVideo, cloudinaryImage } from '@/lib/cloudinary';
 
 import 'swiper/css';
 import 'swiper/css/effect-coverflow';

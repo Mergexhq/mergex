@@ -47,8 +47,8 @@ export const COMPANY: CompanyProfile = {
     tagline: 'Custom Software & AI Systems',
     description:
         'MergeX is a software and AI engineering company based in Chennai, India. We design and build custom software, AI systems, automation workflows, and digital products for businesses that want to operate smarter and move faster.',
-    url: 'https://mergex.in',
-    email: 'hello@mergex.in',
+    url: 'https://themergex.in',
+    email: 'hello@themergex.in',
     location: {
         city: 'Chennai',
         state: 'Tamil Nadu',
@@ -59,12 +59,12 @@ export const COMPANY: CompanyProfile = {
         {
             name: 'Manikandan S',
             role: 'Founder & CEO',
-            email: 'manikandan@mergex.in',
+            email: 'manikandan@themergex.in',
         },
         {
             name: 'Sharukesh P',
             role: 'Co-founder & CIO',
-            email: 'sharukesh@mergex.in',
+            email: 'sharukesh@themergex.in',
         },
     ],
     socialProfiles: {

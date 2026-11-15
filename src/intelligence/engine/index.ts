@@ -31,10 +31,10 @@ import type {
     EngineResponse,
     IntelligenceProvider,
 } from '../types';
-import type { Intent, IntentResult } from '../intent';
+import type { IntentResult } from '../intent';
 import { detectIntent } from '../intent';
 import { retrieveKnowledge, KNOWLEDGE_MIN_SCORE } from '../providers/knowledge';
-import { routeRequest, KNOWLEDGE_CONFIDENCE_THRESHOLD } from './router';
+import { routeRequest } from './router';
 import { buildContext } from './context';
 import { formatResponse, formatGreetingResponse } from './formatter';
 import { buildSystemPrompt } from '../prompts/system';

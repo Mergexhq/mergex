@@ -7,7 +7,7 @@ import { FAQ_ITEMS } from '@/knowledge/faq';
 import { SERVICES } from '@/knowledge/services';
 import { getFAQSchema, getServiceSchema } from '@/knowledge/schema';
 
-const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? 'https://mergex.in';
+const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? 'https://themergex.in';
 
 export const metadata: Metadata = {
   title: 'MergeX - Custom Software & AI Systems',

@@ -74,7 +74,7 @@ export default function LiveWaveform({
   const analyserRef = React.useRef<AnalyserNode | null>(null);
   const streamRef = React.useRef<MediaStream | null>(null);
   const audioCtxRef = React.useRef<AudioContext | null>(null);
-  const dataRef = React.useRef<Uint8Array | null>(null);
+  const dataRef = React.useRef<Uint8Array<ArrayBuffer> | null>(null);
 
   const color = React.useCallback(() => {
     if (barColor) return barColor;
@@ -139,7 +139,7 @@ export default function LiveWaveform({
             !dataRef.current ||
             dataRef.current.length !== an.frequencyBinCount
           ) {
-            dataRef.current = new Uint8Array(an.frequencyBinCount);
+            dataRef.current = new Uint8Array(new ArrayBuffer(an.frequencyBinCount));
           }
           an.getByteFrequencyData(dataRef.current);
           const idx = Math.floor(pos * dataRef.current.length);

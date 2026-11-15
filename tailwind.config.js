@@ -49,10 +49,7 @@ module.exports = {
       },
     },
   },
-  plugins: [
-    require("tailwindcss-animate"),
-    require("@tailwindcss/typography"),
-  ],
+  plugins: [],
   
   // Safelist ensures these classes are always included, even when not detected in the codebase
   // This is useful for dynamically generated classes or classes added by external components

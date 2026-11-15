@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useCallback, useSyncExternalStore } from "react";
 
 /**
  * Background video loader.
@@ -154,29 +154,23 @@ export const preloadVideo = (url: string, priority = 0) => {
  * from cache. Bumps priority so a URL that's actually visible jumps the lane.
  */
 export const useBackgroundVideo = (url: string | undefined, priority = 0): boolean => {
-  const [ready, setReady] = useState(() => {
-    const e = url ? registry.get(url) : undefined;
-    return e?.state === "ready";
-  });
+  const subscribe = useCallback(
+    (onStoreChange: () => void) => {
+      if (!url) return () => {};
+      const entry = getEntry(url);
+      entry.subs.add(onStoreChange);
+      preloadVideo(url, priority);
+      return () => {
+        entry.subs.delete(onStoreChange);
+      };
+    },
+    [url, priority]
+  );
 
-  useEffect(() => {
-    if (!url) return;
-    const entry = getEntry(url);
+  const getSnapshot = useCallback(() => {
+    if (!url) return false;
+    return registry.get(url)?.state === "ready";
+  }, [url]);
 
-    if (entry.state === "ready") {
-      setReady(true);
-      return;
-    }
-    setReady(false);
-
-    const onChange = () => setReady(entry.state === "ready");
-    entry.subs.add(onChange);
-    preloadVideo(url, priority);
-
-    return () => {
-      entry.subs.delete(onChange);
-    };
-  }, [url, priority]);
-
-  return ready;
+  return useSyncExternalStore(subscribe, getSnapshot, () => false);
 };

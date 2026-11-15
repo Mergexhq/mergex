@@ -266,9 +266,9 @@ courts located in Chennai, Tamil Nadu, India.
 
 **MergeX**
 
-Email: hello@mergex.in
+Email: hello@themergex.in
 
-Website: https://www.mergex.in
+Website: https://www.themergex.in
 
 ------------------------------------------------------------------------
 

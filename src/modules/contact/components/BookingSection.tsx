@@ -3,15 +3,7 @@
 import Link from 'next/link';
 import { ArrowUpRight } from 'lucide-react';
 
-interface BookingSectionProps {
-    calNamespace?: string;
-    calLink?: string;
-}
-
-export function BookingSection({
-    calNamespace = 'meet',
-    calLink = 'mergex/meet',
-}: BookingSectionProps) {
+export function BookingSection() {
     return (
         <section id="booking-section" className="bg-[var(--bg-primary)] pt-0 pb-16 relative overflow-hidden z-20">
             <div className="container mx-auto max-w-[1400px] px-6 md:px-8">

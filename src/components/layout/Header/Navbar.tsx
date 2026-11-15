@@ -75,10 +75,7 @@ export function Navbar() {
     const isLightPage = (isLightPageRaw && (isScrolled || !hasDarkHero)) || (isHome && isPastHero);
 
     const textColorClass = isLightPage ? 'text-black' : 'text-white';
-    const navItemColorClass = isLightPage
-        ? 'text-black/80 hover:text-violet-600'
-        : 'text-white/80 hover:text-white';
-    
+
     const cardBgClass = 'bg-transparent rounded-none shadow-none';
 
     const pillBgClass = (!isScrolled && !isDetailPage)
@@ -111,10 +108,11 @@ export function Navbar() {
         };
     }, []);
 
-    // Also close dropdown on path change
-    useEffect(() => {
+    const [prevPathname, setPrevPathname] = useState(pathname);
+    if (prevPathname !== pathname) {
+        setPrevPathname(pathname);
         setIsDetailMenuOpen(false);
-    }, [pathname]);
+    }
 
     // Click outside detail menu handler
     useEffect(() => {
@@ -140,10 +138,6 @@ export function Navbar() {
         };
     }, [isDetailMenuOpen]);
 
-    // Notify when pathname changes (kept for detail menu close)
-    useEffect(() => {
-        setIsDetailMenuOpen(false);
-    }, [pathname]);
 
     return (
         <>

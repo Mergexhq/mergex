@@ -291,9 +291,9 @@ revision date.
 
 **MergeX**
 
-Email: hello@mergex.in
+Email: hello@themergex.in
 
-Website: https://www.mergex.in
+Website: https://www.themergex.in
 
 ------------------------------------------------------------------------
 

@@ -1,8 +1,6 @@
 'use client';
 
-import { usePathname } from 'next/navigation';
 import Link from 'next/link';
-import Image from 'next/image';
 import { ArrowUp } from 'lucide-react';
 import { ParticleTypography } from '@/components/ParticleTypography';
 
@@ -30,8 +28,6 @@ function SocialIcon({ icon }: { icon: string }) {
 }
 
 export default function FooterCurtain() {
-    const pathname = usePathname();
-    const isHome = pathname === '/';
 
     return (
         <div

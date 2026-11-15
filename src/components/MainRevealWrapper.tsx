@@ -1,21 +1,25 @@
 'use client';
 
 import { motion, useScroll, useTransform } from 'framer-motion';
-import { ReactNode, useRef, useEffect, useState } from 'react';
+import { ReactNode, useRef, useSyncExternalStore } from 'react';
 
 /** Returns true while the viewport width is ≤ 768 px (mobile breakpoint). */
+function subscribe(callback: () => void) {
+    const mq = window.matchMedia('(max-width: 768px)');
+    mq.addEventListener('change', callback);
+    return () => mq.removeEventListener('change', callback);
+}
+
+function getSnapshot() {
+    return window.matchMedia('(max-width: 768px)').matches;
+}
+
+function getServerSnapshot() {
+    return false;
+}
+
 function useIsMobile() {
-    const [isMobile, setIsMobile] = useState(false);
-
-    useEffect(() => {
-        const mq = window.matchMedia('(max-width: 768px)');
-        setIsMobile(mq.matches);
-        const handler = (e: MediaQueryListEvent) => setIsMobile(e.matches);
-        mq.addEventListener('change', handler);
-        return () => mq.removeEventListener('change', handler);
-    }, []);
-
-    return isMobile;
+    return useSyncExternalStore(subscribe, getSnapshot, getServerSnapshot);
 }
 
 export default function MainRevealWrapper({ children }: { children: ReactNode }) {

@@ -14,10 +14,11 @@ export function MobileFullscreenMenu() {
     const pathname = usePathname();
     const isStudio = pathname === '/studio' || pathname === '/brands/mergex';
 
-    // Close on route change
-    useEffect(() => {
+    const [prevPathname, setPrevPathname] = useState(pathname);
+    if (prevPathname !== pathname) {
+        setPrevPathname(pathname);
         setIsOpen(false);
-    }, [pathname]);
+    }
 
     // Lock body scroll when menu is open
     useEffect(() => {

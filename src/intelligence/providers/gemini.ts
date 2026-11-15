@@ -158,7 +158,7 @@ export function createGeminiProvider(
                     body: JSON.stringify(body),
                 });
                 json = (await response.json()) as GeminiResponseBody;
-            } catch (err) {
+            } catch {
                 return {
                     content: '',
                     finishReason: 'network-error',
